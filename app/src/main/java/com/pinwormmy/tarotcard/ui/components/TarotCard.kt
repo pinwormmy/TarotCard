@@ -1,0 +1,156 @@
+package com.pinwormmy.tarotcard.ui.components
+
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.pinwormmy.tarotcard.data.TarotCardModel
+import java.util.Locale
+
+@Composable
+fun TarotCard(
+    card: TarotCardModel,
+    isFaceUp: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    flipDurationMillis: Int = 450
+) {
+    val rotation by animateFloatAsState(
+        targetValue = if (isFaceUp) 180f else 0f,
+        animationSpec = tween(flipDurationMillis),
+        label = "tarotCardFlip"
+    )
+
+    Surface(
+        modifier = modifier
+            .aspectRatio(2f / 3f)
+            .clip(RoundedCornerShape(20.dp))
+            .then(if (onClick != null) Modifier.clickable { onClick() } else Modifier),
+        color = Color.Transparent
+    ) {
+        Box(
+            modifier = Modifier
+                .graphicsLayer {
+                    rotationY = rotation
+                    cameraDistance = 12 * density
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            CardBackFace(
+                modifier = Modifier.graphicsLayer {
+                    alpha = if (rotation >= 90f) 0f else 1f
+                }
+            )
+            CardFrontFace(
+                card = card,
+                modifier = Modifier.graphicsLayer {
+                    rotationY = 180f
+                    alpha = if (rotation >= 90f) 1f else 0f
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun CardBackFace(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(2f / 3f)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color(0xFF14162F), Color(0xFF050612))
+                ),
+                shape = RoundedCornerShape(20.dp)
+            )
+            .padding(24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(Color(0xFFB59BFF), Color.Transparent)
+                    ),
+                    shape = RoundedCornerShape(16.dp)
+                )
+        )
+    }
+}
+
+@Composable
+private fun CardFrontFace(
+    card: TarotCardModel,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(2f / 3f)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color(0xFF33285D), Color(0xFF130F2A))
+                ),
+                shape = RoundedCornerShape(20.dp)
+            )
+            .padding(horizontal = 16.dp, vertical = 20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = card.arcana.uppercase(Locale.getDefault()),
+            style = MaterialTheme.typography.labelSmall,
+            color = Color(0xFFDAC8FF)
+        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Text(
+                text = card.name,
+                style = MaterialTheme.typography.titleMedium,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = card.uprightMeaning,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color(0xFFF3E9FF),
+                textAlign = TextAlign.Center,
+                maxLines = 3
+            )
+        }
+        Text(
+            text = card.keywords.joinToString(" · "),
+            style = MaterialTheme.typography.labelSmall,
+            color = Color(0xFFB6A3E8),
+            textAlign = TextAlign.Center,
+            maxLines = 1
+        )
+    }
+}

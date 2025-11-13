@@ -1,0 +1,62 @@
+[
+  {
+    "id": "the_fool",
+    "name": "The Fool",
+    "arcana": "Major",
+    "uprightMeaning": "Fresh starts, optimism, and trust in the unfolding path.",
+    "reversedMeaning": "Hesitation, fear of change, or reckless leaps.",
+    "description": "The Fool steps toward the unknown with an open heart, reminding you to view life with curiosity while staying aware of the edge.",
+    "keywords": ["innocence", "new journey", "spontaneity"],
+    "imageUrl": ""
+  },
+  {
+    "id": "the_magician",
+    "name": "The Magician",
+    "arcana": "Major",
+    "uprightMeaning": "Manifestation through skill, focus, and aligned will.",
+    "reversedMeaning": "Scattered energy, manipulation, or untapped talents.",
+    "description": "Tools of every suit rest on the Magician's table, urging you to direct your talents toward a single, inspired action.",
+    "keywords": ["focus", "power", "skill"],
+    "imageUrl": ""
+  },
+  {
+    "id": "the_high_priestess",
+    "name": "The High Priestess",
+    "arcana": "Major",
+    "uprightMeaning": "Intuition, sacred knowledge, and inner stillness.",
+    "reversedMeaning": "Secrets kept, intuition ignored, or inner dissonance.",
+    "description": "Veiled between pillars, the High Priestess invites you to trust the quiet whisper within and honor what is unseen.",
+    "keywords": ["mystery", "reflection", "inner voice"],
+    "imageUrl": ""
+  },
+  {
+    "id": "the_empress",
+    "name": "The Empress",
+    "arcana": "Major",
+    "uprightMeaning": "Nurturing abundance, creativity, and embodied joy.",
+    "reversedMeaning": "Creative blocks, self-neglect, or overprotection.",
+    "description": "Surrounded by lush fields, the Empress teaches you to tend both your creations and yourself with gentle care.",
+    "keywords": ["abundance", "creation", "comfort"],
+    "imageUrl": ""
+  },
+  {
+    "id": "the_emperor",
+    "name": "The Emperor",
+    "arcana": "Major",
+    "uprightMeaning": "Structure, stability, and confident leadership.",
+    "reversedMeaning": "Rigidity, control issues, or shaky foundations.",
+    "description": "The Emperor's throne is carved from stone, a reminder that wise boundaries and strategy support lasting growth.",
+    "keywords": ["stability", "leadership", "logic"],
+    "imageUrl": ""
+  },
+  {
+    "id": "the_lovers",
+    "name": "The Lovers",
+    "arcana": "Major",
+    "uprightMeaning": "Aligned partnerships, values, and heartfelt choices.",
+    "reversedMeaning": "Misalignment, disharmony, or indecision.",
+    "description": "The Lovers represent a sacred mirror, asking whether your decisions arise from love and shared values.",
+    "keywords": ["alignment", "unity", "values"],
+    "imageUrl": ""
+  }
+]

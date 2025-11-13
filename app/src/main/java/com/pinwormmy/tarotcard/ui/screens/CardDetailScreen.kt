@@ -1,0 +1,137 @@
+package com.pinwormmy.tarotcard.ui.screens
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.pinwormmy.tarotcard.data.TarotCardModel
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CardDetailScreen(
+    card: TarotCardModel?,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(
+                title = { Text(text = card?.name ?: "Card Detail") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        if (card == null) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Card not found.",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
+            return@Scaffold
+        }
+
+        CardDetailBody(card = card, modifier = Modifier.padding(innerPadding))
+    }
+}
+
+@Composable
+private fun CardDetailBody(
+    card: TarotCardModel,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 24.dp)
+            .padding(top = 24.dp, bottom = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+        Text(
+            text = card.arcana,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = card.name,
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Section(
+            title = "Upright Meaning",
+            body = card.uprightMeaning
+        )
+        Section(
+            title = "Reversed Meaning",
+            body = card.reversedMeaning
+        )
+        Section(
+            title = "Description",
+            body = card.description
+        )
+        if (card.keywords.isNotEmpty()) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(
+                    text = "Keywords",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = card.keywords.joinToString(separator = " • "),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun Section(
+    title: String,
+    body: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = body,
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
+}
