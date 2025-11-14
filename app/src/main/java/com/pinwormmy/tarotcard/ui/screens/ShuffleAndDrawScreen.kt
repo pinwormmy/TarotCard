@@ -5,23 +5,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,16 +34,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
-import com.pinwormmy.tarotcard.ui.state.SpreadSlot
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+@Suppress("UNUSED_PARAMETER")
 fun ShuffleAndDrawScreen(
     uiState: SpreadFlowUiState,
     positions: List<SpreadPosition>,
@@ -53,89 +58,103 @@ fun ShuffleAndDrawScreen(
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
 ) {
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFF050711))
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "셔플 & 드로우", fontWeight = FontWeight.Bold)
-
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(360.dp),
+                    .weight(1f)
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                CardDeck(
+                BoxWithConstraints(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    val cardWidth = maxWidth * 0.7f
+                    val cardHeight = cardWidth / 0.625f
+                    if (uiState.gridVisible) {
+                        LazyHorizontalGrid(
+                            modifier = Modifier
+                                .width(cardWidth)
+                                .height(cardHeight),
+                            rows = GridCells.Fixed(2),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                            contentPadding = PaddingValues(12.dp)
+                        ) {
+                            items(uiState.drawPile, key = { it.id }) { card ->
+                                DrawGridCard(
+                                    card = card,
+                                    onSelected = { onCardSelected(card) }
+                                )
+                            }
+                        }
+                    } else {
+                        Box(
+                            modifier = Modifier
+                                .width(cardWidth)
+                                .height(cardHeight),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CardBackImage(
+                                modifier = Modifier.fillMaxSize(),
+                                onClick = onDeckTap
+                            )
+                            CardDeck(
+                                modifier = Modifier.fillMaxSize(),
+                                width = cardWidth,
+                                height = cardHeight,
+                                shuffleTrigger = uiState.shuffleTrigger
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clip(RoundedCornerShape(24.dp))
+                                    .clickable(onClick = onDeckTap)
+                            )
+                        }
+                    }
+                }
+            }
+
+            uiState.statusMessage?.let {
+                Text(
+                    text = it,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(onClick = onDeckTap),
-                    shuffleTrigger = uiState.shuffleTrigger
+                        .padding(vertical = 8.dp),
+                    color = Color.White.copy(alpha = 0.85f),
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
                 )
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 32.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                OutlinedButton(
+                OutlineLargeButton(
                     modifier = Modifier.weight(1f),
+                    text = "컷",
                     onClick = onCutRequest
-                ) {
-                    Text(text = "컷")
-                }
-                Button(
+                )
+                OutlineLargeButton(
                     modifier = Modifier.weight(1f),
+                    text = "드로우",
                     onClick = onShowGrid
-                ) {
-                    Text(text = "드로우")
-                }
-            }
-
-            SelectedCardsRow(
-                positions = positions,
-                finalCards = uiState.finalCards
-            )
-
-            if (uiState.statusMessage != null) {
-                Text(text = uiState.statusMessage)
-            }
-
-            if (uiState.gridVisible) {
-                LazyHorizontalGrid(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    rows = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(vertical = 8.dp)
-                ) {
-                    items(uiState.drawPile, key = { it.id }) { card ->
-                        DrawGridCard(
-                            card = card,
-                            onSelected = { onCardSelected(card) }
-                        )
-                    }
-                }
-            } else {
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "드로우를 누르면 카드가 펼쳐집니다.")
-                }
-            }
-
-            OutlinedButton(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onBack
-            ) {
-                Text(text = "프리셀렉션으로 돌아가기")
+                )
             }
         }
 
@@ -144,32 +163,6 @@ fun ShuffleAndDrawScreen(
                 onSelect = onCutSelect,
                 onCancel = onCutCancel
             )
-        }
-    }
-}
-
-@Composable
-private fun SelectedCardsRow(
-    positions: List<SpreadPosition>,
-    finalCards: Map<SpreadSlot, TarotCardModel>
-) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp),
-        color = Color.White.copy(alpha = 0.05f)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            positions.forEach { position ->
-                Column(horizontalAlignment = Alignment.Start) {
-                    Text(text = position.title, fontWeight = FontWeight.SemiBold)
-                    Text(text = finalCards[position.slot]?.name ?: "-")
-                }
-            }
         }
     }
 }
@@ -272,5 +265,52 @@ private fun MiniDeck(
         ) {
             Text(text = label)
         }
+    }
+}
+
+@Composable
+private fun CardBackImage(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val shape = RoundedCornerShape(24.dp)
+    Box(
+        modifier = modifier
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
+    ) {
+        repeat(3) { offset ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = (offset * 8).dp)
+                    .clip(shape)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
+                        )
+                    )
+            )
+        }
+    }
+}
+
+@Composable
+private fun OutlineLargeButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
+    OutlinedButton(
+        modifier = modifier.height(56.dp),
+        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.4f)),
+        shape = RoundedCornerShape(18.dp),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = Color.Transparent,
+            contentColor = Color.White
+        ),
+        onClick = onClick
+    ) {
+        Text(text = text, fontWeight = FontWeight.SemiBold)
     }
 }
