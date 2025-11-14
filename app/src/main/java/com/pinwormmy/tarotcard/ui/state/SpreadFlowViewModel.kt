@@ -268,7 +268,6 @@ class SpreadFlowViewModel(
             val nextSlot = state.pendingSlots[nextIndex]
             val updatedDrawn = state.drawnCards + (nextSlot to card)
             val updatedFinal = state.finalCards + (nextSlot to card)
-            val updatedPile = state.drawPile.filterNot { it.id == card.id }
             val message = when (nextSlot) {
                 SpreadSlot.Past -> "과거 카드를 선택했습니다."
                 SpreadSlot.Present -> "현재 카드를 선택했습니다."
@@ -276,7 +275,6 @@ class SpreadFlowViewModel(
             }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
             state.copy(
-                drawPile = updatedPile,
                 drawnCards = updatedDrawn,
                 finalCards = updatedFinal,
                 statusMessage = message

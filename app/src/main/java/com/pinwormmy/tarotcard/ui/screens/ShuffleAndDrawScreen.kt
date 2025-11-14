@@ -8,14 +8,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,20 +35,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.zIndex
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
-import kotlin.random.Random
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlin.math.ceil
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -185,7 +189,7 @@ fun ShuffleAndDrawScreen(
             }
 
             // 컷 모드 중에는 statusMessage 숨김
-            if (!uiState.cutMode) {
+            if (!uiState.cutMode && !uiState.gridVisible) {
                 uiState.statusMessage?.let {
                     Text(
                         text = it,
@@ -200,24 +204,26 @@ fun ShuffleAndDrawScreen(
             }
 
             // 하단 버튼 Row
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 32.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                OutlineLargeButton(
-                    modifier = Modifier.weight(1f),
-                    text = if (uiState.cutMode) "취소" else "컷",
-                    onClick = {
-                        if (uiState.cutMode) onCutCancel() else onCutRequest()
-                    }
-                )
-                OutlineLargeButton(
-                    modifier = Modifier.weight(1f),
-                    text = "드로우",
-                    onClick = onShowGrid
-                )
+            if (!uiState.gridVisible) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 32.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    OutlineLargeButton(
+                        modifier = Modifier.weight(1f),
+                        text = if (uiState.cutMode) "취소" else "컷",
+                        onClick = {
+                            if (uiState.cutMode) onCutCancel() else onCutRequest()
+                        }
+                    )
+                    OutlineLargeButton(
+                        modifier = Modifier.weight(1f),
+                        text = "드로우",
+                        onClick = onShowGrid
+                    )
+                }
             }
         }
     }
@@ -282,92 +288,151 @@ private fun DrawPileGrid(
         contentAlignment = Alignment.TopCenter
     ) {
         val density = LocalDensity.current
+        val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
+        var hoveredCardId by remember { mutableStateOf<String?>(null) }
         val columnSpacing = 32.dp
         val cardWidth = (maxWidth - columnSpacing) / 2f
-        val cardHeight = cardWidth / 1.6f
-
-        val maxHeightPx = with(density) { maxHeight.toPx() }
+        val cardHeight = cardWidth * 0.625f
+        val columnCount = ceil(cards.size / 2f).toInt()
+        val totalRows = (cards.size + 1) / 2
+        val usableHeight = maxHeight - cardHeight
+        val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
+        val totalWidth = cardWidth * 2 + columnSpacing
+        val leftColumnX = (maxWidth - totalWidth) / 2f
+        val rightColumnX = leftColumnX + cardWidth + columnSpacing
+        val cardWidthPx = with(density) { cardWidth.toPx() }
         val cardHeightPx = with(density) { cardHeight.toPx() }
-        val usableHeightPx = (maxHeightPx - cardHeightPx).coerceAtLeast(0f)
+        val maxHeightPx = with(density) { maxHeight.toPx() }
+        val startXPx = -cardWidthPx
+        val startYPx = -cardHeightPx
+        data class CardPlacement(
+            val card: TarotCardModel,
+            val targetXPx: Float,
+            val targetYPx: Float,
+            val dealOrderIndex: Int
+        )
 
-        val leftCount = (cards.size + 1) / 2
-        val rightCount = cards.size / 2
-        fun rowsInColumn(column: Int) = if (column == 0) leftCount else rightCount
-
-        val columnCenters = listOf(
-            -((cardWidth / 2f) + columnSpacing / 2f),
-            (cardWidth / 2f) + columnSpacing / 2f
-        ).map { with(density) { it.toPx() } }
-
-        val startXPx = with(density) { -maxWidth.toPx() * 0.6f - cardWidth.toPx() }
-        val startYPx = with(density) { -maxHeight.toPx() * 0.4f - cardHeight.toPx() }
-
-        cards.forEachIndexed { index, card ->
+        val placements = cards.mapIndexed { index, card ->
             val columnIndex = index % 2
             val rowIndex = index / 2
-            val rows = rowsInColumn(columnIndex).coerceAtLeast(1)
-            val stepPx = if (rows > 1) usableHeightPx / (rows - 1) else 0f
-            val targetYPx = stepPx * rowIndex
+            val dealOrderIndex = if (columnIndex == 1) rowIndex else totalRows + rowIndex
+            val targetXDp = if (columnIndex == 0) leftColumnX else rightColumnX
+            val targetYDp = stepY * rowIndex
+            CardPlacement(
+                card = card,
+                targetXPx = with(density) { targetXDp.toPx() },
+                targetYPx = with(density) { targetYDp.toPx() },
+                dealOrderIndex = dealOrderIndex
+            )
+        }
 
-            val interactionSource = remember(card.id) { MutableInteractionSource() }
-            val pressed by interactionSource.collectIsPressedAsState()
-            val appear = remember(card.id) { Animatable(0f) }
-            val randomRotation = remember(card.id) { (Random.nextFloat() - 0.5f) * 5f }
+        fun findCardIdAt(position: Offset): String? {
+            return placements.asReversed().firstOrNull { placement ->
+                val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
+                val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
+                withinX && withinY
+            }?.card?.id
+        }
 
-            val rightColumnCount = rightCount
-            val dealOrderIndex = if (columnIndex == 1) rowIndex else rightColumnCount + rowIndex
-
-            LaunchedEffect(card.id) {
-                delay(50L * dealOrderIndex)
-                appear.animateTo(1f, tween(420))
+        val pointerModifier = Modifier
+            .fillMaxSize()
+            .pointerInput(cards, maxWidth, maxHeight) {
+                awaitEachGesture {
+                    val down = awaitFirstDown(requireUnconsumed = false)
+                    try {
+                        hoveredCardId = findCardIdAt(down.position)
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull { it.id == down.id } ?: continue
+                            hoveredCardId = findCardIdAt(change.position)
+                            if (!change.pressed) {
+                                val selectedId = hoveredCardId
+                                hoveredCardId = null
+                                selectedId?.let { selectionEvents.tryEmit(it) }
+                                break
+                            }
+                            if (change.isConsumed) {
+                                hoveredCardId = null
+                                break
+                            }
+                        }
+                    } finally {
+                        hoveredCardId = null
+                    }
+                }
             }
 
-            val translationX = lerp(startXPx, columnCenters[columnIndex], appear.value)
-            val translationY = lerp(startYPx, targetYPx, appear.value)
-            val baseScale = lerp(0.9f, 1f, appear.value)
-            val pressScale = if (pressed) 1.05f else 1f
-            val alpha = appear.value.coerceIn(0f, 1f)
+        Box(modifier = pointerModifier) {
+            placements.forEach { placement ->
+                val card = placement.card
+                val appear = remember(card.id) { Animatable(0f) }
+                val exitProgress = remember(card.id) { Animatable(0f) }
+                val isExiting = remember(card.id) { mutableStateOf(false) }
 
-            Box(
-                modifier = Modifier
-                    .width(cardWidth)
-                    .height(cardHeight)
-                    .graphicsLayer {
-                        this.translationX = translationX
-                        this.translationY = translationY
-                        this.alpha = alpha
-                        val scale = baseScale * pressScale
-                        this.scaleX = scale
-                        this.scaleY = scale
-                        this.rotationZ = randomRotation
+                LaunchedEffect(card.id) {
+                    delay(40L * placement.dealOrderIndex)
+                    appear.animateTo(1f, tween(360))
+                }
+
+                LaunchedEffect(isExiting.value) {
+                    if (isExiting.value) {
+                        exitProgress.animateTo(1f, tween(400))
+                        delay(50)
+                        onCardSelected(card)
                     }
-                    .clip(RoundedCornerShape(24.dp))
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
-                        )
-                    )
-                    .clickable(
-                        interactionSource = interactionSource,
-                        indication = null,
-                        onClick = { onCardSelected(card) }
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
+                }
+
+                LaunchedEffect(card.id) {
+                    selectionEvents.collect { targetId ->
+                        if (targetId == card.id && !isExiting.value) {
+                            isExiting.value = true
+                        }
+                    }
+                }
+
+                val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear.value)
+                val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear.value)
+                val exitShiftY = exitProgress.value * (maxHeightPx + cardHeightPx)
+                val baseScale = 0.9f + 0.1f * appear.value
+                val hoverScale = if (hoveredCardId == card.id) 1.05f else 1f
+                val layerAlpha = (appear.value * (1f - exitProgress.value)).coerceIn(0f, 1f)
+
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp)
-                        .clip(RoundedCornerShape(20.dp))
+                        .zIndex(if (isExiting.value || exitProgress.value > 0f) 1f else 0f)
+                        .width(cardWidth)
+                        .height(cardHeight)
+                        .graphicsLayer {
+                            translationX = animatedTranslationX
+                            translationY = animatedTranslationY + exitShiftY
+                            this.alpha = layerAlpha
+                            val scale = baseScale * hoverScale
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        .clip(RoundedCornerShape(24.dp))
                         .background(
                             brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    Color(0xFF3A3C65),
-                                    Color(0xFF1A1B30)
+                                colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(10.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color(0xFF3A3C65),
+                                        Color(0xFF1A1B30)
+                                    )
                                 )
                             )
-                        )
-                )
+                    )
+                }
             }
         }
     }
