@@ -77,13 +77,18 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     if (shufflePhase == ShufflePhase.Idle) {
                         StaticCardDeck()
                     }
                     CardDeck(
-                        modifier = Modifier.alpha(if (shufflePhase == ShufflePhase.Idle) 0f else 1f),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .alpha(if (shufflePhase == ShufflePhase.Idle) 0f else 1f),
                         shuffleTrigger = shuffleTrigger,
                         onAnimationFinished = {
                             isShuffling = false

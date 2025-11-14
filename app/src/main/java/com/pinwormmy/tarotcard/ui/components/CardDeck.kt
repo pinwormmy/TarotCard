@@ -7,6 +7,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -58,7 +60,8 @@ fun CardDeck(
     onPhaseChanged: (ShufflePhase) -> Unit = {}
 ) {
     val density = LocalDensity.current
-    val splitDistancePx = with(density) { 60.dp.toPx() }
+    val splitDistanceDp = maxOf(120.dp, width * 0.9f)
+    val splitDistancePx = with(density) { splitDistanceDp.toPx() }
     val riffleDropPx = with(density) { 36.dp.toPx() }
     val centerLiftPx = with(density) { 14.dp.toPx() }
     val deckLayers = 5
@@ -147,10 +150,12 @@ fun CardDeck(
         onFinishedState.value?.invoke()
     }
 
+    val deckSizeModifier = Modifier.size(width = width, height = height)
+
     Box(
         modifier = modifier
-            .size(width = width, height = height)
-            .clip(cardShape),
+            .fillMaxWidth()
+            .height(height),
         contentAlignment = Alignment.Center
     ) {
         when (phase) {
@@ -159,8 +164,8 @@ fun CardDeck(
                 DeckStack(
                     cardCount = deckLayers,
                     modifier = Modifier
-                        .align(Alignment.Center)
-                        .fillMaxSize(),
+                        .then(deckSizeModifier)
+                        .align(Alignment.Center),
                     shape = cardShape
                 )
             }
@@ -169,8 +174,8 @@ fun CardDeck(
                 DeckStack(
                     cardCount = deckLayers,
                     modifier = Modifier
-                        .align(Alignment.Center)
-                        .fillMaxSize(),
+                        .then(deckSizeModifier)
+                        .align(Alignment.Center),
                     translationX = leftOffset.value,
                     rotation = deckTiltFromOffset(leftOffset.value, splitDistancePx),
                     shape = cardShape
@@ -178,8 +183,8 @@ fun CardDeck(
                 DeckStack(
                     cardCount = deckLayers,
                     modifier = Modifier
-                        .align(Alignment.Center)
-                        .fillMaxSize(),
+                        .then(deckSizeModifier)
+                        .align(Alignment.Center),
                     translationX = rightOffset.value,
                     rotation = deckTiltFromOffset(rightOffset.value, splitDistancePx),
                     shape = cardShape
@@ -188,8 +193,8 @@ fun CardDeck(
                     DeckStack(
                         cardCount = deckLayers,
                         modifier = Modifier
-                        .align(Alignment.Center)
-                        .fillMaxSize(),
+                            .then(deckSizeModifier)
+                            .align(Alignment.Center),
                         translationY = centerLift.value,
                         rotation = deckTilt.value,
                         shape = cardShape
@@ -251,7 +256,6 @@ private fun DeckStack(
 ) {
     Box(
         modifier = modifier
-            .fillMaxSize()
             .graphicsLayer {
                 this.translationX = translationX
                 this.translationY = translationY
@@ -264,6 +268,7 @@ private fun DeckStack(
                 modifier = Modifier
                     .fillMaxSize()
                     .offset(y = (index * 6).dp)
+                    .clip(shape)
                     .background(
                         brush = if (index == cardCount - 1) {
                             Brush.verticalGradient(
