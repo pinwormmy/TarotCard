@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.state.SpreadPosition
+import com.pinwormmy.tarotcard.ui.state.SpreadSlot
 
 enum class CardRevealPhase {
     Back,
@@ -40,14 +42,15 @@ enum class CardRevealPhase {
 
 @Composable
 fun ReadingResultScreen(
-    cards: List<TarotCardModel>,
-    question: String,
-    useReversed: Boolean,
+    positions: List<SpreadPosition>,
+    cardsBySlot: Map<SpreadSlot, TarotCardModel>,
     modifier: Modifier = Modifier,
     onRestart: () -> Unit
 ) {
-    val revealStates = remember(cards) {
-        cards.map { mutableStateOf(CardRevealPhase.Back) }
+    val orderedSlots = remember(positions) { positions.map { it.slot } }
+    val orderedCards = orderedSlots.map { cardsBySlot[it] }
+    val revealStates = remember(orderedCards) {
+        orderedCards.map { mutableStateOf(CardRevealPhase.Back) }
     }
 
     val overlayIndex = revealStates.indexOfFirst {
@@ -60,26 +63,18 @@ fun ReadingResultScreen(
             .padding(horizontal = 16.dp, vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(text = "리딩 결과", fontWeight = FontWeight.Bold)
-            if (question.isNotBlank()) {
-                Text(text = "질문: $question")
-            }
-            Text(text = if (useReversed) "리버스 해석 포함" else "정위치 해석만 사용")
-        }
+        Text(text = "리딩 결과", fontWeight = FontWeight.Bold)
 
-        if (cards.isEmpty()) {
+        if (orderedCards.all { it == null }) {
             Text(text = "아직 선택된 카드가 없습니다.")
         } else {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                cards.forEachIndexed { index, card ->
+                orderedCards.forEachIndexed { index, card ->
                     val state = revealStates.getOrNull(index)
-                    if (state != null) {
+                    if (state != null && card != null) {
                         ReadingResultCard(
                             modifier = Modifier.weight(1f),
                             card = card,
@@ -101,7 +96,7 @@ fun ReadingResultScreen(
 
     if (overlayIndex >= 0) {
         val phase = revealStates[overlayIndex].value
-        val card = cards.getOrNull(overlayIndex)
+        val card = orderedCards.getOrNull(overlayIndex)
         if (card != null) {
             ReadingResultOverlay(
                 card = card,

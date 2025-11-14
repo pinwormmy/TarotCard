@@ -38,6 +38,7 @@ import com.pinwormmy.tarotcard.ui.state.category
 fun CardLibraryScreen(
     cards: List<TarotCardModel>,
     selectedCategory: CardCategory,
+    targetSlotTitle: String,
     modifier: Modifier = Modifier,
     onCategoryChange: (CardCategory) -> Unit,
     onCardSelected: (TarotCardModel) -> Unit,
@@ -48,9 +49,9 @@ fun CardLibraryScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 24.dp)
     ) {
-        Text(text = "카드 라이브러리", fontWeight = FontWeight.Bold)
+        Text(text = "$targetSlotTitle 카드 선택", fontWeight = FontWeight.Bold)
         Text(
-            text = "메이저와 각 슈트별 카드를 앞면으로 확인하고 선택하세요.",
+            text = "미리 선택할 카드를 직접 고르세요.",
             modifier = Modifier.padding(bottom = 16.dp)
         )
         val categories = CardCategory.values()

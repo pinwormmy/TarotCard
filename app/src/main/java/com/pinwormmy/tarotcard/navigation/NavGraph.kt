@@ -3,6 +3,7 @@ package com.pinwormmy.tarotcard.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -12,12 +13,11 @@ import androidx.navigation.navArgument
 import com.pinwormmy.tarotcard.data.TarotRepository
 import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
 import com.pinwormmy.tarotcard.ui.screens.CardLibraryScreen
-import com.pinwormmy.tarotcard.ui.screens.PositionSelectScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingResultScreen
-import com.pinwormmy.tarotcard.ui.screens.ReadingSetupScreen
 import com.pinwormmy.tarotcard.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.tarotcard.ui.screens.SpreadSelectionScreen
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowViewModel
+import com.pinwormmy.tarotcard.ui.state.SpreadStep
 
 @Composable
 fun TarotNavGraph(
@@ -31,81 +31,68 @@ fun TarotNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SpreadSelection.route
+        startDestination = Screen.Preselection.route
     ) {
-        composable(Screen.SpreadSelection.route) {
+        composable(Screen.Preselection.route) {
             SpreadSelectionScreen(
-                onStartPositions = {
-                    spreadViewModel.moveToPositionSelect()
-                    navController.navigate(Screen.PositionSelect.route)
+                positions = spreadUiState.positions,
+                preselectionState = spreadUiState.preselection,
+                onPickCard = { slot ->
+                    spreadViewModel.prepareCardSelection(slot)
+                    navController.navigate(Screen.CardLibrary.route)
+                },
+                onStartReading = {
+                    when (spreadViewModel.startReading()) {
+                        SpreadStep.ShuffleAndDraw -> navController.navigate(Screen.ShuffleAndDraw.route)
+                        SpreadStep.ReadingResult -> navController.navigate(Screen.ReadingResult.route)
+                        else -> Unit
+                    }
                 },
                 onQuickReading = {
-                    spreadViewModel.moveToReadingSetup()
-                    navController.navigate(Screen.ReadingSetup.route)
+                    when (spreadViewModel.startQuickReading()) {
+                        SpreadStep.ReadingResult -> navController.navigate(Screen.ReadingResult.route)
+                        else -> Unit
+                    }
                 }
             )
         }
 
-        composable(Screen.PositionSelect.route) {
-            PositionSelectScreen(
-                positions = spreadUiState.positions,
-                currentIndex = spreadUiState.currentPositionIndex,
-                selectedCards = spreadUiState.selectedPositionCards,
-                onPickCard = { navController.navigate(Screen.CardLibrary.route) },
-                onPrevious = { spreadViewModel.goToPreviousPosition() },
-                onNext = { spreadViewModel.goToNextPosition() },
-                onContinue = {
-                    spreadViewModel.moveToReadingSetup()
-                    navController.navigate(Screen.ReadingSetup.route)
-                },
-                canContinue = spreadUiState.isPositionSelectionComplete
-            )
-        }
-
         composable(Screen.CardLibrary.route) {
-            CardLibraryScreen(
-                cards = spreadUiState.availableCards,
-                selectedCategory = spreadUiState.selectedCategory,
-                onCategoryChange = { spreadViewModel.updateCategory(it) },
-                onCardSelected = { card ->
-                    spreadViewModel.selectCardForCurrentPosition(card)
-                    spreadViewModel.goToNextPosition()
+            val targetSlot = spreadUiState.targetSlotForLibrary
+            if (targetSlot == null) {
+                LaunchedEffect(targetSlot) {
                     navController.popBackStack()
-                },
-                onBack = { navController.popBackStack() }
-            )
-        }
-
-        composable(Screen.ReadingSetup.route) {
-            ReadingSetupScreen(
-                question = spreadUiState.question,
-                useReversed = spreadUiState.useReversed,
-                selectedCount = spreadUiState.selectedPositionCards.count { it != null },
-                canImmediateReading = spreadUiState.isPositionSelectionComplete,
-                onQuestionChange = { spreadViewModel.updateQuestion(it) },
-                onToggleReversed = { spreadViewModel.toggleUseReversed() },
-                onShuffleRequested = {
-                    spreadViewModel.moveToShuffle()
-                    navController.navigate(Screen.ShuffleAndDraw.route)
-                },
-                onImmediateReading = {
-                    if (spreadViewModel.immediateReadingFromSelections()) {
-                        navController.navigate(Screen.ReadingResult.route)
+                }
+            } else {
+                val slotTitle = spreadUiState.positions.firstOrNull { it.slot == targetSlot }?.title
+                    ?: "카드"
+                CardLibraryScreen(
+                    cards = spreadUiState.availableCards,
+                    selectedCategory = spreadUiState.selectedCategory,
+                    targetSlotTitle = slotTitle,
+                    onCategoryChange = { spreadViewModel.updateCategory(it) },
+                    onCardSelected = { card ->
+                        spreadViewModel.assignPreselectedCard(targetSlot, card)
+                    },
+                    onBack = {
+                        spreadViewModel.clearTargetSlot()
                     }
-                },
-                onBack = { navController.popBackStack() }
-            )
+                )
+            }
         }
 
         composable(Screen.ShuffleAndDraw.route) {
             ShuffleAndDrawScreen(
                 uiState = spreadUiState,
+                positions = spreadUiState.positions,
                 onDeckTap = { spreadViewModel.triggerShuffle() },
-                onCut = { spreadViewModel.cutDeck() },
-                onDrawToggle = { spreadViewModel.revealDrawGrid() },
-                onCardSelected = { spreadViewModel.selectDrawCard(it) },
-                onComplete = {
-                    if (spreadViewModel.completeDrawIfReady()) {
+                onCutRequest = { spreadViewModel.enterCutMode() },
+                onCutSelect = { index -> spreadViewModel.applyCutChoice(index) },
+                onCutCancel = { spreadViewModel.cancelCutMode() },
+                onShowGrid = { spreadViewModel.revealDrawGrid() },
+                onCardSelected = { card ->
+                    val finished = spreadViewModel.handleDrawSelection(card)
+                    if (finished) {
                         navController.navigate(Screen.ReadingResult.route)
                     }
                 },
@@ -115,15 +102,12 @@ fun TarotNavGraph(
 
         composable(Screen.ReadingResult.route) {
             ReadingResultScreen(
-                cards = spreadUiState.drawnCards,
-                question = spreadUiState.question,
-                useReversed = spreadUiState.useReversed,
+                positions = spreadUiState.positions,
+                cardsBySlot = spreadUiState.finalCards,
                 onRestart = {
                     spreadViewModel.resetFlow()
-                    val startRoute = navController.graph.startDestinationRoute
-                        ?: Screen.SpreadSelection.route
-                    navController.navigate(Screen.SpreadSelection.route) {
-                        popUpTo(startRoute) { inclusive = true }
+                    navController.navigate(Screen.Preselection.route) {
+                        popUpTo(Screen.Preselection.route) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -145,10 +129,8 @@ fun TarotNavGraph(
 }
 
 private sealed class Screen(val route: String) {
-    data object SpreadSelection : Screen("spread_selection")
-    data object PositionSelect : Screen("position_select")
+    data object Preselection : Screen("preselection")
     data object CardLibrary : Screen("card_library")
-    data object ReadingSetup : Screen("reading_setup")
     data object ShuffleAndDraw : Screen("shuffle_and_draw")
     data object ReadingResult : Screen("reading_result")
     data object CardDetail : Screen("card_detail/{cardId}") {
