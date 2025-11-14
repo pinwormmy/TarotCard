@@ -1,62 +1,1288 @@
 [
   {
-    "id": "the_fool",
+    "id": "major_00",
     "name": "The Fool",
     "arcana": "Major",
-    "uprightMeaning": "Fresh starts, optimism, and trust in the unfolding path.",
-    "reversedMeaning": "Hesitation, fear of change, or reckless leaps.",
-    "description": "The Fool steps toward the unknown with an open heart, reminding you to view life with curiosity while staying aware of the edge.",
-    "keywords": ["innocence", "new journey", "spontaneity"],
-    "imageUrl": ""
+    "uprightMeaning": "Fresh starts invite trust in the unknown and playful curiosity. Openness attracts serendipity and bold adventures.",
+    "reversedMeaning": "Reckless leaps bring avoidable chaos and scattered attention. Pause to ground yourself before committing to the next path.",
+    "description": "A youth poised on the cliff edge ready to begin the soul's journey.",
+    "keywords": [
+      "beginnings",
+      "innocence",
+      "faith",
+      "potential",
+      "optimism"
+    ],
+    "imageUrl": null
   },
   {
-    "id": "the_magician",
+    "id": "major_01",
     "name": "The Magician",
     "arcana": "Major",
-    "uprightMeaning": "Manifestation through skill, focus, and aligned will.",
-    "reversedMeaning": "Scattered energy, manipulation, or untapped talents.",
-    "description": "Tools of every suit rest on the Magician's table, urging you to direct your talents toward a single, inspired action.",
-    "keywords": ["focus", "power", "skill"],
-    "imageUrl": ""
+    "uprightMeaning": "Focused will channels resources into tangible results. Skilled communication aligns heaven and earth for manifestation.",
+    "reversedMeaning": "Scattered intent dilutes power and manipulative tactics backfire. Recenter integrity before acting.",
+    "description": "A conduit between realms who knows how to direct energy.",
+    "keywords": [
+      "manifestation",
+      "skill",
+      "initiative",
+      "resourcefulness",
+      "power"
+    ],
+    "imageUrl": null
   },
   {
-    "id": "the_high_priestess",
+    "id": "major_02",
     "name": "The High Priestess",
     "arcana": "Major",
-    "uprightMeaning": "Intuition, sacred knowledge, and inner stillness.",
-    "reversedMeaning": "Secrets kept, intuition ignored, or inner dissonance.",
-    "description": "Veiled between pillars, the High Priestess invites you to trust the quiet whisper within and honor what is unseen.",
-    "keywords": ["mystery", "reflection", "inner voice"],
-    "imageUrl": ""
+    "uprightMeaning": "Stillness reveals subtle truths and intuitive downloads. She invites you to trust inner knowing beyond logic.",
+    "reversedMeaning": "Secrets withheld breed confusion and emotional withdrawal. Share what you sense rather than hiding behind silence.",
+    "description": "Guardian of mysteries seated between light and shadow.",
+    "keywords": [
+      "intuition",
+      "mystery",
+      "subconscious",
+      "dreams"
+    ],
+    "imageUrl": null
   },
   {
-    "id": "the_empress",
+    "id": "major_03",
     "name": "The Empress",
     "arcana": "Major",
-    "uprightMeaning": "Nurturing abundance, creativity, and embodied joy.",
-    "reversedMeaning": "Creative blocks, self-neglect, or overprotection.",
-    "description": "Surrounded by lush fields, the Empress teaches you to tend both your creations and yourself with gentle care.",
-    "keywords": ["abundance", "creation", "comfort"],
-    "imageUrl": ""
+    "uprightMeaning": "Sensual abundance, creativity, and nurturing care blossom under her influence. She encourages you to receive and to create.",
+    "reversedMeaning": "Neglecting your own needs leads to burnout and smothering behavior. Reclaim your pleasure and boundaries.",
+    "description": "Earth mother archetype surrounded by fertile fields.",
+    "keywords": [
+      "fertility",
+      "creativity",
+      "nurture",
+      "beauty",
+      "comfort"
+    ],
+    "imageUrl": null
   },
   {
-    "id": "the_emperor",
+    "id": "major_04",
     "name": "The Emperor",
     "arcana": "Major",
-    "uprightMeaning": "Structure, stability, and confident leadership.",
-    "reversedMeaning": "Rigidity, control issues, or shaky foundations.",
-    "description": "The Emperor's throne is carved from stone, a reminder that wise boundaries and strategy support lasting growth.",
-    "keywords": ["stability", "leadership", "logic"],
-    "imageUrl": ""
+    "uprightMeaning": "Structure, discipline, and leadership stabilize long-term ambitions. Claim your authority with clarity.",
+    "reversedMeaning": "Rigidity and control issues block collaboration. Adapt your strategy to avoid isolation.",
+    "description": "Sovereign ruler seated upon a stone throne.",
+    "keywords": [
+      "authority",
+      "stability",
+      "order",
+      "protection"
+    ],
+    "imageUrl": null
   },
   {
-    "id": "the_lovers",
+    "id": "major_05",
+    "name": "The Hierophant",
+    "arcana": "Major",
+    "uprightMeaning": "Tradition, mentorship, and shared belief systems offer guidance. Learning from elders anchors your path.",
+    "reversedMeaning": "Dogma stifles growth when questioning is forbidden. Forge a personal philosophy beyond empty rules.",
+    "description": "Spiritual teacher channeling ancestral wisdom.",
+    "keywords": [
+      "tradition",
+      "faith",
+      "learning",
+      "ritual"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_06",
     "name": "The Lovers",
     "arcana": "Major",
-    "uprightMeaning": "Aligned partnerships, values, and heartfelt choices.",
-    "reversedMeaning": "Misalignment, disharmony, or indecision.",
-    "description": "The Lovers represent a sacred mirror, asking whether your decisions arise from love and shared values.",
-    "keywords": ["alignment", "unity", "values"],
-    "imageUrl": ""
+    "uprightMeaning": "Heart-led choices align values with partnership and purpose. Authentic connection sparks mutual growth.",
+    "reversedMeaning": "Indecision and divided priorities erode intimacy. Reconcile inner conflict before committing.",
+    "description": "Two figures blessed by a radiant angel.",
+    "keywords": [
+      "union",
+      "choices",
+      "alignment",
+      "love",
+      "values"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_07",
+    "name": "The Chariot",
+    "arcana": "Major",
+    "uprightMeaning": "Determined focus harnesses opposing forces toward victory. Confidence propels you through obstacles.",
+    "reversedMeaning": "Impulsive force without aim causes burnout and scattered wins. Rein your ego before charging.",
+    "description": "Warrior guiding a chariot pulled by sphinxes.",
+    "keywords": [
+      "willpower",
+      "drive",
+      "control",
+      "success"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_08",
+    "name": "Strength",
+    "arcana": "Major",
+    "uprightMeaning": "Compassionate courage tames inner beasts and fosters resilience. Soft power outlasts brute force.",
+    "reversedMeaning": "Self-doubt and repressed anger sap vitality. Befriend your instincts instead of suppressing them.",
+    "description": "Maiden calming a lion with gentle hands.",
+    "keywords": [
+      "courage",
+      "patience",
+      "inner power",
+      "compassion"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_09",
+    "name": "The Hermit",
+    "arcana": "Major",
+    "uprightMeaning": "Solitude illuminates deeper wisdom and ancestral guidance. Retreat to integrate lessons.",
+    "reversedMeaning": "Isolation becomes escapism when you refuse to re-engage. Share the lantern you found.",
+    "description": "Sage holding a lantern atop a mountain.",
+    "keywords": [
+      "introspection",
+      "wisdom",
+      "solitude",
+      "guidance"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_10",
+    "name": "Wheel of Fortune",
+    "arcana": "Major",
+    "uprightMeaning": "Life spins through cycles of expansion and contraction. Align with change and seize emerging luck.",
+    "reversedMeaning": "Clinging to control breeds frustration as tides shift. Surrender resistance to ride the turn.",
+    "description": "Sacred wheel reminding us of fate's motion.",
+    "keywords": [
+      "cycles",
+      "destiny",
+      "chance",
+      "turning point"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_11",
+    "name": "Justice",
+    "arcana": "Major",
+    "uprightMeaning": "Balanced choices anchored in truth restore harmony. Accountability brings fair outcomes.",
+    "reversedMeaning": "Bias and avoidance skew the scales. Face consequences honestly to realign.",
+    "description": "Figure with sword and scales seated between pillars.",
+    "keywords": [
+      "fairness",
+      "truth",
+      "law",
+      "cause and effect"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_12",
+    "name": "The Hanged Man",
+    "arcana": "Major",
+    "uprightMeaning": "Voluntary surrender rewires perspective and invites enlightenment. Pause to see from a new angle.",
+    "reversedMeaning": "Stagnation without purpose drains morale. Choose movement once insight lands.",
+    "description": "Suspended seeker glowing with inner light.",
+    "keywords": [
+      "sacrifice",
+      "patience",
+      "perspective",
+      "pause"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_13",
+    "name": "Death",
+    "arcana": "Major",
+    "uprightMeaning": "Graceful endings clear space for profound renewal. Transformation is inevitable and liberating.",
+    "reversedMeaning": "Clinging to expired forms prolongs grief. Accept transition to regain momentum.",
+    "description": "Armored figure riding through a fading landscape.",
+    "keywords": [
+      "transformation",
+      "release",
+      "rebirth",
+      "closure"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_14",
+    "name": "Temperance",
+    "arcana": "Major",
+    "uprightMeaning": "Integration and moderation blend polarities into harmony. Flow patiently between extremes.",
+    "reversedMeaning": "Imbalance resurfaces when you rush or overindulge. Recalibrate your rituals.",
+    "description": "Angel mixing water between cups.",
+    "keywords": [
+      "balance",
+      "alchemy",
+      "healing",
+      "patience"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_15",
+    "name": "The Devil",
+    "arcana": "Major",
+    "uprightMeaning": "Shadow desires, contracts, and obsessions surface for honest evaluation. Owning them restores choice.",
+    "reversedMeaning": "Addiction and fear tighten chains when left unconscious. Break agreements that drain life force.",
+    "description": "Horned figure binding two lovers by loose chains.",
+    "keywords": [
+      "shadow",
+      "temptation",
+      "materialism",
+      "bondage"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_16",
+    "name": "The Tower",
+    "arcana": "Major",
+    "uprightMeaning": "Sudden upheaval dismantles false structures so truth can stand. Liberation strikes like lightning.",
+    "reversedMeaning": "Resistance to change magnifies chaos. Rebuild with authenticity after the dust settles.",
+    "description": "Lightning-struck tower with falling figures.",
+    "keywords": [
+      "upheaval",
+      "revelation",
+      "collapse",
+      "awakening"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_17",
+    "name": "The Star",
+    "arcana": "Major",
+    "uprightMeaning": "Hope and spiritual nourishment pour through calm presence. Vulnerability invites cosmic blessing.",
+    "reversedMeaning": "Doubt clouds your ability to receive healing waters. Tend your faith gently.",
+    "description": "Woman pouring water beneath a radiant star.",
+    "keywords": [
+      "hope",
+      "healing",
+      "inspiration",
+      "serenity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_18",
+    "name": "The Moon",
+    "arcana": "Major",
+    "uprightMeaning": "Dreams and intuition whisper through misty pathways. Navigate uncertainty with instinct.",
+    "reversedMeaning": "Illusions and anxiety distort reality when fear rules. Illuminate hidden motives.",
+    "description": "Moonlit scene with canines and a lobster emerging.",
+    "keywords": [
+      "intuition",
+      "mystery",
+      "subconscious",
+      "fear"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_19",
+    "name": "The Sun",
+    "arcana": "Major",
+    "uprightMeaning": "Vitality, joy, and clarity shine brightly on your endeavors. Celebrate progress openly.",
+    "reversedMeaning": "Burnout or inflated ego can dim the light. Rest and gratitude keep radiance steady.",
+    "description": "Child riding a white horse beneath the sun.",
+    "keywords": [
+      "success",
+      "joy",
+      "warmth",
+      "clarity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_20",
+    "name": "Judgement",
+    "arcana": "Major",
+    "uprightMeaning": "Awakenings call you to respond with courage and forgiveness. Integrate lessons and rise anew.",
+    "reversedMeaning": "Avoidance of truth delays evolution. Answer the trumpet with honest reflection.",
+    "description": "Angelic trumpet reviving figures from coffins.",
+    "keywords": [
+      "rebirth",
+      "calling",
+      "absolution",
+      "awareness"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "major_21",
+    "name": "The World",
+    "arcana": "Major",
+    "uprightMeaning": "Wholeness, completion, and travel across thresholds reward your dedication. Celebrate mastery.",
+    "reversedMeaning": "Lingering attachments keep cycles unfinished. Close chapters intentionally before you move on.",
+    "description": "Dancer within a laurel wreath encircled by guardians.",
+    "keywords": [
+      "completion",
+      "integration",
+      "travel",
+      "achievement"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_ace",
+    "name": "Ace of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "New feelings and emotional invitations overflow with grace. Vulnerability becomes sacred creative fuel.",
+    "reversedMeaning": "Emotional blocks or withheld affection stunt renewal. Open the heart channel slowly.",
+    "description": "Ace of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "new beginnings",
+      "potential"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_2",
+    "name": "2 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Partnership and heartfelt reflection create safe bonds. Mirrored empathy deepens trust.",
+    "reversedMeaning": "Co-dependence or imbalance strains a bond. Restore self-love to rebalance.",
+    "description": "2 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "balance",
+      "decision"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_3",
+    "name": "3 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Community celebrations and friendship nourish the spirit. Shared joy multiplies blessings.",
+    "reversedMeaning": "Oversocializing or gossip drains energy. Reconnect with authentic companions.",
+    "description": "3 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "growth",
+      "teamwork"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_4",
+    "name": "4 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Introspection invites reevaluation of desires. Quiet time renews appreciation.",
+    "reversedMeaning": "Apathy and refusal of gifts block growth. Reengage with gratitude.",
+    "description": "4 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "stability",
+      "rest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_5",
+    "name": "5 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Grief is honored so new possibilities can emerge. Feel fully to heal.",
+    "reversedMeaning": "Living in regret blinds you to remaining cups. Shift focus gently forward.",
+    "description": "5 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "challenge",
+      "change"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_6",
+    "name": "6 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Sweet nostalgia and kindness restore innocence. Acts of generosity soothe the soul.",
+    "reversedMeaning": "Idealizing the past prevents present joy. Let memories inspire, not imprison.",
+    "description": "6 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "harmony",
+      "support"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_7",
+    "name": "7 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Imagination offers many alluring paths. Discern fantasy from viable dreams.",
+    "reversedMeaning": "Overwhelm and wishful thinking scatter energy. Ground choices in reality.",
+    "description": "7 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "perseverance",
+      "assessment"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_8",
+    "name": "8 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Leaving familiar emotional terrain leads to deeper meaning. Courage walks toward authenticity.",
+    "reversedMeaning": "Avoidance of necessary endings prolongs dissatisfaction. Honor the call to depart.",
+    "description": "8 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "movement",
+      "skill"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_9",
+    "name": "9 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Contentment and heartfelt wishes manifest through aligned effort. Luxuriate in self-approval.",
+    "reversedMeaning": "Overindulgence or complacency dulls progress. Share your blessings as they grow.",
+    "description": "9 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "fruition",
+      "self-worth"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_10",
+    "name": "10 of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Emotional fulfillment and family harmony bless this chapter. Gratitude sustains the rainbow.",
+    "reversedMeaning": "Idealized expectations strain loved ones. Nurture joy rather than chasing perfection.",
+    "description": "10 of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "legacy",
+      "family"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_page",
+    "name": "Page of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Messages of compassion and creative curiosity arrive. Listen to your inner poet.",
+    "reversedMeaning": "Immaturity or emotional gossip causes confusion. Speak kindly from truth.",
+    "description": "Page of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "messages",
+      "curiosity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_knight",
+    "name": "Knight of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Romantic quests and heartfelt offers move forward with charm. Follow sincere feelings.",
+    "reversedMeaning": "Moodiness and escapism derail commitments. Balance passion with accountability.",
+    "description": "Knight of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "action",
+      "quest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_queen",
+    "name": "Queen of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Empathy, intuition, and psychic receptivity guide decisions. Hold space with grace.",
+    "reversedMeaning": "Emotional overwhelm or martyrdom drains compassion. Reinforce personal boundaries.",
+    "description": "Queen of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "maturity",
+      "influence"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "cups_king",
+    "name": "King of Cups",
+    "arcana": "Minor",
+    "uprightMeaning": "Emotional mastery creates wise counsel and creative leadership. Lead with heart and maturity.",
+    "reversedMeaning": "Manipulative or detached behavior chills connections. Practice honest vulnerability.",
+    "description": "King of Cups channels the emotions and relationships of the cups suit.",
+    "keywords": [
+      "emotion",
+      "intuition",
+      "relationships",
+      "healing",
+      "authority",
+      "mastery"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_ace",
+    "name": "Ace of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Spark of inspiration ignites bold ventures. Claim the flame of desire.",
+    "reversedMeaning": "False starts occur when enthusiasm lacks follow-through. Focus energy.",
+    "description": "Ace of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "new beginnings",
+      "potential"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_2",
+    "name": "2 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Strategic planning and bold outlooks widen horizons. Partner with future possibilities.",
+    "reversedMeaning": "Fear of leaving comfort blocks potential. Move despite uncertainty.",
+    "description": "2 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "balance",
+      "decision"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_3",
+    "name": "3 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Momentum builds as ships return with promise. Continue expanding your reach.",
+    "reversedMeaning": "Delays test patience but refine strategy. Adapt logistics without surrendering vision.",
+    "description": "3 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "growth",
+      "teamwork"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_4",
+    "name": "4 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Celebrations and milestones anchor community. Stable foundations allow play.",
+    "reversedMeaning": "Unfinished business interrupts festivities. Tie loose ends before resting.",
+    "description": "4 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "stability",
+      "rest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_5",
+    "name": "5 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Healthy competition sharpens skills and exposes passion. Engage playfully in debates.",
+    "reversedMeaning": "Petty conflict wastes energy. Collaborate rather than prove superiority.",
+    "description": "5 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "challenge",
+      "change"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_6",
+    "name": "6 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Recognition and victory crown your determination. Share success generously.",
+    "reversedMeaning": "Pride and external validation can inflate ego. Remember your supporters.",
+    "description": "6 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "harmony",
+      "support"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_7",
+    "name": "7 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Hold your ground with conviction. Courage defends progress against pressure.",
+    "reversedMeaning": "Stubbornness without listening exhausts you. Choose battles wisely.",
+    "description": "7 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "perseverance",
+      "assessment"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_8",
+    "name": "8 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Swift movement and clear signals propel plans. Say yes to momentum.",
+    "reversedMeaning": "Hasty actions create misfires. Slow down to confirm direction.",
+    "description": "8 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "movement",
+      "skill"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_9",
+    "name": "9 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Resilience and strategic boundaries help you finish the journey. Protect what matters.",
+    "reversedMeaning": "Hypervigilance keeps you stuck in survival mode. Lean on allies.",
+    "description": "9 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "fruition",
+      "self-worth"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_10",
+    "name": "10 of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Ambition achieved brings heavy responsibility. Delegate to sustain fire.",
+    "reversedMeaning": "Taking on too much causes burnout. Release burdens that aren't yours.",
+    "description": "10 of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "legacy",
+      "family"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_page",
+    "name": "Page of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Exciting news and creative sparks arrive. Explore with daring curiosity.",
+    "reversedMeaning": "Impulsiveness or scattered focus wastes inspiration. Anchor ideas before announcing.",
+    "description": "Page of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "messages",
+      "curiosity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_knight",
+    "name": "Knight of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Adventure and charisma drive bold pursuits. Lead with courage and humor.",
+    "reversedMeaning": "Restless ego causes abandoned projects. Commit before charging ahead.",
+    "description": "Knight of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "action",
+      "quest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_queen",
+    "name": "Queen of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Confident magnetism inspires others to shine. Embody warmth and leadership.",
+    "reversedMeaning": "Jealousy or burnout dims influence. Tend your own flame first.",
+    "description": "Queen of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "maturity",
+      "influence"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "wands_king",
+    "name": "King of Wands",
+    "arcana": "Minor",
+    "uprightMeaning": "Visionary mastery galvanizes teams and innovation. Command with integrity.",
+    "reversedMeaning": "Tyrannical or impatient behavior alienates allies. Balance drive with empathy.",
+    "description": "King of Wands channels the creativity and inspiration of the wands suit.",
+    "keywords": [
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "authority",
+      "mastery"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_ace",
+    "name": "Ace of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Breakthrough insight slices through confusion. Speak decisive truth.",
+    "reversedMeaning": "Weaponized words or overthinking sever connection. Use discernment.",
+    "description": "Ace of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "new beginnings",
+      "potential"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_2",
+    "name": "2 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Balanced deliberation and stillness weigh options fairly. Trust calm logic.",
+    "reversedMeaning": "Stalemate continues when you refuse to feel. Integrate intuition with analysis.",
+    "description": "2 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "balance",
+      "decision"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_3",
+    "name": "3 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Heartache and cathartic honesty clear the air. Acknowledge sorrow to heal.",
+    "reversedMeaning": "Lingering resentment clogs recovery. Release stories that keep wounds open.",
+    "description": "3 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "growth",
+      "teamwork"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_4",
+    "name": "4 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Rest, meditation, and retreat restore mental clarity. Honor sacred pause.",
+    "reversedMeaning": "Over-isolation breeds anxiety. Reenter life when energy returns.",
+    "description": "4 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "stability",
+      "rest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_5",
+    "name": "5 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Conflict reveals winners without allies. Question whether the battle is worth it.",
+    "reversedMeaning": "Avoidance or hollow victories haunt the conscience. Seek repair.",
+    "description": "5 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "challenge",
+      "change"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_6",
+    "name": "6 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Guided transition leads from turmoil toward serenity. Accept the ferry ride.",
+    "reversedMeaning": "Resistance to necessary travel prolongs stress. Prepare and move on.",
+    "description": "6 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "harmony",
+      "support"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_7",
+    "name": "7 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Strategic thinking and discretion help you navigate complex agendas. Rely on wit.",
+    "reversedMeaning": "Deception and half-truths unravel trust. Act transparently for lasting success.",
+    "description": "7 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "perseverance",
+      "assessment"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_8",
+    "name": "8 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Mental prisons dissolve when you claim agency. Reality is wider than fear suggests.",
+    "reversedMeaning": "Victim stories perpetuate paralysis. Remove the blindfold step by step.",
+    "description": "8 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "movement",
+      "skill"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_9",
+    "name": "9 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Anxiety peaks before dawn but invites compassionate self-talk. Examine the nightmare.",
+    "reversedMeaning": "Rumination keeps suffering alive. Share your worries to gain perspective.",
+    "description": "9 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "fruition",
+      "self-worth"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_10",
+    "name": "10 of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "A painful cycle ends, clearing space for rebirth. Honor the lessons and release.",
+    "reversedMeaning": "Refusing closure keeps you pinned to the ground. Stand up and begin again.",
+    "description": "10 of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "legacy",
+      "family"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_page",
+    "name": "Page of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Curious study and sharp messages arrive unexpectedly. Observe and learn.",
+    "reversedMeaning": "Gossip or restless nerves spark trouble. Ground your mind before speaking.",
+    "description": "Page of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "messages",
+      "curiosity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_knight",
+    "name": "Knight of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Swift intellect champions truth and decisive action. Cut through red tape.",
+    "reversedMeaning": "Impulsive words wound. Temper speed with empathy.",
+    "description": "Knight of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "action",
+      "quest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_queen",
+    "name": "Queen of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Perceptive independence and honest counsel protect integrity. Speak clear boundaries.",
+    "reversedMeaning": "Cold detachment distances allies. Invite softness into dialogue.",
+    "description": "Queen of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "maturity",
+      "influence"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "swords_king",
+    "name": "King of Swords",
+    "arcana": "Minor",
+    "uprightMeaning": "Strategic leadership and ethical judgment prevail. Rule with reason.",
+    "reversedMeaning": "Rigid thinking or authoritarian tone creates rebellion. Listen before concluding.",
+    "description": "King of Swords channels the thought and truth of the swords suit.",
+    "keywords": [
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "authority",
+      "mastery"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_ace",
+    "name": "Ace of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Tangible opportunities sprout from steady effort. Ground new ventures now.",
+    "reversedMeaning": "Missed chances stem from hesitation. Plant seeds before soil dries.",
+    "description": "Ace of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "new beginnings",
+      "potential"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_2",
+    "name": "2 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Juggling priorities with playfulness keeps finances balanced. Flow with change.",
+    "reversedMeaning": "Overcommitment causes imbalance. Simplify to regain rhythm.",
+    "description": "2 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "balance",
+      "decision"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_3",
+    "name": "3 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Collaboration and craftsmanship earn respect. Share expertise in community.",
+    "reversedMeaning": "Lack of teamwork breeds stalled projects. Invite feedback and compromise.",
+    "description": "3 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "growth",
+      "teamwork"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_4",
+    "name": "4 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Savings and boundaries protect hard-earned wealth. Treasure what matters.",
+    "reversedMeaning": "Clinging to scarcity blocks growth. Loosen the grip to let abundance circulate.",
+    "description": "4 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "stability",
+      "rest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_5",
+    "name": "5 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Struggle and material hardship teach resilience and compassion. Seek support systems.",
+    "reversedMeaning": "Isolation worsens difficulty. Accept help and shift mindset toward recovery.",
+    "description": "5 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "challenge",
+      "change"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_6",
+    "name": "6 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Generosity and fair exchange restore balance. Give and receive with open palms.",
+    "reversedMeaning": "Power imbalances or strings attached create guilt. Offer autonomy with aid.",
+    "description": "6 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "harmony",
+      "support"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_7",
+    "name": "7 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Assessment and patience reveal what to prune or nurture. Trust slow growth.",
+    "reversedMeaning": "Impatience leads to abandoning promising work. Stay the course a bit longer.",
+    "description": "7 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "perseverance",
+      "assessment"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_8",
+    "name": "8 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Skill mastery grows through diligent practice. Focus on craftsmanship.",
+    "reversedMeaning": "Perfectionism without purpose drains joy. Remember why you began.",
+    "description": "8 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "movement",
+      "skill"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_9",
+    "name": "9 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Self-sufficiency and refinement yield luxurious independence. Celebrate the harvest.",
+    "reversedMeaning": "Overidentification with status isolates you. Share comfort with loved ones.",
+    "description": "9 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "fruition",
+      "self-worth"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_10",
+    "name": "10 of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Legacy, ancestry, and long-term security take center stage. Invest in roots.",
+    "reversedMeaning": "Family expectations or outdated systems need revision. Modernize tradition.",
+    "description": "10 of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "legacy",
+      "family"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_page",
+    "name": "Page of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Study and practical curiosity bring fresh income ideas. Sketch the blueprint.",
+    "reversedMeaning": "Procrastination or laziness wastes potential. Take the first tangible step.",
+    "description": "Page of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "messages",
+      "curiosity"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_knight",
+    "name": "Knight of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Steady progress and loyalty accomplish durable goals. Honor routines.",
+    "reversedMeaning": "Stubbornness or boredom stalls momentum. Inject innovation into habits.",
+    "description": "Knight of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "action",
+      "quest"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_queen",
+    "name": "Queen of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Earthy nurture and resourcefulness keep everyone grounded. Create cozy abundance.",
+    "reversedMeaning": "Overgiving or neglecting self-care depletes reserves. Receive nourishment too.",
+    "description": "Queen of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "maturity",
+      "influence"
+    ],
+    "imageUrl": null
+  },
+  {
+    "id": "pentacles_king",
+    "name": "King of Pentacles",
+    "arcana": "Minor",
+    "uprightMeaning": "Reliable leadership builds empires through patience and ethics. Steward resources wisely.",
+    "reversedMeaning": "Material obsession or rigidity calcifies authority. Share power and adapt.",
+    "description": "King of Pentacles channels the material and practical life of the pentacles suit.",
+    "keywords": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "authority",
+      "mastery"
+    ],
+    "imageUrl": null
   }
 ]

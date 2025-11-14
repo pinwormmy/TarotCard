@@ -14,17 +14,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -50,6 +47,8 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
+import kotlin.random.Random
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -93,23 +92,13 @@ fun ShuffleAndDrawScreen(
                     val cardHeight = cardWidth / 0.625f // 세로로 긴 타로카드 비율
 
                     if (uiState.gridVisible) {
-                        // 드로우 그리드 모드
-                        LazyHorizontalGrid(
+                        DrawPileGrid(
+                            cards = uiState.drawPile,
                             modifier = Modifier
-                                .width(cardWidth)
+                                .fillMaxWidth()
                                 .height(cardHeight),
-                            rows = GridCells.Fixed(2),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                            contentPadding = PaddingValues(12.dp)
-                        ) {
-                            items(uiState.drawPile, key = { it.id }) { card ->
-                                DrawGridCard(
-                                    card = card,
-                                    onSelected = { onCardSelected(card) }
-                                )
-                            }
-                        }
+                            onCardSelected = onCardSelected
+                        )
                     } else {
                         // cutMode 전환 애니메이션: 한 덱 ↔ 3덱
                         val transition = updateTransition(
@@ -236,41 +225,6 @@ fun ShuffleAndDrawScreen(
 }
 
 @Composable
-private fun DrawGridCard(
-    card: TarotCardModel,
-    onSelected: () -> Unit
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val pressed by interactionSource.collectIsPressedAsState()
-    Box(
-        modifier = Modifier
-            .background(
-                brush = Brush.verticalGradient(
-                    listOf(Color(0xFF34365C), Color(0xFF16172C))
-                ),
-                shape = RoundedCornerShape(18.dp)
-            )
-            .padding(12.dp)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = onSelected
-            )
-            .graphicsLayer {
-                translationY = if (pressed) -8f else 0f
-            },
-        contentAlignment = Alignment.TopStart
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(text = card.name, fontWeight = FontWeight.Bold)
-            Text(text = card.arcana, color = Color.White.copy(alpha = 0.7f))
-        }
-    }
-}
-
-@Composable
 private fun CardBackImage(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -314,6 +268,97 @@ private fun OutlineLargeButton(
         onClick = onClick
     ) {
         Text(text = text, fontWeight = FontWeight.SemiBold)
+    }
+}
+
+
+@Composable
+private fun DrawPileGrid(
+    cards: List<TarotCardModel>,
+    modifier: Modifier = Modifier,
+    onCardSelected: (TarotCardModel) -> Unit
+) {
+    BoxWithConstraints(
+        modifier = modifier,
+        contentAlignment = Alignment.TopCenter
+    ) {
+        val density = LocalDensity.current
+        val availableWidth = maxWidth
+        val columnSpacing = 40.dp
+        val cardWidth = (availableWidth - columnSpacing) / 2f
+        val cardHeight = cardWidth / 1.6f
+        val rowSpacing = cardHeight * 0.35f
+
+        val columnCenters = listOf(
+            -((cardWidth / 2f) + columnSpacing / 2f),
+            (cardWidth / 2f) + columnSpacing / 2f
+        )
+        val startXPx = with(density) { (-availableWidth).toPx() * 0.5f - cardWidth.toPx() }
+        val startYPx = with(density) { (-cardHeight).toPx() * 1.2f }
+
+        cards.forEachIndexed { index, card ->
+            val columnIndex = index % 2
+            val rowIndex = index / 2
+            val interactionSource = remember(card.id) { MutableInteractionSource() }
+            val pressed by interactionSource.collectIsPressedAsState()
+            val appear = remember(card.id) { Animatable(0f) }
+            val randomRotation = remember(card.id) { (Random.nextFloat() - 0.5f) * 6f }
+
+            LaunchedEffect(card.id) {
+                delay(50L * index)
+                appear.animateTo(1f, tween(420))
+            }
+
+            val targetXPx = with(density) { columnCenters[columnIndex].toPx() }
+            val targetYPx = with(density) { (rowSpacing * rowIndex).toPx() }
+            val translationX = lerp(startXPx, targetXPx, appear.value)
+            val translationY = lerp(startYPx, targetYPx, appear.value)
+            val baseScale = 0.9f + 0.1f * appear.value
+            val pressScale = if (pressed) 1.05f else 1f
+            val alpha = appear.value.coerceIn(0f, 1f)
+
+            Box(
+                modifier = Modifier
+                    .width(cardWidth)
+                    .height(cardHeight)
+                    .graphicsLayer {
+                        this.translationX = translationX
+                        this.translationY = translationY
+                        this.alpha = alpha
+                        val scale = baseScale * pressScale
+                        this.scaleX = scale
+                        this.scaleY = scale
+                        this.rotationZ = randomRotation
+                    }
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
+                        )
+                    )
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        onClick = { onCardSelected(card) }
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color(0xFF3A3C65),
+                                    Color(0xFF1A1B30)
+                                )
+                            )
+                        )
+                )
+            }
+        }
     }
 }
 
@@ -388,25 +433,23 @@ private fun CutModeScene(
                     )
                 }
             }
-                is CutStage.SecondReady -> {
-                    if (index != stage.combined && index != stage.remaining) return
-                    when {
-                        stage.lifted == null -> cutStage = stage.copy(lifted = index)
-                        stage.lifted == index -> cutStage = stage.copy(lifted = null)
-                        else -> {
-                            val source = stage.lifted
-                            if (source != null) {
-                                cutStage = CutStage.SecondMerge(
-                                    combined = stage.combined,
-                                    remaining = stage.remaining,
-                                    source = source,
-                                    target = index,
-                                    animationKey = animationCounter++
-                                )
-                            }
-                        }
+            is CutStage.SecondReady -> {
+                if (index != stage.combined && index != stage.remaining) return
+                when {
+                    stage.lifted == null -> cutStage = stage.copy(lifted = index)
+                    stage.lifted == index -> cutStage = stage.copy(lifted = null)
+                    else -> {
+                        val source = stage.lifted ?: return
+                        cutStage = CutStage.SecondMerge(
+                            combined = stage.combined,
+                            remaining = stage.remaining,
+                            source = source,
+                            target = index,
+                            animationKey = animationCounter++
+                        )
                     }
                 }
+            }
             else -> Unit
         }
     }
