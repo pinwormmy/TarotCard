@@ -95,8 +95,7 @@ fun ShuffleAndDrawScreen(
                         DrawPileGrid(
                             cards = uiState.drawPile,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(cardHeight),
+                                .fillMaxSize(),
                             onCardSelected = onCardSelected
                         )
                     } else {
@@ -283,37 +282,49 @@ private fun DrawPileGrid(
         contentAlignment = Alignment.TopCenter
     ) {
         val density = LocalDensity.current
-        val availableWidth = maxWidth
-        val columnSpacing = 40.dp
-        val cardWidth = (availableWidth - columnSpacing) / 2f
+        val columnSpacing = 32.dp
+        val cardWidth = (maxWidth - columnSpacing) / 2f
         val cardHeight = cardWidth / 1.6f
-        val rowSpacing = cardHeight * 0.35f
+
+        val maxHeightPx = with(density) { maxHeight.toPx() }
+        val cardHeightPx = with(density) { cardHeight.toPx() }
+        val usableHeightPx = (maxHeightPx - cardHeightPx).coerceAtLeast(0f)
+
+        val leftCount = (cards.size + 1) / 2
+        val rightCount = cards.size / 2
+        fun rowsInColumn(column: Int) = if (column == 0) leftCount else rightCount
 
         val columnCenters = listOf(
             -((cardWidth / 2f) + columnSpacing / 2f),
             (cardWidth / 2f) + columnSpacing / 2f
-        )
-        val startXPx = with(density) { (-availableWidth).toPx() * 0.5f - cardWidth.toPx() }
-        val startYPx = with(density) { (-cardHeight).toPx() * 1.2f }
+        ).map { with(density) { it.toPx() } }
+
+        val startXPx = with(density) { -maxWidth.toPx() * 0.6f - cardWidth.toPx() }
+        val startYPx = with(density) { -maxHeight.toPx() * 0.4f - cardHeight.toPx() }
 
         cards.forEachIndexed { index, card ->
             val columnIndex = index % 2
             val rowIndex = index / 2
+            val rows = rowsInColumn(columnIndex).coerceAtLeast(1)
+            val stepPx = if (rows > 1) usableHeightPx / (rows - 1) else 0f
+            val targetYPx = stepPx * rowIndex
+
             val interactionSource = remember(card.id) { MutableInteractionSource() }
             val pressed by interactionSource.collectIsPressedAsState()
             val appear = remember(card.id) { Animatable(0f) }
-            val randomRotation = remember(card.id) { (Random.nextFloat() - 0.5f) * 6f }
+            val randomRotation = remember(card.id) { (Random.nextFloat() - 0.5f) * 5f }
+
+            val rightColumnCount = rightCount
+            val dealOrderIndex = if (columnIndex == 1) rowIndex else rightColumnCount + rowIndex
 
             LaunchedEffect(card.id) {
-                delay(50L * index)
+                delay(50L * dealOrderIndex)
                 appear.animateTo(1f, tween(420))
             }
 
-            val targetXPx = with(density) { columnCenters[columnIndex].toPx() }
-            val targetYPx = with(density) { (rowSpacing * rowIndex).toPx() }
-            val translationX = lerp(startXPx, targetXPx, appear.value)
+            val translationX = lerp(startXPx, columnCenters[columnIndex], appear.value)
             val translationY = lerp(startYPx, targetYPx, appear.value)
-            val baseScale = 0.9f + 0.1f * appear.value
+            val baseScale = lerp(0.9f, 1f, appear.value)
             val pressScale = if (pressed) 1.05f else 1f
             val alpha = appear.value.coerceIn(0f, 1f)
 
