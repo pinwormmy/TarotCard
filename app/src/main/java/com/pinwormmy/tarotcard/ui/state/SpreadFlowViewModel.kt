@@ -229,11 +229,11 @@ class SpreadFlowViewModel(
     }
 
     fun enterCutMode() {
-        updateState { it.copy(cutMode = true) }
+        updateState { it.copy(cutMode = true, statusMessage = null) }
     }
 
     fun cancelCutMode() {
-        updateState { it.copy(cutMode = false) }
+        updateState { it.copy(cutMode = false, statusMessage = null) }
     }
 
     fun applyCutChoice(stackIndex: Int) {
@@ -252,7 +252,7 @@ class SpreadFlowViewModel(
             state.copy(
                 drawPile = reordered,
                 cutMode = false,
-                statusMessage = "스택 ${normalizedIndex + 1}을 위로 옮겼습니다."
+                statusMessage = state.statusMessage
             )
         }
     }

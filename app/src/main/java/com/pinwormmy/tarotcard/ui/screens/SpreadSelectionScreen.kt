@@ -80,14 +80,6 @@ fun SpreadSelectionScreen(
             }
         }
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            text = "선택된 카드 $selectedCount / ${positions.size}",
-            textAlign = TextAlign.Center
-        )
-
         if (activeSlot == null) {
             DefaultDescription()
         } else {
