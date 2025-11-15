@@ -1,15 +1,86 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+### Android ###
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local configuration file (sdk path, keystore, etc.)
 local.properties
+
+# Kotlin build
+*.kotlin_metadata
+
+# Log/Temporary files
+*.log
+
+# Android Studio Navigation editor temp
+.navigation/
+
+# Signing files
+*.jks
+*.keystore
+
+### IntelliJ / Android Studio ###
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Android Studio caches
+.idea/caches/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/artifacts/
+.idea/shelf/
+
+# Misc
+.DS_Store
+/.project
+/.classpath
+/.settings/
+.vscode/
+
+# Jetpack Compose previews
+**/compose-snapshots/
+
+### Output ###
+# APK / AAB etc.
+*.apk
+*.ap_
+*.aab
+
+# Generated files
+captures/
+outputs/
+generated/
+intermediates/
+tmp/
+
+### OS Files ###
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Linux
+.cache/
+
+### Misc ###
+# Crashlytics
+crashlytics-build.properties
+
+# Gradle Wrapper
+gradle-app.setting
+
+# AGP / Compose Related
+*.hprof
+
+# Android Studio Markdown Preview settings
+.idea/markdown.xml
