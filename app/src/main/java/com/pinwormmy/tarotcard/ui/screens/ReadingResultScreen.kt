@@ -1,8 +1,12 @@
 package com.pinwormmy.tarotcard.ui.screens
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,17 +16,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -30,9 +38,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.lerp
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
 import com.pinwormmy.tarotcard.ui.state.SpreadSlot
+import kotlinx.coroutines.launch
+import kotlin.math.min
 
 enum class CardRevealPhase {
     Back,
@@ -53,9 +66,44 @@ fun ReadingResultScreen(
     val revealStates = remember(orderedCards) {
         orderedCards.map { mutableStateOf(CardRevealPhase.Back) }
     }
+    val cardBounds = remember(orderedCards.size) {
+        List(orderedCards.size) { mutableStateOf<Rect?>(null) }
+    }
+    val containerBounds = remember { mutableStateOf<Rect?>(null) }
+    var zoomedIndex by remember { mutableStateOf<Int?>(null) }
+    val zoomAnimation = remember { Animatable(0f) }
+    val coroutineScope = rememberCoroutineScope()
 
-    val overlayIndex = revealStates.indexOfFirst {
-        it.value == CardRevealPhase.Zoom || it.value == CardRevealPhase.Description
+    fun openZoom(index: Int) {
+        if (zoomedIndex == index) return
+        zoomedIndex = index
+        coroutineScope.launch {
+            zoomAnimation.snapTo(0f)
+            zoomAnimation.animateTo(
+                targetValue = 1f,
+                animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+            )
+        }
+    }
+
+    fun closeZoom() {
+        val target = zoomedIndex ?: return
+        coroutineScope.launch {
+            zoomAnimation.animateTo(
+                targetValue = 0f,
+                animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing)
+            )
+            zoomedIndex = null
+            revealStates[target].value = CardRevealPhase.Front
+        }
+    }
+
+    fun showDescription(index: Int) {
+        revealStates[index].value = CardRevealPhase.Description
+    }
+
+    fun dismissDescription(index: Int) {
+        revealStates[index].value = CardRevealPhase.Zoom
     }
 
     Box(
@@ -63,6 +111,7 @@ fun ReadingResultScreen(
             .fillMaxSize()
             .systemBarsPadding()
             .padding(horizontal = 16.dp, vertical = 24.dp)
+            .onGloballyPositioned { containerBounds.value = it.boundsInRoot() }
     ) {
         Column(
             modifier = Modifier
@@ -83,11 +132,30 @@ fun ReadingResultScreen(
                     orderedCards.forEachIndexed { index, card ->
                         val state = revealStates.getOrNull(index)
                         if (state != null && card != null) {
+                            val boundsState = cardBounds[index]
                             ReadingResultCard(
-                                modifier = Modifier.weight(1f),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .onGloballyPositioned { coordinates ->
+                                        boundsState.value = coordinates.boundsInRoot()
+                                    },
                                 card = card,
                                 phase = state.value,
-                                onTapped = { state.value = nextPhase(state.value) }
+                                enabled = zoomedIndex == null,
+                                onTapped = {
+                                    if (zoomedIndex != null) {
+                                        return@ReadingResultCard
+                                    }
+                                    when (state.value) {
+                                        CardRevealPhase.Back -> state.value = CardRevealPhase.Front
+                                        CardRevealPhase.Front -> {
+                                            state.value = CardRevealPhase.Zoom
+                                            openZoom(index)
+                                        }
+                                        CardRevealPhase.Zoom -> showDescription(index)
+                                        CardRevealPhase.Description -> Unit
+                                    }
+                                }
                             )
                         }
                     }
@@ -105,16 +173,33 @@ fun ReadingResultScreen(
         }
     }
 
-    if (overlayIndex >= 0) {
-        val phase = revealStates[overlayIndex].value
-        val card = orderedCards.getOrNull(overlayIndex)
-        if (card != null) {
+    val activeZoomIndex = zoomedIndex
+    if (activeZoomIndex != null) {
+        val phase = revealStates.getOrNull(activeZoomIndex)?.value
+        val card = orderedCards.getOrNull(activeZoomIndex)
+        val originBounds = cardBounds.getOrNull(activeZoomIndex)?.value
+        val container = containerBounds.value
+        if (card != null && phase != null) {
             ReadingResultOverlay(
                 card = card,
                 phase = phase,
-                onDismiss = {
-                    val state = revealStates[overlayIndex]
-                    state.value = nextPhase(state.value)
+                zoomProgress = zoomAnimation.value,
+                cardBounds = originBounds,
+                containerBounds = container,
+                onCardTapped = {
+                    if (phase == CardRevealPhase.Zoom) {
+                        showDescription(activeZoomIndex)
+                    }
+                },
+                onBackgroundTapped = {
+                    if (phase == CardRevealPhase.Zoom) {
+                        closeZoom()
+                    } else if (phase == CardRevealPhase.Description) {
+                        dismissDescription(activeZoomIndex)
+                    }
+                },
+                onDescriptionDismiss = {
+                    dismissDescription(activeZoomIndex)
                 }
             )
         }
@@ -126,6 +211,7 @@ private fun ReadingResultCard(
     card: TarotCardModel,
     phase: CardRevealPhase,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onTapped: () -> Unit
 ) {
     val isBack = phase == CardRevealPhase.Back
@@ -151,7 +237,7 @@ private fun ReadingResultCard(
                     }
                 )
             )
-            .clickable { onTapped() },
+            .clickable(enabled = enabled) { onTapped() },
         contentAlignment = Alignment.Center
     ) {
         if (!isBack) {
@@ -181,41 +267,102 @@ private fun ReadingResultCard(
 private fun ReadingResultOverlay(
     card: TarotCardModel,
     phase: CardRevealPhase,
-    onDismiss: () -> Unit
+    zoomProgress: Float,
+    cardBounds: Rect?,
+    containerBounds: Rect?,
+    onCardTapped: () -> Unit,
+    onBackgroundTapped: () -> Unit,
+    onDescriptionDismiss: () -> Unit
 ) {
+    val dimColor = Color.Black.copy(alpha = 0.7f)
+    val density = LocalDensity.current
+    val backgroundInteraction = remember { MutableInteractionSource() }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f))
-            .clickable { onDismiss() },
+            .background(dimColor),
         contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp)
-                .clip(RoundedCornerShape(24.dp))
-                .background(Color(0xFF1F1F2E))
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            if (phase == CardRevealPhase.Description) {
+        if (phase == CardRevealPhase.Description) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable(
+                        interactionSource = backgroundInteraction,
+                        indication = null
+                    ) { onDescriptionDismiss() }
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(Color(0xFF1F1F2E))
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 Text(
                     text = card.description,
                     textAlign = TextAlign.Center
                 )
-            } else {
                 Text(
-                    text = "카드를 확대해 살펴보세요.",
+                    text = "탭하면 닫습니다",
+                    color = Color.White.copy(alpha = 0.7f),
                     textAlign = TextAlign.Center
                 )
             }
-            Text(
-                text = if (phase == CardRevealPhase.Description) "탭하면 닫습니다" else "한 번 더 탭하면 설명을 확인합니다",
-                color = Color.White.copy(alpha = 0.7f),
-                textAlign = TextAlign.Center
+        } else {
+            val aspectRatio = 0.62f
+            val targetWidthPx = containerBounds?.let { container ->
+                val widthLimit = container.width * 0.7f
+                val heightLimit = container.height * 0.8f
+                val widthFromHeight = heightLimit * aspectRatio
+                min(widthLimit, widthFromHeight)
+            }
+            val targetWidthDp = targetWidthPx?.let { with(density) { it.toDp() } } ?: 280.dp
+            val startWidthPx = cardBounds?.width
+            val startScale = if (targetWidthPx != null && startWidthPx != null && targetWidthPx > 0f) {
+                (startWidthPx / targetWidthPx).coerceIn(0.3f, 1f)
+            } else {
+                0.6f
+            }
+            val startOffset = if (cardBounds != null && containerBounds != null) {
+                Offset(
+                    cardBounds.center.x - containerBounds.center.x,
+                    cardBounds.center.y - containerBounds.center.y
+                )
+            } else {
+                Offset.Zero
+            }
+            val easedProgress = FastOutSlowInEasing.transform(zoomProgress.coerceIn(0f, 1f))
+            val offsetX = lerp(startOffset.x, 0f, easedProgress)
+            val offsetY = lerp(startOffset.y, 0f, easedProgress)
+            val scale = lerp(startScale, 1f, easedProgress)
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable(
+                        interactionSource = backgroundInteraction,
+                        indication = null
+                    ) { onBackgroundTapped() }
+            )
+
+            ReadingResultCard(
+                card = card,
+                phase = phase,
+                modifier = Modifier
+                    .width(targetWidthDp)
+                    .graphicsLayer {
+                        translationX = offsetX
+                        translationY = offsetY
+                        scaleX = scale
+                        scaleY = scale
+                    },
+                onTapped = onCardTapped
             )
         }
     }
@@ -226,6 +373,6 @@ private fun nextPhase(current: CardRevealPhase): CardRevealPhase {
         CardRevealPhase.Back -> CardRevealPhase.Front
         CardRevealPhase.Front -> CardRevealPhase.Zoom
         CardRevealPhase.Zoom -> CardRevealPhase.Description
-        CardRevealPhase.Description -> CardRevealPhase.Front
+        CardRevealPhase.Description -> CardRevealPhase.Zoom
     }
 }
