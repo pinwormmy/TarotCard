@@ -215,6 +215,6 @@ private fun nextPhase(current: CardRevealPhase): CardRevealPhase {
         CardRevealPhase.Back -> CardRevealPhase.Front
         CardRevealPhase.Front -> CardRevealPhase.Zoom
         CardRevealPhase.Zoom -> CardRevealPhase.Description
-        CardRevealPhase.Description -> CardRevealPhase.Back
+        CardRevealPhase.Description -> CardRevealPhase.Front
     }
 }

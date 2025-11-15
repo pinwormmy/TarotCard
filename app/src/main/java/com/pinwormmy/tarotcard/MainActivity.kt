@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val repository = TarotRepository(applicationContext)
-        Log.d("TEST", "Codex working!")
+        Log.d("TEST", "Codex working!");
         setContent {
             TarotcardTheme {
                 TarotNavGraph(repository = repository)
