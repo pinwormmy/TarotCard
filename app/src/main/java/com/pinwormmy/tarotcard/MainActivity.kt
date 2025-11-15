@@ -22,5 +22,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-// 커밋테스트용
