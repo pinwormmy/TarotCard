@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -57,37 +58,47 @@ fun ReadingResultScreen(
         it.value == CardRevealPhase.Zoom || it.value == CardRevealPhase.Description
     }
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+            .systemBarsPadding()
+            .padding(horizontal = 16.dp, vertical = 24.dp)
     ) {
-        Text(text = "리딩 결과", fontWeight = FontWeight.Bold)
-
-        if (orderedCards.all { it == null }) {
-            Text(text = "아직 선택된 카드가 없습니다.")
-        } else {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                orderedCards.forEachIndexed { index, card ->
-                    val state = revealStates.getOrNull(index)
-                    if (state != null && card != null) {
-                        ReadingResultCard(
-                            modifier = Modifier.weight(1f),
-                            card = card,
-                            phase = state.value,
-                            onTapped = { state.value = nextPhase(state.value) }
-                        )
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (orderedCards.all { it == null }) {
+                Text(text = "아직 선택된 카드가 없습니다.")
+            } else {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.CenterHorizontally),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                ) {
+                    orderedCards.forEachIndexed { index, card ->
+                        val state = revealStates.getOrNull(index)
+                        if (state != null && card != null) {
+                            ReadingResultCard(
+                                modifier = Modifier.weight(1f),
+                                card = card,
+                                phase = state.value,
+                                onTapped = { state.value = nextPhase(state.value) }
+                            )
+                        }
                     }
                 }
             }
         }
 
         Button(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
             onClick = onRestart
         ) {
             Text(text = "새 리딩 시작")
