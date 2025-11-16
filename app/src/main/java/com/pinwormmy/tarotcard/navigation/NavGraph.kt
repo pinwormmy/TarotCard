@@ -15,6 +15,7 @@ import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
 import com.pinwormmy.tarotcard.ui.screens.CardLibraryScreen
 import com.pinwormmy.tarotcard.ui.screens.MainMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingResultScreen
+import com.pinwormmy.tarotcard.ui.screens.ReadingSetupScreen
 import com.pinwormmy.tarotcard.ui.screens.SpreadMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.tarotcard.ui.screens.SpreadSelectionScreen
@@ -61,6 +62,21 @@ fun TarotNavGraph(
                     navController.navigate(Screen.CardLibrary.route)
                 },
                 onStartReading = {
+                    navController.navigate(Screen.ReadingSetup.route)
+                }
+            )
+        }
+
+        composable(Screen.ReadingSetup.route) {
+            ReadingSetupScreen(
+                positions = spreadUiState.positions,
+                preselectionState = spreadUiState.preselection,
+                questionText = spreadUiState.questionText,
+                useReversedCards = spreadUiState.useReversedCards,
+                onBack = { navController.popBackStack() },
+                onQuestionChange = { spreadViewModel.updateQuestion(it) },
+                onUseReversedChange = { spreadViewModel.updateUseReversed(it) },
+                onShuffle = {
                     when (spreadViewModel.startReading()) {
                         SpreadStep.ShuffleAndDraw -> navController.navigate(Screen.ShuffleAndDraw.route)
                         SpreadStep.ReadingResult -> navController.navigate(Screen.ReadingResult.route)
@@ -151,6 +167,7 @@ private sealed class Screen(val route: String) {
     data object MainMenu : Screen("main_menu")
     data object SpreadMenu : Screen("spread_menu")
     data object Preselection : Screen("preselection")
+    data object ReadingSetup : Screen("reading_setup")
     data object CardLibrary : Screen("card_library")
     data object ShuffleAndDraw : Screen("shuffle_and_draw")
     data object ReadingResult : Screen("reading_result")

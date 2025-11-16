@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,8 +42,7 @@ fun SpreadSelectionScreen(
     preselectionState: SpreadPreselectionState,
     modifier: Modifier = Modifier,
     onPickCard: (SpreadSlot) -> Unit,
-    onStartReading: () -> Unit,
-    onQuickReading: () -> Unit
+    onStartReading: () -> Unit
 ) {
     var activeSlot by remember { mutableStateOf<SpreadSlot?>(null) }
     val selectedCount = preselectionState.selectedCount
@@ -106,12 +104,6 @@ fun SpreadSelectionScreen(
                 onClick = onStartReading
             ) {
                 Text(text = "리딩 시작하기")
-            }
-            OutlinedButton(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onQuickReading
-            ) {
-                Text(text = "곧바로 리딩하기")
             }
         }
     }

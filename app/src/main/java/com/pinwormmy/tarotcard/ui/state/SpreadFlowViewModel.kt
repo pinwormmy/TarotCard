@@ -75,6 +75,8 @@ data class SpreadFlowUiState(
     val targetSlotForLibrary: SpreadSlot? = null,
     val selectedCategory: CardCategory = CardCategory.MajorArcana,
     val availableCards: List<TarotCardModel> = emptyList(),
+    val questionText: String = "",
+    val useReversedCards: Boolean = true,
     val shuffleTrigger: Int = 0,
     val drawPile: List<TarotCardModel> = emptyList(),
     val pendingSlots: List<SpreadSlot> = emptyList(),
@@ -137,6 +139,14 @@ class SpreadFlowViewModel(
                 availableCards = filteredAvailableCards(updated)
             )
         }
+    }
+
+    fun updateQuestion(text: String) {
+        updateState { it.copy(questionText = text) }
+    }
+
+    fun updateUseReversed(enabled: Boolean) {
+        updateState { it.copy(useReversedCards = enabled) }
     }
 
     fun clearTargetSlot() {
