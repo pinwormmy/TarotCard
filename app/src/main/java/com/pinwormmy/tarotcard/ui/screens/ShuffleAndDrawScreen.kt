@@ -48,8 +48,10 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
+import com.pinwormmy.tarotcard.ui.components.ShufflePhase
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
@@ -69,6 +71,11 @@ fun ShuffleAndDrawScreen(
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
 ) {
+    var shufflePhase by remember { mutableStateOf(ShufflePhase.Idle) }
+    val deckInteractionEnabled =
+        !uiState.gridVisible && !uiState.cutMode &&
+            (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -155,19 +162,24 @@ fun ShuffleAndDrawScreen(
                             ) {
                                 CardBackImage(
                                     modifier = Modifier.fillMaxSize(),
+                                    enabled = deckInteractionEnabled,
                                     onClick = onDeckTap
                                 )
                                 CardDeck(
                                     modifier = Modifier.fillMaxSize(),
                                     width = cardWidth,
                                     height = cardHeight,
-                                    shuffleTrigger = uiState.shuffleTrigger
+                                    shuffleTrigger = uiState.shuffleTrigger,
+                                    onPhaseChanged = { shufflePhase = it }
                                 )
                                 Box(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .clip(RoundedCornerShape(24.dp))
-                                        .clickable(onClick = onDeckTap)
+                                        .clickable(
+                                            enabled = deckInteractionEnabled,
+                                            onClick = onDeckTap
+                                        )
                                 )
                             }
 
@@ -232,12 +244,13 @@ fun ShuffleAndDrawScreen(
 @Composable
 private fun CardBackImage(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)
     Box(
         modifier = modifier
-            .clickable(onClick = onClick),
+            .clickable(enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         repeat(3) { offset ->
@@ -334,9 +347,27 @@ private fun DrawPileGrid(
             }?.card?.id
         }
 
+        val maxDealIndex = placements.maxOfOrNull { it.dealOrderIndex } ?: 0
+        var gesturesEnabled by remember(cards) { mutableStateOf(false) }
+
+        LaunchedEffect(cards) {
+            gesturesEnabled = false
+            if (cards.isEmpty()) {
+                return@LaunchedEffect
+            }
+            val totalDelay = 40L * maxDealIndex + 360L
+            if (totalDelay > 0) {
+                delay(totalDelay)
+            }
+            gesturesEnabled = true
+        }
+
         val pointerModifier = Modifier
             .fillMaxSize()
-            .pointerInput(cards, maxWidth, maxHeight) {
+            .pointerInput(cards, maxWidth, maxHeight, gesturesEnabled) {
+                if (!gesturesEnabled) {
+                    awaitCancellation()
+                }
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
                     try {
@@ -348,7 +379,10 @@ private fun DrawPileGrid(
                             if (!change.pressed) {
                                 val selectedId = hoveredCardId
                                 hoveredCardId = null
-                                selectedId?.let { selectionEvents.tryEmit(it) }
+                                if (selectedId != null) {
+                                    gesturesEnabled = false
+                                    selectionEvents.tryEmit(selectedId)
+                                }
                                 break
                             }
                             if (change.isConsumed) {
@@ -379,6 +413,7 @@ private fun DrawPileGrid(
                         exitProgress.animateTo(1f, tween(400))
                         delay(50)
                         onCardSelected(card)
+                        gesturesEnabled = true
                     }
                 }
 
