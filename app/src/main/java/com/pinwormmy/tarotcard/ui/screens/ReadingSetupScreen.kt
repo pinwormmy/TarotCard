@@ -26,13 +26,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
-import com.pinwormmy.tarotcard.ui.state.SpreadPreselectionState
-import com.pinwormmy.tarotcard.ui.state.SpreadSlot
 
 @Composable
 fun ReadingSetupScreen(
     positions: List<SpreadPosition>,
-    preselectionState: SpreadPreselectionState,
     questionText: String,
     useReversedCards: Boolean,
     modifier: Modifier = Modifier,
@@ -58,7 +55,7 @@ fun ReadingSetupScreen(
             ) {
                 Text(text = "과거 / 현재 / 미래", fontWeight = FontWeight.Bold)
                 OutlinedButton(onClick = onBack) {
-                    Text(text = "선택 변경")
+                    Text(text = "뒤로")
                 }
             }
             Row(
@@ -68,9 +65,7 @@ fun ReadingSetupScreen(
                 positions.forEach { position ->
                     ReadingSetupCard(
                         modifier = Modifier.weight(1f),
-                        label = position.title,
-                        slot = position.slot,
-                        preselectionState = preselectionState
+                        label = position.title
                     )
                 }
             }
@@ -125,12 +120,9 @@ fun ReadingSetupScreen(
 @Composable
 private fun ReadingSetupCard(
     label: String,
-    slot: SpreadSlot,
-    preselectionState: SpreadPreselectionState,
     modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(24.dp)
-    val selectedName = preselectionState.get(slot)?.name
     Box(
         modifier = modifier
             .height(180.dp)
@@ -151,7 +143,7 @@ private fun ReadingSetupCard(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = selectedName ?: "선택 안 됨",
+                text = "셔플에서 카드가 결정됩니다",
                 textAlign = TextAlign.Center,
                 color = Color.White.copy(alpha = 0.9f)
             )
