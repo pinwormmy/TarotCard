@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlin.random.Random
 
 enum class SpreadSlot {
     Past,
@@ -80,11 +81,16 @@ data class SpreadFlowUiState(
     val shuffleTrigger: Int = 0,
     val drawPile: List<TarotCardModel> = emptyList(),
     val pendingSlots: List<SpreadSlot> = emptyList(),
-    val drawnCards: Map<SpreadSlot, TarotCardModel> = emptyMap(),
-    val finalCards: Map<SpreadSlot, TarotCardModel> = emptyMap(),
+    val drawnCards: Map<SpreadSlot, SpreadCardResult> = emptyMap(),
+    val finalCards: Map<SpreadSlot, SpreadCardResult> = emptyMap(),
     val gridVisible: Boolean = false,
     val statusMessage: String? = null,
     val cutMode: Boolean = false
+)
+
+data class SpreadCardResult(
+    val card: TarotCardModel,
+    val isReversed: Boolean
 )
 
 class SpreadFlowViewModel(
@@ -165,6 +171,7 @@ class SpreadFlowViewModel(
     fun startReading(): SpreadStep {
         val current = _uiState.value
         val fixedCards = current.preselection.toFilledMap()
+            .mapValues { SpreadCardResult(it.value, isReversed = false) }
         val pendingSlots = SpreadSlot.values().filter { current.preselection.get(it) == null }
 
         return if (pendingSlots.isEmpty()) {
@@ -181,7 +188,7 @@ class SpreadFlowViewModel(
             }
             SpreadStep.ReadingResult
         } else {
-            val bannedIds = fixedCards.values.map { it.id }.toSet()
+            val bannedIds = fixedCards.values.map { it.card.id }.toSet()
             val remaining = allCards.filterNot { it.id in bannedIds }
             updateState {
                 it.copy(
@@ -201,14 +208,19 @@ class SpreadFlowViewModel(
 
     fun startQuickReading(): SpreadStep {
         val current = _uiState.value
-        val base = current.preselection.toFilledMap().toMutableMap()
+        val base = current.preselection.toFilledMap()
+            .mapValues { SpreadCardResult(it.value, isReversed = false) }
+            .toMutableMap()
         val pendingSlots = SpreadSlot.values().filter { current.preselection.get(it) == null }
-        val bannedIds = base.values.map { it.id }.toMutableSet()
+        val bannedIds = base.values.map { it.card.id }.toMutableSet()
         val remaining = allCards.filterNot { it.id in bannedIds }.shuffled()
         val assignments = pendingSlots.mapIndexedNotNull { index, slot ->
             val card = remaining.getOrNull(index) ?: return@mapIndexedNotNull null
             bannedIds.add(card.id)
-            slot to card
+            slot to SpreadCardResult(
+                card = card,
+                isReversed = current.useReversedCards && Random.nextBoolean()
+            )
         }.toMap()
         base.putAll(assignments)
         updateState {
@@ -271,13 +283,17 @@ class SpreadFlowViewModel(
         var shouldShowResult = false
         updateState { state ->
             if (state.pendingSlots.isEmpty()) return@updateState state
-            if (state.drawnCards.values.any { it.id == card.id }) return@updateState state
+            if (state.drawnCards.values.any { it.card.id == card.id }) return@updateState state
             val nextIndex = state.drawnCards.size
             if (nextIndex >= state.pendingSlots.size) return@updateState state
 
             val nextSlot = state.pendingSlots[nextIndex]
-            val updatedDrawn = state.drawnCards + (nextSlot to card)
-            val updatedFinal = state.finalCards + (nextSlot to card)
+            val placement = SpreadCardResult(
+                card = card,
+                isReversed = state.useReversedCards && Random.nextBoolean()
+            )
+            val updatedDrawn = state.drawnCards + (nextSlot to placement)
+            val updatedFinal = state.finalCards + (nextSlot to placement)
             val message = when (nextSlot) {
                 SpreadSlot.Past -> "과거 카드를 선택했습니다."
                 SpreadSlot.Present -> "현재 카드를 선택했습니다."

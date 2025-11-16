@@ -42,6 +42,7 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.state.SpreadCardResult
 import com.pinwormmy.tarotcard.ui.state.SpreadPosition
 import com.pinwormmy.tarotcard.ui.state.SpreadSlot
 import kotlinx.coroutines.launch
@@ -57,17 +58,17 @@ enum class CardRevealPhase {
 @Composable
 fun ReadingResultScreen(
     positions: List<SpreadPosition>,
-    cardsBySlot: Map<SpreadSlot, TarotCardModel>,
+    cardsBySlot: Map<SpreadSlot, SpreadCardResult>,
     modifier: Modifier = Modifier,
     onNavigateHome: () -> Unit
 ) {
     val orderedSlots = remember(positions) { positions.map { it.slot } }
-    val orderedCards = orderedSlots.map { cardsBySlot[it] }
-    val revealStates = remember(orderedCards) {
-        orderedCards.map { mutableStateOf(CardRevealPhase.Back) }
+    val orderedPlacements = orderedSlots.map { cardsBySlot[it] }
+    val revealStates = remember(orderedPlacements) {
+        orderedPlacements.map { mutableStateOf(CardRevealPhase.Back) }
     }
-    val cardBounds = remember(orderedCards.size) {
-        List(orderedCards.size) { mutableStateOf<Rect?>(null) }
+    val cardBounds = remember(orderedPlacements.size) {
+        List(orderedPlacements.size) { mutableStateOf<Rect?>(null) }
     }
     val containerBounds = remember { mutableStateOf<Rect?>(null) }
     var zoomedIndex by remember { mutableStateOf<Int?>(null) }
@@ -120,7 +121,7 @@ fun ReadingResultScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (orderedCards.all { it == null }) {
+            if (orderedPlacements.all { it == null }) {
                 Text(text = "아직 선택된 카드가 없습니다.")
             } else {
                 Row(
@@ -129,8 +130,10 @@ fun ReadingResultScreen(
                         .align(Alignment.CenterHorizontally),
                     horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
                 ) {
-                    orderedCards.forEachIndexed { index, card ->
+                    orderedPlacements.forEachIndexed { index, placement ->
                         val state = revealStates.getOrNull(index)
+                        val card = placement?.card
+                        val isReversed = placement?.isReversed == true
                         if (state != null && card != null) {
                             val boundsState = cardBounds[index]
                             ReadingResultCard(
@@ -140,6 +143,7 @@ fun ReadingResultScreen(
                                         boundsState.value = coordinates.boundsInRoot()
                                     },
                                 card = card,
+                                isReversed = isReversed,
                                 phase = state.value,
                                 enabled = zoomedIndex == null,
                                 onTapped = {
@@ -176,12 +180,15 @@ fun ReadingResultScreen(
     val activeZoomIndex = zoomedIndex
     if (activeZoomIndex != null) {
         val phase = revealStates.getOrNull(activeZoomIndex)?.value
-        val card = orderedCards.getOrNull(activeZoomIndex)
+        val placement = orderedPlacements.getOrNull(activeZoomIndex)
+        val card = placement?.card
+        val isReversed = placement?.isReversed == true
         val originBounds = cardBounds.getOrNull(activeZoomIndex)?.value
         val container = containerBounds.value
         if (card != null && phase != null) {
             ReadingResultOverlay(
                 card = card,
+                isReversed = isReversed,
                 phase = phase,
                 zoomProgress = zoomAnimation.value,
                 cardBounds = originBounds,
@@ -209,6 +216,7 @@ fun ReadingResultScreen(
 @Composable
 private fun ReadingResultCard(
     card: TarotCardModel,
+    isReversed: Boolean,
     phase: CardRevealPhase,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -220,6 +228,7 @@ private fun ReadingResultCard(
         label = "cardFlip"
     )
     val density = LocalDensity.current
+    val faceRotation = if (!isBack && isReversed) 180f else 0f
     Box(
         modifier = modifier
             .aspectRatio(0.62f)
@@ -227,6 +236,7 @@ private fun ReadingResultCard(
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 8 * density.density
+                rotationZ = faceRotation
             }
             .background(
                 brush = Brush.verticalGradient(
@@ -266,6 +276,7 @@ private fun ReadingResultCard(
 @Composable
 private fun ReadingResultOverlay(
     card: TarotCardModel,
+    isReversed: Boolean,
     phase: CardRevealPhase,
     zoomProgress: Float,
     cardBounds: Rect?,
@@ -303,9 +314,14 @@ private fun ReadingResultOverlay(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                val bodyText = if (isReversed) {
+                    "${card.name} 리버스 카드: ${card.reversedMeaning}"
+                } else {
+                    card.description
+                }
                 Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 Text(
-                    text = card.description,
+                    text = bodyText,
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -353,6 +369,7 @@ private fun ReadingResultOverlay(
 
             ReadingResultCard(
                 card = card,
+                isReversed = isReversed,
                 phase = phase,
                 modifier = Modifier
                     .width(targetWidthDp)
