@@ -59,7 +59,7 @@ fun ReadingResultScreen(
     positions: List<SpreadPosition>,
     cardsBySlot: Map<SpreadSlot, TarotCardModel>,
     modifier: Modifier = Modifier,
-    onRestart: () -> Unit
+    onNavigateHome: () -> Unit
 ) {
     val orderedSlots = remember(positions) { positions.map { it.slot } }
     val orderedCards = orderedSlots.map { cardsBySlot[it] }
@@ -167,9 +167,9 @@ fun ReadingResultScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth(),
-            onClick = onRestart
+            onClick = onNavigateHome
         ) {
-            Text(text = "새 리딩 시작")
+            Text(text = "메인으로")
         }
     }
 

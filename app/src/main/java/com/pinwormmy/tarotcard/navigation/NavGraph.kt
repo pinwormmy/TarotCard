@@ -13,7 +13,9 @@ import androidx.navigation.navArgument
 import com.pinwormmy.tarotcard.data.TarotRepository
 import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
 import com.pinwormmy.tarotcard.ui.screens.CardLibraryScreen
+import com.pinwormmy.tarotcard.ui.screens.MainMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingResultScreen
+import com.pinwormmy.tarotcard.ui.screens.SpreadMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.tarotcard.ui.screens.SpreadSelectionScreen
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowViewModel
@@ -31,8 +33,25 @@ fun TarotNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Preselection.route
+        startDestination = Screen.MainMenu.route
     ) {
+        composable(Screen.MainMenu.route) {
+            MainMenuScreen(
+                onStartReading = {
+                    navController.navigate(Screen.SpreadMenu.route)
+                }
+            )
+        }
+
+        composable(Screen.SpreadMenu.route) {
+            SpreadMenuScreen(
+                onPastPresentFuture = {
+                    navController.navigate(Screen.Preselection.route)
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+
         composable(Screen.Preselection.route) {
             SpreadSelectionScreen(
                 positions = spreadUiState.positions,
@@ -104,10 +123,10 @@ fun TarotNavGraph(
             ReadingResultScreen(
                 positions = spreadUiState.positions,
                 cardsBySlot = spreadUiState.finalCards,
-                onRestart = {
+                onNavigateHome = {
                     spreadViewModel.resetFlow()
-                    navController.navigate(Screen.Preselection.route) {
-                        popUpTo(Screen.Preselection.route) { inclusive = true }
+                    navController.navigate(Screen.MainMenu.route) {
+                        popUpTo(Screen.MainMenu.route) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -129,6 +148,8 @@ fun TarotNavGraph(
 }
 
 private sealed class Screen(val route: String) {
+    data object MainMenu : Screen("main_menu")
+    data object SpreadMenu : Screen("spread_menu")
     data object Preselection : Screen("preselection")
     data object CardLibrary : Screen("card_library")
     data object ShuffleAndDraw : Screen("shuffle_and_draw")
