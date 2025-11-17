@@ -41,7 +41,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
-import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +51,7 @@ fun DailyCardScreen(
 ) {
     var isBack by remember { mutableStateOf(true) }
     var showDescription by remember { mutableStateOf(false) }
-    val isReversed by remember { mutableStateOf(Random.nextBoolean()) }
+    val isReversed = false
 
     Scaffold(
         modifier = modifier,
