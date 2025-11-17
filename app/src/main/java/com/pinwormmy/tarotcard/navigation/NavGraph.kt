@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.pinwormmy.tarotcard.data.TarotRepository
+import com.pinwormmy.tarotcard.ui.screens.CardBrowserScreen
 import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
 import com.pinwormmy.tarotcard.ui.screens.DailyCardScreen
 import com.pinwormmy.tarotcard.ui.screens.MainMenuScreen
@@ -36,6 +37,7 @@ fun TarotNavGraph(
         factory = SpreadFlowViewModel.Factory(repository)
     )
     val spreadUiState by spreadViewModel.uiState.collectAsState()
+    val allCards = remember { repository.getCards() }
 
     NavHost(
         navController = navController,
@@ -51,7 +53,8 @@ fun TarotNavGraph(
                 },
                 onDailyCard = {
                     navController.navigate(Screen.DailyCard.route)
-                }
+                },
+                onBrowseCards = { navController.navigate(Screen.CardBrowser.route) }
             )
         }
 
@@ -136,9 +139,16 @@ fun TarotNavGraph(
         }
 
         composable(Screen.DailyCard.route) {
-            val card = remember { repository.getCards().random() }
+            val card = remember { allCards.random() }
             DailyCardScreen(
                 card = card,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.CardBrowser.route) {
+            CardBrowserScreen(
+                cards = allCards,
                 onBack = { navController.popBackStack() }
             )
         }
@@ -152,6 +162,7 @@ private sealed class Screen(val route: String) {
     data object ShuffleAndDraw : Screen("shuffle_and_draw")
     data object ReadingResult : Screen("reading_result")
     data object DailyCard : Screen("daily_card")
+    data object CardBrowser : Screen("card_browser")
     data object CardDetail : Screen("card_detail/{cardId}") {
         fun createRoute(cardId: String) = "card_detail/$cardId"
     }
