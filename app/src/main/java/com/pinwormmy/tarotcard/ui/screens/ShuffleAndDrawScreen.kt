@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,7 +51,6 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
-import com.pinwormmy.tarotcard.ui.state.SpreadPosition
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -58,10 +58,8 @@ import kotlin.math.ceil
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-@Suppress("UNUSED_PARAMETER")
 fun ShuffleAndDrawScreen(
     uiState: SpreadFlowUiState,
-    positions: List<SpreadPosition>,
     modifier: Modifier = Modifier,
     onDeckTap: () -> Unit,
     onCutRequest: () -> Unit,
@@ -88,6 +86,26 @@ fun ShuffleAndDrawScreen(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = uiState.spread.title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+                if (uiState.questionText.isNotBlank()) {
+                    Text(
+                        text = "Q. ${uiState.questionText}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.White.copy(alpha = 0.8f),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
             // 상단 카드 영역
             Box(
                 modifier = Modifier

@@ -10,15 +10,16 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,8 +43,10 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.SpreadBoard
+import com.pinwormmy.tarotcard.ui.components.estimatedBoardHeight
 import com.pinwormmy.tarotcard.ui.state.SpreadCardResult
-import com.pinwormmy.tarotcard.ui.state.SpreadPosition
+import com.pinwormmy.tarotcard.ui.state.SpreadDefinition
 import com.pinwormmy.tarotcard.ui.state.SpreadSlot
 import kotlinx.coroutines.launch
 import kotlin.math.min
@@ -57,18 +60,20 @@ enum class CardRevealPhase {
 
 @Composable
 fun ReadingResultScreen(
-    positions: List<SpreadPosition>,
+    spread: SpreadDefinition,
     cardsBySlot: Map<SpreadSlot, SpreadCardResult>,
+    questionText: String,
     modifier: Modifier = Modifier,
     onNavigateHome: () -> Unit
 ) {
-    val orderedSlots = remember(positions) { positions.map { it.slot } }
+    val positions = spread.positions
+    val orderedSlots = remember(spread) { positions.map { it.slot } }
     val orderedPlacements = orderedSlots.map { cardsBySlot[it] }
-    val revealStates = remember(orderedPlacements) {
-        orderedPlacements.map { mutableStateOf(CardRevealPhase.Back) }
+    val revealStates = remember(spread) {
+        positions.map { mutableStateOf(CardRevealPhase.Back) }
     }
-    val cardBounds = remember(orderedPlacements.size) {
-        List(orderedPlacements.size) { mutableStateOf<Rect?>(null) }
+    val cardBounds = remember(spread) {
+        List(positions.size) { mutableStateOf<Rect?>(null) }
     }
     val containerBounds = remember { mutableStateOf<Rect?>(null) }
     var zoomedIndex by remember { mutableStateOf<Int?>(null) }
@@ -121,27 +126,53 @@ fun ReadingResultScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = spread.title,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                if (questionText.isNotBlank()) {
+                    Text(
+                        text = "Q. $questionText",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.8f),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
             if (orderedPlacements.all { it == null }) {
                 Text(text = "아직 선택된 카드가 없습니다.")
             } else {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(Alignment.CenterHorizontally),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                        .height(spread.estimatedBoardHeight())
+                        .clip(RoundedCornerShape(32.dp))
+                        .background(Color(0xFF0F1120))
+                        .padding(16.dp)
                 ) {
-                    orderedPlacements.forEachIndexed { index, placement ->
+                    SpreadBoard(
+                        layout = spread.layout,
+                        positions = positions,
+                        modifier = Modifier.fillMaxSize()
+                    ) { index, position, cardModifier ->
                         val state = revealStates.getOrNull(index)
+                        val placement = orderedPlacements.getOrNull(index)
                         val card = placement?.card
                         val isReversed = placement?.isReversed == true
-                        if (state != null && card != null) {
-                            val boundsState = cardBounds[index]
+                        val boundsState = cardBounds.getOrNull(index)
+                        if (state != null && card != null && boundsState != null) {
+                            val measuredModifier = cardModifier.onGloballyPositioned { coordinates ->
+                                boundsState.value = coordinates.boundsInRoot()
+                            }
                             ReadingResultCard(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .onGloballyPositioned { coordinates ->
-                                        boundsState.value = coordinates.boundsInRoot()
-                                    },
+                                modifier = measuredModifier,
                                 card = card,
                                 isReversed = isReversed,
                                 phase = state.value,
@@ -160,6 +191,11 @@ fun ReadingResultScreen(
                                         CardRevealPhase.Description -> Unit
                                     }
                                 }
+                            )
+                        } else {
+                            ResultPlaceholderCard(
+                                modifier = cardModifier,
+                                label = position.title
                             )
                         }
                     }
@@ -210,6 +246,26 @@ fun ReadingResultScreen(
                 }
             )
         }
+    }
+}
+
+@Composable
+private fun ResultPlaceholderCard(
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(24.dp))
+            .background(Color(0xFF1E2038).copy(alpha = 0.8f)),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            modifier = Modifier.padding(12.dp),
+            text = label,
+            textAlign = TextAlign.Center,
+            color = Color.White.copy(alpha = 0.6f)
+        )
     }
 }
 

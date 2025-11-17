@@ -10,18 +10,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.random.Random
 
-enum class SpreadSlot {
-    Past,
-    Present,
-    Future
-}
-
-data class SpreadPosition(
-    val slot: SpreadSlot,
-    val title: String,
-    val description: String
-)
-
 enum class CardCategory(val displayName: String) {
     MajorArcana("Major Arcana"),
     Wands("Wands"),
@@ -32,9 +20,9 @@ enum class CardCategory(val displayName: String) {
 
 data class SpreadFlowUiState(
     val step: SpreadStep = SpreadStep.Preselection,
-    val positions: List<SpreadPosition> = emptyList(),
+    val spread: SpreadDefinition = SpreadCatalog.default,
     val questionText: String = "",
-    val useReversedCards: Boolean = true,
+    val useReversedCards: Boolean = SpreadCatalog.default.defaultUseReversed,
     val shuffleTrigger: Int = 0,
     val drawPile: List<TarotCardModel> = emptyList(),
     val pendingSlots: List<SpreadSlot> = emptyList(),
@@ -54,33 +42,30 @@ class SpreadFlowViewModel(
     repository: TarotRepository
 ) : ViewModel() {
 
-    private val positions = listOf(
-        SpreadPosition(
-            slot = SpreadSlot.Past,
-            title = "과거",
-            description = "과거가 현재 상황에 어떤 영향을 미치나요?"
-        ),
-        SpreadPosition(
-            slot = SpreadSlot.Present,
-            title = "현재",
-            description = "현재 상황은 어떤가요?"
-        ),
-        SpreadPosition(
-            slot = SpreadSlot.Future,
-            title = "미래",
-            description = "이 상황의 잠재적 결과는 무엇인가요?"
-        )
-    )
+    val availableSpreads: List<SpreadDefinition> = SpreadCatalog.all
 
     private val allCards = repository.getCards()
 
     private val _uiState = MutableStateFlow(
         SpreadFlowUiState(
-            positions = positions,
-            drawPile = allCards
+            spread = SpreadCatalog.default,
+            drawPile = allCards,
+            useReversedCards = SpreadCatalog.default.defaultUseReversed
         )
     )
     val uiState: StateFlow<SpreadFlowUiState> = _uiState.asStateFlow()
+
+    fun selectSpread(type: SpreadType) {
+        val target = SpreadCatalog.find(type)
+        _uiState.value = SpreadFlowUiState(
+            step = SpreadStep.Preselection,
+            spread = target,
+            questionText = "",
+            useReversedCards = target.defaultUseReversed,
+            drawPile = allCards,
+            finalCards = emptyMap()
+        )
+    }
 
     fun updateQuestion(text: String) {
         updateState { it.copy(questionText = text) }
@@ -91,9 +76,9 @@ class SpreadFlowViewModel(
     }
 
     fun startReading(): SpreadStep {
-        val current = _uiState.value
+        val spread = _uiState.value.spread
+        val pendingSlots = spread.positions.map { it.slot }
         val fixedCards = emptyMap<SpreadSlot, SpreadCardResult>()
-        val pendingSlots = SpreadSlot.values().toList()
 
         return if (pendingSlots.isEmpty()) {
             updateState {
@@ -129,7 +114,10 @@ class SpreadFlowViewModel(
 
     fun startQuickReading(): SpreadStep {
         val current = _uiState.value
-        val pendingSlots = SpreadSlot.values().toList()
+        val pendingSlots = current.spread.positions.map { it.slot }
+        if (pendingSlots.isEmpty()) {
+            return SpreadStep.ReadingResult
+        }
         val remaining = allCards.shuffled()
         val assignments = pendingSlots.mapIndexedNotNull { index, slot ->
             val card = remaining.getOrNull(index) ?: return@mapIndexedNotNull null
@@ -209,11 +197,8 @@ class SpreadFlowViewModel(
             )
             val updatedDrawn = state.drawnCards + (nextSlot to placement)
             val updatedFinal = state.finalCards + (nextSlot to placement)
-            val message = when (nextSlot) {
-                SpreadSlot.Past -> "과거 카드를 선택했습니다."
-                SpreadSlot.Present -> "현재 카드를 선택했습니다."
-                SpreadSlot.Future -> "미래 카드를 선택했습니다."
-            }
+            val titleLookup = state.spread.positions.associateBy { it.slot }
+            val message = titleLookup[nextSlot]?.let { "${it.title} 카드를 선택했습니다." }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
             state.copy(
                 drawnCards = updatedDrawn,
@@ -228,9 +213,12 @@ class SpreadFlowViewModel(
     }
 
     fun resetFlow() {
+        val current = _uiState.value
         _uiState.value = SpreadFlowUiState(
             step = SpreadStep.Preselection,
-            positions = positions,
+            spread = current.spread,
+            questionText = "",
+            useReversedCards = current.useReversedCards,
             drawPile = allCards,
             finalCards = emptyMap()
         )

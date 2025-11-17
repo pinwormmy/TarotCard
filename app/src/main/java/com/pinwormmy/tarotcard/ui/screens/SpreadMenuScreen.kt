@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,54 +25,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pinwormmy.tarotcard.ui.state.SpreadCatalog
+import com.pinwormmy.tarotcard.ui.state.SpreadDefinition
+import com.pinwormmy.tarotcard.ui.state.SpreadType
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SpreadMenuScreen(
-    onPastPresentFuture: () -> Unit,
+    spreads: List<SpreadDefinition>,
+    onSpreadSelected: (SpreadType) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val spreads = listOf(
-        SpreadMenuEntry(
-            title = "원카드",
-            description = "가볍게 오늘의 방향성을 확인",
-            enabled = false,
-            onClick = {}
-        ),
-        SpreadMenuEntry(
-            title = "과거, 현재, 미래",
-            description = "이미 구현된 3장 스프레드",
-            enabled = true,
-            onClick = onPastPresentFuture
-        ),
-        SpreadMenuEntry(
-            title = "에너지와 조언",
-            description = "현재 에너지를 정리하고 힌트를 받아요",
-            enabled = false,
-            onClick = {}
-        ),
-        SpreadMenuEntry(
-            title = "앞으로 나아갈 길",
-            description = "장기 계획과 여정 진단",
-            enabled = false,
-            onClick = {}
-        ),
-        SpreadMenuEntry(
-            title = "관계",
-            description = "상대방과의 연결을 조망",
-            enabled = false,
-            onClick = {}
-        ),
-        SpreadMenuEntry(
-            title = "켈틱 크로스",
-            description = "깊이 있는 10장 시나리오",
-            enabled = false,
-            onClick = {}
-        )
-    )
-
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -88,9 +55,10 @@ fun SpreadMenuScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -98,56 +66,46 @@ fun SpreadMenuScreen(
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
-            spreads.forEach { entry ->
-                SpreadMenuCard(entry = entry)
+            spreads.forEach { definition ->
+                SpreadMenuCard(
+                    spread = definition,
+                    onClick = { onSpreadSelected(definition.type) }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun SpreadMenuCard(entry: SpreadMenuEntry) {
+private fun SpreadMenuCard(
+    spread: SpreadDefinition,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val shape = RoundedCornerShape(24.dp)
-    val containerColor = if (entry.enabled) {
-        MaterialTheme.colorScheme.surfaceVariant
-    } else {
-        MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
-    }
-    val textColor = if (entry.enabled) {
-        MaterialTheme.colorScheme.onSurfaceVariant
-    } else {
-        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-    }
-
     Surface(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .let {
-                if (entry.enabled) {
-                    it.clickable(onClick = entry.onClick)
-                } else {
-                    it
-                }
-            },
+            .clickable(onClick = onClick),
         shape = shape,
-        tonalElevation = if (entry.enabled) 4.dp else 0.dp,
-        color = containerColor
+        tonalElevation = 4.dp,
+        color = MaterialTheme.colorScheme.surfaceVariant
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 18.dp)
+                .padding(horizontal = 20.dp, vertical = 18.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = entry.title,
+                text = spread.title,
                 style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = textColor
+                fontWeight = FontWeight.Bold
             )
             Text(
-                text = entry.description,
+                text = spread.description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = textColor.copy(alpha = 0.8f)
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
             )
         }
     }
@@ -157,13 +115,10 @@ private fun SpreadMenuCard(entry: SpreadMenuEntry) {
 @Composable
 private fun SpreadMenuPreview() {
     TarotcardTheme {
-        SpreadMenuScreen(onPastPresentFuture = {}, onBack = {})
+        SpreadMenuScreen(
+            spreads = SpreadCatalog.all,
+            onSpreadSelected = {},
+            onBack = {}
+        )
     }
 }
-
-private data class SpreadMenuEntry(
-    val title: String,
-    val description: String,
-    val enabled: Boolean,
-    val onClick: () -> Unit
-)

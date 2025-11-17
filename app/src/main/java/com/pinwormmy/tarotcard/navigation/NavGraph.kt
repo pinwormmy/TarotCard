@@ -1,8 +1,14 @@
 package com.pinwormmy.tarotcard.navigation
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -11,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.pinwormmy.tarotcard.data.TarotRepository
 import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
+import com.pinwormmy.tarotcard.ui.screens.DailyCardScreen
 import com.pinwormmy.tarotcard.ui.screens.MainMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingResultScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingSetupScreen
@@ -21,7 +28,8 @@ import com.pinwormmy.tarotcard.ui.state.SpreadStep
 
 @Composable
 fun TarotNavGraph(
-    repository: TarotRepository
+    repository: TarotRepository,
+    modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
     val spreadViewModel: SpreadFlowViewModel = viewModel(
@@ -31,19 +39,27 @@ fun TarotNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MainMenu.route
+        startDestination = Screen.MainMenu.route,
+        modifier = modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
     ) {
         composable(Screen.MainMenu.route) {
             MainMenuScreen(
                 onStartReading = {
                     navController.navigate(Screen.SpreadMenu.route)
+                },
+                onDailyCard = {
+                    navController.navigate(Screen.DailyCard.route)
                 }
             )
         }
 
         composable(Screen.SpreadMenu.route) {
             SpreadMenuScreen(
-                onPastPresentFuture = {
+                spreads = spreadViewModel.availableSpreads,
+                onSpreadSelected = { type ->
+                    spreadViewModel.selectSpread(type)
                     navController.navigate(Screen.ReadingSetup.route)
                 },
                 onBack = { navController.popBackStack() }
@@ -52,7 +68,7 @@ fun TarotNavGraph(
 
         composable(Screen.ReadingSetup.route) {
             ReadingSetupScreen(
-                positions = spreadUiState.positions,
+                spread = spreadUiState.spread,
                 questionText = spreadUiState.questionText,
                 useReversedCards = spreadUiState.useReversedCards,
                 onBack = { navController.popBackStack() },
@@ -77,7 +93,6 @@ fun TarotNavGraph(
         composable(Screen.ShuffleAndDraw.route) {
             ShuffleAndDrawScreen(
                 uiState = spreadUiState,
-                positions = spreadUiState.positions,
                 onDeckTap = { spreadViewModel.triggerShuffle() },
                 onCutRequest = { spreadViewModel.enterCutMode() },
                 onCutSelect = { index -> spreadViewModel.applyCutChoice(index) },
@@ -95,8 +110,9 @@ fun TarotNavGraph(
 
         composable(Screen.ReadingResult.route) {
             ReadingResultScreen(
-                positions = spreadUiState.positions,
+                spread = spreadUiState.spread,
                 cardsBySlot = spreadUiState.finalCards,
+                questionText = spreadUiState.questionText,
                 onNavigateHome = {
                     spreadViewModel.resetFlow()
                     navController.navigate(Screen.MainMenu.route) {
@@ -118,6 +134,14 @@ fun TarotNavGraph(
                 onBack = { navController.popBackStack() }
             )
         }
+
+        composable(Screen.DailyCard.route) {
+            val card = remember { repository.getCards().random() }
+            DailyCardScreen(
+                card = card,
+                onBack = { navController.popBackStack() }
+            )
+        }
     }
 }
 
@@ -127,6 +151,7 @@ private sealed class Screen(val route: String) {
     data object ReadingSetup : Screen("reading_setup")
     data object ShuffleAndDraw : Screen("shuffle_and_draw")
     data object ReadingResult : Screen("reading_result")
+    data object DailyCard : Screen("daily_card")
     data object CardDetail : Screen("card_detail/{cardId}") {
         fun createRoute(cardId: String) = "card_detail/$cardId"
     }
