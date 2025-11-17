@@ -41,16 +41,20 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
+import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
@@ -75,6 +79,38 @@ fun ShuffleAndDrawScreen(
         uiState.drawnCards.values.map { it.card.id }.toSet()
     }
     val skin = LocalTarotSkin.current
+    val hapticFeedback = LocalHapticFeedback.current
+    val hapticsEnabled = LocalHapticsEnabled.current
+    val deckTapWithHaptics = {
+        if (hapticsEnabled) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+        }
+        onDeckTap()
+    }
+    val gridRevealWithHaptics = {
+        if (hapticsEnabled) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        }
+        onShowGrid()
+    }
+    val cutRequestWithHaptics = {
+        if (hapticsEnabled) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+        }
+        onCutRequest()
+    }
+    val cutCancelWithHaptics = {
+        if (hapticsEnabled) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+        }
+        onCutCancel()
+    }
+    val cutSelectWithHaptics: (Int) -> Unit = { index ->
+        if (hapticsEnabled) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        }
+        onCutSelect(index)
+    }
     val deckInteractionEnabled =
         !uiState.gridVisible && !uiState.cutMode &&
             (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
@@ -129,6 +165,8 @@ fun ShuffleAndDrawScreen(
                         DrawPileGrid(
                             cards = uiState.drawPile,
                             disabledCardIds = drawnIds,
+                            hapticsEnabled = hapticsEnabled,
+                            hapticFeedback = hapticFeedback,
                             modifier = Modifier
                                 .fillMaxSize(),
                             onCardSelected = onCardSelected
@@ -187,7 +225,7 @@ fun ShuffleAndDrawScreen(
                                 CardBackImage(
                                     modifier = Modifier.fillMaxSize(),
                                     enabled = deckInteractionEnabled,
-                                    onClick = onDeckTap
+                                    onClick = deckTapWithHaptics
                                 )
                                 CardDeck(
                                     modifier = Modifier.fillMaxSize(),
@@ -202,7 +240,7 @@ fun ShuffleAndDrawScreen(
                                         .clip(RoundedCornerShape(24.dp))
                                         .clickable(
                                             enabled = deckInteractionEnabled,
-                                            onClick = onDeckTap
+                                            onClick = deckTapWithHaptics
                                         )
                                 )
                             }
@@ -214,9 +252,7 @@ fun ShuffleAndDrawScreen(
                                         .fillMaxSize()
                                         .graphicsLayer { alpha = cutAlpha },
                                     fanProgress = fanOutProgress,
-                                    onStackChosen = { index ->
-                                        onCutSelect(index)
-                                    }
+                                    onStackChosen = cutSelectWithHaptics
                                 )
                             }
                         }
@@ -251,13 +287,17 @@ fun ShuffleAndDrawScreen(
                         modifier = Modifier.weight(1f),
                         text = if (uiState.cutMode) "취소" else "컷",
                         onClick = {
-                            if (uiState.cutMode) onCutCancel() else onCutRequest()
+                            if (uiState.cutMode) {
+                                cutCancelWithHaptics()
+                            } else {
+                                cutRequestWithHaptics()
+                            }
                         }
                     )
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
                         text = "드로우",
-                        onClick = onShowGrid
+                        onClick = gridRevealWithHaptics
                     )
                 }
             }
@@ -320,6 +360,8 @@ private fun OutlineLargeButton(
 private fun DrawPileGrid(
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
+    hapticsEnabled: Boolean,
+    hapticFeedback: HapticFeedback,
     modifier: Modifier = Modifier,
     onCardSelected: (TarotCardModel) -> Unit
 ) {
@@ -408,6 +450,9 @@ private fun DrawPileGrid(
                                 hoveredCardId = null
                                 if (selectedId != null) {
                                     gesturesEnabled = false
+                                    if (hapticsEnabled) {
+                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    }
                                     selectionEvents.tryEmit(selectedId)
                                 }
                                 break

@@ -35,12 +35,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
+import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,6 +57,8 @@ fun DailyCardScreen(
     var showDescription by remember { mutableStateOf(false) }
     val isReversed = false
     val skin = LocalTarotSkin.current
+    val hapticsEnabled = LocalHapticsEnabled.current
+    val hapticFeedback = LocalHapticFeedback.current
 
     Scaffold(
         modifier = modifier,
@@ -103,6 +108,9 @@ fun DailyCardScreen(
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
                         .clickable {
+                            if (hapticsEnabled) {
+                                hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                            }
                             if (isBack) {
                                 isBack = false
                             } else {
