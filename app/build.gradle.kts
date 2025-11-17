@@ -88,4 +88,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }

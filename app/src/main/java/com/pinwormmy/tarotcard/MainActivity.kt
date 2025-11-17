@@ -5,11 +5,13 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pinwormmy.tarotcard.data.TarotRepository
 import com.pinwormmy.tarotcard.navigation.TarotNavGraph
+import com.pinwormmy.tarotcard.notifications.DailyCardNotificationScheduler
 import com.pinwormmy.tarotcard.ui.state.TarotSettingsViewModel
 import com.pinwormmy.tarotcard.ui.theme.TarotBackground
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
@@ -23,6 +25,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: TarotSettingsViewModel = viewModel()
             val settingsState by settingsViewModel.uiState.collectAsState()
+            val appContext = applicationContext
+            LaunchedEffect(settingsState.dailyCardNotification, settingsState.dailyCardTime) {
+                if (settingsState.dailyCardNotification) {
+                    DailyCardNotificationScheduler.schedule(appContext, settingsState.dailyCardTime)
+                } else {
+                    DailyCardNotificationScheduler.cancel(appContext)
+                }
+            }
             TarotcardTheme(skin = settingsState.skin) {
                 TarotBackground {
                     TarotNavGraph(
