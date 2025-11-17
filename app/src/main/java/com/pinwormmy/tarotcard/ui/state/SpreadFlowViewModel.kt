@@ -55,6 +55,9 @@ class SpreadFlowViewModel(
     )
     val uiState: StateFlow<SpreadFlowUiState> = _uiState.asStateFlow()
 
+    private fun slotsFor(spread: SpreadDefinition): List<SpreadSlot> =
+        spread.positions.sortedBy { it.order }.map { it.slot }
+
     fun selectSpread(type: SpreadType) {
         val target = SpreadCatalog.find(type)
         _uiState.value = SpreadFlowUiState(
@@ -77,7 +80,7 @@ class SpreadFlowViewModel(
 
     fun startReading(): SpreadStep {
         val spread = _uiState.value.spread
-        val pendingSlots = spread.positions.map { it.slot }
+        val pendingSlots = slotsFor(spread)
         val fixedCards = emptyMap<SpreadSlot, SpreadCardResult>()
 
         return if (pendingSlots.isEmpty()) {
@@ -94,8 +97,7 @@ class SpreadFlowViewModel(
             }
             SpreadStep.ReadingResult
         } else {
-            val bannedIds = fixedCards.values.map { it.card.id }.toSet()
-            val remaining = allCards.filterNot { it.id in bannedIds }
+            val remaining = allCards.shuffled(Random(System.currentTimeMillis()))
             updateState {
                 it.copy(
                     finalCards = fixedCards,
@@ -114,11 +116,11 @@ class SpreadFlowViewModel(
 
     fun startQuickReading(): SpreadStep {
         val current = _uiState.value
-        val pendingSlots = current.spread.positions.map { it.slot }
+        val pendingSlots = slotsFor(current.spread)
         if (pendingSlots.isEmpty()) {
             return SpreadStep.ReadingResult
         }
-        val remaining = allCards.shuffled()
+        val remaining = allCards.shuffled(Random(System.currentTimeMillis()))
         val assignments = pendingSlots.mapIndexedNotNull { index, slot ->
             val card = remaining.getOrNull(index) ?: return@mapIndexedNotNull null
             slot to SpreadCardResult(

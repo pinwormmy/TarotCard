@@ -70,6 +70,9 @@ fun ShuffleAndDrawScreen(
     onBack: () -> Unit
 ) {
     var shufflePhase by remember { mutableStateOf(ShufflePhase.Idle) }
+    val drawnIds = remember(uiState.drawnCards) {
+        uiState.drawnCards.values.map { it.card.id }.toSet()
+    }
     val deckInteractionEnabled =
         !uiState.gridVisible && !uiState.cutMode &&
             (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
@@ -123,6 +126,7 @@ fun ShuffleAndDrawScreen(
                     if (uiState.gridVisible) {
                         DrawPileGrid(
                             cards = uiState.drawPile,
+                            disabledCardIds = drawnIds,
                             modifier = Modifier
                                 .fillMaxSize(),
                             onCardSelected = onCardSelected
@@ -311,6 +315,7 @@ private fun OutlineLargeButton(
 @Composable
 private fun DrawPileGrid(
     cards: List<TarotCardModel>,
+    disabledCardIds: Set<String>,
     modifier: Modifier = Modifier,
     onCardSelected: (TarotCardModel) -> Unit
 ) {
@@ -361,7 +366,7 @@ private fun DrawPileGrid(
             return placements.asReversed().firstOrNull { placement ->
                 val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
                 val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
-                withinX && withinY
+                withinX && withinY && disabledCardIds.contains(placement.card.id).not()
             }?.card?.id
         }
 
@@ -443,12 +448,14 @@ private fun DrawPileGrid(
                     }
                 }
 
+                val isDisabled = disabledCardIds.contains(card.id)
                 val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear.value)
                 val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear.value)
                 val exitShiftY = exitProgress.value * (maxHeightPx + cardHeightPx)
                 val baseScale = 0.9f + 0.1f * appear.value
-                val hoverScale = if (hoveredCardId == card.id) 1.05f else 1f
-                val layerAlpha = (appear.value * (1f - exitProgress.value)).coerceIn(0f, 1f)
+                val hoverScale = if (!isDisabled && hoveredCardId == card.id) 1.05f else 1f
+                val targetAlpha = if (isDisabled) 0f else 1f
+                val layerAlpha = (appear.value * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
 
                 Box(
                     modifier = Modifier
