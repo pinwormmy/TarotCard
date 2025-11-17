@@ -20,16 +20,20 @@ import com.pinwormmy.tarotcard.ui.screens.CardBrowserScreen
 import com.pinwormmy.tarotcard.ui.screens.CardDetailScreen
 import com.pinwormmy.tarotcard.ui.screens.DailyCardScreen
 import com.pinwormmy.tarotcard.ui.screens.MainMenuScreen
+import com.pinwormmy.tarotcard.ui.screens.OptionsScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingResultScreen
 import com.pinwormmy.tarotcard.ui.screens.ReadingSetupScreen
 import com.pinwormmy.tarotcard.ui.screens.SpreadMenuScreen
 import com.pinwormmy.tarotcard.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowViewModel
 import com.pinwormmy.tarotcard.ui.state.SpreadStep
+import com.pinwormmy.tarotcard.ui.state.TarotSettingsViewModel
+import com.pinwormmy.tarotcard.ui.theme.TarotSkins
 
 @Composable
 fun TarotNavGraph(
     repository: TarotRepository,
+    settingsViewModel: TarotSettingsViewModel,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
@@ -38,6 +42,7 @@ fun TarotNavGraph(
     )
     val spreadUiState by spreadViewModel.uiState.collectAsState()
     val allCards = remember { repository.getCards() }
+    val settingsUiState by settingsViewModel.uiState.collectAsState()
 
     NavHost(
         navController = navController,
@@ -54,7 +59,8 @@ fun TarotNavGraph(
                 onDailyCard = {
                     navController.navigate(Screen.DailyCard.route)
                 },
-                onBrowseCards = { navController.navigate(Screen.CardBrowser.route) }
+                onBrowseCards = { navController.navigate(Screen.CardBrowser.route) },
+                onOpenOptions = { navController.navigate(Screen.Options.route) }
             )
         }
 
@@ -152,6 +158,20 @@ fun TarotNavGraph(
                 onBack = { navController.popBackStack() }
             )
         }
+
+        composable(Screen.Options.route) {
+            OptionsScreen(
+                settings = settingsUiState,
+                availableSkins = TarotSkins.all,
+                onSelectSkin = { settingsViewModel.selectSkin(it) },
+                onSelectCardBack = { settingsViewModel.selectCardBack(it) },
+                onSelectCardFace = { settingsViewModel.selectCardFace(it) },
+                onToggleDailyCard = { settingsViewModel.toggleDailyCard(it) },
+                onDailyCardTimeChange = { settingsViewModel.updateDailyCardTime(it) },
+                onToggleHaptics = { settingsViewModel.toggleHaptics(it) },
+                onBack = { navController.popBackStack() }
+            )
+        }
     }
 }
 
@@ -163,6 +183,7 @@ private sealed class Screen(val route: String) {
     data object ReadingResult : Screen("reading_result")
     data object DailyCard : Screen("daily_card")
     data object CardBrowser : Screen("card_browser")
+    data object Options : Screen("options")
     data object CardDetail : Screen("card_detail/{cardId}") {
         fun createRoute(cardId: String) = "card_detail/$cardId"
     }

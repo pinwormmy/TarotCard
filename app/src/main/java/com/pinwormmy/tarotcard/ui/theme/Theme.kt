@@ -28,7 +28,7 @@ private fun colorSchemeForSkin(skin: TarotSkin) = darkColorScheme(
 
 @Composable
 fun TarotcardTheme(
-    skin: TarotSkin = TarotSkins.Midnight,
+    skin: TarotSkin = TarotSkins.default,
     content: @Composable () -> Unit
 ) {
     val colorScheme = colorSchemeForSkin(skin)

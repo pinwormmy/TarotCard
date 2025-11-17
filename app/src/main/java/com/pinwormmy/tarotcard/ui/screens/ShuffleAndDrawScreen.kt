@@ -51,6 +51,7 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
+import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -73,6 +74,7 @@ fun ShuffleAndDrawScreen(
     val drawnIds = remember(uiState.drawnCards) {
         uiState.drawnCards.values.map { it.card.id }.toSet()
     }
+    val skin = LocalTarotSkin.current
     val deckInteractionEnabled =
         !uiState.gridVisible && !uiState.cutMode &&
             (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
@@ -80,7 +82,7 @@ fun ShuffleAndDrawScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFF050711))
+            .background(skin.backgroundBrush)
     ) {
         Column(
             modifier = Modifier
@@ -270,6 +272,12 @@ private fun CardBackImage(
     onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)
+    val backGradient = Brush.verticalGradient(
+        listOf(
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f),
+            MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+        )
+    )
     Box(
         modifier = modifier
             .clickable(enabled = enabled, onClick = onClick),
@@ -278,17 +286,13 @@ private fun CardBackImage(
         repeat(3) { offset ->
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = (offset * 8).dp)
-                    .clip(shape)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
-                        )
-                    )
-            )
-        }
+                .fillMaxSize()
+                .padding(top = (offset * 8).dp)
+                .clip(shape)
+                .background(backGradient)
+        )
     }
+}
 }
 
 @Composable
@@ -473,7 +477,10 @@ private fun DrawPileGrid(
                         .clip(RoundedCornerShape(24.dp))
                         .background(
                             brush = Brush.verticalGradient(
-                                colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.surfaceVariant,
+                                    MaterialTheme.colorScheme.surface
+                                )
                             )
                         ),
                     contentAlignment = Alignment.Center
@@ -486,8 +493,8 @@ private fun DrawPileGrid(
                             .background(
                                 brush = Brush.verticalGradient(
                                     colors = listOf(
-                                        Color(0xFF3A3C65),
-                                        Color(0xFF1A1B30)
+                                        MaterialTheme.colorScheme.primaryContainer,
+                                        MaterialTheme.colorScheme.secondaryContainer
                                     )
                                 )
                             )

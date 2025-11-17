@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,6 +53,7 @@ fun DailyCardScreen(
     var isBack by remember { mutableStateOf(true) }
     var showDescription by remember { mutableStateOf(false) }
     val isReversed = false
+    val skin = LocalTarotSkin.current
 
     Scaffold(
         modifier = modifier,
@@ -70,11 +72,7 @@ fun DailyCardScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF16182C), Color(0xFF050711))
-                    )
-                )
+                .background(skin.backgroundBrush)
         ) {
             Column(
                 modifier = Modifier
@@ -93,11 +91,11 @@ fun DailyCardScreen(
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
-                    Text(
-                        text = "카드를 두 번 탭하면 설명을 볼 수 있어요",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.White.copy(alpha = 0.8f)
-                    )
+                Text(
+                    text = "카드를 두 번 탭하면 설명을 볼 수 있어요",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                )
                 }
 
                 Box(
@@ -126,7 +124,7 @@ fun DailyCardScreen(
                     text = if (isBack) "첫 탭으로 카드를 뒤집어 보세요" else "한 번 더 탭하면 설명 팝업",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.9f)
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.85f)
                 )
             }
 
@@ -168,15 +166,21 @@ private fun DailyCardDisplay(
                     cameraDistance = 12 * density.density
                     rotationZ = faceRotation
                 }
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = if (isBack) {
-                            listOf(Color(0xFF2B2C4E), Color(0xFF14152A))
+               .background(
+                   brush = Brush.verticalGradient(
+                       colors = if (isBack) {
+                            listOf(
+                                MaterialTheme.colorScheme.surfaceVariant,
+                                MaterialTheme.colorScheme.surface
+                            )
                         } else {
-                            listOf(Color(0xFFE0C097), Color(0xFFC89F63))
+                            listOf(
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.95f),
+                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.95f)
+                            )
                         }
-                    ),
-                    shape = RoundedCornerShape(32.dp)
+                   ),
+                   shape = RoundedCornerShape(32.dp)
                 )
                 .padding(24.dp),
             contentAlignment = Alignment.Center
@@ -196,7 +200,8 @@ private fun DailyCardDisplay(
                     Text(
                         text = card.keywords.joinToString(),
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             } else {
@@ -204,7 +209,14 @@ private fun DailyCardDisplay(
                     modifier = Modifier
                         .size(96.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(Color.White.copy(alpha = 0.25f))
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
+                                )
+                            )
+                        )
                 )
             }
         }
@@ -230,7 +242,7 @@ private fun DailyCardDescriptionSheet(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
                 .clip(RoundedCornerShape(28.dp))
-                .background(Color(0xFF1E1F36))
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -238,12 +250,13 @@ private fun DailyCardDescriptionSheet(
             Text(text = card.name, fontWeight = FontWeight.Bold)
             Text(
                 text = if (isReversed) card.reversedMeaning else card.uprightMeaning,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 text = "탭해서 닫기",
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White.copy(alpha = 0.7f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
         }
     }

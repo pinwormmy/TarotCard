@@ -39,6 +39,7 @@ import com.pinwormmy.tarotcard.ui.components.estimatedBoardHeight
 import com.pinwormmy.tarotcard.ui.state.SpreadCatalog
 import com.pinwormmy.tarotcard.ui.state.SpreadDefinition
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
+import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 
 @Composable
 fun ReadingSetupScreen(
@@ -54,10 +55,12 @@ fun ReadingSetupScreen(
 ) {
     val isCelticCross = spread.type == SpreadType.CelticCross
     var raiseFirstCard by remember(spread) { mutableStateOf(false) }
+    val skin = LocalTarotSkin.current
 
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(skin.backgroundBrush)
             .padding(horizontal = 24.dp, vertical = 32.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -89,7 +92,15 @@ fun ReadingSetupScreen(
                     .fillMaxWidth()
                     .height(spread.estimatedBoardHeight())
                     .padding(top = 8.dp)
-                    .background(Color(0xFF0F1120), RoundedCornerShape(28.dp))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            listOf(
+                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f),
+                                MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+                            )
+                        ),
+                        shape = RoundedCornerShape(28.dp)
+                    )
                     .padding(16.dp)
             ) { _, position, cardModifier ->
                 val previewModifier = if (isCelticCross && position.order == 1) {
@@ -171,20 +182,22 @@ private fun SpreadPreviewCard(
     modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(20.dp)
+    val gradient = Brush.verticalGradient(
+        listOf(
+            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.85f),
+            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f)
+        )
+    )
     Surface(
         modifier = modifier,
         shape = shape,
         tonalElevation = 8.dp,
-        color = Color(0xFF2E3054)
+        color = Color.Transparent
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF3E3F63), Color(0xFF18192F))
-                    )
-                )
+                .background(gradient)
                 .padding(12.dp),
             contentAlignment = Alignment.Center
         ) {
