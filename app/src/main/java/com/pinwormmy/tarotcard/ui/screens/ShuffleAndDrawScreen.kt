@@ -27,6 +27,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -261,20 +262,6 @@ fun ShuffleAndDrawScreen(
             }
 
             // 컷 모드 중에는 statusMessage 숨김
-            if (!uiState.cutMode && !uiState.gridVisible) {
-                uiState.statusMessage?.let {
-                    Text(
-                        text = it,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        color = Color.White.copy(alpha = 0.85f),
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-
             // 하단 버튼 Row
             if (!uiState.gridVisible) {
                 Row(
@@ -300,6 +287,31 @@ fun ShuffleAndDrawScreen(
                         onClick = gridRevealWithHaptics
                     )
                 }
+            }
+        }
+    }
+
+    // 하단 안내 메시지
+    val instruction = uiState.nextInstruction
+    if (instruction != null) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Surface(
+                shape = RoundedCornerShape(24.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
+                tonalElevation = 6.dp
+            ) {
+                Text(
+                    text = instruction,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
         }
     }

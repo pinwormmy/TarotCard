@@ -30,7 +30,8 @@ data class SpreadFlowUiState(
     val finalCards: Map<SpreadSlot, SpreadCardResult> = emptyMap(),
     val gridVisible: Boolean = false,
     val statusMessage: String? = null,
-    val cutMode: Boolean = false
+    val cutMode: Boolean = false,
+    val nextInstruction: String? = null
 )
 
 data class SpreadCardResult(
@@ -58,17 +59,23 @@ class SpreadFlowViewModel(
     private fun slotsFor(spread: SpreadDefinition): List<SpreadSlot> =
         spread.positions.sortedBy { it.order }.map { it.slot }
 
-    fun selectSpread(type: SpreadType) {
-        val target = SpreadCatalog.find(type)
-        _uiState.value = SpreadFlowUiState(
-            step = SpreadStep.Preselection,
-            spread = target,
-            questionText = "",
-            useReversedCards = target.defaultUseReversed,
-            drawPile = allCards,
-            finalCards = emptyMap()
-        )
+    private fun instructionFor(spread: SpreadDefinition, index: Int): String? {
+        val position = spread.positions.getOrNull(index)
+        return position?.let { "${it.title} 카드를 선택하세요." }
     }
+
+fun selectSpread(type: SpreadType) {
+    val target = SpreadCatalog.find(type)
+    _uiState.value = SpreadFlowUiState(
+        step = SpreadStep.Preselection,
+        spread = target,
+        questionText = "",
+        useReversedCards = target.defaultUseReversed,
+        drawPile = allCards,
+        finalCards = emptyMap(),
+        nextInstruction = null
+    )
+}
 
     fun updateQuestion(text: String) {
         updateState { it.copy(questionText = text) }
@@ -78,10 +85,10 @@ class SpreadFlowViewModel(
         updateState { it.copy(useReversedCards = enabled) }
     }
 
-    fun startReading(): SpreadStep {
-        val spread = _uiState.value.spread
-        val pendingSlots = slotsFor(spread)
-        val fixedCards = emptyMap<SpreadSlot, SpreadCardResult>()
+fun startReading(): SpreadStep {
+    val spread = _uiState.value.spread
+    val pendingSlots = slotsFor(spread)
+    val fixedCards = emptyMap<SpreadSlot, SpreadCardResult>()
 
         return if (pendingSlots.isEmpty()) {
             updateState {
@@ -107,7 +114,8 @@ class SpreadFlowViewModel(
                     gridVisible = false,
                     statusMessage = null,
                     step = SpreadStep.ShuffleAndDraw,
-                    cutMode = false
+                    cutMode = false,
+                    nextInstruction = null
                 )
             }
             SpreadStep.ShuffleAndDraw
@@ -151,9 +159,14 @@ class SpreadFlowViewModel(
         }
     }
 
-    fun revealDrawGrid() {
-        updateState { it.copy(gridVisible = true) }
+fun revealDrawGrid() {
+    updateState { state ->
+        state.copy(
+            gridVisible = true,
+            nextInstruction = instructionFor(state.spread, state.drawnCards.size)
+        )
     }
+}
 
     fun enterCutMode() {
         updateState { it.copy(cutMode = true, statusMessage = null) }
@@ -202,10 +215,12 @@ class SpreadFlowViewModel(
             val titleLookup = state.spread.positions.associateBy { it.slot }
             val message = titleLookup[nextSlot]?.let { "${it.title} 카드를 선택했습니다." }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
+            val nextInstruction = instructionFor(state.spread, nextIndex + 1)
             state.copy(
                 drawnCards = updatedDrawn,
                 finalCards = updatedFinal,
-                statusMessage = message
+                statusMessage = message,
+                nextInstruction = if (shouldShowResult) null else nextInstruction
             )
         }
         if (shouldShowResult) {
