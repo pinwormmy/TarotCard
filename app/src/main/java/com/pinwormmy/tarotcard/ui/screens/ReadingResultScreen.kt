@@ -219,9 +219,10 @@ fun ReadingResultScreen(
         val placement = orderedPlacements.getOrNull(activeZoomIndex)
         val card = placement?.card
         val isReversed = placement?.isReversed == true
+        val position = positions.getOrNull(activeZoomIndex)
         val originBounds = cardBounds.getOrNull(activeZoomIndex)?.value
         val container = containerBounds.value
-        if (card != null && phase != null) {
+        if (card != null && phase != null && position != null) {
             ReadingResultOverlay(
                 card = card,
                 isReversed = isReversed,
@@ -229,6 +230,9 @@ fun ReadingResultScreen(
                 zoomProgress = zoomAnimation.value,
                 cardBounds = originBounds,
                 containerBounds = container,
+                slotTitle = position.title,
+                slotDescription = position.description,
+                slotOrder = position.order,
                 onCardTapped = {
                     if (phase == CardRevealPhase.Zoom) {
                         showDescription(activeZoomIndex)
@@ -337,6 +341,9 @@ private fun ReadingResultOverlay(
     zoomProgress: Float,
     cardBounds: Rect?,
     containerBounds: Rect?,
+    slotTitle: String,
+    slotDescription: String,
+    slotOrder: Int,
     onCardTapped: () -> Unit,
     onBackgroundTapped: () -> Unit,
     onDescriptionDismiss: () -> Unit
@@ -351,6 +358,28 @@ private fun ReadingResultOverlay(
             .background(dimColor),
         contentAlignment = Alignment.Center
     ) {
+        val headerTitle = "$slotOrder. $slotTitle"
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 24.dp, vertical = 28.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = headerTitle,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = slotDescription,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
+            )
+        }
+
         if (phase == CardRevealPhase.Description) {
             Box(
                 modifier = Modifier
