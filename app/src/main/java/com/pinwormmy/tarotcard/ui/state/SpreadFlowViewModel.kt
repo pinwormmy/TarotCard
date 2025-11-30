@@ -46,14 +46,9 @@ class SpreadFlowViewModel(
     val availableSpreads: List<SpreadDefinition> = SpreadCatalog.all
 
     private val allCards = repository.getCards()
+    private val random = Random(System.currentTimeMillis())
 
-    private val _uiState = MutableStateFlow(
-        SpreadFlowUiState(
-            spread = SpreadCatalog.default,
-            drawPile = allCards,
-            useReversedCards = SpreadCatalog.default.defaultUseReversed
-        )
-    )
+    private val _uiState = MutableStateFlow(baseState(SpreadCatalog.default))
     val uiState: StateFlow<SpreadFlowUiState> = _uiState.asStateFlow()
 
     private fun slotsFor(spread: SpreadDefinition): List<SpreadSlot> =
@@ -64,18 +59,10 @@ class SpreadFlowViewModel(
         return position?.let { "${it.title} 카드를 선택하세요." }
     }
 
-fun selectSpread(type: SpreadType) {
-    val target = SpreadCatalog.find(type)
-    _uiState.value = SpreadFlowUiState(
-        step = SpreadStep.Preselection,
-        spread = target,
-        questionText = "",
-        useReversedCards = target.defaultUseReversed,
-        drawPile = allCards,
-        finalCards = emptyMap(),
-        nextInstruction = null
-    )
-}
+    fun selectSpread(type: SpreadType) {
+        val target = SpreadCatalog.find(type)
+        _uiState.value = baseState(target)
+    }
 
     fun updateQuestion(text: String) {
         updateState { it.copy(questionText = text) }
@@ -85,32 +72,30 @@ fun selectSpread(type: SpreadType) {
         updateState { it.copy(useReversedCards = enabled) }
     }
 
-fun startReading(): SpreadStep {
-    val spread = _uiState.value.spread
-    val pendingSlots = slotsFor(spread)
-    val fixedCards = emptyMap<SpreadSlot, SpreadCardResult>()
-
+    fun startReading(): SpreadStep {
+        val spread = _uiState.value.spread
+        val pendingSlots = slotsFor(spread)
         return if (pendingSlots.isEmpty()) {
             updateState {
                 it.copy(
-                    finalCards = fixedCards,
+                    finalCards = emptyMap(),
                     pendingSlots = emptyList(),
                     drawnCards = emptyMap(),
                     gridVisible = false,
                     statusMessage = null,
                     cutMode = false,
-                    step = SpreadStep.ReadingResult
+                    step = SpreadStep.ReadingResult,
+                    nextInstruction = null
                 )
             }
             SpreadStep.ReadingResult
         } else {
-            val remaining = allCards.shuffled(Random(System.currentTimeMillis()))
             updateState {
                 it.copy(
-                    finalCards = fixedCards,
+                    finalCards = emptyMap(),
                     pendingSlots = pendingSlots,
                     drawnCards = emptyMap(),
-                    drawPile = remaining,
+                    drawPile = newShuffledDeck(),
                     gridVisible = false,
                     statusMessage = null,
                     step = SpreadStep.ShuffleAndDraw,
@@ -123,17 +108,30 @@ fun startReading(): SpreadStep {
     }
 
     fun startQuickReading(): SpreadStep {
-        val current = _uiState.value
-        val pendingSlots = slotsFor(current.spread)
+        val spread = _uiState.value.spread
+        val pendingSlots = slotsFor(spread)
         if (pendingSlots.isEmpty()) {
+            updateState {
+                it.copy(
+                    finalCards = emptyMap(),
+                    pendingSlots = emptyList(),
+                    drawnCards = emptyMap(),
+                    step = SpreadStep.ReadingResult,
+                    gridVisible = false,
+                    cutMode = false,
+                    statusMessage = null,
+                    nextInstruction = null
+                )
+            }
             return SpreadStep.ReadingResult
         }
-        val remaining = allCards.shuffled(Random(System.currentTimeMillis()))
+
+        val remaining = newShuffledDeck()
         val assignments = pendingSlots.mapIndexedNotNull { index, slot ->
             val card = remaining.getOrNull(index) ?: return@mapIndexedNotNull null
             slot to SpreadCardResult(
                 card = card,
-                isReversed = current.useReversedCards && Random.nextBoolean()
+                isReversed = randomReversed(_uiState.value.useReversedCards)
             )
         }.toMap()
         updateState {
@@ -144,7 +142,9 @@ fun startReading(): SpreadStep {
                 step = SpreadStep.ReadingResult,
                 gridVisible = false,
                 cutMode = false,
-                statusMessage = null
+                statusMessage = null,
+                drawPile = remaining,
+                nextInstruction = null
             )
         }
         return SpreadStep.ReadingResult
@@ -159,14 +159,14 @@ fun startReading(): SpreadStep {
         }
     }
 
-fun revealDrawGrid() {
-    updateState { state ->
-        state.copy(
-            gridVisible = true,
-            nextInstruction = instructionFor(state.spread, state.drawnCards.size)
-        )
+    fun revealDrawGrid() {
+        updateState { state ->
+            state.copy(
+                gridVisible = true,
+                nextInstruction = instructionFor(state.spread, state.drawnCards.size)
+            )
+        }
     }
-}
 
     fun enterCutMode() {
         updateState { it.copy(cutMode = true, statusMessage = null) }
@@ -208,7 +208,7 @@ fun revealDrawGrid() {
             val nextSlot = state.pendingSlots[nextIndex]
             val placement = SpreadCardResult(
                 card = card,
-                isReversed = state.useReversedCards && Random.nextBoolean()
+                isReversed = randomReversed(state.useReversedCards)
             )
             val updatedDrawn = state.drawnCards + (nextSlot to placement)
             val updatedFinal = state.finalCards + (nextSlot to placement)
@@ -231,13 +231,9 @@ fun revealDrawGrid() {
 
     fun resetFlow() {
         val current = _uiState.value
-        _uiState.value = SpreadFlowUiState(
-            step = SpreadStep.Preselection,
+        _uiState.value = baseState(
             spread = current.spread,
-            questionText = "",
-            useReversedCards = current.useReversedCards,
-            drawPile = allCards,
-            finalCards = emptyMap()
+            useReversed = current.useReversedCards
         )
     }
 
@@ -249,6 +245,32 @@ fun revealDrawGrid() {
         val third = pile.drop(baseSize * 2)
         return listOf(first, second, third)
     }
+
+    private fun baseState(
+        spread: SpreadDefinition,
+        useReversed: Boolean = spread.defaultUseReversed
+    ): SpreadFlowUiState =
+        SpreadFlowUiState(
+            step = SpreadStep.Preselection,
+            spread = spread,
+            questionText = "",
+            useReversedCards = useReversed,
+            drawPile = allCards,
+            pendingSlots = emptyList(),
+            drawnCards = emptyMap(),
+            finalCards = emptyMap(),
+            gridVisible = false,
+            statusMessage = null,
+            cutMode = false,
+            nextInstruction = null,
+            shuffleTrigger = 0
+        )
+
+    private fun newShuffledDeck(): List<TarotCardModel> =
+        allCards.shuffled(random)
+
+    private fun randomReversed(enabled: Boolean): Boolean =
+        enabled && random.nextBoolean()
 
     private fun updateState(transform: (SpreadFlowUiState) -> SpreadFlowUiState) {
         _uiState.update(transform)

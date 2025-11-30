@@ -1,7 +1,6 @@
 package com.pinwormmy.tarotcard
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,7 +22,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val repository = TarotRepository(applicationContext)
-        Log.d("TEST", "Codex working!");
         setContent {
             val settingsViewModel: TarotSettingsViewModel = viewModel()
             val settingsState by settingsViewModel.uiState.collectAsState()

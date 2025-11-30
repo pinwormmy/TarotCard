@@ -338,13 +338,13 @@ private fun CardBackImage(
         repeat(3) { offset ->
             Box(
                 modifier = Modifier
-                .fillMaxSize()
-                .padding(top = (offset * 8).dp)
-                .clip(shape)
-                .background(backGradient)
-        )
+                    .fillMaxSize()
+                    .padding(top = (offset * 8).dp)
+                    .clip(shape)
+                    .background(backGradient)
+            )
+        }
     }
-}
 }
 
 @Composable
@@ -366,7 +366,6 @@ private fun OutlineLargeButton(
         Text(text = text, fontWeight = FontWeight.SemiBold)
     }
 }
-
 
 @Composable
 private fun DrawPileGrid(
