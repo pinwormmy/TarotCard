@@ -7,6 +7,7 @@ plugins {
 android {
     namespace = "com.pinwormmy.tarotcard"
     compileSdk = 35
+    buildToolsVersion = "36.1.0"
 
     defaultConfig {
         applicationId = "com.pinwormmy.tarotcard"
