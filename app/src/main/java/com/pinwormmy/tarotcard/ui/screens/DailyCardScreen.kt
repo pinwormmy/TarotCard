@@ -90,12 +90,14 @@ fun DailyCardScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Text(
-                        text = card.name,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
+                    if (!isBack) {
+                        Text(
+                            text = card.name,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 Text(
                     text = "카드를 두 번 탭하면 설명을 볼 수 있어요",
                     style = MaterialTheme.typography.bodySmall,

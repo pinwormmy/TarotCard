@@ -71,7 +71,7 @@ fun TarotNavGraph(
                     spreadViewModel.selectSpread(type)
                     navController.navigate(Screen.ReadingSetup.route)
                 },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
 
@@ -80,7 +80,7 @@ fun TarotNavGraph(
                 spread = spreadUiState.spread,
                 questionText = spreadUiState.questionText,
                 useReversedCards = spreadUiState.useReversedCards,
-                onBack = { navController.popBackStack() },
+                onBack = { navController.safePopBackStack() },
                 onQuestionChange = { spreadViewModel.updateQuestion(it) },
                 onUseReversedChange = { spreadViewModel.updateUseReversed(it) },
                 onShuffle = {
@@ -113,7 +113,7 @@ fun TarotNavGraph(
                         navController.navigate(Screen.ReadingResult.route)
                     }
                 },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
 
@@ -140,7 +140,7 @@ fun TarotNavGraph(
             val card = repository.getCard(cardId)
             CardDetailScreen(
                 card = card,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
 
@@ -148,14 +148,14 @@ fun TarotNavGraph(
             val card = remember { allCards.random() }
             DailyCardScreen(
                 card = card,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
 
         composable(Screen.CardBrowser.route) {
             CardBrowserScreen(
                 cards = allCards,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
 
@@ -169,10 +169,15 @@ fun TarotNavGraph(
                 onToggleDailyCard = { settingsViewModel.toggleDailyCard(it) },
                 onDailyCardTimeChange = { settingsViewModel.updateDailyCardTime(it) },
                 onToggleHaptics = { settingsViewModel.toggleHaptics(it) },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.safePopBackStack() }
             )
         }
     }
+}
+
+private fun androidx.navigation.NavController.safePopBackStack(): Boolean {
+    val hasPrevious = previousBackStackEntry != null
+    return if (hasPrevious) popBackStack() else false
 }
 
 private sealed class Screen(val route: String) {
