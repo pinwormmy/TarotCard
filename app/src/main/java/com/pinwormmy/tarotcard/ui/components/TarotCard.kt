@@ -4,17 +4,13 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,11 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
-import java.util.Locale
 
 @Composable
 fun TarotCard(
@@ -124,43 +118,5 @@ private fun CardFrontFace(
                 listOf(Color.Transparent, Color(0xCC0C0B18))
             )
         )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 18.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = card.arcana.uppercase(Locale.getDefault()),
-                style = MaterialTheme.typography.labelSmall,
-                color = Color(0xFFD8CEFA)
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                Text(
-                    text = card.name,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = card.uprightMeaning,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFFF3E9FF),
-                    textAlign = TextAlign.Center,
-                    maxLines = 3
-                )
-            }
-            Text(
-                text = card.keywords.joinToString(" · "),
-                style = MaterialTheme.typography.labelSmall,
-                color = Color(0xFFB6A3E8),
-                textAlign = TextAlign.Center,
-                maxLines = 1
-            )
-        }
     }
 }

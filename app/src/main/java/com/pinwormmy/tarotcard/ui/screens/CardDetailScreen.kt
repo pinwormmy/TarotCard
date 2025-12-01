@@ -94,18 +94,6 @@ private fun CardDetailBody(
             text = card.name,
             style = MaterialTheme.typography.headlineMedium
         )
-        Section(
-            title = "Upright Meaning",
-            body = card.uprightMeaning
-        )
-        Section(
-            title = "Reversed Meaning",
-            body = card.reversedMeaning
-        )
-        Section(
-            title = "Description",
-            body = card.description
-        )
         if (card.keywords.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
@@ -119,6 +107,18 @@ private fun CardDetailBody(
                 )
             }
         }
+        Section(
+            title = "Upright Meaning",
+            body = card.uprightMeaning
+        )
+        Section(
+            title = "Reversed Meaning",
+            body = card.reversedMeaning
+        )
+        Section(
+            title = "Description",
+            body = card.description
+        )
         Spacer(modifier = Modifier.height(8.dp))
     }
 }

@@ -110,47 +110,39 @@ private fun CardLibraryItem(
         )
     ) {
         val shape: Shape = RoundedCornerShape(20.dp)
-        Box(
+        Column(
             modifier = Modifier
                 .background(Color.Transparent, shape = shape)
-                .padding(12.dp)
+                .padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             CardFaceArt(
                 card = card,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.62f)
-                    .align(Alignment.TopCenter),
+                    .aspectRatio(0.62f),
                 overlay = Brush.verticalGradient(
                     listOf(Color.Transparent, Color(0xAA0A0B16))
                 ),
                 shape = shape
             )
-            Column(
+            Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+            Text(
+                text = card.keywords.take(3).joinToString(),
+                color = Color.White.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = "선택",
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-                Text(
-                    text = card.keywords.take(3).joinToString(),
-                    color = Color.White.copy(alpha = 0.8f),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "선택",
-                    modifier = Modifier
-                        .background(
-                            color = Color.White.copy(alpha = 0.12f),
-                            shape = RoundedCornerShape(24.dp)
-                        )
-                        .padding(horizontal = 16.dp, vertical = 4.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
+                    .background(
+                        color = Color.White.copy(alpha = 0.12f),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

@@ -134,16 +134,18 @@ private fun CardBrowserItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Card(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(0.62f)
             .clickable(onClick = onClick),
-        shape = MaterialTheme.shapes.large
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Box(
+        Card(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .aspectRatio(0.62f),
+            shape = MaterialTheme.shapes.large
         ) {
             CardFaceArt(
                 card = card,
@@ -153,23 +155,13 @@ private fun CardBrowserItem(
                 ),
                 shape = MaterialTheme.shapes.large
             )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
-                    .padding(12.dp)
-            ) {
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(horizontal = 6.dp, vertical = 8.dp),
-                    text = card.name,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White
-                )
-            }
         }
+        Text(
+            text = card.name,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }
 

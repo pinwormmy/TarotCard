@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -190,26 +189,6 @@ private fun DailyCardDisplay(
                     ),
                     shape = RoundedCornerShape(32.dp)
                 )
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 18.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = card.name,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(
-                        text = card.keywords.joinToString(),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White.copy(alpha = 0.9f)
-                    )
-                }
             } else {
                 Box(
                     modifier = Modifier
@@ -254,6 +233,21 @@ private fun DailyCardDescriptionSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(text = card.name, fontWeight = FontWeight.Bold)
+            if (card.keywords.isNotEmpty()) {
+                Text(
+                    text = card.keywords.joinToString(separator = " • "),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
+                )
+            }
+            if (isReversed) {
+                Text(
+                    text = "역방향 해석",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
             Text(
                 text = if (isReversed) card.reversedMeaning else card.uprightMeaning,
                 textAlign = TextAlign.Center,

@@ -312,20 +312,6 @@ private fun ReadingResultCard(
                 ),
                 shape = shape
             )
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, color = Color.White)
-                Text(
-                    text = card.keywords.joinToString(),
-                    textAlign = TextAlign.Center,
-                    color = Color.White.copy(alpha = 0.9f)
-                )
-            }
         } else {
             Box(
                 modifier = Modifier
@@ -403,16 +389,27 @@ private fun ReadingResultOverlay(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                val bodyText = if (isReversed) {
-                    "${card.name} 리버스 카드: ${card.reversedMeaning}"
-                } else {
-                    card.description
-                }
+                val meaningTitle = if (isReversed) "역방향 해석" else null
+                val meaningBody = if (isReversed) card.reversedMeaning else card.uprightMeaning
                 Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-                Text(
-                    text = bodyText,
-                    textAlign = TextAlign.Center
-                )
+                if (card.keywords.isNotEmpty()) {
+                    Text(
+                        text = card.keywords.joinToString(separator = " • "),
+                        color = Color.White.copy(alpha = 0.9f),
+                        textAlign = TextAlign.Center
+                    )
+                }
+                if (meaningTitle != null) {
+                    Text(text = meaningTitle, fontWeight = FontWeight.SemiBold, color = Color.White)
+                }
+                Text(text = meaningBody, textAlign = TextAlign.Center)
+                if (card.description.isNotBlank()) {
+                    Text(
+                        text = card.description,
+                        textAlign = TextAlign.Center,
+                        color = Color.White.copy(alpha = 0.9f)
+                    )
+                }
                 Text(
                     text = "탭하면 닫습니다",
                     color = Color.White.copy(alpha = 0.7f),
