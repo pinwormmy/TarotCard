@@ -28,15 +28,18 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,6 +50,11 @@ import com.pinwormmy.tarotcard.ui.state.category
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import kotlinx.coroutines.launch
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+
+private enum class BrowserOverlayPhase { Zoom, Description }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -58,6 +66,11 @@ fun CardBrowserScreen(
     val categories = remember { listOf<CardCategory?>(null) + CardCategory.values().toList() }
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     var selectedCard by remember { mutableStateOf<TarotCardModel?>(null) }
+    var overlayPhase by remember { mutableStateOf(BrowserOverlayPhase.Zoom) }
+    val zoomProgress = remember { Animatable(0f) }
+    val coroutineScope = rememberCoroutineScope()
+    var animateZoom by remember { mutableStateOf(false) }
+    var isZoomAnimating by remember { mutableStateOf(false) }
     val filteredCards = remember(selectedTabIndex, cards) {
         val category = categories.getOrNull(selectedTabIndex)
         if (category == null) cards else cards.filter { it.category() == category }
@@ -116,7 +129,18 @@ fun CardBrowserScreen(
                 items(filteredCards, key = { it.id }) { card ->
                     CardBrowserItem(
                         card = card,
-                        onClick = { selectedCard = card }
+                        onClick = {
+                            if (isZoomAnimating) return@CardBrowserItem
+                            if (overlayPhase == BrowserOverlayPhase.Description) {
+                                overlayPhase = BrowserOverlayPhase.Zoom
+                                selectedCard = null
+                                animateZoom = false
+                            } else {
+                                selectedCard = card
+                                overlayPhase = BrowserOverlayPhase.Zoom
+                                animateZoom = true
+                            }
+                        }
                     )
                 }
             }
@@ -125,7 +149,44 @@ fun CardBrowserScreen(
 
     val activeCard = selectedCard
     if (activeCard != null) {
-        CardDetailOverlay(card = activeCard, onDismiss = { selectedCard = null })
+        LaunchedEffect(activeCard, animateZoom) {
+            if (animateZoom) {
+                isZoomAnimating = true
+                zoomProgress.snapTo(0f)
+                zoomProgress.animateTo(1f, tween(durationMillis = 280))
+                isZoomAnimating = false
+                animateZoom = false
+            } else {
+                zoomProgress.snapTo(1f)
+            }
+        }
+        CardDetailOverlay(
+            card = activeCard,
+            phase = overlayPhase,
+            zoomProgress = zoomProgress.value,
+            isZoomAnimating = isZoomAnimating,
+            onCardTap = {
+                if (isZoomAnimating) return@CardDetailOverlay
+                overlayPhase = when (overlayPhase) {
+                    BrowserOverlayPhase.Zoom -> BrowserOverlayPhase.Description
+                    BrowserOverlayPhase.Description -> BrowserOverlayPhase.Description
+                }
+            },
+            onDismiss = {
+                overlayPhase = BrowserOverlayPhase.Zoom
+                selectedCard = null
+                animateZoom = false
+                isZoomAnimating = false
+                coroutineScope.launch { zoomProgress.snapTo(1f) }
+            },
+            onCloseAll = {
+                selectedCard = null
+                overlayPhase = BrowserOverlayPhase.Zoom
+                animateZoom = false
+                isZoomAnimating = false
+                coroutineScope.launch { zoomProgress.snapTo(1f) }
+            }
+        )
     }
 }
 
@@ -169,58 +230,92 @@ private fun CardBrowserItem(
 @Composable
 private fun CardDetailOverlay(
     card: TarotCardModel,
+    phase: BrowserOverlayPhase,
+    zoomProgress: Float,
+    isZoomAnimating: Boolean,
     modifier: Modifier = Modifier,
-    onDismiss: () -> Unit
+    onCardTap: () -> Unit,
+    onDismiss: () -> Unit,
+    onCloseAll: () -> Unit
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f))
-            .clickable(onClick = onDismiss),
+            .background(Color.Black.copy(alpha = 0.7f)),
         contentAlignment = Alignment.Center
     ) {
-        Surface(
+        Box(
             modifier = Modifier
-                .padding(horizontal = 24.dp)
-                .clickable(onClick = onDismiss),
-            shape = MaterialTheme.shapes.large,
-            tonalElevation = 6.dp,
-            color = MaterialTheme.colorScheme.surface
-        ) {
-            Column(
+                .fillMaxSize()
+                .clickable(enabled = !isZoomAnimating, onClick = onDismiss)
+        )
+        if (phase == BrowserOverlayPhase.Zoom) {
+            Surface(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                    .padding(horizontal = 24.dp)
+                    .graphicsLayer {
+                        val scale = 0.7f + (0.3f * zoomProgress.coerceIn(0f, 1f))
+                        scaleX = scale
+                        scaleY = scale
+                        alpha = zoomProgress.coerceIn(0f, 1f)
+                    }
+                    .clickable(enabled = !isZoomAnimating, onClick = onCardTap),
+                shape = TarotCardShape,
+                tonalElevation = 6.dp,
+                color = Color.Transparent
             ) {
                 CardFaceArt(
                     card = card,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(0.62f)
+                        .aspectRatio(0.62f),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0xCC0F0F1F))
+                    ),
+                    shape = TarotCardShape
                 )
-                Text(text = card.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-                if (card.description.isNotBlank()) {
+            }
+        } else {
+            Surface(
+                modifier = Modifier
+                    .padding(horizontal = 24.dp)
+                    .clickable(onClick = onCloseAll),
+                shape = TarotCardShape,
+                tonalElevation = 8.dp,
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(text = card.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                    Text(text = card.arcana, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    if (card.keywords.isNotEmpty()) {
+                        Text(
+                            text = "키워드: " + card.keywords.joinToString(separator = " • "),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Text(text = "정방향", fontWeight = FontWeight.SemiBold)
+                    Text(text = card.uprightMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
+                    Text(text = "역방향", fontWeight = FontWeight.SemiBold)
+                    Text(text = card.reversedMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
+                    if (card.description.isNotBlank()) {
+                        Text(
+                            text = card.description,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f)
+                        )
+                    }
                     Text(
-                        text = card.description,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f)
+                        text = "탭하면 닫힙니다",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                        textAlign = TextAlign.Center
                     )
                 }
-                if (card.keywords.isNotEmpty()) {
-                    Text(
-                        text = "키워드",
-                        fontWeight = FontWeight.SemiBold
-                    )
-                    Text(
-                        text = card.keywords.joinToString(),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
-                    )
-                }
-                Text(text = "정방향", fontWeight = FontWeight.SemiBold)
-                Text(text = card.uprightMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
-                Text(text = "역방향", fontWeight = FontWeight.SemiBold)
-                Text(text = card.reversedMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
-                Text(text = "탭하면 닫힙니다", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), textAlign = TextAlign.Center)
             }
         }
     }
