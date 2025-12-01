@@ -45,6 +45,7 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.state.CardCategory
 import com.pinwormmy.tarotcard.ui.state.category
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -143,19 +144,31 @@ private fun CardBrowserItem(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF3E3F63), Color(0xFF1A1B30))
-                    )
-                ),
-            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = card.name,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White.copy(alpha = 0.9f)
+            CardFaceArt(
+                card = card,
+                modifier = Modifier.fillMaxSize(),
+                overlay = Brush.verticalGradient(
+                    listOf(Color.Transparent, Color(0xCC0F0F1F))
+                ),
+                shape = MaterialTheme.shapes.large
             )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(12.dp)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(horizontal = 6.dp, vertical = 8.dp),
+                    text = card.name,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.White
+                )
+            }
         }
     }
 }
@@ -187,6 +200,12 @@ private fun CardDetailOverlay(
                     .padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                CardFaceArt(
+                    card = card,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(0.62f)
+                )
                 Text(text = card.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                 if (card.description.isNotBlank()) {
                     Text(

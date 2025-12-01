@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,6 +79,12 @@ private fun CardDetailBody(
             .padding(top = 24.dp, bottom = 32.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
+        CardFaceArt(
+            card = card,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(0.62f)
+        )
         Text(
             text = card.arcana,
             style = MaterialTheme.typography.labelLarge,

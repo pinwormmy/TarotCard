@@ -45,6 +45,7 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -176,28 +177,23 @@ private fun DailyCardDisplay(
                     cameraDistance = 12 * density.density
                     rotationZ = faceRotation
                 }
-               .background(
-                   brush = Brush.verticalGradient(
-                       colors = if (isBack) {
-                            listOf(
-                                MaterialTheme.colorScheme.surfaceVariant,
-                                MaterialTheme.colorScheme.surface
-                            )
-                        } else {
-                            listOf(
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.95f),
-                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.95f)
-                            )
-                        }
-                   ),
-                   shape = RoundedCornerShape(32.dp)
-                )
-                .padding(24.dp),
+                .clip(RoundedCornerShape(32.dp))
+                .background(Color(0xFF0F0F1A)),
             contentAlignment = Alignment.Center
         ) {
             if (!isBack) {
+                CardFaceArt(
+                    card = card,
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0xCC0C0B18))
+                    ),
+                    shape = RoundedCornerShape(32.dp)
+                )
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 18.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -211,7 +207,7 @@ private fun DailyCardDisplay(
                         text = card.keywords.joinToString(),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = Color.White.copy(alpha = 0.9f)
                     )
                 }
             } else {

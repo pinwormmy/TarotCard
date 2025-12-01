@@ -13,7 +13,7 @@
       "잠재력",
       "낙관"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot00"
   },
   {
     "id": "major_01",
@@ -29,7 +29,7 @@
       "재치",
       "힘"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot01"
   },
   {
     "id": "major_02",
@@ -44,7 +44,7 @@
       "잠재의식",
       "꿈"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot02"
   },
   {
     "id": "major_03",
@@ -60,7 +60,7 @@
       "아름다움",
       "안락"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot03"
   },
   {
     "id": "major_04",
@@ -75,7 +75,7 @@
       "질서",
       "보호"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot04"
   },
   {
     "id": "major_05",
@@ -90,7 +90,7 @@
       "학습",
       "의식"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot05"
   },
   {
     "id": "major_06",
@@ -106,7 +106,7 @@
       "사랑",
       "가치"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot06"
   },
   {
     "id": "major_07",
@@ -121,7 +121,7 @@
       "통제",
       "성공"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot07"
   },
   {
     "id": "major_08",
@@ -136,7 +136,7 @@
       "내적 힘",
       "연민"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot08"
   },
   {
     "id": "major_09",
@@ -151,7 +151,7 @@
       "고독",
       "인도"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot09"
   },
   {
     "id": "major_10",
@@ -166,7 +166,7 @@
       "기회",
       "전환점"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot10"
   },
   {
     "id": "major_11",
@@ -181,7 +181,7 @@
       "법",
       "인과"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot11"
   },
   {
     "id": "major_12",
@@ -196,7 +196,7 @@
       "관점",
       "멈춤"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot12"
   },
   {
     "id": "major_13",
@@ -211,7 +211,7 @@
       "재탄생",
       "마무리"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot13"
   },
   {
     "id": "major_14",
@@ -226,7 +226,7 @@
       "치유",
       "인내"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot14"
   },
   {
     "id": "major_15",
@@ -241,7 +241,7 @@
       "물질주의",
       "속박"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot15"
   },
   {
     "id": "major_16",
@@ -256,7 +256,7 @@
       "붕괴",
       "각성"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot16"
   },
   {
     "id": "major_17",
@@ -271,7 +271,7 @@
       "영감",
       "평온"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot17"
   },
   {
     "id": "major_18",
@@ -286,7 +286,7 @@
       "잠재의식",
       "두려움"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot18"
   },
   {
     "id": "major_19",
@@ -301,7 +301,7 @@
       "따뜻함",
       "명료함"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot19"
   },
   {
     "id": "major_20",
@@ -316,7 +316,7 @@
       "용서",
       "자각"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot20"
   },
   {
     "id": "major_21",
@@ -331,10 +331,10 @@
       "여행",
       "성취"
     ],
-    "imageUrl": null
+    "imageUrl": "tarot21"
   },
   {
-    "id": "cups_ace",
+    "id": "cups_01",
     "name": "컵 에이스",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "새로운 감정과 초대가 은총처럼 넘쳐납니다. 취약함이 성스러운 창조의 연료가 됩니다.",
@@ -348,10 +348,10 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": null
+    "imageUrl": "cups01"
   },
   {
-    "id": "cups_2",
+    "id": "cups_02",
     "name": "컵 2",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "파트너십과 진심어린 비춤이 안전한 유대를 만듭니다. 거울 같은 공감이 신뢰를 깊게 합니다.",
@@ -365,10 +365,10 @@
       "균형",
       "결정"
     ],
-    "imageUrl": null
+    "imageUrl": "cups02"
   },
   {
-    "id": "cups_3",
+    "id": "cups_03",
     "name": "컵 3",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "공동체의 축하와 우정이 영혼을 영양합니다. 함께 누리는 기쁨이 축복을 배가시킵니다.",
@@ -382,10 +382,10 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": null
+    "imageUrl": "cups03"
   },
   {
-    "id": "cups_4",
+    "id": "cups_04",
     "name": "컵 4",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "내면 성찰이 욕망을 다시 평가하게 합니다. 고요한 시간이 감사함을 새롭게 합니다.",
@@ -399,10 +399,10 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": null
+    "imageUrl": "cups04"
   },
   {
-    "id": "cups_5",
+    "id": "cups_05",
     "name": "컵 5",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "슬픔을 존중해야 새로운 가능성이 떠오릅니다. 온전히 느껴야 치유됩니다.",
@@ -416,10 +416,10 @@
       "도전",
       "변화"
     ],
-    "imageUrl": null
+    "imageUrl": "cups05"
   },
   {
-    "id": "cups_6",
+    "id": "cups_06",
     "name": "컵 6",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "달콤한 향수와 친절이 순수함을 되살립니다. 베푸는 행동이 영혼을 달랩니다.",
@@ -433,10 +433,10 @@
       "조화",
       "지지"
     ],
-    "imageUrl": null
+    "imageUrl": "cups06"
   },
   {
-    "id": "cups_7",
+    "id": "cups_07",
     "name": "컵 7",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "상상력이 매력적인 길을 여럿 제시합니다. 환상과 실현 가능한 꿈을 분별하세요.",
@@ -450,10 +450,10 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": null
+    "imageUrl": "cups07"
   },
   {
-    "id": "cups_8",
+    "id": "cups_08",
     "name": "컵 8",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "익숙한 감정의 땅을 떠나야 더 깊은 의미를 만납니다. 용기가 진정성을 향해 걷게 합니다.",
@@ -467,10 +467,10 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": null
+    "imageUrl": "cups08"
   },
   {
-    "id": "cups_9",
+    "id": "cups_09",
     "name": "컵 9",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "만족감과 진심 어린 소원이 조화로운 노력으로 현실화됩니다. 스스로를 칭찬하며 누리세요.",
@@ -484,7 +484,7 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": null
+    "imageUrl": "cups09"
   },
   {
     "id": "cups_10",
@@ -501,10 +501,10 @@
       "유산",
       "가족"
     ],
-    "imageUrl": null
+    "imageUrl": "cups10"
   },
   {
-    "id": "cups_page",
+    "id": "cups_11",
     "name": "컵 시종",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "연민의 메시지와 창의적 호기심이 다가옵니다. 내면의 시인에게 귀를 기울이세요.",
@@ -518,10 +518,10 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": null
+    "imageUrl": "cups11"
   },
   {
-    "id": "cups_knight",
+    "id": "cups_12",
     "name": "컵 기사",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "낭만적인 탐색과 진심 어린 제안이 매력적으로 전진합니다. 솔직한 감정을 따르세요.",
@@ -535,10 +535,10 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": null
+    "imageUrl": "cups12"
   },
   {
-    "id": "cups_queen",
+    "id": "cups_13",
     "name": "컵 여왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "공감과 직관, 섬세한 수용성이 결정을 이끕니다. 우아한 공간을 마련해 주세요.",
@@ -552,10 +552,10 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": null
+    "imageUrl": "cups13"
   },
   {
-    "id": "cups_king",
+    "id": "cups_14",
     "name": "컵 왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "감정의 숙련이 현명한 조언과 창의적 리더십을 만들어 냅니다. 성숙한 마음으로 이끄세요.",
@@ -569,10 +569,10 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": null
+    "imageUrl": "cups14"
   },
   {
-    "id": "wands_ace",
+    "id": "wands_01",
     "name": "완드 에이스",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "영감의 불씨가 대담한 시도를 점화합니다. 욕망의 불꽃을 당신의 것으로 선언하세요.",
@@ -586,10 +586,10 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": null
+    "imageUrl": "wands01"
   },
   {
-    "id": "wands_2",
+    "id": "wands_02",
     "name": "완드 2",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "전략적 계획과 대담한 시야가 지평을 넓힙니다. 다가오는 가능성과 손을 맞잡으세요.",
@@ -603,10 +603,10 @@
       "균형",
       "결정"
     ],
-    "imageUrl": null
+    "imageUrl": "wands02"
   },
   {
-    "id": "wands_3",
+    "id": "wands_03",
     "name": "완드 3",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "배가 약속을 싣고 돌아오듯 추진력이 쌓입니다. 닿을 수 있는 범위를 계속 확장하세요.",
@@ -620,10 +620,10 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": null
+    "imageUrl": "wands03"
   },
   {
-    "id": "wands_4",
+    "id": "wands_04",
     "name": "완드 4",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "축하와 이정표가 공동체를 견고히 합니다. 단단한 토대는 놀이를 허락합니다.",
@@ -637,10 +637,10 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": null
+    "imageUrl": "wands04"
   },
   {
-    "id": "wands_5",
+    "id": "wands_05",
     "name": "완드 5",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "건강한 경쟁이 실력을 벼리고 열정을 드러냅니다. 논쟁도 놀이처럼 즐기세요.",
@@ -654,10 +654,10 @@
       "도전",
       "변화"
     ],
-    "imageUrl": null
+    "imageUrl": "wands05"
   },
   {
-    "id": "wands_6",
+    "id": "wands_06",
     "name": "완드 6",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "인정과 승리가 당신의 결단력을 왕관처럼 씌웁니다. 성과를 아낌없이 나누세요.",
@@ -671,10 +671,10 @@
       "조화",
       "지지"
     ],
-    "imageUrl": null
+    "imageUrl": "wands06"
   },
   {
-    "id": "wands_7",
+    "id": "wands_07",
     "name": "완드 7",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "확신을 갖고 자리를 지키세요. 용기가 압박 속에서도 당신의 진전을 방어합니다.",
@@ -688,10 +688,10 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": null
+    "imageUrl": "wands07"
   },
   {
-    "id": "wands_8",
+    "id": "wands_08",
     "name": "완드 8",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "빠른 움직임과 명확한 신호가 계획을 앞으로 밀어줍니다. 속도를 기꺼이 받아들이세요.",
@@ -705,10 +705,10 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": null
+    "imageUrl": "wands08"
   },
   {
-    "id": "wands_9",
+    "id": "wands_09",
     "name": "완드 9",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "회복력과 전략적 경계가 여정을 완주하게 합니다. 소중한 것을 지키세요.",
@@ -722,7 +722,7 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": null
+    "imageUrl": "wands09"
   },
   {
     "id": "wands_10",
@@ -739,10 +739,10 @@
       "유산",
       "가족"
     ],
-    "imageUrl": null
+    "imageUrl": "wands10"
   },
   {
-    "id": "wands_page",
+    "id": "wands_11",
     "name": "완드 시종",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "짜릿한 소식과 창작의 불꽃이 도착합니다. 대담한 호기심으로 탐험하세요.",
@@ -756,10 +756,10 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": null
+    "imageUrl": "wands11"
   },
   {
-    "id": "wands_knight",
+    "id": "wands_12",
     "name": "완드 기사",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "모험심과 매력이 대담한 추구를 몰아갑니다. 용기와 유머로 앞장서세요.",
@@ -773,10 +773,10 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": null
+    "imageUrl": "wands12"
   },
   {
-    "id": "wands_queen",
+    "id": "wands_13",
     "name": "완드 여왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "자신감 넘치는 매력이 타인에게 빛을 비추게 합니다. 따뜻함과 리더십을 체현하세요.",
@@ -790,10 +790,10 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": null
+    "imageUrl": "wands13"
   },
   {
-    "id": "wands_king",
+    "id": "wands_14",
     "name": "완드 왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "비전 있는 숙련이 팀과 혁신을 결집시킵니다. 진정성을 갖고 지휘하세요.",
@@ -807,10 +807,10 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": null
+    "imageUrl": "wands14"
   },
   {
-    "id": "swords_ace",
+    "id": "swords_01",
     "name": "소드 에이스",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "돌파구 같은 통찰이 혼란을 가릅니다. 결단력 있는 진실을 말하세요.",
@@ -824,10 +824,10 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": null
+    "imageUrl": "swords01"
   },
   {
-    "id": "swords_2",
+    "id": "swords_02",
     "name": "소드 2",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "균형 잡힌 숙고와 고요함이 선택지를 공정하게 저울질합니다. 차분한 논리를 믿으세요.",
@@ -841,10 +841,10 @@
       "균형",
       "결정"
     ],
-    "imageUrl": null
+    "imageUrl": "swords02"
   },
   {
-    "id": "swords_3",
+    "id": "swords_03",
     "name": "소드 3",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "심장의 통증과 카타르시스 같은 정직함이 공기를 맑게 합니다. 슬픔을 인정해야 치유됩니다.",
@@ -858,10 +858,10 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": null
+    "imageUrl": "swords03"
   },
   {
-    "id": "swords_4",
+    "id": "swords_04",
     "name": "소드 4",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "휴식과 명상, 후퇴가 정신을 다시 맑게 합니다. 신성한 멈춤을 존중하세요.",
@@ -875,10 +875,10 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": null
+    "imageUrl": "swords04"
   },
   {
-    "id": "swords_5",
+    "id": "swords_05",
     "name": "소드 5",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "갈등은 동료 없는 승자를 드러냅니다. 이 싸움이 가치 있는지 의심해 보세요.",
@@ -892,10 +892,10 @@
       "도전",
       "변화"
     ],
-    "imageUrl": null
+    "imageUrl": "swords05"
   },
   {
-    "id": "swords_6",
+    "id": "swords_06",
     "name": "소드 6",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "인도받는 전환이 혼란에서 고요로 데려갑니다. 배를 타고 이동하는 여정을 받아들이세요.",
@@ -909,10 +909,10 @@
       "조화",
       "지지"
     ],
-    "imageUrl": null
+    "imageUrl": "swords06"
   },
   {
-    "id": "swords_7",
+    "id": "swords_07",
     "name": "소드 7",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "전략적 사고와 신중함이 복잡한 의제를 헤쳐 나가게 합니다. 기지를 믿으세요.",
@@ -926,10 +926,10 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": null
+    "imageUrl": "swords07"
   },
   {
-    "id": "swords_8",
+    "id": "swords_08",
     "name": "소드 8",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "자신의 주체성을 인정하면 정신적 감옥이 녹아납니다. 현실은 두려움이 말하는 것보다 넓습니다.",
@@ -943,10 +943,10 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": null
+    "imageUrl": "swords08"
   },
   {
-    "id": "swords_9",
+    "id": "swords_09",
     "name": "소드 9",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "불안은 새벽 직전에 정점을 찍지만 연민 어린 자기 대화를 부릅니다. 악몽을 들여다보세요.",
@@ -960,7 +960,7 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": null
+    "imageUrl": "swords09"
   },
   {
     "id": "swords_10",
@@ -977,10 +977,10 @@
       "유산",
       "가족"
     ],
-    "imageUrl": null
+    "imageUrl": "swords10"
   },
   {
-    "id": "swords_page",
+    "id": "swords_11",
     "name": "소드 시종",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "호기심 많은 공부와 날카로운 메시지가 예상치 않게 도착합니다. 관찰하며 배우세요.",
@@ -994,10 +994,10 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": null
+    "imageUrl": "swords11"
   },
   {
-    "id": "swords_knight",
+    "id": "swords_12",
     "name": "소드 기사",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "민첩한 지성이 진실과 단호한 행동을 옹호합니다. 불필요한 장벽을 잘라내세요.",
@@ -1011,10 +1011,10 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": null
+    "imageUrl": "swords12"
   },
   {
-    "id": "swords_queen",
+    "id": "swords_13",
     "name": "소드 여왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "통찰력 있는 독립성과 정직한 조언이 진실성을 지켜 줍니다. 분명한 경계를 말하세요.",
@@ -1028,10 +1028,10 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": null
+    "imageUrl": "swords13"
   },
   {
-    "id": "swords_king",
+    "id": "swords_14",
     "name": "소드 왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "전략적 리더십과 윤리적 판단이 빛납니다. 이성을 가지고 다스리세요.",
@@ -1045,10 +1045,10 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": null
+    "imageUrl": "swords14"
   },
   {
-    "id": "pentacles_ace",
+    "id": "pents_01",
     "name": "펜타클 에이스",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "꾸준한 노력이 손에 잡히는 기회를 틔웁니다. 지금 새 사업을 뿌리내리세요.",
@@ -1062,10 +1062,10 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": null
+    "imageUrl": "pents01"
   },
   {
-    "id": "pentacles_2",
+    "id": "pents_02",
     "name": "펜타클 2",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "장난기 있는 태도로 우선순위를 저글링하면 재정이 균형을 이룹니다. 변화의 흐름을 타세요.",
@@ -1079,10 +1079,10 @@
       "균형",
       "결정"
     ],
-    "imageUrl": null
+    "imageUrl": "pents02"
   },
   {
-    "id": "pentacles_3",
+    "id": "pents_03",
     "name": "펜타클 3",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "협업과 장인정신이 존중을 이끕니다. 공동체에서 전문성을 나누세요.",
@@ -1096,10 +1096,10 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": null
+    "imageUrl": "pents03"
   },
   {
-    "id": "pentacles_4",
+    "id": "pents_04",
     "name": "펜타클 4",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "저축과 경계가 힘들게 얻은 부를 지킵니다. 진짜 소중한 것을 귀하게 여기세요.",
@@ -1113,10 +1113,10 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": null
+    "imageUrl": "pents04"
   },
   {
-    "id": "pentacles_5",
+    "id": "pents_05",
     "name": "펜타클 5",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "고난과 물질적 어려움이 회복력과 연민을 가르칩니다. 지원 체계를 찾으세요.",
@@ -1130,10 +1130,10 @@
       "도전",
       "변화"
     ],
-    "imageUrl": null
+    "imageUrl": "pents05"
   },
   {
-    "id": "pentacles_6",
+    "id": "pents_06",
     "name": "펜타클 6",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "관대함과 공정한 교환이 균형을 되찾게 합니다. 열린 손바닥으로 주고받으세요.",
@@ -1147,10 +1147,10 @@
       "조화",
       "지지"
     ],
-    "imageUrl": null
+    "imageUrl": "pents06"
   },
   {
-    "id": "pentacles_7",
+    "id": "pents_07",
     "name": "펜타클 7",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "점검과 인내가 무엇을 덜고 보살필지 보여줍니다. 느린 성장을 신뢰하세요.",
@@ -1164,10 +1164,10 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": null
+    "imageUrl": "pents07"
   },
   {
-    "id": "pentacles_8",
+    "id": "pents_08",
     "name": "펜타클 8",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "부지런한 연습이 실력을 키웁니다. 장인정신에 집중하세요.",
@@ -1181,10 +1181,10 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": null
+    "imageUrl": "pents08"
   },
   {
-    "id": "pentacles_9",
+    "id": "pents_09",
     "name": "펜타클 9",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "자립과 세련됨이 우아한 독립을 선사합니다. 수확을 마음껏 축하하세요.",
@@ -1198,10 +1198,10 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": null
+    "imageUrl": "pents09"
   },
   {
-    "id": "pentacles_10",
+    "id": "pents_10",
     "name": "펜타클 10",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "유산, 조상, 장기적인 안전이 중심이 됩니다. 뿌리에 투자하세요.",
@@ -1215,10 +1215,10 @@
       "유산",
       "가족"
     ],
-    "imageUrl": null
+    "imageUrl": "pents10"
   },
   {
-    "id": "pentacles_page",
+    "id": "pents_11",
     "name": "펜타클 시종",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "공부와 실용적 호기심이 새로운 수입 아이디어를 가져옵니다. 청사진을 그리세요.",
@@ -1232,10 +1232,10 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": null
+    "imageUrl": "pents11"
   },
   {
-    "id": "pentacles_knight",
+    "id": "pents_12",
     "name": "펜타클 기사",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "꾸준한 진전과 충성심이 오래가는 목표를 완성합니다. 루틴을 존중하세요.",
@@ -1249,10 +1249,10 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": null
+    "imageUrl": "pents12"
   },
   {
-    "id": "pentacles_queen",
+    "id": "pents_13",
     "name": "펜타클 여왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "대지 같은 돌봄과 재치가 모두를 단단히 붙들어 줍니다. 포근한 풍요를 만드세요.",
@@ -1266,10 +1266,10 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": null
+    "imageUrl": "pents13"
   },
   {
-    "id": "pentacles_king",
+    "id": "pents_14",
     "name": "펜타클 왕",
     "arcana": "마이너 아르카나",
     "uprightMeaning": "신뢰할 수 있는 리더십이 인내와 윤리로 제국을 세웁니다. 자원을 현명하게 관리하세요.",
@@ -1283,6 +1283,6 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": null
+    "imageUrl": "pents14"
   }
 ]

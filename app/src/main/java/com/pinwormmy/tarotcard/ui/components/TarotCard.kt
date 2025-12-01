@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +26,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import java.util.Locale
 
 @Composable
@@ -108,49 +110,57 @@ private fun CardFrontFace(
     card: TarotCardModel,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(2f / 3f)
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFF33285D), Color(0xFF130F2A))
-                ),
-                shape = RoundedCornerShape(20.dp)
-            )
-            .padding(horizontal = 16.dp, vertical = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+            .clip(RoundedCornerShape(20.dp))
+            .background(Color(0xFF130F2A))
     ) {
-        Text(
-            text = card.arcana.uppercase(Locale.getDefault()),
-            style = MaterialTheme.typography.labelSmall,
-            color = Color(0xFFDAC8FF)
+        CardFaceArt(
+            card = card,
+            modifier = Modifier.fillMaxSize(),
+            overlay = Brush.verticalGradient(
+                listOf(Color.Transparent, Color(0xCC0C0B18))
+            )
         )
         Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 18.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = card.name,
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
-                textAlign = TextAlign.Center
+                text = card.arcana.uppercase(Locale.getDefault()),
+                style = MaterialTheme.typography.labelSmall,
+                color = Color(0xFFD8CEFA)
             )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Text(
+                    text = card.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = card.uprightMeaning,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color(0xFFF3E9FF),
+                    textAlign = TextAlign.Center,
+                    maxLines = 3
+                )
+            }
             Text(
-                text = card.uprightMeaning,
-                style = MaterialTheme.typography.bodySmall,
-                color = Color(0xFFF3E9FF),
+                text = card.keywords.joinToString(" · "),
+                style = MaterialTheme.typography.labelSmall,
+                color = Color(0xFFB6A3E8),
                 textAlign = TextAlign.Center,
-                maxLines = 3
+                maxLines = 1
             )
         }
-        Text(
-            text = card.keywords.joinToString(" · "),
-            style = MaterialTheme.typography.labelSmall,
-            color = Color(0xFFB6A3E8),
-            textAlign = TextAlign.Center,
-            maxLines = 1
-        )
     }
 }

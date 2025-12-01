@@ -43,6 +43,7 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.SpreadBoard
 import com.pinwormmy.tarotcard.ui.components.estimatedBoardHeight
 import com.pinwormmy.tarotcard.ui.state.SpreadCardResult
@@ -289,37 +290,40 @@ private fun ReadingResultCard(
     )
     val density = LocalDensity.current
     val faceRotation = if (!isBack && isReversed) 180f else 0f
+    val shape = RoundedCornerShape(24.dp)
     Box(
         modifier = modifier
             .aspectRatio(0.62f)
-            .clip(RoundedCornerShape(24.dp))
+            .clip(shape)
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 8 * density.density
                 rotationZ = faceRotation
             }
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = if (isBack) {
-                        listOf(Color(0xFF35365A), Color(0xFF191A2F))
-                    } else {
-                        listOf(Color(0xFFE0C097), Color(0xFFC89F63))
-                    }
-                )
-            )
             .clickable(enabled = enabled) { onTapped() },
         contentAlignment = Alignment.Center
     ) {
         if (!isBack) {
+            CardFaceArt(
+                card = card,
+                modifier = Modifier.fillMaxSize(),
+                overlay = Brush.verticalGradient(
+                    listOf(Color.Transparent, Color(0xCC0B0A14))
+                ),
+                shape = shape
+            )
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, color = Color.White)
                 Text(
                     text = card.keywords.joinToString(),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = Color.White.copy(alpha = 0.9f)
                 )
             }
         } else {
@@ -327,7 +331,7 @@ private fun ReadingResultCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .background(Color.White.copy(alpha = 0.2f), RoundedCornerShape(12.dp))
+                    .background(Color(0xFF35365A), RoundedCornerShape(12.dp))
             )
         }
     }

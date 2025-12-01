@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.state.CardCategory
 import com.pinwormmy.tarotcard.ui.state.category
+import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -110,35 +112,45 @@ private fun CardLibraryItem(
         val shape: Shape = RoundedCornerShape(20.dp)
         Box(
             modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF454776), Color(0xFF1C1D33))
-                    ),
-                    shape = shape
-                )
-                .padding(16.dp)
+                .background(Color.Transparent, shape = shape)
+                .padding(12.dp)
         ) {
+            CardFaceArt(
+                card = card,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.62f)
+                    .align(Alignment.TopCenter),
+                overlay = Brush.verticalGradient(
+                    listOf(Color.Transparent, Color(0xAA0A0B16))
+                ),
+                shape = shape
+            )
             Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(text = card.name, fontWeight = FontWeight.Bold)
-                Text(
-                    text = card.keywords.take(3).joinToString(),
-                    color = Color.White.copy(alpha = 0.7f)
-                )
-            }
-            Text(
-                text = "선택",
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .background(
-                        color = Color.White.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(24.dp)
-                    )
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                textAlign = TextAlign.Center
-            )
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Text(
+                    text = card.keywords.take(3).joinToString(),
+                    color = Color.White.copy(alpha = 0.8f),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "선택",
+                    modifier = Modifier
+                        .background(
+                            color = Color.White.copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(24.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

@@ -297,7 +297,7 @@ fun TarotCardModel.category(): CardCategory {
         normalizedId.startsWith("wands_") -> CardCategory.Wands
         normalizedId.startsWith("cups_") -> CardCategory.Cups
         normalizedId.startsWith("swords_") -> CardCategory.Swords
-        normalizedId.startsWith("pentacles_") -> CardCategory.Pentacles
+        normalizedId.startsWith("pentacles_") || normalizedId.startsWith("pents_") -> CardCategory.Pentacles
         else -> {
             val value = arcana.lowercase()
             when {
