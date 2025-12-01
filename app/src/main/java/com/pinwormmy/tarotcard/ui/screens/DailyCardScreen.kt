@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -45,6 +44,8 @@ import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -157,7 +158,7 @@ private fun DailyCardDisplay(
     Surface(
         modifier = modifier.aspectRatio(0.62f),
         tonalElevation = 12.dp,
-        shape = RoundedCornerShape(32.dp),
+        shape = TarotCardShape,
         color = Color.Transparent
     ) {
         Box(
@@ -168,7 +169,7 @@ private fun DailyCardDisplay(
                     cameraDistance = 12 * density.density
                     rotationZ = faceRotation
                 }
-                .clip(RoundedCornerShape(32.dp))
+                .clip(TarotCardShape)
                 .background(Color(0xFF0F0F1A)),
             contentAlignment = Alignment.Center
         ) {
@@ -179,7 +180,7 @@ private fun DailyCardDisplay(
                     overlay = Brush.verticalGradient(
                         listOf(Color.Transparent, Color(0xCC0C0B18))
                     ),
-                    shape = RoundedCornerShape(32.dp)
+                    shape = TarotCardShape
                 )
             } else {
                 Box(

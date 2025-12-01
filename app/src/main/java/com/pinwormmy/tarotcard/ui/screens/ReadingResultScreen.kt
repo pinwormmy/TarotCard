@@ -46,6 +46,7 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.SpreadBoard
 import com.pinwormmy.tarotcard.ui.components.estimatedBoardHeight
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.state.SpreadCardResult
 import com.pinwormmy.tarotcard.ui.state.SpreadDefinition
 import com.pinwormmy.tarotcard.ui.state.SpreadSlot
@@ -154,7 +155,7 @@ fun ReadingResultScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(spread.estimatedBoardHeight())
-                        .clip(RoundedCornerShape(32.dp))
+                        .clip(TarotCardShape)
                         .background(Color(0xFF0F1120))
                         .padding(16.dp)
                 ) {
@@ -261,7 +262,7 @@ private fun ResultPlaceholderCard(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(24.dp))
+            .clip(TarotCardShape)
             .background(Color(0xFF1E2038).copy(alpha = 0.8f)),
         contentAlignment = Alignment.Center
     ) {
@@ -290,7 +291,7 @@ private fun ReadingResultCard(
     )
     val density = LocalDensity.current
     val faceRotation = if (!isBack && isReversed) 180f else 0f
-    val shape = RoundedCornerShape(24.dp)
+    val shape = TarotCardShape
     Box(
         modifier = modifier
             .aspectRatio(0.62f)
@@ -317,7 +318,7 @@ private fun ReadingResultCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .background(Color(0xFF35365A), RoundedCornerShape(12.dp))
+                    .background(Color(0xFF35365A), TarotCardShape)
             )
         }
     }

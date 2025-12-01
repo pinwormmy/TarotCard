@@ -46,6 +46,7 @@ import com.pinwormmy.tarotcard.ui.state.CardCategory
 import com.pinwormmy.tarotcard.ui.state.category
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -145,7 +146,7 @@ private fun CardBrowserItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(0.62f),
-            shape = MaterialTheme.shapes.large
+            shape = TarotCardShape
         ) {
             CardFaceArt(
                 card = card,
@@ -153,7 +154,7 @@ private fun CardBrowserItem(
                 overlay = Brush.verticalGradient(
                     listOf(Color.Transparent, Color(0xCC0F0F1F))
                 ),
-                shape = MaterialTheme.shapes.large
+                shape = TarotCardShape
             )
         }
         Text(

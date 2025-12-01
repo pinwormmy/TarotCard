@@ -34,6 +34,7 @@ import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.state.CardCategory
 import com.pinwormmy.tarotcard.ui.state.category
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -109,7 +110,7 @@ private fun CardLibraryItem(
             containerColor = Color.Transparent
         )
     ) {
-        val shape: Shape = RoundedCornerShape(20.dp)
+        val shape: Shape = TarotCardShape
         Column(
             modifier = Modifier
                 .background(Color.Transparent, shape = shape)

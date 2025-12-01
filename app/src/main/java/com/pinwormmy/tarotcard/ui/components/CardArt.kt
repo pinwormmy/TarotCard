@@ -13,11 +13,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @Composable
 fun rememberCardPainter(card: TarotCardModel): Painter? {
@@ -36,7 +35,7 @@ fun CardFaceArt(
     card: TarotCardModel,
     modifier: Modifier = Modifier,
     overlay: Brush? = null,
-    shape: Shape = RoundedCornerShape(20.dp)
+    shape: Shape = TarotCardShape
  ) {
     val painter = rememberCardPainter(card)
     if (painter != null) {

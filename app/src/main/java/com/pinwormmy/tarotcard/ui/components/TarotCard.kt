@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +21,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @Composable
 fun TarotCard(
@@ -40,7 +40,7 @@ fun TarotCard(
     Surface(
         modifier = modifier
             .aspectRatio(2f / 3f)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(TarotCardShape)
             .then(if (onClick != null) Modifier.clickable { onClick() } else Modifier),
         color = Color.Transparent
     ) {
@@ -80,7 +80,7 @@ private fun CardBackFace(
                 brush = Brush.verticalGradient(
                     colors = listOf(Color(0xFF14162F), Color(0xFF050612))
                 ),
-                shape = RoundedCornerShape(20.dp)
+                shape = TarotCardShape
             )
             .padding(24.dp),
         contentAlignment = Alignment.Center
@@ -93,7 +93,7 @@ private fun CardBackFace(
                     brush = Brush.radialGradient(
                         colors = listOf(Color(0xFFB59BFF), Color.Transparent)
                     ),
-                    shape = RoundedCornerShape(16.dp)
+                    shape = TarotCardShape
                 )
         )
     }
@@ -108,7 +108,7 @@ private fun CardFrontFace(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(2f / 3f)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(TarotCardShape)
             .background(Color(0xFF130F2A))
     ) {
         CardFaceArt(

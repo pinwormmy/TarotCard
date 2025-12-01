@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,6 +34,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.abs
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 enum class ShufflePhase {
     Idle,
@@ -72,7 +72,7 @@ fun CardDeck(
     val mergeDuration = 420
     val settleDuration = 260
 
-    val cardShape = RoundedCornerShape(20.dp)
+    val cardShape = TarotCardShape
 
     var phase by remember { mutableStateOf(ShufflePhase.Idle) }
     var showRiffleCards by remember { mutableStateOf(false) }
@@ -252,7 +252,7 @@ private fun DeckStack(
     translationX: Float = 0f,
     translationY: Float = 0f,
     rotation: Float = 0f,
-    shape: Shape = RoundedCornerShape(20.dp)
+    shape: Shape = TarotCardShape
 ) {
     Box(
         modifier = modifier
@@ -295,7 +295,7 @@ private fun RiffleCard(
     translationX: Float,
     translationY: Float,
     rotation: Float,
-    shape: Shape = RoundedCornerShape(20.dp)
+    shape: Shape = TarotCardShape
 ) {
     Box(
         modifier = Modifier
@@ -335,7 +335,7 @@ fun StaticCardDeck(
     Box(
         modifier = modifier
             .size(width = width, height = height)
-            .clip(RoundedCornerShape(20.dp)),
+            .clip(TarotCardShape),
         contentAlignment = Alignment.Center
     ) {
         DeckStack(
