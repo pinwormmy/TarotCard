@@ -47,6 +47,7 @@ import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.SpreadBoard
 import com.pinwormmy.tarotcard.ui.components.estimatedBoardHeight
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.state.SpreadCardResult
 import com.pinwormmy.tarotcard.ui.state.SpreadDefinition
 import com.pinwormmy.tarotcard.ui.state.SpreadSlot
@@ -314,11 +315,12 @@ private fun ReadingResultCard(
                 shape = shape
             )
         } else {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-                    .background(Color(0xFF35365A), TarotCardShape)
+            CardBackArt(
+                modifier = Modifier.fillMaxSize(),
+                overlay = Brush.verticalGradient(
+                    listOf(Color.Transparent, Color(0x66000000))
+                ),
+                shape = shape
             )
         }
     }

@@ -54,6 +54,8 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
@@ -61,6 +63,7 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
+import kotlin.math.min
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -333,13 +336,6 @@ private fun CardBackImage(
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(24.dp)
-    val backGradient = Brush.verticalGradient(
-        listOf(
-            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f),
-            MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
-        )
-    )
     Box(
         modifier = modifier
             .clickable(enabled = enabled, onClick = onClick),
@@ -350,9 +346,16 @@ private fun CardBackImage(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = (offset * 8).dp)
-                    .clip(shape)
-                    .background(backGradient)
-            )
+                    .clip(TarotCardShape)
+            ) {
+                CardBackArt(
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0x55000000))
+                    ),
+                    shape = TarotCardShape
+                )
+            }
         }
     }
 }
@@ -395,10 +398,14 @@ private fun DrawPileGrid(
         val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
         val columnSpacing = 32.dp
-        val cardWidth = (maxWidth - columnSpacing) / 2f
-        val cardHeight = cardWidth * 0.625f
-        val columnCount = ceil(cards.size / 2f).toInt()
         val totalRows = (cards.size + 1) / 2
+
+        val cardWidth = (maxWidth - columnSpacing) / 2f
+        val cardHeight = cardWidth * 0.625f // landscape ratio
+
+        val cardWidthPx = with(density) { cardWidth.toPx() }
+        val cardHeightPx = with(density) { cardHeight.toPx() }
+        val columnCount = ceil(cards.size / 2f).toInt()
         val usableHeight = maxHeight - cardHeight
         val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
         val dealStaggerMillis = 20L
@@ -407,11 +414,9 @@ private fun DrawPileGrid(
         val totalWidth = cardWidth * 2 + columnSpacing
         val leftColumnX = (maxWidth - totalWidth) / 2f
         val rightColumnX = leftColumnX + cardWidth + columnSpacing
-        val cardWidthPx = with(density) { cardWidth.toPx() }
-        val cardHeightPx = with(density) { cardHeight.toPx() }
-        val maxHeightPx = with(density) { maxHeight.toPx() }
         val startXPx = -cardWidthPx
         val startYPx = -cardHeightPx
+        val maxHeightPx = with(density) { maxHeight.toPx() }
         data class CardPlacement(
             val card: TarotCardModel,
             val targetXPx: Float,
@@ -548,31 +553,19 @@ private fun DrawPileGrid(
                             val scale = baseScale * hoverScale
                             scaleX = scale
                             scaleY = scale
-                        }
-                        .clip(RoundedCornerShape(24.dp))
-                        .background(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    MaterialTheme.colorScheme.surfaceVariant,
-                                    MaterialTheme.colorScheme.surface
-                                )
-                            )
-                        ),
+                            rotationZ = 90f
+                            shape = TarotCardShape
+                            clip = true
+                        },
                     contentAlignment = Alignment.Center
                 ) {
-                    Box(
+                    CardBackArt(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        MaterialTheme.colorScheme.primaryContainer,
-                                        MaterialTheme.colorScheme.secondaryContainer
-                                    )
-                                )
-                            )
+                            .fillMaxSize(),
+                        overlay = Brush.verticalGradient(
+                            listOf(Color.Transparent, Color(0x66000000))
+                        ),
+                        shape = TarotCardShape
                     )
                 }
             }

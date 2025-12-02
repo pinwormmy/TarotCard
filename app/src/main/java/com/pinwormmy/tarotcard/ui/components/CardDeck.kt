@@ -35,6 +35,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 
 enum class ShufflePhase {
     Idle,
@@ -264,24 +265,33 @@ private fun DeckStack(
         contentAlignment = Alignment.Center
     ) {
         repeat(cardCount) { index ->
+            val isTop = index == cardCount - 1
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .offset(y = (index * 6).dp)
                     .clip(shape)
-                    .background(
-                        brush = if (index == cardCount - 1) {
-                            Brush.verticalGradient(
-                                colors = listOf(Color(0xFF3A3B6D), Color(0xFF1C1D36))
-                            )
-                        } else {
-                            Brush.verticalGradient(
-                                colors = listOf(Color(0xFF1B1C33), Color(0xFF0F1024))
-                            )
-                        },
-                        shape = shape
+            ) {
+                if (isTop) {
+                    CardBackArt(
+                        modifier = Modifier.fillMaxSize(),
+                        overlay = Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color(0x66000000))
+                        )
                     )
-            )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(Color(0xFF1B1C33), Color(0xFF0F1024))
+                                ),
+                                shape = shape
+                            )
+                    )
+                }
+            }
         }
     }
 }

@@ -52,6 +52,69 @@ fun rememberCardPainter(
 }
 
 @Composable
+fun rememberCardBackPainter(
+    backStyle: com.pinwormmy.tarotcard.ui.state.CardBackStyle? = null
+): Painter? {
+    val context = LocalContext.current
+    val style = backStyle ?: com.pinwormmy.tarotcard.ui.theme.LocalCardBackStyle.current
+    val key = style.assetName
+    val assetPath = remember(key) { "skins/cardback/${style.assetName.lowercase()}.jpg" }
+    val assetPainter = remember(key, context) {
+        runCatching {
+            context.assets.open(assetPath).use { stream ->
+                BitmapFactory.decodeStream(stream)?.asImageBitmap()
+            }?.let { BitmapPainter(it) }
+        }.getOrNull()
+    }
+    if (assetPainter != null) return assetPainter
+    val resId = remember(key, context) {
+        context.resources.getIdentifier(style.assetName.lowercase(), "drawable", context.packageName)
+            .takeIf { it != 0 }
+    }
+    return resId?.let { painterResource(id = it) }
+}
+
+@Composable
+fun CardBackArt(
+    modifier: Modifier = Modifier,
+    shape: Shape = TarotCardShape,
+    overlay: Brush? = null,
+    backStyle: com.pinwormmy.tarotcard.ui.state.CardBackStyle? = null
+) {
+    val painter = rememberCardBackPainter(backStyle)
+    if (painter != null) {
+        Box(modifier = modifier) {
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(shape),
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+            if (overlay != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(overlay, shape = shape)
+                )
+            }
+        }
+    } else {
+        Box(
+            modifier = modifier
+                .clip(shape)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color(0xFF1C1D36), Color(0xFF0E0F1E))
+                    ),
+                    shape = shape
+                )
+        )
+    }
+}
+
+@Composable
 fun CardFaceArt(
     card: TarotCardModel,
     modifier: Modifier = Modifier,

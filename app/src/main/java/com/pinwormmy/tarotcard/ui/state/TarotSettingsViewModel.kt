@@ -9,10 +9,14 @@ import java.time.LocalTime
 import com.pinwormmy.tarotcard.ui.theme.TarotSkin
 import com.pinwormmy.tarotcard.ui.theme.TarotSkins
 
-enum class CardBackStyle(val displayName: String) {
-    Classic("클래식"),
-    Midnight("미드나이트"),
-    Aurora("오로라")
+enum class CardBackStyle(
+    val displayName: String,
+    val assetName: String
+) {
+    Byzantine("비잔틴", "byzantine"),
+    LightBrown("라이트 브라운", "lightbrown"),
+    RoseMoon("로즈 문", "rosemoon"),
+    Persia("페르시아", "persia")
 }
 
 enum class CardFaceSkin(
@@ -25,7 +29,7 @@ enum class CardFaceSkin(
 
 data class SettingsUiState(
     val skinId: String = TarotSkins.default.id,
-    val cardBackStyle: CardBackStyle = CardBackStyle.Classic,
+    val cardBackStyle: CardBackStyle = CardBackStyle.Byzantine,
     val cardFaceSkin: CardFaceSkin = CardFaceSkin.Animation,
     val dailyCardNotification: Boolean = false,
     val dailyCardTime: LocalTime = LocalTime.of(9, 0),

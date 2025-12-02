@@ -2,13 +2,11 @@ package com.pinwormmy.tarotcard.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,9 +16,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.unit.dp
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @Composable
@@ -75,26 +73,14 @@ private fun CardBackFace(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(2f / 3f)
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFF14162F), Color(0xFF050612))
-                ),
-                shape = TarotCardShape
-            )
-            .padding(24.dp),
+            .aspectRatio(2f / 3f),
         contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .background(
-                    brush = Brush.radialGradient(
-                        colors = listOf(Color(0xFFB59BFF), Color.Transparent)
-                    ),
-                    shape = TarotCardShape
-                )
+        CardBackArt(
+            modifier = Modifier.fillMaxSize(),
+            overlay = Brush.verticalGradient(
+                listOf(Color.Transparent, Color(0x88000000))
+            )
         )
     }
 }
@@ -109,7 +95,6 @@ private fun CardFrontFace(
             .fillMaxWidth()
             .aspectRatio(2f / 3f)
             .clip(TarotCardShape)
-            .background(Color(0xFF130F2A))
     ) {
         CardFaceArt(
             card = card,

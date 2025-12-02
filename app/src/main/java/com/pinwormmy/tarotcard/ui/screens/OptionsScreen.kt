@@ -61,6 +61,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
+import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.state.CardBackStyle
 import com.pinwormmy.tarotcard.ui.state.CardFaceSkin
 import com.pinwormmy.tarotcard.ui.state.SettingsUiState
@@ -68,6 +69,7 @@ import com.pinwormmy.tarotcard.ui.theme.TarotSkin
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import android.annotation.SuppressLint
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("NewApi") // java.time.* is desugared; safe on minSdk 24
@@ -98,6 +100,7 @@ fun OptionsScreen(
         )
     }
     var previewSkin by remember { mutableStateOf<Pair<CardFaceSkin, Rect?>?>(null) }
+    var previewBack by remember { mutableStateOf<Pair<CardBackStyle, Rect?>?>(null) }
 
     Scaffold(
         topBar = {
@@ -132,12 +135,11 @@ fun OptionsScreen(
                     )
                 }
 
-                OptionSection(title = "카드 뒷면") {
-                    StyleChips(
-                        items = CardBackStyle.values().toList(),
+                OptionSection(title = "카드 뒷면 선택") {
+                    CardBackSkinSelector(
+                        backs = CardBackStyle.values().toList(),
                         selected = settings.cardBackStyle,
-                        label = { it.displayName },
-                        onSelect = onSelectCardBack
+                        onPreview = { back, bounds -> previewBack = back to bounds }
                     )
                 }
 
@@ -230,6 +232,19 @@ fun OptionsScreen(
                     onDismiss = { previewSkin = null }
                 )
             }
+            previewBack?.let { (back, bounds) ->
+                CardBackPreviewModal(
+                    back = back,
+                    isSelected = back == settings.cardBackStyle,
+                    containerBounds = containerBounds.value,
+                    startBounds = bounds,
+                    onSelect = {
+                        onSelectCardBack(back)
+                        previewBack = null
+                    },
+                    onDismiss = { previewBack = null }
+                )
+            }
         }
     }
 }
@@ -287,6 +302,52 @@ private fun CardFaceSkinSelector(
                 }
                 Text(
                     text = skin.displayName,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CardBackSkinSelector(
+    backs: List<CardBackStyle>,
+    selected: CardBackStyle,
+    onPreview: (CardBackStyle, Rect?) -> Unit
+) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        items(backs) { back ->
+            val isSelected = back == selected
+            val itemBounds = remember { mutableStateOf<Rect?>(null) }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .width(96.dp)
+                        .aspectRatio(0.62f)
+                        .border(
+                            width = if (isSelected) 2.dp else 1.dp,
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
+                                alpha = 0.3f
+                            ),
+                            shape = TarotCardShape
+                        )
+                        .onGloballyPositioned { itemBounds.value = it.boundsInRoot() }
+                        .clickable { onPreview(back, itemBounds.value) },
+                    shape = TarotCardShape,
+                    tonalElevation = if (isSelected) 6.dp else 2.dp
+                ) {
+                    CardBackArt(
+                        modifier = Modifier.fillMaxSize(),
+                        backStyle = back,
+                        shape = TarotCardShape
+                    )
+                }
+                Text(
+                    text = back.displayName,
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal
                 )
@@ -396,6 +457,119 @@ private fun CardFacePreviewModal(
                     onClick = onSelect
                 ) {
                     Text(text = if (isSelected) "선택됨" else "스킨 선택")
+                }
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismiss
+                ) {
+                    Text(text = "취소")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CardBackPreviewModal(
+    back: CardBackStyle,
+    isSelected: Boolean,
+    containerBounds: Rect?,
+    startBounds: Rect?,
+    onSelect: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    val progress = remember { Animatable(0f) }
+    val density = LocalDensity.current
+    BackHandler(onBack = onDismiss)
+
+    LaunchedEffect(back) {
+        progress.snapTo(0f)
+        progress.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 260, easing = FastOutSlowInEasing)
+        )
+    }
+
+    val container = containerBounds
+    val targetWidthPx = container?.let {
+        val maxWidth = it.width * 0.72f
+        val maxHeight = it.height * 0.82f
+        val widthFromHeight = maxHeight * 0.62f
+        minOf(maxWidth, widthFromHeight)
+    } ?: with(density) { 220.dp.toPx() }
+    val targetWidthDp = with(density) { targetWidthPx.toDp() }
+
+    val containerCenter = container?.center ?: Offset.Zero
+    val startCenter = startBounds?.center ?: containerCenter
+    val startScale = startBounds?.width?.div(targetWidthPx)?.coerceAtLeast(0.5f) ?: 0.85f
+    val startOffset = startCenter - containerCenter
+    val eased = FastOutSlowInEasing.transform(progress.value.coerceIn(0f, 1f))
+    val overlayAlpha = eased * 0.6f
+    val scale = startScale + (1f - startScale) * eased
+    val offsetX = startOffset.x * (1f - eased)
+    val offsetY = startOffset.y * (1f - eased)
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = overlayAlpha))
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() }
+                ) { onDismiss() }
+        )
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 32.dp, vertical = 24.dp)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                    translationX = offsetX
+                    translationY = offsetY
+                    alpha = 0.6f + 0.4f * eased
+                }
+                .background(Color(0xFF1F1F2E), RoundedCornerShape(24.dp))
+                .border(
+                    width = 1.dp,
+                    color = Color.White.copy(alpha = 0.15f),
+                    shape = RoundedCornerShape(24.dp)
+                )
+                .padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = back.displayName,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Surface(
+                shape = RoundedCornerShape(18.dp),
+                tonalElevation = 8.dp
+            ) {
+                CardBackArt(
+                    modifier = Modifier
+                        .width(targetWidthDp)
+                        .aspectRatio(0.62f),
+                    backStyle = back,
+                    shape = TarotCardShape
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Button(
+                    modifier = Modifier.weight(1f),
+                    onClick = onSelect
+                ) {
+                    Text(text = if (isSelected) "선택됨" else "뒷면 선택")
                 }
                 OutlinedButton(
                     modifier = Modifier.weight(1f),

@@ -45,6 +45,7 @@ import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -183,18 +184,12 @@ private fun DailyCardDisplay(
                     shape = TarotCardShape
                 )
             } else {
-                Box(
-                    modifier = Modifier
-                        .size(96.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(
-                            Brush.verticalGradient(
-                                listOf(
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                                    MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
-                                )
-                            )
-                        )
+                CardBackArt(
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0x66000000))
+                    ),
+                    shape = TarotCardShape
                 )
             }
         }
