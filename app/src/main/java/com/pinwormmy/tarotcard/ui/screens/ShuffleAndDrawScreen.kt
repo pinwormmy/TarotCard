@@ -115,6 +115,15 @@ fun ShuffleAndDrawScreen(
     val deckInteractionEnabled =
         !uiState.gridVisible && !uiState.cutMode &&
             (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
+    var dealAnimationFinished by remember(uiState.shuffleTrigger, uiState.drawPile) {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(uiState.gridVisible) {
+        if (!uiState.gridVisible) {
+            dealAnimationFinished = false
+        }
+    }
 
     Box(
         modifier = modifier
@@ -168,6 +177,7 @@ fun ShuffleAndDrawScreen(
                             disabledCardIds = drawnIds,
                             hapticsEnabled = hapticsEnabled,
                             hapticFeedback = hapticFeedback,
+                            onDealAnimationFinished = { dealAnimationFinished = true },
                             modifier = Modifier
                                 .fillMaxSize(),
                             onCardSelected = onCardSelected
@@ -293,7 +303,7 @@ fun ShuffleAndDrawScreen(
 
     // 하단 안내 메시지
     val instruction = uiState.nextInstruction
-    if (instruction != null) {
+    if (instruction != null && (!uiState.gridVisible || dealAnimationFinished)) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -373,6 +383,7 @@ private fun DrawPileGrid(
     disabledCardIds: Set<String>,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
+    onDealAnimationFinished: () -> Unit = {},
     modifier: Modifier = Modifier,
     onCardSelected: (TarotCardModel) -> Unit
 ) {
@@ -390,6 +401,9 @@ private fun DrawPileGrid(
         val totalRows = (cards.size + 1) / 2
         val usableHeight = maxHeight - cardHeight
         val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
+        val dealStaggerMillis = 20L
+        val dealAnimationMillis = 220
+        var dealAnimationReported by remember(cards) { mutableStateOf(false) }
         val totalWidth = cardWidth * 2 + columnSpacing
         val leftColumnX = (maxWidth - totalWidth) / 2f
         val rightColumnX = leftColumnX + cardWidth + columnSpacing
@@ -432,14 +446,19 @@ private fun DrawPileGrid(
 
         LaunchedEffect(cards) {
             gesturesEnabled = false
+            dealAnimationReported = false
             if (cards.isEmpty()) {
                 return@LaunchedEffect
             }
-            val totalDelay = 40L * maxDealIndex + 360L
+            val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
             if (totalDelay > 0) {
                 delay(totalDelay)
             }
             gesturesEnabled = true
+            if (!dealAnimationReported) {
+                dealAnimationReported = true
+                onDealAnimationFinished()
+            }
         }
 
         val pointerModifier = Modifier
@@ -487,8 +506,8 @@ private fun DrawPileGrid(
                 val isExiting = remember(card.id) { mutableStateOf(false) }
 
                 LaunchedEffect(card.id) {
-                    delay(40L * placement.dealOrderIndex)
-                    appear.animateTo(1f, tween(360))
+                    delay(dealStaggerMillis * placement.dealOrderIndex)
+                    appear.animateTo(1f, tween(dealAnimationMillis))
                 }
 
                 LaunchedEffect(isExiting.value) {
