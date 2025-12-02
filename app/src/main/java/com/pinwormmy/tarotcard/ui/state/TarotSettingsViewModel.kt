@@ -15,16 +15,17 @@ enum class CardBackStyle(val displayName: String) {
     Aurora("오로라")
 }
 
-enum class CardFaceSkin(val displayName: String) {
-    AuroraMist("오로라 미스트"),
-    SolarFlare("솔라 플레어"),
-    DeepSea("딥 씨")
+enum class CardFaceSkin(
+    val displayName: String,
+    val previewImage: String
+) {
+    Animation("애니메이션", "tarot00")
 }
 
 data class SettingsUiState(
     val skinId: String = TarotSkins.default.id,
     val cardBackStyle: CardBackStyle = CardBackStyle.Classic,
-    val cardFaceSkin: CardFaceSkin = CardFaceSkin.AuroraMist,
+    val cardFaceSkin: CardFaceSkin = CardFaceSkin.Animation,
     val dailyCardNotification: Boolean = false,
     val dailyCardTime: LocalTime = LocalTime.of(9, 0),
     val hapticsEnabled: Boolean = true
