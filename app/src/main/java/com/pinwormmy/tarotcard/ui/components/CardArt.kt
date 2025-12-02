@@ -21,8 +21,8 @@ import androidx.compose.ui.res.painterResource
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.state.CardFaceSkin
 import com.pinwormmy.tarotcard.ui.theme.LocalCardFaceSkin
-import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
+@Suppress("DiscouragedApi", "UseOfNonComposableResources")
 @Composable
 fun rememberCardPainter(
     card: TarotCardModel,
@@ -44,13 +44,14 @@ fun rememberCardPainter(
     if (assetPainter != null) return assetPainter
 
     val resId = remember(key, context) {
-        (card.imageUrl ?: card.id)?.let { normalized ->
-            context.resources.getIdentifier(normalized.lowercase(), "drawable", context.packageName)
-        }?.takeIf { it != 0 }
+        val normalized = (card.imageUrl ?: card.id).lowercase()
+        context.resources.getIdentifier(normalized, "drawable", context.packageName)
+            .takeIf { it != 0 }
     }
     return resId?.let { painterResource(id = it) }
 }
 
+@Suppress("DiscouragedApi", "UseOfNonComposableResources")
 @Composable
 fun rememberCardBackPainter(
     backStyle: com.pinwormmy.tarotcard.ui.state.CardBackStyle? = null
@@ -79,9 +80,10 @@ fun CardBackArt(
     modifier: Modifier = Modifier,
     shape: Shape = TarotCardShape,
     overlay: Brush? = null,
-    backStyle: com.pinwormmy.tarotcard.ui.state.CardBackStyle? = null
+    backStyle: com.pinwormmy.tarotcard.ui.state.CardBackStyle? = null,
+    painterOverride: Painter? = null
 ) {
-    val painter = rememberCardBackPainter(backStyle)
+    val painter = painterOverride ?: rememberCardBackPainter(backStyle)
     if (painter != null) {
         Box(modifier = modifier) {
             Image(

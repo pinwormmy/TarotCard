@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VALUE")
+
 package com.pinwormmy.tarotcard.ui.screens
 
 import androidx.compose.animation.core.Animatable
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,10 +44,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.UiComposable
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
@@ -57,6 +62,7 @@ import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
+import com.pinwormmy.tarotcard.ui.components.rememberCardBackPainter
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
@@ -65,7 +71,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
 
-@Suppress("UNUSED_PARAMETER")
+private const val LANDSCAPE_CARD_RATIO = 1.6f
+private val GRID_COLUMN_SPACING = 32.dp
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShuffleAndDrawScreen(
@@ -79,6 +87,8 @@ fun ShuffleAndDrawScreen(
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
 ) {
+    BackHandler(onBack = onBack)
+
     var shufflePhase by remember { mutableStateOf(ShufflePhase.Idle) }
     val drawnIds = remember(uiState.drawnCards) {
         uiState.drawnCards.values.map { it.card.id }.toSet()
@@ -183,12 +193,12 @@ fun ShuffleAndDrawScreen(
                     if (uiState.gridVisible) {
                         // ✅ 드로우 그리드: 여기 안에서만 가로 카드 처리
                         DrawPileGrid(
+                            modifier = Modifier.fillMaxSize(),
                             cards = uiState.drawPile,
                             disabledCardIds = drawnIds,
                             hapticsEnabled = hapticsEnabled,
                             hapticFeedback = hapticFeedback,
                             onDealAnimationFinished = { dealAnimationFinished = true },
-                            modifier = Modifier.fillMaxSize(),
                             onCardSelected = onCardSelected
                         )
                     } else {
@@ -335,6 +345,7 @@ fun ShuffleAndDrawScreen(
     }
 }
 
+@UiComposable
 @Composable
 private fun CardBackImage(
     modifier: Modifier = Modifier,
@@ -385,14 +396,15 @@ private fun OutlineLargeButton(
     }
 }
 
+@UiComposable
 @Composable
 private fun DrawPileGrid(
+    modifier: Modifier = Modifier,
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
     onDealAnimationFinished: () -> Unit = {},
-    modifier: Modifier = Modifier,
     onCardSelected: (TarotCardModel) -> Unit
 ) {
     BoxWithConstraints(
@@ -402,12 +414,13 @@ private fun DrawPileGrid(
         val density = LocalDensity.current
         val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
+        val cardBackPainter = rememberCardBackPainter()
 
-        val columnSpacing = 32.dp
+        val columnSpacing = GRID_COLUMN_SPACING
         val totalRows = (cards.size + 1) / 2
 
         // 가로 카드 비율: 세로 카드(0.625:1)를 눕힌 1.6:1 비율
-        val landscapeRatio = 1.6f
+        val landscapeRatio = LANDSCAPE_CARD_RATIO
         val cardWidth = (maxWidth - columnSpacing) / 2f
         val cardHeight = cardWidth / landscapeRatio
 
@@ -573,7 +586,8 @@ private fun DrawPileGrid(
                     contentAlignment = Alignment.Center
                 ) {
                     RotatedCardBack(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        painter = cardBackPainter
                     )
                 }
             }
@@ -581,9 +595,11 @@ private fun DrawPileGrid(
     }
 }
 
+@UiComposable
 @Composable
 private fun RotatedCardBack(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    painter: Painter?
 ) {
     // 드로우 그리드용 가로 카드: 자식은 세로 비율로 측정, 부모는 가로 비율을 노출한 뒤
     // 배치 단계에서 90도 회전과 모서리 클립을 적용하여 카드와 이미지 방향을 일치시킨다.
@@ -605,7 +621,8 @@ private fun RotatedCardBack(
                     overlay = Brush.verticalGradient(
                         listOf(Color.Transparent, Color(0x66000000))
                     ),
-                    shape = TarotCardShape
+                    shape = TarotCardShape,
+                    painterOverride = painter
                 )
             }
         }
@@ -704,7 +721,7 @@ private fun CutModeScene(
                     stage.lifted == null -> cutStage = stage.copy(lifted = index)
                     stage.lifted == index -> cutStage = stage.copy(lifted = null)
                     else -> {
-                        val source = stage.lifted ?: return
+                        val source = stage.lifted!!
                         cutStage = CutStage.SecondMerge(
                             combined = stage.combined,
                             remaining = stage.remaining,
