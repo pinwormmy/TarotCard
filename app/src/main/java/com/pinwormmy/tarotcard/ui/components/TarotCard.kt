@@ -99,9 +99,7 @@ private fun CardFrontFace(
         CardFaceArt(
             card = card,
             modifier = Modifier.fillMaxSize(),
-            overlay = Brush.verticalGradient(
-                listOf(Color.Transparent, Color(0xCC0C0B18))
-            )
+            overlay = null
         )
     }
 }

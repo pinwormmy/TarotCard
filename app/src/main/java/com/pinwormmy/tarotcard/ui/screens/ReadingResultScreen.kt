@@ -309,9 +309,6 @@ private fun ReadingResultCard(
             CardFaceArt(
                 card = card,
                 modifier = Modifier.fillMaxSize(),
-                overlay = Brush.verticalGradient(
-                    listOf(Color.Transparent, Color(0xCC0B0A14))
-                ),
                 shape = shape
             )
         } else {

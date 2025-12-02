@@ -123,9 +123,6 @@ private fun CardLibraryItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(0.62f),
-                overlay = Brush.verticalGradient(
-                    listOf(Color.Transparent, Color(0xAA0A0B16))
-                ),
                 shape = shape
             )
             Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)

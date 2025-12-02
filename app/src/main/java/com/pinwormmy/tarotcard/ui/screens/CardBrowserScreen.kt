@@ -212,9 +212,6 @@ private fun CardBrowserItem(
             CardFaceArt(
                 card = card,
                 modifier = Modifier.fillMaxSize(),
-                overlay = Brush.verticalGradient(
-                    listOf(Color.Transparent, Color(0xCC0F0F1F))
-                ),
                 shape = TarotCardShape
             )
         }
@@ -269,9 +266,6 @@ private fun CardDetailOverlay(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(0.62f),
-                    overlay = Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0xCC0F0F1F))
-                    ),
                     shape = TarotCardShape
                 )
             }
