@@ -4,7 +4,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,8 +34,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.abs
-import com.pinwormmy.tarotcard.ui.components.TarotCardShape
-import com.pinwormmy.tarotcard.ui.components.CardBackArt
 
 enum class ShufflePhase {
     Idle,
@@ -57,10 +55,12 @@ fun CardDeck(
     width: Dp = 220.dp,
     height: Dp = 320.dp,
     shuffleTrigger: Int = 0,
+    painter: Painter? = null,
     onAnimationFinished: (() -> Unit)? = null,
     onPhaseChanged: (ShufflePhase) -> Unit = {}
 ) {
     val density = LocalDensity.current
+    val backPainter = painter ?: rememberCardBackPainter()
     val splitDistanceDp = maxOf(120.dp, width * 0.9f)
     val splitDistancePx = with(density) { splitDistanceDp.toPx() }
     val riffleDropPx = with(density) { 36.dp.toPx() }
@@ -167,7 +167,8 @@ fun CardDeck(
                     modifier = Modifier
                         .then(deckSizeModifier)
                         .align(Alignment.Center),
-                    shape = cardShape
+                    shape = cardShape,
+                    painter = backPainter
                 )
             }
 
@@ -179,7 +180,8 @@ fun CardDeck(
                         .align(Alignment.Center),
                     translationX = leftOffset.value,
                     rotation = deckTiltFromOffset(leftOffset.value, splitDistancePx),
-                    shape = cardShape
+                    shape = cardShape,
+                    painter = backPainter
                 )
                 DeckStack(
                     cardCount = deckLayers,
@@ -188,7 +190,8 @@ fun CardDeck(
                         .align(Alignment.Center),
                     translationX = rightOffset.value,
                     rotation = deckTiltFromOffset(rightOffset.value, splitDistancePx),
-                    shape = cardShape
+                    shape = cardShape,
+                    painter = backPainter
                 )
                 if (phase != ShufflePhase.Split) {
                     DeckStack(
@@ -198,7 +201,8 @@ fun CardDeck(
                             .align(Alignment.Center),
                         translationY = centerLift.value,
                         rotation = deckTilt.value,
-                        shape = cardShape
+                        shape = cardShape,
+                        painter = backPainter
                     )
                 }
             }
@@ -210,7 +214,6 @@ fun CardDeck(
                 if (progress > 0f) {
                     RiffleCard(
                         progress = progress,
-                        fromLeft = card.fromLeft,
                         width = width,
                         height = height,
                         translationX = lerp(
@@ -227,7 +230,8 @@ fun CardDeck(
                             start = if (card.fromLeft) -9f else 9f,
                             stop = 0f,
                             fraction = progress
-                        )
+                        ),
+                        painter = backPainter
                     )
                 }
             }
@@ -253,7 +257,8 @@ private fun DeckStack(
     translationX: Float = 0f,
     translationY: Float = 0f,
     rotation: Float = 0f,
-    shape: Shape = TarotCardShape
+    shape: Shape = TarotCardShape,
+    painter: Painter? = null
 ) {
     Box(
         modifier = modifier
@@ -265,32 +270,24 @@ private fun DeckStack(
         contentAlignment = Alignment.Center
     ) {
         repeat(cardCount) { index ->
-            val isTop = index == cardCount - 1
+            val depthAlpha = 0.25f + (index / cardCount.toFloat()) * 0.25f
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .offset(y = (index * 6).dp)
                     .clip(shape)
             ) {
-                if (isTop) {
-                    CardBackArt(
-                        modifier = Modifier.fillMaxSize(),
-                        overlay = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color(0x66000000))
+                CardBackArt(
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.5f * depthAlpha)
                         )
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(Color(0xFF1B1C33), Color(0xFF0F1024))
-                                ),
-                                shape = shape
-                            )
-                    )
-                }
+                    ),
+                    shape = shape,
+                    painterOverride = painter
+                )
             }
         }
     }
@@ -299,13 +296,13 @@ private fun DeckStack(
 @Composable
 private fun RiffleCard(
     progress: Float,
-    fromLeft: Boolean,
     width: Dp,
     height: Dp,
     translationX: Float,
     translationY: Float,
     rotation: Float,
-    shape: Shape = TarotCardShape
+    shape: Shape = TarotCardShape,
+    painter: Painter? = null
 ) {
     Box(
         modifier = Modifier
@@ -317,17 +314,16 @@ private fun RiffleCard(
                 this.alpha = progress
             }
             .clip(shape)
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = if (fromLeft) {
-                        listOf(Color(0xFF2B2C4A), Color(0xFF13142B))
-                    } else {
-                        listOf(Color(0xFF34375B), Color(0xFF181933))
-                    }
-                ),
-                shape = shape
-            )
-    )
+    ) {
+        CardBackArt(
+            modifier = Modifier.fillMaxSize(),
+            overlay = Brush.verticalGradient(
+                listOf(Color.Transparent, Color(0x44000000))
+            ),
+            shape = shape,
+            painterOverride = painter
+        )
+    }
 }
 
 @Preview
@@ -337,6 +333,7 @@ private fun CardDeckPreview() {
 }
 
 @Composable
+@Suppress("unused")
 fun StaticCardDeck(
     modifier: Modifier = Modifier,
     width: Dp = 220.dp,

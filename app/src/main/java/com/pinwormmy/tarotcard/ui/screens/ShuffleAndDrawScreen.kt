@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_VALUE")
+@file:Suppress("UNUSED_VALUE", "UnusedAssignment")
 
 package com.pinwormmy.tarotcard.ui.screens
 
@@ -48,8 +48,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.UiComposable
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
@@ -96,6 +96,7 @@ fun ShuffleAndDrawScreen(
     val skin = LocalTarotSkin.current
     val hapticFeedback = LocalHapticFeedback.current
     val hapticsEnabled = LocalHapticsEnabled.current
+    val cardBackPainter = rememberCardBackPainter()
 
     val deckTapWithHaptics = {
         if (hapticsEnabled) {
@@ -255,13 +256,15 @@ fun ShuffleAndDrawScreen(
                                 CardBackImage(
                                     modifier = Modifier.fillMaxSize(),
                                     enabled = deckInteractionEnabled,
-                                    onClick = deckTapWithHaptics
+                                    onClick = deckTapWithHaptics,
+                                    painter = cardBackPainter
                                 )
                                 CardDeck(
                                     modifier = Modifier.fillMaxSize(),
                                     width = cardWidth,
                                     height = cardHeight,
                                     shuffleTrigger = uiState.shuffleTrigger,
+                                    painter = cardBackPainter,
                                     onPhaseChanged = { shufflePhase = it }
                                 )
                                 Box(
@@ -345,12 +348,12 @@ fun ShuffleAndDrawScreen(
     }
 }
 
-@UiComposable
 @Composable
 private fun CardBackImage(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    painter: Painter? = null
 ) {
     Box(
         modifier = modifier
@@ -369,7 +372,8 @@ private fun CardBackImage(
                     overlay = Brush.verticalGradient(
                         listOf(Color.Transparent, Color(0x55000000))
                     ),
-                    shape = TarotCardShape
+                    shape = TarotCardShape,
+                    painterOverride = painter
                 )
             }
         }
@@ -396,7 +400,6 @@ private fun OutlineLargeButton(
     }
 }
 
-@UiComposable
 @Composable
 private fun DrawPileGrid(
     modifier: Modifier = Modifier,
@@ -722,7 +725,7 @@ private fun CutModeScene(
                     stage.lifted == null -> cutStage = stage.copy(lifted = index)
                     stage.lifted == index -> cutStage = stage.copy(lifted = null)
                     else -> {
-                        val source = stage.lifted!!
+                    val source = stage.lifted
                         cutStage = CutStage.SecondMerge(
                             combined = stage.combined,
                             remaining = stage.remaining,
@@ -749,7 +752,6 @@ private fun CutModeScene(
         val pileWidth = fullWidth * 0.28f
         val pileHeight = pileWidth / 0.625f
         val baseSpacing = 0.35f
-        val twoPileSpacing = 0.2f
         val liftY = 0.08f
 
         fun baseX(index: Int): Float = when (index) {
