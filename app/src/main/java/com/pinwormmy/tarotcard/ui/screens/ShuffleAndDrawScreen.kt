@@ -655,6 +655,7 @@ private fun CutModeScene(
     onStackChosen: (Int) -> Unit
 ) {
     val density = LocalDensity.current
+    val cardBackPainter = rememberCardBackPainter()
     var animationCounter by remember { mutableStateOf(0) }
 
     val firstMergeProgress = remember { Animatable(0f) }
@@ -805,14 +806,12 @@ private fun CutModeScene(
                     clickable = true
                     when (index) {
                         stage.combined -> {
-                            x = -twoPileSpacing
                             if (stage.lifted == index) {
                                 y = -liftY
                                 scale = 1.08f
                             }
                         }
                         stage.remaining -> {
-                            x = twoPileSpacing
                             if (stage.lifted == index) {
                                 y = -liftY
                                 scale = 1.08f
@@ -826,10 +825,8 @@ private fun CutModeScene(
                 }
                 is CutStage.SecondMerge -> {
                     clickable = false
-                    val start =
-                        if (stage.source == stage.combined) -twoPileSpacing else twoPileSpacing
-                    val end =
-                        if (stage.target == stage.combined) -twoPileSpacing else twoPileSpacing
+                    val start = baseX(stage.source)
+                    val end = baseX(stage.target)
                     when (index) {
                         stage.source -> {
                             x = lerp(start, end, secondMergeValue)
@@ -895,12 +892,8 @@ private fun CutModeScene(
                         scaleY = visual.scale
                         alpha = visual.alpha
                     }
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF2F3053), Color(0xFF15162B))
-                        )
-                    )
+                    .clip(TarotCardShape)
+                    .background(Color.Transparent)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
@@ -914,16 +907,17 @@ private fun CutModeScene(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(top = 4.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color(0xFF363966),
-                                        Color(0xFF17182D)
-                                    )
-                                )
-                            )
-                    )
+                            .clip(TarotCardShape)
+                    ) {
+                        CardBackArt(
+                            modifier = Modifier.fillMaxSize(),
+                            overlay = Brush.verticalGradient(
+                                listOf(Color.Transparent, Color(0x44000000))
+                            ),
+                            shape = TarotCardShape,
+                            painterOverride = cardBackPainter
+                        )
+                    }
                 }
             }
         }
