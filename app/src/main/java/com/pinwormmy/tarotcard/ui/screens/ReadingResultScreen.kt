@@ -360,12 +360,12 @@ private fun ReadingResultOverlay(
                 text = headerTitle,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color(0xFFF3F2FF)
             )
             Text(
                 text = slotDescription,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.White.copy(alpha = 0.8f),
+                color = Color(0xFFE6E5F5),
                 textAlign = TextAlign.Center
             )
         }
@@ -395,21 +395,14 @@ private fun ReadingResultOverlay(
                 if (card.keywords.isNotEmpty()) {
                     Text(
                         text = card.keywords.joinToString(separator = " • "),
-                        color = Color.White.copy(alpha = 0.9f),
+                        color = Color(0xFFEAE8FF),
                         textAlign = TextAlign.Center
                     )
                 }
                 if (meaningTitle != null) {
-                    Text(text = meaningTitle, fontWeight = FontWeight.SemiBold, color = Color.White)
+                    Text(text = meaningTitle, fontWeight = FontWeight.SemiBold, color = Color(0xFFF3F2FF))
                 }
-                Text(text = meaningBody, textAlign = TextAlign.Center)
-                if (card.description.isNotBlank()) {
-                    Text(
-                        text = card.description,
-                        textAlign = TextAlign.Center,
-                        color = Color.White.copy(alpha = 0.9f)
-                    )
-                }
+                Text(text = meaningBody, textAlign = TextAlign.Center, color = Color(0xFFECEBFF))
                 Text(
                     text = "탭하면 닫습니다",
                     color = Color.White.copy(alpha = 0.7f),
