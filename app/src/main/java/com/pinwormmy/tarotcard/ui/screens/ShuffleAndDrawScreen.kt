@@ -20,14 +20,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,21 +39,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
-import androidx.compose.ui.hapticfeedback.HapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.components.CardDeck
 import com.pinwormmy.tarotcard.ui.components.ShufflePhase
-import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
@@ -63,8 +64,8 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
-import kotlin.math.min
 
+@Suppress("UNUSED_PARAMETER")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShuffleAndDrawScreen(
@@ -85,6 +86,7 @@ fun ShuffleAndDrawScreen(
     val skin = LocalTarotSkin.current
     val hapticFeedback = LocalHapticFeedback.current
     val hapticsEnabled = LocalHapticsEnabled.current
+
     val deckTapWithHaptics = {
         if (hapticsEnabled) {
             hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -115,9 +117,11 @@ fun ShuffleAndDrawScreen(
         }
         onCutSelect(index)
     }
+
     val deckInteractionEnabled =
         !uiState.gridVisible && !uiState.cutMode &&
-            (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
+                (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
+
     var dealAnimationFinished by remember(uiState.shuffleTrigger, uiState.drawPile) {
         mutableStateOf(false)
     }
@@ -140,6 +144,7 @@ fun ShuffleAndDrawScreen(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // 상단 타이틀 / 질문
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -171,18 +176,19 @@ fun ShuffleAndDrawScreen(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
+                    // 셔플/컷용 세로 카드 비율
                     val cardWidth = maxWidth * 0.7f
                     val cardHeight = cardWidth / 0.625f // 세로로 긴 타로카드 비율
 
                     if (uiState.gridVisible) {
+                        // ✅ 드로우 그리드: 여기 안에서만 가로 카드 처리
                         DrawPileGrid(
                             cards = uiState.drawPile,
                             disabledCardIds = drawnIds,
                             hapticsEnabled = hapticsEnabled,
                             hapticFeedback = hapticFeedback,
                             onDealAnimationFinished = { dealAnimationFinished = true },
-                            modifier = Modifier
-                                .fillMaxSize(),
+                            modifier = Modifier.fillMaxSize(),
                             onCardSelected = onCardSelected
                         )
                     } else {
@@ -226,7 +232,7 @@ fun ShuffleAndDrawScreen(
                                 .height(cardHeight),
                             contentAlignment = Alignment.Center
                         ) {
-                            // 1) 항상 그려지는 "한 덱"
+                            // 1) 항상 그려지는 "한 덱" (세로 카드)
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -259,7 +265,7 @@ fun ShuffleAndDrawScreen(
                                 )
                             }
 
-                            // 2) 컷 모드 3덱 — **cutMode가 true 이거나, 알파가 남아 있을 때만 그리기**
+                            // 2) 컷 모드 3덱 (세로 카드 느낌 유지)
                             if (uiState.cutMode || cutAlpha > 0.01f) {
                                 CutModeScene(
                                     modifier = Modifier
@@ -274,8 +280,7 @@ fun ShuffleAndDrawScreen(
                 }
             }
 
-            // 컷 모드 중에는 statusMessage 숨김
-            // 하단 버튼 Row
+            // 하단 버튼 Row (그리드 아닐 때만)
             if (!uiState.gridVisible) {
                 Row(
                     modifier = Modifier
@@ -397,26 +402,34 @@ private fun DrawPileGrid(
         val density = LocalDensity.current
         val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
+
         val columnSpacing = 32.dp
         val totalRows = (cards.size + 1) / 2
 
+        // 가로 카드 비율: 세로 카드(0.625:1)를 눕힌 1.6:1 비율
+        val landscapeRatio = 1.6f
         val cardWidth = (maxWidth - columnSpacing) / 2f
-        val cardHeight = cardWidth * 0.625f // landscape ratio
+        val cardHeight = cardWidth / landscapeRatio
 
         val cardWidthPx = with(density) { cardWidth.toPx() }
         val cardHeightPx = with(density) { cardHeight.toPx() }
+
         val columnCount = ceil(cards.size / 2f).toInt()
         val usableHeight = maxHeight - cardHeight
         val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
         val dealStaggerMillis = 20L
         val dealAnimationMillis = 220
+
         var dealAnimationReported by remember(cards) { mutableStateOf(false) }
+
         val totalWidth = cardWidth * 2 + columnSpacing
         val leftColumnX = (maxWidth - totalWidth) / 2f
         val rightColumnX = leftColumnX + cardWidth + columnSpacing
+
         val startXPx = -cardWidthPx
         val startYPx = -cardHeightPx
         val maxHeightPx = with(density) { maxHeight.toPx() }
+
         data class CardPlacement(
             val card: TarotCardModel,
             val targetXPx: Float,
@@ -442,7 +455,7 @@ private fun DrawPileGrid(
             return placements.asReversed().firstOrNull { placement ->
                 val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
                 val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
-                withinX && withinY && disabledCardIds.contains(placement.card.id).not()
+                withinX && withinY && !disabledCardIds.contains(placement.card.id)
             }?.card?.id
         }
 
@@ -452,9 +465,8 @@ private fun DrawPileGrid(
         LaunchedEffect(cards) {
             gesturesEnabled = false
             dealAnimationReported = false
-            if (cards.isEmpty()) {
-                return@LaunchedEffect
-            }
+            if (cards.isEmpty()) return@LaunchedEffect
+
             val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
             if (totalDelay > 0) {
                 delay(totalDelay)
@@ -486,7 +498,9 @@ private fun DrawPileGrid(
                                 if (selectedId != null) {
                                     gesturesEnabled = false
                                     if (hapticsEnabled) {
-                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        hapticFeedback.performHapticFeedback(
+                                            HapticFeedbackType.LongPress
+                                        )
                                     }
                                     selectionEvents.tryEmit(selectedId)
                                 }
@@ -539,8 +553,10 @@ private fun DrawPileGrid(
                 val baseScale = 0.9f + 0.1f * appear.value
                 val hoverScale = if (!isDisabled && hoveredCardId == card.id) 1.05f else 1f
                 val targetAlpha = if (isDisabled) 0f else 1f
-                val layerAlpha = (appear.value * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
+                val layerAlpha =
+                    (appear.value * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
 
+                // 🔥 여기 Box가 "가로 카드" 컨테이너 + 움직임 담당
                 Box(
                     modifier = Modifier
                         .zIndex(if (isExiting.value || exitProgress.value > 0f) 1f else 0f)
@@ -553,19 +569,11 @@ private fun DrawPileGrid(
                             val scale = baseScale * hoverScale
                             scaleX = scale
                             scaleY = scale
-                            rotationZ = 90f
-                            shape = TarotCardShape
-                            clip = true
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    CardBackArt(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        overlay = Brush.verticalGradient(
-                            listOf(Color.Transparent, Color(0x66000000))
-                        ),
-                        shape = TarotCardShape
+                    RotatedCardBack(
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -573,9 +581,55 @@ private fun DrawPileGrid(
     }
 }
 
+@Composable
+private fun RotatedCardBack(
+    modifier: Modifier = Modifier
+) {
+    // 드로우 그리드용 가로 카드: 자식은 세로 비율로 측정, 부모는 가로 비율을 노출한 뒤
+    // 배치 단계에서 90도 회전과 모서리 클립을 적용하여 카드와 이미지 방향을 일치시킨다.
+    Layout(
+        modifier = modifier,
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer {
+                        rotationZ = 90f
+                        transformOrigin = TransformOrigin.Center
+                        shape = TarotCardShape
+                        clip = true
+                    }
+            ) {
+                CardBackArt(
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0x66000000))
+                    ),
+                    shape = TarotCardShape
+                )
+            }
+        }
+    ) { measurables, constraints ->
+        val placeable = measurables.first().measure(
+            constraints.copy(
+                minWidth = constraints.minHeight,
+                maxWidth = constraints.maxHeight,
+                minHeight = constraints.minWidth,
+                maxHeight = constraints.maxWidth
+            )
+        )
+
+        // 부모(가로 셀) 기준 크기를 노출
+        layout(placeable.height, placeable.width) {
+            val offsetX = (placeable.height - placeable.width) / 2
+            val offsetY = (placeable.width - placeable.height) / 2
+            placeable.placeRelative(offsetX, offsetY)
+        }
+    }
+}
+
 /**
  * 컷 모드에서 보여줄 3덱 장면.
- * fanProgress: 0f → 1f 로 갈수록 중앙 덱이 좌/중/우로 퍼져나가는 느낌.
  */
 @Composable
 private fun CutModeScene(
@@ -721,7 +775,6 @@ private fun CutModeScene(
                             alpha = lerp(1f, 0f, firstMergeValue)
                         }
                         stage.target -> {
-                            val bop = (1f - firstMergeValue * 0.5f)
                             scale = 1f + 0.05f * firstMergeValue
                             alpha = 1f
                         }
@@ -756,8 +809,10 @@ private fun CutModeScene(
                 }
                 is CutStage.SecondMerge -> {
                     clickable = false
-                    val start = if (stage.source == stage.combined) -twoPileSpacing else twoPileSpacing
-                    val end = if (stage.target == stage.combined) -twoPileSpacing else twoPileSpacing
+                    val start =
+                        if (stage.source == stage.combined) -twoPileSpacing else twoPileSpacing
+                    val end =
+                        if (stage.target == stage.combined) -twoPileSpacing else twoPileSpacing
                     when (index) {
                         stage.source -> {
                             x = lerp(start, end, secondMergeValue)
@@ -790,7 +845,10 @@ private fun CutModeScene(
                 }
             }
 
-            if (cutStage is CutStage.FirstMerge || cutStage is CutStage.SecondMerge || cutStage is CutStage.FinalZoom) {
+            if (cutStage is CutStage.FirstMerge ||
+                cutStage is CutStage.SecondMerge ||
+                cutStage is CutStage.FinalZoom
+            ) {
                 clickable = false
             }
 
@@ -834,11 +892,11 @@ private fun CutModeScene(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                repeat(3) { depth ->
+                repeat(3) { _ ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = (depth * 4).dp)
+                            .padding(top = 4.dp)
                             .clip(RoundedCornerShape(20.dp))
                             .background(
                                 brush = Brush.verticalGradient(
