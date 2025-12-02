@@ -14,6 +14,7 @@ import com.pinwormmy.tarotcard.navigation.TarotNavGraph
 import com.pinwormmy.tarotcard.notifications.DailyCardNotificationScheduler
 import com.pinwormmy.tarotcard.ui.state.TarotSettingsViewModel
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
+import com.pinwormmy.tarotcard.ui.theme.LocalCardFaceSkin
 import com.pinwormmy.tarotcard.ui.theme.TarotBackground
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 
@@ -33,8 +34,14 @@ class MainActivity : ComponentActivity() {
                     DailyCardNotificationScheduler.cancel(appContext)
                 }
             }
-            CompositionLocalProvider(LocalHapticsEnabled provides settingsState.hapticsEnabled) {
-                TarotcardTheme(skin = settingsState.skin) {
+            CompositionLocalProvider(
+                LocalHapticsEnabled provides settingsState.hapticsEnabled,
+                LocalCardFaceSkin provides settingsState.cardFaceSkin
+            ) {
+                TarotcardTheme(
+                    skin = settingsState.skin,
+                    cardFaceSkin = settingsState.cardFaceSkin
+                ) {
                     TarotBackground {
                         TarotNavGraph(
                             repository = repository,

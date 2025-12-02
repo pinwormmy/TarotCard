@@ -1,5 +1,6 @@
 package com.pinwormmy.tarotcard.ui.components
 
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,23 +8,43 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.draw.clip
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.state.CardFaceSkin
+import com.pinwormmy.tarotcard.ui.theme.LocalCardFaceSkin
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 
 @Composable
-fun rememberCardPainter(card: TarotCardModel): Painter? {
+fun rememberCardPainter(
+    card: TarotCardModel,
+    faceSkin: CardFaceSkin = LocalCardFaceSkin.current
+): Painter? {
     val context = LocalContext.current
-    val key = card.imageUrl ?: card.id
+    val key = "${faceSkin.folder}:${card.imageUrl ?: card.id}"
+    val assetPath = remember(key) {
+        val name = (card.imageUrl ?: card.id).lowercase()
+        "skins/${faceSkin.folder}/$name.jpg"
+    }
+    val assetPainter = remember(key, context) {
+        runCatching {
+            context.assets.open(assetPath).use { stream ->
+                BitmapFactory.decodeStream(stream)?.asImageBitmap()
+            }?.let { BitmapPainter(it) }
+        }.getOrNull()
+    }
+    if (assetPainter != null) return assetPainter
+
     val resId = remember(key, context) {
-        key?.let { normalized ->
+        (card.imageUrl ?: card.id)?.let { normalized ->
             context.resources.getIdentifier(normalized.lowercase(), "drawable", context.packageName)
         }?.takeIf { it != 0 }
     }

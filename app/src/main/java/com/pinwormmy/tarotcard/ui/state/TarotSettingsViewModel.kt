@@ -17,9 +17,10 @@ enum class CardBackStyle(val displayName: String) {
 
 enum class CardFaceSkin(
     val displayName: String,
+    val folder: String,
     val previewImage: String
 ) {
-    Animation("애니메이션", "tarot00")
+    Animation("애니메이션", "animation", "tarot00")
 }
 
 data class SettingsUiState(
