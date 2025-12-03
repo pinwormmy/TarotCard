@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.pinwormmy.tarotcard.data.SettingsRepository
 import com.pinwormmy.tarotcard.data.TarotRepository
 import com.pinwormmy.tarotcard.navigation.TarotNavGraph
 import com.pinwormmy.tarotcard.notifications.DailyCardNotificationScheduler
@@ -24,8 +25,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val repository = TarotRepository(applicationContext)
+        val settingsRepository = SettingsRepository(applicationContext)
         setContent {
-            val settingsViewModel: TarotSettingsViewModel = viewModel()
+            val settingsViewModel: TarotSettingsViewModel =
+                viewModel(factory = TarotSettingsViewModel.factory(settingsRepository))
             val settingsState by settingsViewModel.uiState.collectAsState()
             val appContext = applicationContext
             LaunchedEffect(settingsState.dailyCardNotification, settingsState.dailyCardTime) {
