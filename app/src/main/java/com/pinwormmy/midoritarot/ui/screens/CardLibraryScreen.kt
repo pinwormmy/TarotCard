@@ -1,0 +1,145 @@
+package com.pinwormmy.midoritarot.ui.screens
+
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.ui.state.CardCategory
+import com.pinwormmy.midoritarot.ui.state.category
+import com.pinwormmy.midoritarot.ui.components.CardFaceArt
+import com.pinwormmy.midoritarot.ui.components.TarotCardShape
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun CardLibraryScreen(
+    cards: List<TarotCardModel>,
+    selectedCategory: CardCategory,
+    targetSlotTitle: String,
+    modifier: Modifier = Modifier,
+    onCategoryChange: (CardCategory) -> Unit,
+    onCardSelected: (TarotCardModel) -> Unit,
+    onBack: () -> Unit
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 24.dp)
+    ) {
+        Text(text = "$targetSlotTitle 카드 선택", fontWeight = FontWeight.Bold)
+        Text(
+            text = "미리 선택할 카드를 직접 고르세요.",
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        val categories = CardCategory.entries
+        TabRow(selectedTabIndex = categories.indexOf(selectedCategory)) {
+            categories.forEach { category ->
+                Tab(
+                    selected = selectedCategory == category,
+                    onClick = { onCategoryChange(category) },
+                    text = { Text(text = category.displayName) }
+                )
+            }
+        }
+
+        val filtered = remember(cards, selectedCategory) {
+            cards.filter { it.category() == selectedCategory }
+        }
+
+        LazyVerticalGrid(
+            modifier = Modifier
+                .weight(1f)
+                .padding(top = 16.dp),
+            columns = GridCells.Adaptive(140.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(filtered, key = { it.id }) { card ->
+                CardLibraryItem(card = card, onCardSelected = onCardSelected)
+            }
+        }
+
+        OutlinedButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            onClick = onBack
+        ) {
+            Text(text = "뒤로가기")
+        }
+    }
+}
+
+@Composable
+private fun CardLibraryItem(
+    card: TarotCardModel,
+    onCardSelected: (TarotCardModel) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onCardSelected(card) },
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+        )
+    ) {
+        val shape: Shape = TarotCardShape
+        Column(
+            modifier = Modifier
+                .background(Color.Transparent, shape = shape)
+                .padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            CardFaceArt(
+                card = card,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.62f),
+                shape = shape
+            )
+            Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+            Text(
+                text = card.keywords.take(3).joinToString(),
+                color = Color.White.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = "선택",
+                modifier = Modifier
+                    .background(
+                        color = Color.White.copy(alpha = 0.12f),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}

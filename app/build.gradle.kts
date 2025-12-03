@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "com.pinwormmy.tarotcard"
+    namespace = "com.pinwormmy.midoritarot"
     compileSdk = 35
     buildToolsVersion = "36.1.0"
 
     defaultConfig {
-        applicationId = "com.pinwormmy.tarotcard"
+        applicationId = "com.pinwormmy.midoritarot"
         minSdk = 24
         targetSdk = 34
 
