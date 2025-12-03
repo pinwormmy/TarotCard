@@ -658,5 +658,3 @@ private fun previewCardForSkin(skin: CardFaceSkin): TarotCardModel {
         imageUrl = skin.previewImage
     )
 }
-
-
