@@ -391,7 +391,12 @@ private fun ReadingResultOverlay(
             ) {
                 val meaningTitle = if (isReversed) "역방향 해석" else null
                 val meaningBody = if (isReversed) card.reversedMeaning else card.uprightMeaning
-                Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Text(
+                    text = card.name,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFFF8F8FF)
+                )
                 if (card.keywords.isNotEmpty()) {
                     Text(
                         text = card.keywords.joinToString(separator = " • "),
@@ -461,14 +466,5 @@ private fun ReadingResultOverlay(
                 onTapped = onCardTapped
             )
         }
-    }
-}
-
-private fun nextPhase(current: CardRevealPhase): CardRevealPhase {
-    return when (current) {
-        CardRevealPhase.Back -> CardRevealPhase.Front
-        CardRevealPhase.Front -> CardRevealPhase.Zoom
-        CardRevealPhase.Zoom -> CardRevealPhase.Description
-        CardRevealPhase.Description -> CardRevealPhase.Zoom
     }
 }
