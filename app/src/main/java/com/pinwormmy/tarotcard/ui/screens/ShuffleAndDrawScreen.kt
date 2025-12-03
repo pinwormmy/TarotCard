@@ -48,8 +48,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.UiComposable
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
@@ -66,6 +66,7 @@ import com.pinwormmy.tarotcard.ui.components.rememberCardBackPainter
 import com.pinwormmy.tarotcard.ui.state.SpreadFlowUiState
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
+import com.pinwormmy.tarotcard.ui.theme.HapticsPlayer
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -96,35 +97,36 @@ fun ShuffleAndDrawScreen(
     val skin = LocalTarotSkin.current
     val hapticFeedback = LocalHapticFeedback.current
     val hapticsEnabled = LocalHapticsEnabled.current
+    val context = LocalContext.current
     val cardBackPainter = rememberCardBackPainter()
 
     val deckTapWithHaptics = {
         if (hapticsEnabled) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+            HapticsPlayer.cardTap(context, hapticFeedback)
         }
         onDeckTap()
     }
     val gridRevealWithHaptics = {
         if (hapticsEnabled) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            HapticsPlayer.shuffle(context, hapticFeedback)
         }
         onShowGrid()
     }
     val cutRequestWithHaptics = {
         if (hapticsEnabled) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+            HapticsPlayer.cardTap(context, hapticFeedback)
         }
         onCutRequest()
     }
     val cutCancelWithHaptics = {
         if (hapticsEnabled) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+            HapticsPlayer.cardTap(context, hapticFeedback)
         }
         onCutCancel()
     }
     val cutSelectWithHaptics: (Int) -> Unit = { index ->
         if (hapticsEnabled) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            HapticsPlayer.shuffle(context, hapticFeedback)
         }
         onCutSelect(index)
     }
@@ -265,7 +267,21 @@ fun ShuffleAndDrawScreen(
                                     height = cardHeight,
                                     shuffleTrigger = uiState.shuffleTrigger,
                                     painter = cardBackPainter,
-                                    onPhaseChanged = { shufflePhase = it }
+                                    onPhaseChanged = {
+                                        shufflePhase = it
+                                        if (hapticsEnabled) {
+                                            when (it) {
+                                                ShufflePhase.Split,
+                                                ShufflePhase.Merge -> HapticsPlayer.shuffle(context, hapticFeedback)
+                                                else -> Unit
+                                            }
+                                        }
+                                    },
+                                    onRiffleBeat = {
+                                        if (hapticsEnabled) {
+                                            HapticsPlayer.shuffle(context, hapticFeedback)
+                                        }
+                                    }
                                 )
                                 Box(
                                     modifier = Modifier
@@ -598,7 +614,6 @@ private fun DrawPileGrid(
     }
 }
 
-@UiComposable
 @Composable
 private fun RotatedCardBack(
     modifier: Modifier = Modifier,

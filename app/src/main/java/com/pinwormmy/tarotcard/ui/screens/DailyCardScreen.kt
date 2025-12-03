@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -38,15 +37,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.pinwormmy.tarotcard.data.TarotCardModel
 import com.pinwormmy.tarotcard.ui.theme.LocalTarotSkin
 import com.pinwormmy.tarotcard.ui.theme.LocalHapticsEnabled
+import com.pinwormmy.tarotcard.ui.theme.HapticsPlayer
 import com.pinwormmy.tarotcard.ui.theme.TarotcardTheme
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,10 +57,10 @@ fun DailyCardScreen(
 ) {
     var isBack by remember { mutableStateOf(true) }
     var showDescription by remember { mutableStateOf(false) }
-    val isReversed = false
     val skin = LocalTarotSkin.current
     val hapticsEnabled = LocalHapticsEnabled.current
     val hapticFeedback = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier,
@@ -101,24 +101,24 @@ fun DailyCardScreen(
 
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 24.dp)
-                        .clickable {
-                            if (hapticsEnabled) {
-                                hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                            }
-                            if (isBack) {
-                                isBack = false
-                            } else {
-                                showDescription = true
-                            }
-                        },
+                .fillMaxWidth()
+                .padding(vertical = 24.dp)
+                .clickable {
+                    if (isBack) {
+                        if (hapticsEnabled) {
+                            HapticsPlayer.cardFlip(context, hapticFeedback)
+                        }
+                        isBack = false
+                    } else {
+                        showDescription = true
+                    }
+                },
                     contentAlignment = Alignment.Center
                 ) {
                     DailyCardDisplay(
                         card = card,
                         isBack = isBack,
-                        isReversed = isReversed,
+                        isReversed = false,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -135,7 +135,7 @@ fun DailyCardScreen(
             if (showDescription) {
                 DailyCardDescriptionSheet(
                     card = card,
-                    isReversed = isReversed,
+                    isReversed = false,
                     onDismiss = { showDescription = false }
                 )
             }

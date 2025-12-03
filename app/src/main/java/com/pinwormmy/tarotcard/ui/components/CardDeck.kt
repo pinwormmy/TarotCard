@@ -57,7 +57,8 @@ fun CardDeck(
     shuffleTrigger: Int = 0,
     painter: Painter? = null,
     onAnimationFinished: (() -> Unit)? = null,
-    onPhaseChanged: (ShufflePhase) -> Unit = {}
+    onPhaseChanged: (ShufflePhase) -> Unit = {},
+    onRiffleBeat: () -> Unit = {}
 ) {
     val density = LocalDensity.current
     val backPainter = painter ?: rememberCardBackPainter()
@@ -136,6 +137,7 @@ fun CardDeck(
                             easing = LinearOutSlowInEasing
                         )
                     )
+                    onRiffleBeat()
                 }
             }
         }

@@ -61,6 +61,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -73,6 +74,7 @@ import com.pinwormmy.tarotcard.ui.state.CardBackStyle
 import com.pinwormmy.tarotcard.ui.state.CardFaceSkin
 import com.pinwormmy.tarotcard.ui.state.SettingsUiState
 import com.pinwormmy.tarotcard.ui.theme.TarotSkin
+import com.pinwormmy.tarotcard.ui.theme.HapticsPlayer
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -92,6 +94,7 @@ fun OptionsScreen(
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
+    val hapticFeedback = LocalHapticFeedback.current
     val timeFormatter = remember { DateTimeFormatter.ofPattern("a hh:mm") }
     val containerBounds = remember { mutableStateOf<Rect?>(null) }
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
@@ -239,7 +242,12 @@ fun OptionsScreen(
                         }
                         Switch(
                             checked = settings.hapticsEnabled,
-                            onCheckedChange = onToggleHaptics
+                            onCheckedChange = { enabled ->
+                                onToggleHaptics(enabled)
+                                if (enabled) {
+                                    HapticsPlayer.tripleConfirm(context, hapticFeedback)
+                                }
+                            }
                         )
                     }
                 }
