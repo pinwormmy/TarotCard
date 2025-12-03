@@ -1,32 +1,37 @@
 package com.pinwormmy.tarotcard.ui.screens
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -42,24 +47,26 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.layout.boundsInRoot
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
+import androidx.core.content.ContextCompat
 import com.pinwormmy.tarotcard.data.TarotCardModel
+import com.pinwormmy.tarotcard.ui.components.CardBackArt
 import com.pinwormmy.tarotcard.ui.components.CardFaceArt
 import com.pinwormmy.tarotcard.ui.components.TarotCardShape
 import com.pinwormmy.tarotcard.ui.state.CardBackStyle
@@ -68,8 +75,6 @@ import com.pinwormmy.tarotcard.ui.state.SettingsUiState
 import com.pinwormmy.tarotcard.ui.theme.TarotSkin
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import android.annotation.SuppressLint
-import com.pinwormmy.tarotcard.ui.components.CardBackArt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("NewApi") // java.time.* is desugared; safe on minSdk 24
@@ -89,6 +94,11 @@ fun OptionsScreen(
     val context = LocalContext.current
     val timeFormatter = remember { DateTimeFormatter.ofPattern("a hh:mm") }
     val containerBounds = remember { mutableStateOf<Rect?>(null) }
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        onToggleDailyCard(granted)
+    }
 
     val timePickerDialog = remember(settings.dailyCardTime) {
         TimePickerDialog(
@@ -137,7 +147,7 @@ fun OptionsScreen(
 
                 OptionSection(title = "카드 뒷면 선택") {
                     CardBackSkinSelector(
-                        backs = CardBackStyle.values().toList(),
+                        backs = CardBackStyle.entries.toList(),
                         selected = settings.cardBackStyle,
                         onPreview = { back, bounds -> previewBack = back to bounds }
                     )
@@ -145,7 +155,7 @@ fun OptionsScreen(
 
                 OptionSection(title = "카드 스킨 선택") {
                     CardFaceSkinSelector(
-                        skins = CardFaceSkin.values().toList(),
+                        skins = CardFaceSkin.entries.toList(),
                         selected = settings.cardFaceSkin,
                         onPreview = { skin, bounds -> previewSkin = skin to bounds }
                     )
@@ -167,7 +177,25 @@ fun OptionsScreen(
                         }
                         Switch(
                             checked = settings.dailyCardNotification,
-                            onCheckedChange = onToggleDailyCard
+                            onCheckedChange = { enabled ->
+                                if (!enabled) {
+                                    onToggleDailyCard(false)
+                                    return@Switch
+                                }
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                                    onToggleDailyCard(true)
+                                    return@Switch
+                                }
+                                val permissionGranted = ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.POST_NOTIFICATIONS
+                                ) == PackageManager.PERMISSION_GRANTED
+                                if (permissionGranted) {
+                                    onToggleDailyCard(true)
+                                } else {
+                                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                }
+                            }
                         )
                     }
                     Text(
@@ -444,7 +472,7 @@ private fun CardFacePreviewModal(
                 CardFaceArt(
                     card = previewCard,
                     modifier = Modifier
-                        .width(220.dp)
+                        .width(targetWidthDp)
                         .aspectRatio(0.62f)
                 )
             }
@@ -629,30 +657,4 @@ private fun previewCardForSkin(skin: CardFaceSkin): TarotCardModel {
         keywords = emptyList(),
         imageUrl = skin.previewImage
     )
-}
-
-@Composable
-private fun <T> StyleChips(
-    items: List<T>,
-    selected: T,
-    label: (T) -> String,
-    onSelect: (T) -> Unit
-) {
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        items(items) { item ->
-            val isSelected = item == selected
-            Surface(
-                modifier = Modifier.clickable { onSelect(item) },
-                shape = CircleShape,
-                tonalElevation = if (isSelected) 6.dp else 0.dp,
-                color = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.2f) else MaterialTheme.colorScheme.surfaceVariant
-            ) {
-                Text(
-                    text = label(item),
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
-                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                )
-            }
-        }
-    }
 }
