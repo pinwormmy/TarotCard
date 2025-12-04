@@ -159,7 +159,7 @@ fun ReadingResultScreen(
                         .fillMaxWidth()
                         .height(spread.estimatedBoardHeight())
                         .clip(TarotCardShape)
-                        .background(Color(0xFF0F1120))
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.92f))
                         .padding(16.dp)
                 ) {
                     SpreadBoard(

@@ -39,9 +39,9 @@ object TarotSkins {
         primary = Color(0xFFE0C097),
         secondary = Color(0xFF8A8AE6),
         tertiary = Color(0xFFF5B9A3),
-        surface = Color(0xFF111323),
-        surfaceVariant = Color(0xFF1C1F33),
-        outline = Color(0xFF3C3D63),
+        surface = Color(0xFF242B45),
+        surfaceVariant = Color(0xFF323B5B),
+        outline = Color(0xFF6474A0),
         textPrimary = Color(0xFFF4EADB),
         textSecondary = Color(0xFFC9CDE2)
     )
@@ -61,9 +61,9 @@ object TarotSkins {
         primary = Color(0xFFC9A7EB),
         secondary = Color(0xFF7AD0F5),
         tertiary = Color(0xFFF7C1BB),
-        surface = Color(0xFF161327),
-        surfaceVariant = Color(0xFF2B2442),
-        outline = Color(0xFF4B4371),
+        surface = Color(0xFF2D3352),
+        surfaceVariant = Color(0xFF3B4768),
+        outline = Color(0xFF6B76A5),
         textPrimary = Color(0xFFF1EBFF),
         textSecondary = Color(0xFFCDD2F7)
     )
