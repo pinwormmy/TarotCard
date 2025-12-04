@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -81,8 +82,9 @@ fun MainMenuScreen(
                     painter = painterResource(id = R.drawable.title_logo),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentScale = ContentScale.FillBounds
+                        .fillMaxWidth()
+                        .aspectRatio(700f / 674f),
+                    contentScale = ContentScale.Fit
                 )
             }
 
