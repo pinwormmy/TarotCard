@@ -31,7 +31,7 @@ fun TarotBackground(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Transparent),
-                alpha = 0.25f,
+                alpha = 0.4f,
                 contentScale = ContentScale.Crop
             )
         }

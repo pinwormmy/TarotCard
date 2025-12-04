@@ -34,7 +34,7 @@ object TarotSkins {
                 Color(0xFF0F1230)
             )
         ),
-        backgroundOverlayColor = Color(0x99000000),
+        backgroundOverlayColor = Color(0x33000000),
         backgroundImageRes = R.drawable.bg_space01,
         primary = Color(0xFFE0C097),
         secondary = Color(0xFF8A8AE6),
@@ -56,7 +56,7 @@ object TarotSkins {
                 Color(0xFF0F1229)
             )
         ),
-        backgroundOverlayColor = Color(0xAA020210),
+        backgroundOverlayColor = Color(0x33020210),
         backgroundImageRes = R.drawable.bg_space02,
         primary = Color(0xFFC9A7EB),
         secondary = Color(0xFF7AD0F5),
