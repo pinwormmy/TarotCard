@@ -77,6 +77,7 @@ fun CardBrowserScreen(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
+        containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
                 title = { Text(text = "카드 살펴보기") },
@@ -154,6 +155,7 @@ fun CardBrowserScreen(
                 zoomProgress.snapTo(0f)
                 zoomProgress.animateTo(1f, tween(durationMillis = 280))
                 isZoomAnimating = false
+                @Suppress
                 animateZoom = false
             } else {
                 zoomProgress.snapTo(1f)

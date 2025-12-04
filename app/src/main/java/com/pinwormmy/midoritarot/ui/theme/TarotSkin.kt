@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
+import com.pinwormmy.midoritarot.R
 
 @Immutable
 data class TarotSkin(
@@ -12,7 +12,7 @@ data class TarotSkin(
     val displayName: String,
     val backgroundBrush: Brush,
     val backgroundOverlayColor: Color,
-    val backgroundImage: Painter? = null,
+    val backgroundImageRes: Int? = null,
     val primary: Color,
     val secondary: Color,
     val tertiary: Color,
@@ -24,9 +24,9 @@ data class TarotSkin(
 )
 
 object TarotSkins {
-    val Midnight = TarotSkin(
-        id = "midnight_obsidian",
-        displayName = "Midnight Obsidian",
+    val SpaceOne = TarotSkin(
+        id = "space_1",
+        displayName = "우주1",
         backgroundBrush = Brush.verticalGradient(
             listOf(
                 Color(0xFF020203),
@@ -35,6 +35,7 @@ object TarotSkins {
             )
         ),
         backgroundOverlayColor = Color(0x99000000),
+        backgroundImageRes = R.drawable.bg_space01,
         primary = Color(0xFFE0C097),
         secondary = Color(0xFF8A8AE6),
         tertiary = Color(0xFFF5B9A3),
@@ -45,17 +46,18 @@ object TarotSkins {
         textSecondary = Color(0xFFC9CDE2)
     )
 
-    val Twilight = TarotSkin(
-        id = "twilight_moonstone",
-        displayName = "Twilight Moonstone",
+    val SpaceTwo = TarotSkin(
+        id = "space_2",
+        displayName = "우주2",
         backgroundBrush = Brush.verticalGradient(
             listOf(
-                Color(0xFF0B0612),
-                Color(0xFF1A0F28),
-                Color(0xFF250F38)
+                Color(0xFF05060F),
+                Color(0xFF0A0D1C),
+                Color(0xFF0F1229)
             )
         ),
-        backgroundOverlayColor = Color(0x88020210),
+        backgroundOverlayColor = Color(0xAA020210),
+        backgroundImageRes = R.drawable.bg_space02,
         primary = Color(0xFFC9A7EB),
         secondary = Color(0xFF7AD0F5),
         tertiary = Color(0xFFF7C1BB),
@@ -66,29 +68,8 @@ object TarotSkins {
         textSecondary = Color(0xFFCDD2F7)
     )
 
-    val Ember = TarotSkin(
-        id = "ember_sands",
-        displayName = "Ember Sands",
-        backgroundBrush = Brush.verticalGradient(
-            listOf(
-                Color(0xFF120604),
-                Color(0xFF2C0F08),
-                Color(0xFF4A1F0F)
-            )
-        ),
-        backgroundOverlayColor = Color(0xAA140600),
-        primary = Color(0xFFFFC38F),
-        secondary = Color(0xFFFF8F70),
-        tertiary = Color(0xFFFFD86E),
-        surface = Color(0xFF201512),
-        surfaceVariant = Color(0xFF3A251D),
-        outline = Color(0xFF5C3A2E),
-        textPrimary = Color(0xFFFFF3E4),
-        textSecondary = Color(0xFFFFD8C2)
-    )
-
-    val all: List<TarotSkin> = listOf(Midnight, Twilight, Ember)
-    val default: TarotSkin = Midnight
+    val all: List<TarotSkin> = listOf(SpaceOne, SpaceTwo)
+    val default: TarotSkin = SpaceOne
 
     fun findById(id: String): TarotSkin = all.firstOrNull { it.id == id } ?: default
 }

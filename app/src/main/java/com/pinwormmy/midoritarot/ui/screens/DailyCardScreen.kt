@@ -38,7 +38,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.data.TarotCardModel
-import com.pinwormmy.midoritarot.ui.theme.LocalTarotSkin
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
@@ -57,13 +56,13 @@ fun DailyCardScreen(
 ) {
     var isBack by remember { mutableStateOf(true) }
     var showDescription by remember { mutableStateOf(false) }
-    val skin = LocalTarotSkin.current
     val hapticsEnabled = LocalHapticsEnabled.current
     val hapticFeedback = LocalHapticFeedback.current
     val context = LocalContext.current
 
     Scaffold(
         modifier = modifier,
+        containerColor = Color.Transparent,
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "오늘의 카드") },
@@ -79,7 +78,7 @@ fun DailyCardScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(skin.backgroundBrush)
+                .background(Color.Transparent)
         ) {
             Column(
                 modifier = Modifier

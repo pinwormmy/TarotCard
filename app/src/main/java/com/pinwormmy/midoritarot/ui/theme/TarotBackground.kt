@@ -1,14 +1,16 @@
 package com.pinwormmy.midoritarot.ui.theme
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.material3.LocalContentColor
 
 @Composable
 fun TarotBackground(
@@ -22,9 +24,9 @@ fun TarotBackground(
             .background(skin.backgroundBrush)
             .fillMaxSize()
     ) {
-        skin.backgroundImage?.let { painter ->
-            Image(
-                painter = painter,
+        skin.backgroundImageRes?.let { resId ->
+            androidx.compose.foundation.Image(
+                painter = painterResource(id = resId),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
@@ -38,6 +40,10 @@ fun TarotBackground(
                 .fillMaxSize()
                 .background(skin.backgroundOverlayColor)
         )
-        content()
+        CompositionLocalProvider(
+            LocalContentColor provides skin.textPrimary
+        ) {
+            content()
+        }
     }
 }

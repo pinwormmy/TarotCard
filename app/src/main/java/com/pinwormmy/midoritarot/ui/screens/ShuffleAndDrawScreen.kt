@@ -65,7 +65,6 @@ import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.rememberCardBackPainter
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowUiState
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
-import com.pinwormmy.midoritarot.ui.theme.LocalTarotSkin
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
@@ -94,7 +93,6 @@ fun ShuffleAndDrawScreen(
     val drawnIds = remember(uiState.drawnCards) {
         uiState.drawnCards.values.map { it.card.id }.toSet()
     }
-    val skin = LocalTarotSkin.current
     val hapticFeedback = LocalHapticFeedback.current
     val hapticsEnabled = LocalHapticsEnabled.current
     val context = LocalContext.current
@@ -148,7 +146,7 @@ fun ShuffleAndDrawScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(skin.backgroundBrush)
+            .background(Color.Transparent)
     ) {
         Column(
             modifier = Modifier

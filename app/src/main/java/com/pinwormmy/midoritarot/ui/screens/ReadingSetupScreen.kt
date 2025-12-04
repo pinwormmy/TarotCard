@@ -39,7 +39,6 @@ import com.pinwormmy.midoritarot.ui.components.estimatedBoardHeight
 import com.pinwormmy.midoritarot.ui.state.SpreadCatalog
 import com.pinwormmy.midoritarot.ui.state.SpreadDefinition
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
-import com.pinwormmy.midoritarot.ui.theme.LocalTarotSkin
 
 @Composable
 fun ReadingSetupScreen(
@@ -55,12 +54,11 @@ fun ReadingSetupScreen(
 ) {
     val isCelticCross = spread.type == SpreadType.CelticCross
     var raiseFirstCard by remember(spread) { mutableStateOf(false) }
-    val skin = LocalTarotSkin.current
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(skin.backgroundBrush)
+            .background(Color.Transparent)
             .padding(horizontal = 24.dp, vertical = 32.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
