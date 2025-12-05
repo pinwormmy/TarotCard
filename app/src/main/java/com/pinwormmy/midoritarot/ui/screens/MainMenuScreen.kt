@@ -82,7 +82,7 @@ fun MainMenuScreen(
                     painter = painterResource(id = R.drawable.title_logo),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(0.9f)
                         .aspectRatio(700f / 674f),
                     contentScale = ContentScale.Fit
                 )
