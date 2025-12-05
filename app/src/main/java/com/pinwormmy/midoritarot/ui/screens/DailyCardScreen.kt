@@ -41,6 +41,7 @@ import com.pinwormmy.midoritarot.data.TarotCardModel
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
@@ -117,7 +118,6 @@ fun DailyCardScreen(
                     DailyCardDisplay(
                         card = card,
                         isBack = isBack,
-                        isReversed = false,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -134,7 +134,6 @@ fun DailyCardScreen(
             if (showDescription) {
                 DailyCardDescriptionSheet(
                     card = card,
-                    isReversed = false,
                     onDismiss = { showDescription = false }
                 )
             }
@@ -146,7 +145,6 @@ fun DailyCardScreen(
 private fun DailyCardDisplay(
     card: TarotCardModel,
     isBack: Boolean,
-    isReversed: Boolean,
     modifier: Modifier = Modifier
 ) {
     val density = LocalDensity.current
@@ -154,9 +152,9 @@ private fun DailyCardDisplay(
         targetValue = if (isBack) 180f else 0f,
         label = "dailyCardFlip"
     )
-    val faceRotation = if (!isBack && isReversed) 180f else 0f
+    val faceRotation = 0f
     Surface(
-        modifier = modifier.aspectRatio(0.62f),
+        modifier = modifier.aspectRatio(CARD_ASPECT_RATIO),
         tonalElevation = 12.dp,
         shape = TarotCardShape,
         color = Color.Transparent
@@ -195,7 +193,6 @@ private fun DailyCardDisplay(
 @Composable
 private fun DailyCardDescriptionSheet(
     card: TarotCardModel,
-    isReversed: Boolean,
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
@@ -225,15 +222,8 @@ private fun DailyCardDescriptionSheet(
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
                 )
             }
-            if (isReversed) {
-                Text(
-                    text = "역방향 해석",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
             Text(
-                text = if (isReversed) card.reversedMeaning else card.uprightMeaning,
+                text = card.uprightMeaning,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )

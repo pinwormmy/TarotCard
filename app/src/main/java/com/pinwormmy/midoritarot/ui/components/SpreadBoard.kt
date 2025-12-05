@@ -16,8 +16,6 @@ import com.pinwormmy.midoritarot.ui.state.SpreadPosition
 import kotlin.math.max
 import kotlin.math.min
 
-private const val CARD_ASPECT_RATIO = 0.62f
-
 @Composable
 fun SpreadBoard(
     layout: SpreadLayout,

@@ -43,6 +43,7 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.SpreadBoard
 import com.pinwormmy.midoritarot.ui.components.estimatedBoardHeight
@@ -302,7 +303,7 @@ private fun ReadingResultCard(
     val shape = TarotCardShape
     Box(
         modifier = modifier
-            .aspectRatio(0.62f)
+            .aspectRatio(CARD_ASPECT_RATIO)
             .clip(shape)
             .graphicsLayer {
                 rotationY = rotation
@@ -422,7 +423,7 @@ private fun ReadingResultOverlay(
                 )
             }
         } else {
-            val aspectRatio = 0.62f
+            val aspectRatio = CARD_ASPECT_RATIO
             val targetWidthPx = containerBounds?.let { container ->
                 val widthLimit = container.width * 0.7f
                 val heightLimit = container.height * 0.8f

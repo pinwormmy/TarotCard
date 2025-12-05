@@ -70,6 +70,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
@@ -322,7 +323,7 @@ private fun CardFaceSkinSelector(
                 Surface(
                     modifier = Modifier
                         .width(96.dp)
-                        .aspectRatio(0.62f)
+                        .aspectRatio(CARD_ASPECT_RATIO)
                         .border(
                             width = if (isSelected) 2.dp else 1.dp,
                             color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
@@ -367,7 +368,7 @@ private fun CardBackSkinSelector(
                 Surface(
                     modifier = Modifier
                         .width(96.dp)
-                        .aspectRatio(0.62f)
+                        .aspectRatio(CARD_ASPECT_RATIO)
                         .border(
                             width = if (isSelected) 2.dp else 1.dp,
                             color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
@@ -422,7 +423,7 @@ private fun CardFacePreviewModal(
     val targetWidthPx = container?.let {
         val maxWidth = it.width * 0.72f
         val maxHeight = it.height * 0.82f
-        val widthFromHeight = maxHeight * 0.62f
+        val widthFromHeight = maxHeight * CARD_ASPECT_RATIO
         minOf(maxWidth, widthFromHeight)
     } ?: with(density) { 220.dp.toPx() }
     val targetWidthDp = with(density) { targetWidthPx.toDp() }
@@ -485,7 +486,7 @@ private fun CardFacePreviewModal(
                     card = previewCard,
                     modifier = Modifier
                         .width(targetWidthDp)
-                        .aspectRatio(0.62f)
+                        .aspectRatio(CARD_ASPECT_RATIO)
                 )
             }
             Row(
@@ -534,7 +535,7 @@ private fun CardBackPreviewModal(
     val targetWidthPx = container?.let {
         val maxWidth = it.width * 0.72f
         val maxHeight = it.height * 0.82f
-        val widthFromHeight = maxHeight * 0.62f
+        val widthFromHeight = maxHeight * CARD_ASPECT_RATIO
         minOf(maxWidth, widthFromHeight)
     } ?: with(density) { 220.dp.toPx() }
     val targetWidthDp = with(density) { targetWidthPx.toDp() }
@@ -596,7 +597,7 @@ private fun CardBackPreviewModal(
                 CardBackArt(
                     modifier = Modifier
                         .width(targetWidthDp)
-                        .aspectRatio(0.62f),
+                        .aspectRatio(CARD_ASPECT_RATIO),
                     backStyle = back,
                     shape = TarotCardShape
                 )

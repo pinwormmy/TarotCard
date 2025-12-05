@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VALUE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+
 package com.pinwormmy.midoritarot.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -38,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -68,6 +71,7 @@ fun CardBrowserScreen(
     var overlayPhase by remember { mutableStateOf(BrowserOverlayPhase.Zoom) }
     val zoomProgress = remember { Animatable(0f) }
     val coroutineScope = rememberCoroutineScope()
+    @Suppress("UNUSED_VALUE")
     var animateZoom by remember { mutableStateOf(false) }
     var isZoomAnimating by remember { mutableStateOf(false) }
     val filteredCards = remember(selectedTabIndex, cards) {
@@ -155,8 +159,6 @@ fun CardBrowserScreen(
                 zoomProgress.snapTo(0f)
                 zoomProgress.animateTo(1f, tween(durationMillis = 280))
                 isZoomAnimating = false
-                @Suppress
-                animateZoom = false
             } else {
                 zoomProgress.snapTo(1f)
             }
@@ -174,16 +176,18 @@ fun CardBrowserScreen(
                 }
             },
             onDismiss = {
-                overlayPhase = BrowserOverlayPhase.Zoom
                 selectedCard = null
-                animateZoom = false
+                if (selectedCard == null) {
+                    overlayPhase = BrowserOverlayPhase.Zoom
+                }
                 isZoomAnimating = false
                 coroutineScope.launch { zoomProgress.snapTo(1f) }
             },
             onCloseAll = {
                 selectedCard = null
-                overlayPhase = BrowserOverlayPhase.Zoom
-                animateZoom = false
+                if (selectedCard == null) {
+                    overlayPhase = BrowserOverlayPhase.Zoom
+                }
                 isZoomAnimating = false
                 coroutineScope.launch { zoomProgress.snapTo(1f) }
             }
@@ -207,7 +211,7 @@ private fun CardBrowserItem(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(0.62f),
+                .aspectRatio(CARD_ASPECT_RATIO),
             shape = TarotCardShape
         ) {
             CardFaceArt(
@@ -266,7 +270,7 @@ private fun CardDetailOverlay(
                     card = card,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(0.62f),
+                        .aspectRatio(CARD_ASPECT_RATIO),
                     shape = TarotCardShape
                 )
             }

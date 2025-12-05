@@ -1,4 +1,9 @@
-@file:Suppress("UNUSED_VALUE", "UnusedAssignment")
+@file:Suppress(
+    "UNUSED_VALUE",
+    "UnusedAssignment",
+    "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE",
+    "ComposeApplierCallMismatch"
+)
 
 package com.pinwormmy.midoritarot.ui.screens
 
@@ -33,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,10 +54,11 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.UiComposable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -60,6 +67,8 @@ import androidx.compose.ui.zIndex
 import com.pinwormmy.midoritarot.data.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CARD_LANDSCAPE_RATIO
 import com.pinwormmy.midoritarot.ui.components.ShufflePhase
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.rememberCardBackPainter
@@ -71,7 +80,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
 
-private const val LANDSCAPE_CARD_RATIO = 1.6f
+private const val LANDSCAPE_CARD_RATIO = CARD_LANDSCAPE_RATIO
 private val GRID_COLUMN_SPACING = 32.dp
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -129,9 +138,12 @@ fun ShuffleAndDrawScreen(
         onCutSelect(index)
     }
 
-    val deckInteractionEnabled =
-        !uiState.gridVisible && !uiState.cutMode &&
+    val deckInteractionEnabled by remember(uiState.gridVisible, uiState.cutMode, shufflePhase) {
+        derivedStateOf {
+            !uiState.gridVisible && !uiState.cutMode &&
                 (shufflePhase == ShufflePhase.Idle || shufflePhase == ShufflePhase.Finished)
+        }
+    }
 
     var dealAnimationFinished by remember(uiState.shuffleTrigger, uiState.drawPile) {
         mutableStateOf(false)
@@ -189,7 +201,7 @@ fun ShuffleAndDrawScreen(
                 ) {
                     // 셔플/컷용 세로 카드 비율
                     val cardWidth = maxWidth * 0.7f
-                    val cardHeight = cardWidth / 0.625f // 세로로 긴 타로카드 비율
+                    val cardHeight = cardWidth / CARD_ASPECT_RATIO // 2:3 비율
 
                     if (uiState.gridVisible) {
                         // ✅ 드로우 그리드: 여기 안에서만 가로 카드 처리
@@ -436,7 +448,7 @@ private fun DrawPileGrid(
         val columnSpacing = GRID_COLUMN_SPACING
         val totalRows = (cards.size + 1) / 2
 
-        // 가로 카드 비율: 세로 카드(0.625:1)를 눕힌 1.6:1 비율
+        // 가로 카드 비율: 세로 카드(0.66:1)를 눕힌 1.5:1 비율
         val landscapeRatio = LANDSCAPE_CARD_RATIO
         val cardWidth = (maxWidth - columnSpacing) / 2f
         val cardHeight = cardWidth / landscapeRatio
@@ -449,8 +461,6 @@ private fun DrawPileGrid(
         val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
         val dealStaggerMillis = 20L
         val dealAnimationMillis = 220
-
-        var dealAnimationReported by remember(cards) { mutableStateOf(false) }
 
         val totalWidth = cardWidth * 2 + columnSpacing
         val leftColumnX = (maxWidth - totalWidth) / 2f
@@ -490,11 +500,11 @@ private fun DrawPileGrid(
         }
 
         val maxDealIndex = placements.maxOfOrNull { it.dealOrderIndex } ?: 0
+        @Suppress("UNUSED_VALUE")
         var gesturesEnabled by remember(cards) { mutableStateOf(false) }
 
         LaunchedEffect(cards) {
             gesturesEnabled = false
-            dealAnimationReported = false
             if (cards.isEmpty()) return@LaunchedEffect
 
             val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
@@ -502,10 +512,7 @@ private fun DrawPileGrid(
                 delay(totalDelay)
             }
             gesturesEnabled = true
-            if (!dealAnimationReported) {
-                dealAnimationReported = true
-                onDealAnimationFinished()
-            }
+            onDealAnimationFinished()
         }
 
         val pointerModifier = Modifier
@@ -527,12 +534,14 @@ private fun DrawPileGrid(
                                 hoveredCardId = null
                                 if (selectedId != null) {
                                     gesturesEnabled = false
-                                    if (hapticsEnabled) {
-                                        hapticFeedback.performHapticFeedback(
-                                            HapticFeedbackType.LongPress
-                                        )
+                                    if (!gesturesEnabled) {
+                                        if (hapticsEnabled) {
+                                            hapticFeedback.performHapticFeedback(
+                                                HapticFeedbackType.LongPress
+                                            )
+                                        }
+                                        selectionEvents.tryEmit(selectedId)
                                     }
-                                    selectionEvents.tryEmit(selectedId)
                                 }
                                 break
                             }
@@ -612,6 +621,7 @@ private fun DrawPileGrid(
     }
 }
 
+@UiComposable
 @Composable
 private fun RotatedCardBack(
     modifier: Modifier = Modifier,
@@ -763,7 +773,7 @@ private fun CutModeScene(
     ) {
         val fullWidth = maxWidth
         val pileWidth = fullWidth * 0.28f
-        val pileHeight = pileWidth / 0.625f
+        val pileHeight = pileWidth / CARD_ASPECT_RATIO
         val baseSpacing = 0.35f
         val liftY = 0.08f
 

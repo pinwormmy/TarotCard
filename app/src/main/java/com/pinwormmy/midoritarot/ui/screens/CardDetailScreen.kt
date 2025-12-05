@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,7 +86,7 @@ private fun CardDetailBody(
             card = card,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(0.62f)
+                .aspectRatio(CARD_ASPECT_RATIO)
         )
         Text(
             text = card.arcana,

@@ -4,7 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,11 +31,13 @@ import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.data.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardCategory
 import com.pinwormmy.midoritarot.ui.state.category
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+@Suppress("unused")
 fun CardLibraryScreen(
     cards: List<TarotCardModel>,
     selectedCategory: CardCategory,
@@ -121,7 +122,7 @@ private fun CardLibraryItem(
                 card = card,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.62f),
+                    .aspectRatio(CARD_ASPECT_RATIO),
                 shape = shape
             )
             Text(text = card.name, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
