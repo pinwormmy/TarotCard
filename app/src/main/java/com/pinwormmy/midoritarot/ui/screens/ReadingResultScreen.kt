@@ -115,6 +115,11 @@ fun ReadingResultScreen(
         revealStates[index].value = CardRevealPhase.Zoom
     }
 
+    fun dismissDescriptionAndClose(index: Int) {
+        dismissDescription(index)
+        closeZoom()
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -247,11 +252,11 @@ fun ReadingResultScreen(
                     if (phase == CardRevealPhase.Zoom) {
                         closeZoom()
                     } else if (phase == CardRevealPhase.Description) {
-                        dismissDescription(activeZoomIndex)
+                        dismissDescriptionAndClose(activeZoomIndex)
                     }
                 },
                 onDescriptionDismiss = {
-                    dismissDescription(activeZoomIndex)
+                    dismissDescriptionAndClose(activeZoomIndex)
                 }
             )
         }
@@ -448,10 +453,22 @@ private fun ReadingResultOverlay(
                 modifier = Modifier
                     .fillMaxSize()
                     .clickable(
-                        interactionSource = backgroundInteraction,
-                        indication = null
-                    ) { onBackgroundTapped() }
+                    interactionSource = backgroundInteraction,
+                    indication = null
+                ) { onBackgroundTapped() }
             )
+
+            if (phase == CardRevealPhase.Zoom) {
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 96.dp)
+                        .padding(horizontal = 24.dp),
+                    text = "카드를 터치하면 해석을 볼 수 있습니다.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.White.copy(alpha = 0.82f)
+                )
+            }
 
             ReadingResultCard(
                 card = card,
