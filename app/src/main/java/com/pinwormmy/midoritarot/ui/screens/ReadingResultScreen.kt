@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.SpreadBoard
@@ -50,8 +50,8 @@ import com.pinwormmy.midoritarot.ui.components.estimatedBoardHeight
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
-import com.pinwormmy.midoritarot.ui.state.SpreadDefinition
-import com.pinwormmy.midoritarot.ui.state.SpreadSlot
+import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
+import com.pinwormmy.midoritarot.domain.spread.SpreadSlot
 import kotlinx.coroutines.launch
 import kotlin.math.min
 

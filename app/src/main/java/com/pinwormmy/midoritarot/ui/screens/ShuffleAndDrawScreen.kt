@@ -2,7 +2,9 @@
     "UNUSED_VALUE",
     "UnusedAssignment",
     "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE",
-    "ComposeApplierCallMismatch"
+    "ComposeApplierCallMismatch",
+    "ComposeApplierParameterMismatch",
+    "ComposeApplierDeclarationMismatch"
 )
 
 package com.pinwormmy.midoritarot.ui.screens
@@ -64,7 +66,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
@@ -534,14 +536,12 @@ private fun DrawPileGrid(
                                 hoveredCardId = null
                                 if (selectedId != null) {
                                     gesturesEnabled = false
-                                    if (!gesturesEnabled) {
-                                        if (hapticsEnabled) {
-                                            hapticFeedback.performHapticFeedback(
-                                                HapticFeedbackType.LongPress
-                                            )
-                                        }
-                                        selectionEvents.tryEmit(selectedId)
+                                    if (hapticsEnabled) {
+                                        hapticFeedback.performHapticFeedback(
+                                            HapticFeedbackType.LongPress
+                                        )
                                     }
+                                    selectionEvents.tryEmit(selectedId)
                                 }
                                 break
                             }

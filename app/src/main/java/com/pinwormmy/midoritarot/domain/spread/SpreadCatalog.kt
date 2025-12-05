@@ -1,4 +1,4 @@
-package com.pinwormmy.midoritarot.ui.state
+package com.pinwormmy.midoritarot.domain.spread
 
 import androidx.compose.runtime.Immutable
 

@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.theme.LocalCardFaceSkin
 

@@ -26,7 +26,7 @@ import com.pinwormmy.midoritarot.ui.screens.ReadingSetupScreen
 import com.pinwormmy.midoritarot.ui.screens.SpreadMenuScreen
 import com.pinwormmy.midoritarot.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowViewModel
-import com.pinwormmy.midoritarot.ui.state.SpreadStep
+import com.pinwormmy.midoritarot.domain.spread.SpreadStep
 import com.pinwormmy.midoritarot.ui.state.TarotSettingsViewModel
 import com.pinwormmy.midoritarot.ui.theme.TarotSkins
 
@@ -91,10 +91,8 @@ fun TarotNavGraph(
                     }
                 },
                 onQuickReading = {
-                    when (spreadViewModel.startQuickReading()) {
-                        SpreadStep.ReadingResult -> navController.navigate(Screen.ReadingResult.route)
-                        else -> Unit
-                    }
+                    spreadViewModel.startQuickReading()
+                    navController.navigate(Screen.ReadingResult.route)
                 }
             )
         }
@@ -190,6 +188,7 @@ private sealed class Screen(val route: String) {
     data object CardBrowser : Screen("card_browser")
     data object Options : Screen("options")
     data object CardDetail : Screen("card_detail/{cardId}") {
+        @Suppress("unused")
         fun createRoute(cardId: String) = "card_detail/$cardId"
     }
 }

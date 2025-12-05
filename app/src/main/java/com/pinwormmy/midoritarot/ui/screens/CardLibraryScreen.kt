@@ -28,7 +28,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardCategory
 import com.pinwormmy.midoritarot.ui.state.category
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO

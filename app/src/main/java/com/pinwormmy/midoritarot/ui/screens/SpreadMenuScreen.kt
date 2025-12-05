@@ -29,9 +29,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pinwormmy.midoritarot.ui.state.SpreadCatalog
-import com.pinwormmy.midoritarot.ui.state.SpreadDefinition
-import com.pinwormmy.midoritarot.ui.state.SpreadType
+import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
+import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
+import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

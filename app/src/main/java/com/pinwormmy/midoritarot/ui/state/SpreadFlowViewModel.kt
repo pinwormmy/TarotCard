@@ -2,8 +2,13 @@ package com.pinwormmy.midoritarot.ui.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pinwormmy.midoritarot.data.TarotCardModel
 import com.pinwormmy.midoritarot.data.TarotRepository
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
+import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
+import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
+import com.pinwormmy.midoritarot.domain.spread.SpreadSlot
+import com.pinwormmy.midoritarot.domain.spread.SpreadStep
+import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -107,7 +112,7 @@ class SpreadFlowViewModel(
         }
     }
 
-    fun startQuickReading(): SpreadStep {
+    fun startQuickReading() {
         val spread = _uiState.value.spread
         val pendingSlots = slotsFor(spread)
         if (pendingSlots.isEmpty()) {
@@ -123,7 +128,7 @@ class SpreadFlowViewModel(
                     nextInstruction = null
                 )
             }
-            return SpreadStep.ReadingResult
+            return
         }
 
         val remaining = newShuffledDeck()
@@ -147,7 +152,6 @@ class SpreadFlowViewModel(
                 nextInstruction = null
             )
         }
-        return SpreadStep.ReadingResult
     }
 
     fun triggerShuffle() {

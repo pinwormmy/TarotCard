@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 
+@Suppress("unused")
 @Composable
 fun CardRow(
     cards: List<TarotCardModel>,

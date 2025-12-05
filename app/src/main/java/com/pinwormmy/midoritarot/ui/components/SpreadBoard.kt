@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.compose.ui.platform.LocalDensity
-import com.pinwormmy.midoritarot.ui.state.SpreadDefinition
-import com.pinwormmy.midoritarot.ui.state.SpreadLayout
-import com.pinwormmy.midoritarot.ui.state.SpreadPosition
+import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
+import com.pinwormmy.midoritarot.domain.spread.SpreadLayout
+import com.pinwormmy.midoritarot.domain.spread.SpreadPosition
 import kotlin.math.max
 import kotlin.math.min
 

@@ -1,4 +1,4 @@
-package com.pinwormmy.midoritarot.data
+package com.pinwormmy.midoritarot.domain.model
 
 data class TarotCardModel(
     val id: String,

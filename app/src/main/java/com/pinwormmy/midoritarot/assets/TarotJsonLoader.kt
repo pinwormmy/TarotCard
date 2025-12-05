@@ -1,7 +1,7 @@
 package com.pinwormmy.midoritarot.assets
 
 import android.content.Context
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import org.json.JSONArray
 
 object TarotJsonLoader {

@@ -46,7 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pinwormmy.midoritarot.data.TarotCardModel
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardCategory
 import com.pinwormmy.midoritarot.ui.state.category
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
@@ -177,17 +177,13 @@ fun CardBrowserScreen(
             },
             onDismiss = {
                 selectedCard = null
-                if (selectedCard == null) {
-                    overlayPhase = BrowserOverlayPhase.Zoom
-                }
+                overlayPhase = BrowserOverlayPhase.Zoom
                 isZoomAnimating = false
                 coroutineScope.launch { zoomProgress.snapTo(1f) }
             },
             onCloseAll = {
                 selectedCard = null
-                if (selectedCard == null) {
-                    overlayPhase = BrowserOverlayPhase.Zoom
-                }
+                overlayPhase = BrowserOverlayPhase.Zoom
                 isZoomAnimating = false
                 coroutineScope.launch { zoomProgress.snapTo(1f) }
             }

@@ -2,6 +2,7 @@ package com.pinwormmy.midoritarot.data
 
 import android.content.Context
 import com.pinwormmy.midoritarot.assets.TarotJsonLoader
+import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 
 class TarotRepository(
     private val context: Context
