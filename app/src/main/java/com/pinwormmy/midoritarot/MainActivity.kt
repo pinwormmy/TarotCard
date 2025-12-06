@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.pinwormmy.midoritarot.data.DailyCardRepository
 import com.pinwormmy.midoritarot.data.SettingsRepository
 import com.pinwormmy.midoritarot.data.TarotRepository
 import com.pinwormmy.midoritarot.navigation.TarotNavGraph
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val repository = TarotRepository(applicationContext)
+        val dailyCardRepository = DailyCardRepository(applicationContext, repository)
         val settingsRepository = SettingsRepository(applicationContext)
         setContent {
             val settingsViewModel: TarotSettingsViewModel =
@@ -51,6 +53,7 @@ class MainActivity : ComponentActivity() {
                     TarotBackground {
                         TarotNavGraph(
                             repository = repository,
+                            dailyCardRepository = dailyCardRepository,
                             settingsViewModel = settingsViewModel
                         )
                     }

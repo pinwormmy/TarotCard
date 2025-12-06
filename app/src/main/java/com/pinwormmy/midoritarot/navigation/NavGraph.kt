@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.pinwormmy.midoritarot.data.DailyCardRepository
 import com.pinwormmy.midoritarot.data.TarotRepository
 import com.pinwormmy.midoritarot.ui.screens.CardBrowserScreen
 import com.pinwormmy.midoritarot.ui.screens.CardDetailScreen
@@ -33,6 +34,7 @@ import com.pinwormmy.midoritarot.ui.theme.TarotSkins
 @Composable
 fun TarotNavGraph(
     repository: TarotRepository,
+    dailyCardRepository: DailyCardRepository,
     settingsViewModel: TarotSettingsViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -143,10 +145,11 @@ fun TarotNavGraph(
         }
 
         composable(Screen.DailyCard.route) {
-            val card = remember { allCards.random() }
+            val dailyCardResult = remember { dailyCardRepository.getCardForToday() }
             DailyCardScreen(
-                card = card,
-                onBack = { navController.safePopBackStack() }
+                card = dailyCardResult.card,
+                onBack = { navController.safePopBackStack() },
+                showFrontImmediately = dailyCardResult.isExisting
             )
         }
 

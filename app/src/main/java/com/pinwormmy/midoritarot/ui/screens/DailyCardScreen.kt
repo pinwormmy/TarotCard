@@ -52,10 +52,11 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun DailyCardScreen(
     card: TarotCardModel,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    onBack: () -> Unit
+    showFrontImmediately: Boolean = false
 ) {
-    var isBack by remember { mutableStateOf(true) }
+    var isBack by remember { mutableStateOf(!showFrontImmediately) }
     var showDescription by remember { mutableStateOf(false) }
     val hapticsEnabled = LocalHapticsEnabled.current
     val hapticFeedback = LocalHapticFeedback.current
@@ -92,11 +93,15 @@ fun DailyCardScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                Text(
-                    text = "카드를 두 번 탭하면 설명을 볼 수 있어요",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                )
+                    Text(
+                        text = if (showFrontImmediately) {
+                            "앞면이 바로 보입니다. 한 번 탭하면 설명을 볼 수 있어요"
+                        } else {
+                            "카드를 두 번 탭하면 설명을 볼 수 있어요"
+                        },
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                    )
                 }
 
                 Box(
@@ -124,7 +129,11 @@ fun DailyCardScreen(
 
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = if (isBack) "첫 탭으로 카드를 뒤집어 보세요" else "한 번 더 탭하면 설명 팝업",
+                    text = when {
+                        isBack -> "첫 탭으로 카드를 뒤집어 보세요"
+                        showFrontImmediately -> "탭하면 설명 팝업"
+                        else -> "한 번 더 탭하면 설명 팝업"
+                    },
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.85f)
@@ -249,6 +258,10 @@ private fun DailyCardPreview() {
             description = "",
             keywords = listOf("탐색", "침잠")
         )
-        DailyCardScreen(card = sample, onBack = {})
+        DailyCardScreen(
+            card = sample,
+            onBack = {},
+            showFrontImmediately = false
+        )
     }
 }
