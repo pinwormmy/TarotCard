@@ -70,9 +70,15 @@ fun ReadingResultScreen(
     modifier: Modifier = Modifier,
     onNavigateHome: () -> Unit
 ) {
+    val rememberedCards = remember { mutableStateOf(cardsBySlot) }
+    if (cardsBySlot.isNotEmpty()) {
+        rememberedCards.value = cardsBySlot
+    }
+    val displayCards = rememberedCards.value
+
     val positions = spread.positions
     val orderedSlots = remember(spread) { positions.map { it.slot } }
-    val orderedPlacements = orderedSlots.map { cardsBySlot[it] }
+    val orderedPlacements = orderedSlots.map { displayCards[it] }
     val revealStates = remember(spread) {
         positions.map { mutableStateOf(CardRevealPhase.Back) }
     }
