@@ -105,7 +105,6 @@ fun TarotNavGraph(
                 onDeckTap = { spreadViewModel.triggerShuffle() },
                 onCutRequest = { spreadViewModel.enterCutMode() },
                 onCutSelect = { index -> spreadViewModel.applyCutChoice(index) },
-                onCutCancel = { spreadViewModel.cancelCutMode() },
                 onShowGrid = { spreadViewModel.revealDrawGrid() },
                 onCardSelected = { card ->
                     val finished = spreadViewModel.handleDrawSelection(card)

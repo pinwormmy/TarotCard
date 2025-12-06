@@ -93,7 +93,6 @@ fun ShuffleAndDrawScreen(
     onDeckTap: () -> Unit,
     onCutRequest: () -> Unit,
     onCutSelect: (Int) -> Unit,
-    onCutCancel: () -> Unit,
     onShowGrid: () -> Unit,
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
@@ -126,12 +125,6 @@ fun ShuffleAndDrawScreen(
             HapticsPlayer.cardTap(context, hapticFeedback)
         }
         onCutRequest()
-    }
-    val cutCancelWithHaptics = {
-        if (hapticsEnabled) {
-            HapticsPlayer.cardTap(context, hapticFeedback)
-        }
-        onCutCancel()
     }
     val cutSelectWithHaptics: (Int) -> Unit = { index ->
         if (hapticsEnabled) {
@@ -334,7 +327,7 @@ fun ShuffleAndDrawScreen(
             }
 
             // 하단 버튼 Row (그리드 아닐 때만)
-            if (!uiState.gridVisible) {
+            if (!uiState.gridVisible && !uiState.cutMode) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -343,15 +336,9 @@ fun ShuffleAndDrawScreen(
                 ) {
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
-                        text = if (uiState.cutMode) "취소" else "컷",
+                        text = "컷",
                         enabled = !animationLocked,
-                        onClick = {
-                            if (uiState.cutMode) {
-                                cutCancelWithHaptics()
-                            } else {
-                                cutRequestWithHaptics()
-                            }
-                        }
+                        onClick = cutRequestWithHaptics
                     )
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
