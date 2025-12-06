@@ -151,6 +151,17 @@ fun ShuffleAndDrawScreen(
         mutableStateOf(false)
     }
 
+    val animationLocked by remember(shufflePhase, uiState.gridVisible, dealAnimationFinished) {
+        derivedStateOf {
+            (shufflePhase != ShufflePhase.Idle && shufflePhase != ShufflePhase.Finished) ||
+                (uiState.gridVisible && !dealAnimationFinished)
+        }
+    }
+
+    val selectionLocked by remember(uiState.pendingSlots.size, uiState.drawnCards.size) {
+        derivedStateOf { uiState.drawnCards.size >= uiState.pendingSlots.size }
+    }
+
     LaunchedEffect(uiState.gridVisible) {
         if (!uiState.gridVisible) {
             dealAnimationFinished = false
@@ -207,15 +218,16 @@ fun ShuffleAndDrawScreen(
 
                     if (uiState.gridVisible) {
                         // ✅ 드로우 그리드: 여기 안에서만 가로 카드 처리
-                        DrawPileGrid(
-                            modifier = Modifier.fillMaxSize(),
-                            cards = uiState.drawPile,
-                            disabledCardIds = drawnIds,
-                            hapticsEnabled = hapticsEnabled,
-                            hapticFeedback = hapticFeedback,
-                            onDealAnimationFinished = { dealAnimationFinished = true },
-                            onCardSelected = onCardSelected
-                        )
+                            DrawPileGrid(
+                                modifier = Modifier.fillMaxSize(),
+                                cards = uiState.drawPile,
+                                disabledCardIds = drawnIds,
+                                hapticsEnabled = hapticsEnabled,
+                                hapticFeedback = hapticFeedback,
+                                selectionLocked = animationLocked || selectionLocked,
+                                onDealAnimationFinished = { dealAnimationFinished = true },
+                                onCardSelected = onCardSelected
+                            )
                     } else {
                         // cutMode 전환 애니메이션: 한 덱 ↔ 3덱
                         val transition = updateTransition(
@@ -269,7 +281,7 @@ fun ShuffleAndDrawScreen(
                             ) {
                                 CardBackImage(
                                     modifier = Modifier.fillMaxSize(),
-                                    enabled = deckInteractionEnabled,
+                                    enabled = deckInteractionEnabled && !animationLocked,
                                     onClick = deckTapWithHaptics,
                                     painter = cardBackPainter
                                 )
@@ -300,7 +312,7 @@ fun ShuffleAndDrawScreen(
                                         .fillMaxSize()
                                         .clip(RoundedCornerShape(24.dp))
                                         .clickable(
-                                            enabled = deckInteractionEnabled,
+                                            enabled = deckInteractionEnabled && !animationLocked,
                                             onClick = deckTapWithHaptics
                                         )
                                 )
@@ -332,6 +344,7 @@ fun ShuffleAndDrawScreen(
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
                         text = if (uiState.cutMode) "취소" else "컷",
+                        enabled = !animationLocked,
                         onClick = {
                             if (uiState.cutMode) {
                                 cutCancelWithHaptics()
@@ -343,6 +356,7 @@ fun ShuffleAndDrawScreen(
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
                         text = "드로우",
+                        enabled = !animationLocked,
                         onClick = gridRevealWithHaptics
                     )
                 }
@@ -412,6 +426,7 @@ private fun CardBackImage(
 private fun OutlineLargeButton(
     modifier: Modifier = Modifier,
     text: String,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     OutlinedButton(
@@ -422,6 +437,7 @@ private fun OutlineLargeButton(
             containerColor = Color.Transparent,
             contentColor = Color.White
         ),
+        enabled = enabled,
         onClick = onClick
     ) {
         Text(text = text, fontWeight = FontWeight.SemiBold)
@@ -435,6 +451,7 @@ private fun DrawPileGrid(
     disabledCardIds: Set<String>,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
+    selectionLocked: Boolean = false,
     onDealAnimationFinished: () -> Unit = {},
     onCardSelected: (TarotCardModel) -> Unit
 ) {
@@ -519,8 +536,8 @@ private fun DrawPileGrid(
 
         val pointerModifier = Modifier
             .fillMaxSize()
-            .pointerInput(cards, maxWidth, maxHeight, gesturesEnabled) {
-                if (!gesturesEnabled) {
+            .pointerInput(cards, maxWidth, maxHeight, gesturesEnabled, selectionLocked) {
+                if (!gesturesEnabled || selectionLocked) {
                     awaitCancellation()
                 }
                 awaitEachGesture {
