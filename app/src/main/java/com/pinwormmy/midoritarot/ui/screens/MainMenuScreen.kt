@@ -113,9 +113,9 @@ private fun MainMenuButton(
     onClick: () -> Unit
 ) {
     val containerColor = if (enabled) {
-        MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+        MaterialTheme.colorScheme.surface.copy(alpha = 0.72f)
     } else {
-        MaterialTheme.colorScheme.surface.copy(alpha = 0.3f)
+        MaterialTheme.colorScheme.surface.copy(alpha = 0.18f)
     }
     val contentColor = if (enabled) {
         MaterialTheme.colorScheme.onSurface
