@@ -11,10 +11,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,23 +35,23 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import androidx.compose.ui.layout.boundsInRoot
-import androidx.compose.ui.layout.onGloballyPositioned
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.CardFaceArt
-import com.pinwormmy.midoritarot.ui.components.SpreadBoard
-import com.pinwormmy.midoritarot.ui.components.estimatedBoardHeight
-import com.pinwormmy.midoritarot.ui.components.TarotCardShape
-import com.pinwormmy.midoritarot.ui.components.CardBackArt
-import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadSlot
+import com.pinwormmy.midoritarot.domain.spread.SpreadType
+import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CardBackArt
+import com.pinwormmy.midoritarot.ui.components.CardFaceArt
+import com.pinwormmy.midoritarot.ui.components.SpreadBoard
+import com.pinwormmy.midoritarot.ui.components.TarotCardShape
+import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
@@ -125,7 +125,7 @@ fun ReadingResultScreen(
         modifier = modifier
             .fillMaxSize()
             .systemBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 24.dp)
+            .padding(horizontal = 2.dp, vertical = 6.dp)
             .onGloballyPositioned { containerBounds.value = it.boundsInRoot() }
     ) {
         Column(
@@ -154,7 +154,8 @@ fun ReadingResultScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 2.dp),
             contentAlignment = Alignment.Center
         ) {
             if (orderedPlacements.all { it == null }) {
@@ -163,15 +164,20 @@ fun ReadingResultScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(spread.estimatedBoardHeight())
-                        .clip(TarotCardShape)
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.92f))
-                        .padding(16.dp)
+                        .padding(vertical = 4.dp),
+                    contentAlignment = Alignment.Center
                 ) {
+                    val boardSpacing = when (spread.type) {
+                        SpreadType.CelticCross -> 2.dp
+                        else -> 4.dp
+                    }
                     SpreadBoard(
                         layout = spread.layout,
                         positions = positions,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
+                        spacing = boardSpacing
                     ) { index, position, cardModifier ->
                         val state = revealStates.getOrNull(index)
                         val placement = orderedPlacements.getOrNull(index)

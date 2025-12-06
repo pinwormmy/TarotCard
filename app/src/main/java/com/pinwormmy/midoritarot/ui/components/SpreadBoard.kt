@@ -21,7 +21,7 @@ fun SpreadBoard(
     layout: SpreadLayout,
     positions: List<SpreadPosition>,
     modifier: Modifier = Modifier,
-    spacing: Dp = 16.dp,
+    spacing: Dp = 4.dp,
     content: @Composable (index: Int, position: SpreadPosition, modifier: Modifier) -> Unit
 ) {
     val density = LocalDensity.current
@@ -35,7 +35,7 @@ fun SpreadBoard(
         val usableHeight = (maxHeightPx - spacingPx * (rowCount - 1)).coerceAtLeast(0f)
         val widthBased = usableWidth / columnCount
         val widthFromHeight = (usableHeight / rowCount) * CARD_ASPECT_RATIO
-        val cardWidthPx = min(widthBased, widthFromHeight).coerceAtLeast(80f)
+        val cardWidthPx = min(widthBased, widthFromHeight).coerceAtLeast(112f)
         val cardHeightPx = cardWidthPx / CARD_ASPECT_RATIO
         val contentWidthPx = columnCount * cardWidthPx + spacingPx * (columnCount - 1)
         val contentHeightPx = rowCount * cardHeightPx + spacingPx * (rowCount - 1)
