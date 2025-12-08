@@ -182,7 +182,7 @@ fun OptionsScreen(
                         Column {
                             Text(text = "알림 받기", fontWeight = FontWeight.SemiBold)
                             Text(
-                                text = "원하는 시간에 오늘의 카드를 알려드려요.",
+                                text = "원하는 시간에 오늘의 카드를 뽑도록 알려드려요.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                             )
@@ -210,11 +210,6 @@ fun OptionsScreen(
                             }
                         )
                     }
-                    Text(
-                        text = "알림에는 카드 이름과 정방향 의미가 간단한 푸시 메시지로 표시됩니다.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
                     if (settings.dailyCardNotification) {
                         Surface(
                             modifier = Modifier
