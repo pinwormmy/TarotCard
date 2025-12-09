@@ -35,7 +35,17 @@ fun SpreadBoard(
         val usableHeight = (maxHeightPx - spacingPx * (rowCount - 1)).coerceAtLeast(0f)
         val widthBased = usableWidth / columnCount
         val widthFromHeight = (usableHeight / rowCount) * CARD_ASPECT_RATIO
-        val cardWidthPx = min(widthBased, widthFromHeight).coerceAtLeast(112f)
+        val cardWidthLimitPx = with(density) { CARD_MAX_WIDTH_DP.dp.toPx() }
+        val cardHeightLimitPx = with(density) { CARD_MAX_HEIGHT_DP.dp.toPx() }
+        val rawWidthPx = min(widthBased, widthFromHeight)
+        val cappedWidthPx = min(rawWidthPx, cardWidthLimitPx)
+        val cappedHeightPx = cappedWidthPx / CARD_ASPECT_RATIO
+        val adjustedWidthPx = if (cappedHeightPx > cardHeightLimitPx) {
+            cardHeightLimitPx * CARD_ASPECT_RATIO
+        } else {
+            cappedWidthPx
+        }
+        val cardWidthPx = max(adjustedWidthPx, 112f)
         val cardHeightPx = cardWidthPx / CARD_ASPECT_RATIO
         val contentWidthPx = columnCount * cardWidthPx + spacingPx * (columnCount - 1)
         val contentHeightPx = rowCount * cardHeightPx + spacingPx * (rowCount - 1)

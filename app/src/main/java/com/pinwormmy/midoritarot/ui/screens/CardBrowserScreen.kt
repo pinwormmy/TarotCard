@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -219,6 +221,7 @@ private fun CardBrowserItem(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
+                .widthIn(max = CARD_MAX_WIDTH_DP.dp)
                 .aspectRatio(CARD_ASPECT_RATIO),
             shape = TarotCardShape
         ) {
@@ -278,6 +281,7 @@ private fun CardDetailOverlay(
                     card = card,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .widthIn(max = CARD_MAX_WIDTH_DP.dp)
                         .aspectRatio(CARD_ASPECT_RATIO),
                     shape = TarotCardShape
                 )

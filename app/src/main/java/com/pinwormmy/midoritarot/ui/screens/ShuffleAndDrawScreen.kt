@@ -70,6 +70,8 @@ import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
+import com.pinwormmy.midoritarot.ui.components.CARD_MAX_HEIGHT_DP
 import com.pinwormmy.midoritarot.ui.components.CARD_LANDSCAPE_RATIO
 import com.pinwormmy.midoritarot.ui.components.ShufflePhase
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
@@ -208,8 +210,10 @@ fun ShuffleAndDrawScreen(
                     // 셔플/컷용 세로 카드 비율
                     val widthFactor = if (uiState.cutMode) 0.9f else 0.7f
                     val maxWidthByHeight = maxHeight * CARD_ASPECT_RATIO
-                    val cardWidth = (maxWidth * widthFactor).coerceAtMost(maxWidthByHeight)
-                    val cardHeight = cardWidth / CARD_ASPECT_RATIO // 2:3 비율
+                    val proposedWidth = (maxWidth * widthFactor).coerceAtMost(maxWidthByHeight)
+                    val cappedWidth = proposedWidth.coerceAtMost(CARD_MAX_WIDTH_DP.dp)
+                    val cardHeight = (cappedWidth / CARD_ASPECT_RATIO).coerceAtMost(CARD_MAX_HEIGHT_DP.dp)
+                    val cardWidth = cardHeight * CARD_ASPECT_RATIO
 
                     if (uiState.gridVisible) {
                         // ✅ 드로우 그리드: 여기 안에서만 가로 카드 처리

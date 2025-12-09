@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -32,6 +33,7 @@ import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardCategory
 import com.pinwormmy.midoritarot.ui.state.category
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 
@@ -122,6 +124,7 @@ private fun CardLibraryItem(
                 card = card,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .widthIn(max = CARD_MAX_WIDTH_DP.dp)
                     .aspectRatio(CARD_ASPECT_RATIO),
                 shape = shape
             )

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -43,6 +44,8 @@ import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.DAILY_CARD_MAX_WIDTH_DP
+import com.pinwormmy.midoritarot.ui.components.DAILY_CARD_MAX_HEIGHT_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
@@ -127,7 +130,12 @@ fun DailyCardScreen(
                     DailyCardDisplay(
                         card = card,
                         isBack = isBack,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .sizeIn(
+                                maxWidth = DAILY_CARD_MAX_WIDTH_DP.dp,
+                                maxHeight = DAILY_CARD_MAX_HEIGHT_DP.dp
+                            )
                     )
                 }
 
@@ -191,15 +199,15 @@ private fun DailyCardDisplay(
                     shape = TarotCardShape
                 )
             } else {
-                CardBackArt(
-                    modifier = Modifier.fillMaxSize(),
-                    overlay = Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0x66000000))
-                    ),
-                    shape = TarotCardShape
-                )
-            }
-        }
+        CardBackArt(
+            modifier = Modifier.fillMaxSize(),
+            overlay = Brush.verticalGradient(
+                listOf(Color.Transparent, Color(0x66000000))
+            ),
+            shape = TarotCardShape
+        )
+    }
+}
     }
 }
 

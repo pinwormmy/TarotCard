@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
+import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -90,6 +92,7 @@ private fun CardDetailBody(
             card = card,
             modifier = Modifier
                 .fillMaxWidth()
+                .widthIn(max = CARD_MAX_WIDTH_DP.dp)
                 .aspectRatio(CARD_ASPECT_RATIO)
         )
         Text(

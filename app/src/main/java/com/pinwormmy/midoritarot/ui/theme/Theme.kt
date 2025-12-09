@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.graphics.Color
 import com.pinwormmy.midoritarot.ui.state.CardBackStyle
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
@@ -36,6 +37,9 @@ fun TarotcardTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = colorSchemeForSkin(skin)
+    val configuration = LocalConfiguration.current
+    val isTablet = configuration.smallestScreenWidthDp >= 600
+    val typography = if (isTablet) TypographyTablet else Typography
 
     CompositionLocalProvider(
         LocalTarotSkin provides skin,
@@ -44,7 +48,7 @@ fun TarotcardTheme(
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = Typography,
+            typography = typography,
             content = content
         )
     }
