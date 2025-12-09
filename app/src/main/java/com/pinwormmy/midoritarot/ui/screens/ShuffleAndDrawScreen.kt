@@ -206,7 +206,9 @@ fun ShuffleAndDrawScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     // 셔플/컷용 세로 카드 비율
-                    val cardWidth = maxWidth * 0.7f
+                    val widthFactor = if (uiState.cutMode) 0.9f else 0.7f
+                    val maxWidthByHeight = maxHeight * CARD_ASPECT_RATIO
+                    val cardWidth = (maxWidth * widthFactor).coerceAtMost(maxWidthByHeight)
                     val cardHeight = cardWidth / CARD_ASPECT_RATIO // 2:3 비율
 
                     if (uiState.gridVisible) {
