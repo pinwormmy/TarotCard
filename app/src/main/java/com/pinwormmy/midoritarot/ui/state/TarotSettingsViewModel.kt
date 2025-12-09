@@ -27,7 +27,7 @@ enum class CardFaceSkin(
     val folder: String,
     val previewImage: String
 ) {
-    Animation("애니메이션", "animation", "tarot00")
+    Animation("일본 애니", "animation", "tarot00")
 }
 
 @SuppressLint("NewApi")

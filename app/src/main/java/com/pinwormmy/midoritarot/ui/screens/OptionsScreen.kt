@@ -328,11 +328,11 @@ private fun CardFaceSkinSelector(
                             color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
                                 alpha = 0.3f
                             ),
-                            shape = RoundedCornerShape(18.dp)
+                            shape = TarotCardShape
                         )
                         .onGloballyPositioned { itemBounds.value = it.boundsInRoot() }
                         .clickable { onPreview(skin, itemBounds.value) },
-                    shape = RoundedCornerShape(18.dp),
+                    shape = TarotCardShape,
                     tonalElevation = if (isSelected) 6.dp else 2.dp
                 ) {
                     CardFaceArt(
@@ -478,7 +478,7 @@ private fun CardFacePreviewModal(
                 fontWeight = FontWeight.Bold
             )
             Surface(
-                shape = RoundedCornerShape(18.dp),
+                shape = TarotCardShape,
                 tonalElevation = 8.dp
             ) {
                 CardFaceArt(
@@ -590,7 +590,7 @@ private fun CardBackPreviewModal(
                 fontWeight = FontWeight.Bold
             )
             Surface(
-                shape = RoundedCornerShape(18.dp),
+                shape = TarotCardShape,
                 tonalElevation = 8.dp
             ) {
                 CardBackArt(
