@@ -1,5 +1,6 @@
 package com.pinwormmy.midoritarot.notifications
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -34,10 +35,10 @@ class DailyCardNotificationWorker(
         return Result.success()
     }
 
+    @SuppressLint("MissingPermission") // permission is checked in canPostNotifications()
     private fun showNotification() {
-        val channelId = "daily_card_channel"
-        ensureChannel(channelId)
-        if (!canPostNotifications(channelId)) return
+        ensureChannel()
+        if (!canPostNotifications()) return
 
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -49,9 +50,9 @@ class DailyCardNotificationWorker(
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val notification = NotificationCompat.Builder(applicationContext, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("타로테스트")
+        val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_stat_name)
+            .setContentTitle("미도리 타로")
             .setContentText("오늘은 무슨 일이 생길까? 오늘의 타로카드를 뽑아보세요!")
             .setStyle(
                 NotificationCompat.BigTextStyle().bigText(
@@ -66,7 +67,7 @@ class DailyCardNotificationWorker(
         NotificationManagerCompat.from(applicationContext).notify(NOTIFICATION_ID, notification)
     }
 
-    private fun canPostNotifications(channelId: String): Boolean {
+    private fun canPostNotifications(): Boolean {
         val notificationManager = NotificationManagerCompat.from(applicationContext)
         val hasPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ContextCompat.checkSelfPermission(
@@ -79,16 +80,16 @@ class DailyCardNotificationWorker(
         if (!hasPermission) return false
         if (!notificationManager.areNotificationsEnabled()) return false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = notificationManager.getNotificationChannel(channelId)
+            val channel = notificationManager.getNotificationChannel(CHANNEL_ID)
             if (channel?.importance == NotificationManager.IMPORTANCE_NONE) return false
         }
         return true
     }
 
-    private fun ensureChannel(channelId: String) {
+    private fun ensureChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
+                CHANNEL_ID,
                 applicationContext.getString(R.string.app_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
@@ -101,5 +102,6 @@ class DailyCardNotificationWorker(
 
     companion object {
         private const val NOTIFICATION_ID = 1001
+        private const val CHANNEL_ID = "daily_card_channel"
     }
 }
