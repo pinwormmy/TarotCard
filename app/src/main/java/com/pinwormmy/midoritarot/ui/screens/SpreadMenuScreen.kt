@@ -22,7 +22,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +35,7 @@ import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.R
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,9 +59,7 @@ fun SpreadMenuScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
-                )
+                colors = TarotUiDefaults.topBarColors()
             )
         }
     ) { innerPadding ->

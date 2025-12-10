@@ -1,53 +1,38 @@
 package com.pinwormmy.midoritarot.assets
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import org.json.JSONArray
 import java.util.Locale
+import org.json.JSONArray
+import org.json.JSONObject
 
 object TarotJsonLoader {
     fun load(
         context: Context,
         fileName: String = "tarot_data.json"
     ): List<TarotCardModel> {
-        val locale = Locale.getDefault().language.lowercase()
-        val preferredFile = when (locale) {
-            "en" -> "tarot_data_en.json"
-            "ja" -> "tarot_data_ja.json"
-            "th" -> "tarot_data_th.json"
-            else -> fileName
-        }
-        val json = runCatching {
-            context.assets.open(preferredFile).bufferedReader().use { it.readText() }
-        }.getOrElse {
-            context.assets.open(fileName).bufferedReader().use { it.readText() }
-        }
+        val locale = currentLocale(context)
+        val json = context.assets.open(fileName).bufferedReader().use { it.readText() }
         val array = JSONArray(json)
         val cards = mutableListOf<TarotCardModel>()
         for (index in 0 until array.length()) {
             val item = array.getJSONObject(index)
-            val keywordsArray = item.optJSONArray("keywords")
-            val keywords = buildList {
-                if (keywordsArray != null) {
-                    for (i in 0 until keywordsArray.length()) {
-                        add(keywordsArray.optString(i))
-                    }
-                }
-            }
-            val uprightMeaning = item.optString("uprightMeaning")
-                .takeIf { it.isNotBlank() }
-                ?: item.optString("meaning")
-            val reversedMeaning = item.optString("reversedMeaning")
-                .takeIf { it.isNotBlank() }
-                ?: "Blocked energy, delays, or the shadow of ${item.optString("name")}"
-            val description = item.optString("description")
-                .takeIf { it.isNotBlank() }
-                ?: uprightMeaning
+            val keywords = localizedKeywords(item, locale)
+            val name = localizedString(item, "name", locale)
+            val arcana = localizedString(item, "arcana", locale)
+            val uprightMeaning = localizedString(item, "uprightMeaning", locale)
+                .ifBlank { item.optString("meaning") }
+            val reversedMeaning = localizedString(item, "reversedMeaning", locale)
+                .ifBlank { "Blocked energy, delays, or the shadow of $name" }
+            val description = localizedString(item, "description", locale)
+                .ifBlank { uprightMeaning }
 
             cards += TarotCardModel(
                 id = item.getString("id"),
-                name = item.getString("name"),
-                arcana = item.optString("arcana"),
+                name = name,
+                arcana = arcana,
                 uprightMeaning = uprightMeaning,
                 reversedMeaning = reversedMeaning,
                 description = description,
@@ -56,5 +41,34 @@ object TarotJsonLoader {
             )
         }
         return cards
+    }
+}
+
+private fun currentLocale(context: Context): Locale {
+    val appLocales: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
+    val locale = appLocales.get(0)
+        ?: context.resources.configuration.locales.get(0)
+        ?: Locale.getDefault()
+    return locale
+}
+
+private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): String {
+    val lang = locale.language.lowercase()
+    val localizedKey = "${baseKey}_${lang}"
+    return item.optString(localizedKey)
+        .takeIf { it.isNotBlank() }
+        ?: item.optString(baseKey)
+}
+
+private fun localizedKeywords(item: JSONObject, locale: Locale): List<String> {
+    val lang = locale.language.lowercase()
+    val localizedKey = "keywords_${lang}"
+    val keywordsArray = item.optJSONArray(localizedKey) ?: item.optJSONArray("keywords")
+    return buildList {
+        if (keywordsArray != null) {
+            for (i in 0 until keywordsArray.length()) {
+                add(keywordsArray.optString(i))
+            }
+        }
     }
 }

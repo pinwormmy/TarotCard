@@ -5,6 +5,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +19,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -57,6 +57,7 @@ import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
 import com.pinwormmy.midoritarot.R
@@ -164,7 +165,7 @@ fun ReadingResultScreen(
                     Text(
                         text = "Q. $questionText",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White.copy(alpha = 0.8f),
+                        color = TarotUiDefaults.hint(0.8f),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -292,14 +293,14 @@ private fun ResultPlaceholderCard(
     Box(
         modifier = modifier
             .clip(TarotCardShape)
-            .background(Color(0xFF1E2038).copy(alpha = 0.8f)),
+            .background(TarotUiDefaults.secondaryPanelColor(alpha = 0.85f)),
         contentAlignment = Alignment.Center
     ) {
         Text(
             modifier = Modifier.padding(12.dp),
             text = label,
             textAlign = TextAlign.Center,
-            color = Color.White.copy(alpha = 0.6f)
+            color = TarotUiDefaults.hint(0.7f)
         )
     }
 }
@@ -374,7 +375,7 @@ private fun ReadingResultOverlay(
     onBackgroundTapped: () -> Unit,
     onDescriptionDismiss: () -> Unit
 ) {
-    val dimColor = Color.Black.copy(alpha = 0.7f)
+    val dimColor = TarotUiDefaults.scrimColor()
     val density = LocalDensity.current
     val backgroundInteraction = remember { MutableInteractionSource() }
 
@@ -396,12 +397,12 @@ private fun ReadingResultOverlay(
                 text = headerTitle,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFF3F2FF)
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 text = slotDescription,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color(0xFFE6E5F5),
+                color = TarotUiDefaults.hint(0.85f),
                 textAlign = TextAlign.Center
             )
         }
@@ -419,8 +420,9 @@ private fun ReadingResultOverlay(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(24.dp)
-                    .clip(RoundedCornerShape(24.dp))
-                    .background(Color(0xFF1F1F2E))
+                    .clip(TarotUiDefaults.sheetShape)
+                    .background(TarotUiDefaults.panelColor(), TarotUiDefaults.sheetShape)
+                    .border(TarotUiDefaults.panelBorder(), TarotUiDefaults.sheetShape)
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -431,22 +433,30 @@ private fun ReadingResultOverlay(
                     text = card.name,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFF8F8FF)
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 if (card.keywords.isNotEmpty()) {
                     Text(
                         text = card.keywords.joinToString(separator = " • "),
-                        color = Color(0xFFEAE8FF),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
                 }
                 if (meaningTitle != null) {
-                    Text(text = meaningTitle, fontWeight = FontWeight.SemiBold, color = Color(0xFFF3F2FF))
+                    Text(
+                        text = meaningTitle,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
-                Text(text = meaningBody, textAlign = TextAlign.Center, color = Color(0xFFECEBFF))
+                Text(
+                    text = meaningBody,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
                 Text(
                     text = stringResource(id = R.string.reading_result_close_hint),
-                    color = Color.White.copy(alpha = 0.7f),
+                    color = TarotUiDefaults.hint(),
                     textAlign = TextAlign.Center
                 )
             }
@@ -495,7 +505,7 @@ private fun ReadingResultOverlay(
                         .padding(horizontal = 24.dp),
                     text = stringResource(id = R.string.reading_result_touch_hint),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.82f)
+                    color = TarotUiDefaults.hint(0.82f)
                 )
             }
 

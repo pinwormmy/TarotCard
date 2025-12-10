@@ -22,6 +22,11 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import com.pinwormmy.midoritarot.assets.backAssetPath
+import com.pinwormmy.midoritarot.assets.backDrawableResId
+import com.pinwormmy.midoritarot.assets.faceAssetPath
+import com.pinwormmy.midoritarot.assets.faceDrawableResId
+import com.pinwormmy.midoritarot.assets.normalizedFaceName
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.theme.LocalCardFaceSkin
@@ -35,17 +40,12 @@ fun rememberCardPainter(
     faceSkin: CardFaceSkin = LocalCardFaceSkin.current
 ): Painter? {
     val context = LocalContext.current
-    val normalized = remember(card.id, card.imageUrl) {
-        (card.imageUrl ?: card.id).lowercase()
-    }
+    val normalized = remember(card.id, card.imageUrl) { normalizedFaceName(card) }
     val key = "${faceSkin.folder}:$normalized"
-    val resId = remember(key, context) {
-        context.resources.getIdentifier(normalized, "drawable", context.packageName)
-            .takeIf { it != 0 }
-    }
+    val resId = remember(key, context) { faceDrawableResId(context, normalized) }
     if (resId != null) return painterResource(id = resId)
 
-    val assetPath = remember(key) { "skins/${faceSkin.folder}/$normalized.jpg" }
+    val assetPath = remember(key) { faceAssetPath(card, faceSkin) }
     return rememberAssetBitmapPainter(key = key, assetPath = assetPath)
 }
 
@@ -57,13 +57,10 @@ fun rememberCardBackPainter(
     val context = LocalContext.current
     val style = backStyle ?: com.pinwormmy.midoritarot.ui.theme.LocalCardBackStyle.current
     val key = style.assetName.lowercase()
-    val resId = remember(key, context) {
-        context.resources.getIdentifier(key, "drawable", context.packageName)
-            .takeIf { it != 0 }
-    }
+    val resId = remember(key, context) { backDrawableResId(context, style) }
     if (resId != null) return painterResource(id = resId)
 
-    val assetPath = remember(key) { "skins/cardback/$key.jpg" }
+    val assetPath = remember(key) { backAssetPath(style) }
     return rememberAssetBitmapPainter(key = key, assetPath = assetPath)
 }
 

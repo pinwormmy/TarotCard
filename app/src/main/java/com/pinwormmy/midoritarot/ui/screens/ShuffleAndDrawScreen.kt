@@ -80,6 +80,7 @@ import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import androidx.compose.ui.platform.LocalWindowInfo
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.R
@@ -436,11 +437,11 @@ private fun OutlineLargeButton(
 ) {
     OutlinedButton(
         modifier = modifier.height(56.dp),
-        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.4f)),
+        border = BorderStroke(1.dp, TarotUiDefaults.outline(0.5f)),
         shape = RoundedCornerShape(18.dp),
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.Transparent,
-            contentColor = Color.White
+            contentColor = MaterialTheme.colorScheme.onSurface
         ),
         enabled = enabled,
         onClick = onClick

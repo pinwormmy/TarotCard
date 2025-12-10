@@ -3,6 +3,7 @@ package com.pinwormmy.midoritarot.ui.state
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.pinwormmy.midoritarot.core.localization.LocalizedString
 import com.pinwormmy.midoritarot.data.SettingsRepository
 import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.TarotSkins
@@ -13,40 +14,24 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-data class LocalizedName(
-    val ko: String,
-    val en: String,
-    val ja: String? = null,
-    val th: String? = null
-) {
-    fun resolve(locale: Locale = Locale.getDefault()): String {
-        return when (locale.language.lowercase()) {
-            "en" -> en.ifBlank { ko }
-            "ja" -> ja?.takeIf { it.isNotBlank() } ?: ko
-            "th" -> th?.takeIf { it.isNotBlank() } ?: ko
-            else -> ko
-        }
-    }
-}
-
 enum class CardBackStyle(
-    val displayName: LocalizedName,
+    val displayName: LocalizedString,
     val assetName: String
 ) {
     Byzantine(
-        displayName = LocalizedName(ko = "비잔틴", en = "Byzantine"),
+        displayName = LocalizedString(ko = "비잔틴", en = "Byzantine"),
         assetName = "byzantine"
     ),
     LightBrown(
-        displayName = LocalizedName(ko = "라이트 브라운", en = "Light Brown"),
+        displayName = LocalizedString(ko = "라이트 브라운", en = "Light Brown"),
         assetName = "lightbrown"
     ),
     RoseMoon(
-        displayName = LocalizedName(ko = "로즈 문", en = "Rose Moon"),
+        displayName = LocalizedString(ko = "로즈 문", en = "Rose Moon"),
         assetName = "rosemoon"
     ),
     Persia(
-        displayName = LocalizedName(ko = "페르시아", en = "Persia"),
+        displayName = LocalizedString(ko = "페르시아", en = "Persia"),
         assetName = "persia"
     );
 
@@ -54,12 +39,12 @@ enum class CardBackStyle(
 }
 
 enum class CardFaceSkin(
-    val displayName: LocalizedName,
+    val displayName: LocalizedString,
     val folder: String,
     val previewImage: String
 ) {
     Animation(
-        displayName = LocalizedName(ko = "일본 애니", en = "Anime"),
+        displayName = LocalizedString(ko = "일본 애니", en = "Anime"),
         folder = "animation",
         previewImage = "tarot00"
     );

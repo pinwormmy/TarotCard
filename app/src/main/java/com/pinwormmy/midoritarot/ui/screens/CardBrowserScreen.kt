@@ -29,7 +29,6 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -59,6 +58,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.platform.LocalDensity
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
@@ -115,9 +115,7 @@ fun CardBrowserScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
-                )
+                colors = TarotUiDefaults.topBarColors()
             )
         }
     ) { innerPadding ->
@@ -279,7 +277,7 @@ private fun CardDetailOverlay(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f)),
+            .background(TarotUiDefaults.scrimColor()),
         contentAlignment = Alignment.Center
     ) {
         Box(
@@ -316,9 +314,10 @@ private fun CardDetailOverlay(
                 modifier = Modifier
                     .padding(horizontal = 24.dp)
                     .clickable(onClick = onCloseAll),
-                shape = TarotCardShape,
+                shape = TarotUiDefaults.panelShape,
                 tonalElevation = 8.dp,
-                color = MaterialTheme.colorScheme.surface
+                color = TarotUiDefaults.panelColor(),
+                border = TarotUiDefaults.panelBorder()
             ) {
                 Column(
                     modifier = Modifier

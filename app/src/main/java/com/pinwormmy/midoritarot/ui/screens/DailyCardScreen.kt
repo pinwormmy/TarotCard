@@ -3,6 +3,7 @@ package com.pinwormmy.midoritarot.ui.screens
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +47,6 @@ import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.platform.LocalContext
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
@@ -55,6 +54,7 @@ import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.R
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,9 +84,7 @@ fun DailyCardScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
-                )
+                colors = TarotUiDefaults.centerTopBarColors()
             )
         }
     ) { innerPadding ->
@@ -114,7 +112,7 @@ fun DailyCardScreen(
                             stringResource(id = R.string.daily_card_hint_double)
                         },
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                        color = TarotUiDefaults.hint()
                     )
                 }
 
@@ -150,7 +148,7 @@ fun DailyCardScreen(
                     },
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.85f)
+                    color = TarotUiDefaults.hint(0.85f)
                 )
             }
 
@@ -201,7 +199,7 @@ private fun DailyCardDisplay(
                     rotationZ = faceRotation
                 }
                 .clip(TarotCardShape)
-                .background(Color(0xFF0F0F1A)),
+                .background(TarotUiDefaults.secondaryPanelColor(alpha = 0.9f)),
             contentAlignment = Alignment.Center
         ) {
             if (!isBack) {
@@ -232,7 +230,7 @@ private fun DailyCardDescriptionSheet(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f))
+            .background(TarotUiDefaults.scrimColor())
             .clickable(onClick = onDismiss),
         contentAlignment = Alignment.Center
     ) {
@@ -240,8 +238,9 @@ private fun DailyCardDescriptionSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
-                .clip(RoundedCornerShape(28.dp))
-                .background(MaterialTheme.colorScheme.surface)
+                .clip(TarotUiDefaults.sheetShape)
+                .background(TarotUiDefaults.panelColor(), TarotUiDefaults.sheetShape)
+                .border(TarotUiDefaults.panelBorder(), TarotUiDefaults.sheetShape)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)

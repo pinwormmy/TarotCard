@@ -13,7 +13,19 @@
       "잠재력",
       "낙관"
     ],
-    "imageUrl": "tarot00"
+    "imageUrl": "tarot00",
+    "name_en": "The Fool",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "A fresh start and innocent trust invite serendipity and bold adventures.",
+    "reversedMeaning_en": "Reckless leaps or fear of leaping lead to avoidable chaos; pause and ground yourself.",
+    "description_en": "A carefree youth at the cliff’s edge, white rose and knapsack in hand.",
+    "keywords_en": [
+      "beginnings",
+      "innocence",
+      "trust",
+      "potential",
+      "optimism"
+    ]
   },
   {
     "id": "major_01",
@@ -29,7 +41,19 @@
       "재치",
       "힘"
     ],
-    "imageUrl": "tarot01"
+    "imageUrl": "tarot01",
+    "name_en": "The Magician",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Focused will channels resources into tangible results; skill aligns heaven and earth.",
+    "reversedMeaning_en": "Scattered intent or manipulation drains power; regain authenticity before acting.",
+    "description_en": "A conduit between realms, raising a wand and pointing to earth.",
+    "keywords_en": [
+      "manifestation",
+      "skill",
+      "initiative",
+      "resourcefulness",
+      "power"
+    ]
   },
   {
     "id": "major_02",
@@ -44,7 +68,19 @@
       "잠재의식",
       "꿈"
     ],
-    "imageUrl": "tarot02"
+    "imageUrl": "tarot02",
+    "name_en": "The High Priestess",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Quiet intuition reveals subtle truths; trust the wisdom beyond logic.",
+    "reversedMeaning_en": "Secrets and silence breed confusion; share what you feel instead of hiding.",
+    "description_en": "Guardian of mystery seated between light and shadow.",
+    "keywords_en": [
+      "intuition",
+      "mystery",
+      "inner voice",
+      "stillness",
+      "esoteric"
+    ]
   },
   {
     "id": "major_03",
@@ -60,7 +96,19 @@
       "아름다움",
       "안락"
     ],
-    "imageUrl": "tarot03"
+    "imageUrl": "tarot03",
+    "name_en": "The Empress",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Nurturing abundance, creativity, and sensual comfort bloom under her care.",
+    "reversedMeaning_en": "Overprotection or creative block; tend to yourself as you would another.",
+    "description_en": "A sovereign of fertile fields and gentle authority.",
+    "keywords_en": [
+      "abundance",
+      "care",
+      "creativity",
+      "fertility",
+      "comfort"
+    ]
   },
   {
     "id": "major_04",
@@ -75,7 +123,19 @@
       "질서",
       "보호"
     ],
-    "imageUrl": "tarot04"
+    "imageUrl": "tarot04",
+    "name_en": "The Emperor",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Structure, strategy, and decisive leadership create stability.",
+    "reversedMeaning_en": "Rigidity or control issues undermine authority; lead with balance, not force.",
+    "description_en": "An armored ruler on a stone throne, symbol of order and will.",
+    "keywords_en": [
+      "authority",
+      "structure",
+      "discipline",
+      "stability",
+      "strategy"
+    ]
   },
   {
     "id": "major_05",
@@ -90,7 +150,19 @@
       "학습",
       "의식"
     ],
-    "imageUrl": "tarot05"
+    "imageUrl": "tarot05",
+    "name_en": "The Hierophant",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Tradition, shared beliefs, and mentorship offer guidance and belonging.",
+    "reversedMeaning_en": "Dogma stifles; question rules and reclaim personal meaning.",
+    "description_en": "A spiritual teacher between pillars, blessing seekers.",
+    "keywords_en": [
+      "tradition",
+      "faith",
+      "mentorship",
+      "conformity",
+      "teaching"
+    ]
   },
   {
     "id": "major_06",
@@ -106,7 +178,19 @@
       "사랑",
       "가치"
     ],
-    "imageUrl": "tarot06"
+    "imageUrl": "tarot06",
+    "name_en": "The Lovers",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Alignment of values and heartfelt choice create harmonious union.",
+    "reversedMeaning_en": "Misalignment or indecision strains bonds; return to core truth.",
+    "description_en": "Two figures under an angel, choosing with open hearts.",
+    "keywords_en": [
+      "union",
+      "choice",
+      "values",
+      "partnership",
+      "attraction"
+    ]
   },
   {
     "id": "major_07",
@@ -121,7 +205,19 @@
       "통제",
       "성공"
     ],
-    "imageUrl": "tarot07"
+    "imageUrl": "tarot07",
+    "name_en": "The Chariot",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Willpower and focus steer opposing forces toward victory.",
+    "reversedMeaning_en": "Lack of direction or forcefulness causes drift; regain control with clarity.",
+    "description_en": "A determined driver guiding two sphinxes forward.",
+    "keywords_en": [
+      "drive",
+      "determination",
+      "victory",
+      "control",
+      "momentum"
+    ]
   },
   {
     "id": "major_08",
@@ -136,7 +232,19 @@
       "내적 힘",
       "연민"
     ],
-    "imageUrl": "tarot08"
+    "imageUrl": "tarot08",
+    "name_en": "Strength",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Gentle courage and inner calm tame wild energy.",
+    "reversedMeaning_en": "Self-doubt or suppressed anger; meet fear with compassion.",
+    "description_en": "A woman closing a lion’s jaws with serene grace.",
+    "keywords_en": [
+      "courage",
+      "compassion",
+      "patience",
+      "inner power",
+      "taming"
+    ]
   },
   {
     "id": "major_09",
@@ -151,7 +259,19 @@
       "고독",
       "인도"
     ],
-    "imageUrl": "tarot09"
+    "imageUrl": "tarot09",
+    "name_en": "The Hermit",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Solitude and reflection reveal inner guidance; seek your own lamp.",
+    "reversedMeaning_en": "Isolation or avoidance; step out to reconnect after insight.",
+    "description_en": "An old sage holds a lantern on a snowy peak.",
+    "keywords_en": [
+      "introspection",
+      "wisdom",
+      "retreat",
+      "guidance",
+      "solitude"
+    ]
   },
   {
     "id": "major_10",
@@ -166,7 +286,19 @@
       "기회",
       "전환점"
     ],
-    "imageUrl": "tarot10"
+    "imageUrl": "tarot10",
+    "name_en": "Wheel of Fortune",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Cycles turn; luck and change invite adaptability and faith.",
+    "reversedMeaning_en": "Resistance to change or feeling stuck; adjust and participate in the turn.",
+    "description_en": "A great wheel in motion, ringed by symbols of fate.",
+    "keywords_en": [
+      "cycles",
+      "destiny",
+      "chance",
+      "turning point",
+      "karma"
+    ]
   },
   {
     "id": "major_11",
@@ -181,7 +313,19 @@
       "법",
       "인과"
     ],
-    "imageUrl": "tarot11"
+    "imageUrl": "tarot11",
+    "name_en": "Justice",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Balance, truth, and fair consequences come to light.",
+    "reversedMeaning_en": "Bias, dishonesty, or avoidance of responsibility; restore equilibrium.",
+    "description_en": "A figure with scales and sword seated in clarity.",
+    "keywords_en": [
+      "fairness",
+      "truth",
+      "law",
+      "cause and effect",
+      "balance"
+    ]
   },
   {
     "id": "major_12",
@@ -196,7 +340,19 @@
       "관점",
       "멈춤"
     ],
-    "imageUrl": "tarot12"
+    "imageUrl": "tarot12",
+    "name_en": "The Hanged Man",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Pause and see from a new angle; surrender opens insight.",
+    "reversedMeaning_en": "Stalling or martyrdom; choose movement once perspective is gained.",
+    "description_en": "A serene figure hangs upside down with a halo.",
+    "keywords_en": [
+      "surrender",
+      "perspective",
+      "pause",
+      "sacrifice",
+      "acceptance"
+    ]
   },
   {
     "id": "major_13",
@@ -211,7 +367,19 @@
       "재탄생",
       "마무리"
     ],
-    "imageUrl": "tarot13"
+    "imageUrl": "tarot13",
+    "name_en": "Death",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "An ending clears space for transformation and renewal.",
+    "reversedMeaning_en": "Fear of change or clinging delays growth; let go gently.",
+    "description_en": "A skeletal rider heralds unavoidable transition.",
+    "keywords_en": [
+      "ending",
+      "transition",
+      "release",
+      "rebirth",
+      "closure"
+    ]
   },
   {
     "id": "major_14",
@@ -226,7 +394,19 @@
       "치유",
       "인내"
     ],
-    "imageUrl": "tarot14"
+    "imageUrl": "tarot14",
+    "name_en": "Temperance",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Balance and patience blend opposites into harmony.",
+    "reversedMeaning_en": "Excess or imbalance; re-center and moderate your pace.",
+    "description_en": "An angel pours water between two cups, grounding and flowing.",
+    "keywords_en": [
+      "balance",
+      "moderation",
+      "healing",
+      "patience",
+      "alchemy"
+    ]
   },
   {
     "id": "major_15",
@@ -241,7 +421,19 @@
       "물질주의",
       "속박"
     ],
-    "imageUrl": "tarot15"
+    "imageUrl": "tarot15",
+    "name_en": "The Devil",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Attachments, temptation, or shadow desires seek conscious choice.",
+    "reversedMeaning_en": "Loosening chains and reclaiming power; release unhealthy bonds.",
+    "description_en": "A horned figure with chained lovers at his feet.",
+    "keywords_en": [
+      "shadow",
+      "temptation",
+      "bondage",
+      "materialism",
+      "desire"
+    ]
   },
   {
     "id": "major_16",
@@ -256,7 +448,19 @@
       "붕괴",
       "각성"
     ],
-    "imageUrl": "tarot16"
+    "imageUrl": "tarot16",
+    "name_en": "The Tower",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Sudden upheaval shatters false structures, clearing truth.",
+    "reversedMeaning_en": "Avoiding necessary change prolongs instability; rebuild with honesty.",
+    "description_en": "Lightning strikes a tower, figures fall as crowns tumble.",
+    "keywords_en": [
+      "upheaval",
+      "revelation",
+      "collapse",
+      "awakening",
+      "liberation"
+    ]
   },
   {
     "id": "major_17",
@@ -271,7 +475,19 @@
       "영감",
       "평온"
     ],
-    "imageUrl": "tarot17"
+    "imageUrl": "tarot17",
+    "name_en": "The Star",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Hope, healing, and gentle guidance return after storms.",
+    "reversedMeaning_en": "Doubt clouds the light; reconnect to faith and self-worth.",
+    "description_en": "A calm figure pours water beneath a starlit sky.",
+    "keywords_en": [
+      "hope",
+      "healing",
+      "guidance",
+      "renewal",
+      "inspiration"
+    ]
   },
   {
     "id": "major_18",
@@ -286,7 +502,19 @@
       "잠재의식",
       "두려움"
     ],
-    "imageUrl": "tarot18"
+    "imageUrl": "tarot18",
+    "name_en": "The Moon",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Dreams, intuition, and uncertainty blur the path; move with feeling.",
+    "reversedMeaning_en": "Confusion lifts; name your fears and trust small steps.",
+    "description_en": "A moonlit path between towers, animals howling to the night.",
+    "keywords_en": [
+      "intuition",
+      "illusion",
+      "fears",
+      "unconscious",
+      "dreams"
+    ]
   },
   {
     "id": "major_19",
@@ -301,7 +529,19 @@
       "따뜻함",
       "명료함"
     ],
-    "imageUrl": "tarot19"
+    "imageUrl": "tarot19",
+    "name_en": "The Sun",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Clarity, vitality, and joyful success shine brightly.",
+    "reversedMeaning_en": "Temporary clouds or over-optimism; reconnect to simple joy.",
+    "description_en": "A child rides beneath a radiant sun and banner.",
+    "keywords_en": [
+      "joy",
+      "success",
+      "vitality",
+      "clarity",
+      "warmth"
+    ]
   },
   {
     "id": "major_20",
@@ -316,7 +556,19 @@
       "용서",
       "자각"
     ],
-    "imageUrl": "tarot20"
+    "imageUrl": "tarot20",
+    "name_en": "Judgement",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Awakening and honest review lead to renewal and purpose.",
+    "reversedMeaning_en": "Self-criticism or avoidance stalls rebirth; accept the call.",
+    "description_en": "An angel’s horn calls figures to rise from the past.",
+    "keywords_en": [
+      "awakening",
+      "assessment",
+      "rebirth",
+      "absolution",
+      "calling"
+    ]
   },
   {
     "id": "major_21",
@@ -331,7 +583,19 @@
       "여행",
       "성취"
     ],
-    "imageUrl": "tarot21"
+    "imageUrl": "tarot21",
+    "name_en": "The World",
+    "arcana_en": "Major Arcana",
+    "uprightMeaning_en": "Completion and wholeness; a cycle ends and integration begins.",
+    "reversedMeaning_en": "Loose ends or delay in closure; finish and celebrate.",
+    "description_en": "A dancer in a wreath, embraced by four guardians.",
+    "keywords_en": [
+      "completion",
+      "wholeness",
+      "travel",
+      "integration",
+      "achievement"
+    ]
   },
   {
     "id": "cups_01",
@@ -348,7 +612,19 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": "cups01"
+    "imageUrl": "cups01",
+    "name_en": "Ace of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "New feelings, compassion, and creative flow overflow.",
+    "reversedMeaning_en": "Emotional block or withheld affection; let the heart breathe.",
+    "description_en": "An overflowing chalice held by a divine hand.",
+    "keywords_en": [
+      "new feelings",
+      "love",
+      "compassion",
+      "creativity",
+      "openness"
+    ]
   },
   {
     "id": "cups_02",
@@ -365,7 +641,19 @@
       "균형",
       "결정"
     ],
-    "imageUrl": "cups02"
+    "imageUrl": "cups02",
+    "name_en": "Two of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Mutual attraction and balanced partnership form a bond.",
+    "reversedMeaning_en": "Disconnection or imbalance; restore equal exchange.",
+    "description_en": "Two figures toast, caduceus rising between them.",
+    "keywords_en": [
+      "partnership",
+      "attraction",
+      "harmony",
+      "union",
+      "mutuality"
+    ]
   },
   {
     "id": "cups_03",
@@ -382,7 +670,19 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": "cups03"
+    "imageUrl": "cups03",
+    "name_en": "Three of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Celebration, friendship, and shared joy lift spirits.",
+    "reversedMeaning_en": "Overindulgence or exclusion; reconnect sincerely.",
+    "description_en": "Three friends raise cups in a joyful circle.",
+    "keywords_en": [
+      "celebration",
+      "community",
+      "friendship",
+      "joy",
+      "support"
+    ]
   },
   {
     "id": "cups_04",
@@ -399,7 +699,19 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": "cups04"
+    "imageUrl": "cups04",
+    "name_en": "Four of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Apathy and contemplation; a new offer is unnoticed.",
+    "reversedMeaning_en": "Re-engagement and fresh curiosity after stagnation.",
+    "description_en": "A seated figure ignores a cup offered from a cloud.",
+    "keywords_en": [
+      "apathy",
+      "reevaluation",
+      "boredom",
+      "introspection",
+      "offer"
+    ]
   },
   {
     "id": "cups_05",
@@ -416,7 +728,19 @@
       "도전",
       "변화"
     ],
-    "imageUrl": "cups05"
+    "imageUrl": "cups05",
+    "name_en": "Five of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Grief and regret focus on what’s lost; two cups remain.",
+    "reversedMeaning_en": "Acceptance and moving forward; hope slowly returns.",
+    "description_en": "A cloaked figure mourns spilled cups, two behind still full.",
+    "keywords_en": [
+      "loss",
+      "regret",
+      "grief",
+      "disappointment",
+      "perspective"
+    ]
   },
   {
     "id": "cups_06",
@@ -433,7 +757,19 @@
       "조화",
       "지지"
     ],
-    "imageUrl": "cups06"
+    "imageUrl": "cups06",
+    "name_en": "Six of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Nostalgia, kindness, and simple joy from the past.",
+    "reversedMeaning_en": "Living in the past or clinging; make space for now.",
+    "description_en": "Children share flowers in a peaceful courtyard.",
+    "keywords_en": [
+      "nostalgia",
+      "innocence",
+      "kindness",
+      "memories",
+      "comfort"
+    ]
   },
   {
     "id": "cups_07",
@@ -450,7 +786,19 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": "cups07"
+    "imageUrl": "cups07",
+    "name_en": "Seven of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Many choices and fantasies; discern what is real.",
+    "reversedMeaning_en": "Clarity after confusion; commit to one path.",
+    "description_en": "Seven cups filled with tempting visions in a cloud.",
+    "keywords_en": [
+      "choices",
+      "fantasy",
+      "temptation",
+      "illusion",
+      "dreaming"
+    ]
   },
   {
     "id": "cups_08",
@@ -467,7 +815,19 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": "cups08"
+    "imageUrl": "cups08",
+    "name_en": "Eight of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "A voluntary departure in search of deeper meaning.",
+    "reversedMeaning_en": "Fear of leaving or drifting aimlessly; choose with heart.",
+    "description_en": "A traveler walks away from stacked cups under moonlight.",
+    "keywords_en": [
+      "departure",
+      "search",
+      "letting go",
+      "introspection",
+      "journey"
+    ]
   },
   {
     "id": "cups_09",
@@ -484,7 +844,19 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": "cups09"
+    "imageUrl": "cups09",
+    "name_en": "Nine of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Contentment and wish fulfillment; enjoy what you have.",
+    "reversedMeaning_en": "Smugness or hollow success; seek genuine satisfaction.",
+    "description_en": "A pleased figure sits before nine displayed cups.",
+    "keywords_en": [
+      "satisfaction",
+      "gratitude",
+      "wish come true",
+      "comfort",
+      "pleasure"
+    ]
   },
   {
     "id": "cups_10",
@@ -501,7 +873,19 @@
       "유산",
       "가족"
     ],
-    "imageUrl": "cups10"
+    "imageUrl": "cups10",
+    "name_en": "Ten of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Emotional harmony, family, and shared bliss.",
+    "reversedMeaning_en": "Strained harmony or unrealistic ideals; nurture real bonds.",
+    "description_en": "A family rejoices beneath a rainbow of cups.",
+    "keywords_en": [
+      "harmony",
+      "family",
+      "joy",
+      "blessing",
+      "alignment"
+    ]
   },
   {
     "id": "cups_11",
@@ -518,7 +902,19 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": "cups11"
+    "imageUrl": "cups11",
+    "name_en": "Page of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Gentle messenger of feelings, creativity, and curiosity.",
+    "reversedMeaning_en": "Emotional immaturity or blocked inspiration; play with ideas.",
+    "description_en": "A youthful page holds a cup with a surprising fish.",
+    "keywords_en": [
+      "curiosity",
+      "imagination",
+      "intuition",
+      "messages",
+      "sensitivity"
+    ]
   },
   {
     "id": "cups_12",
@@ -535,7 +931,19 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": "cups12"
+    "imageUrl": "cups12",
+    "name_en": "Knight of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Romantic pursuit and heartfelt offers move forward.",
+    "reversedMeaning_en": "Moodiness or unrealistic ideals; balance dream with action.",
+    "description_en": "A knight rides calmly with a cup extended.",
+    "keywords_en": [
+      "romance",
+      "idealism",
+      "invitation",
+      "charm",
+      "quest"
+    ]
   },
   {
     "id": "cups_13",
@@ -552,7 +960,19 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": "cups13"
+    "imageUrl": "cups13",
+    "name_en": "Queen of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Compassionate, intuitive nurturing with emotional depth.",
+    "reversedMeaning_en": "Overwhelm or emotional withdrawal; re-center boundaries.",
+    "description_en": "A serene queen contemplates an ornate chalice.",
+    "keywords_en": [
+      "compassion",
+      "intuition",
+      "empathy",
+      "calm",
+      "support"
+    ]
   },
   {
     "id": "cups_14",
@@ -569,7 +989,19 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": "cups14"
+    "imageUrl": "cups14",
+    "name_en": "King of Cups",
+    "arcana_en": "Cups",
+    "uprightMeaning_en": "Emotional balance, diplomacy, and wise counsel.",
+    "reversedMeaning_en": "Emotional manipulation or volatility; steady the waters.",
+    "description_en": "A king on a throne atop rolling seas, cup in hand.",
+    "keywords_en": [
+      "balance",
+      "diplomacy",
+      "wisdom",
+      "supportive",
+      "calm authority"
+    ]
   },
   {
     "id": "wands_01",
@@ -586,7 +1018,19 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": "wands01"
+    "imageUrl": "wands01",
+    "name_en": "Ace of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "A spark of inspiration, initiative, and raw creative energy.",
+    "reversedMeaning_en": "Delayed start or blocked passion; clear the path to act.",
+    "description_en": "A hand extends a budding wand from the clouds.",
+    "keywords_en": [
+      "inspiration",
+      "initiative",
+      "potential",
+      "energy",
+      "creation"
+    ]
   },
   {
     "id": "wands_02",
@@ -603,7 +1047,19 @@
       "균형",
       "결정"
     ],
-    "imageUrl": "wands02"
+    "imageUrl": "wands02",
+    "name_en": "Two of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Planning and looking ahead; hold the vision and map the route.",
+    "reversedMeaning_en": "Playing too small or fear of expansion; step outside the gate.",
+    "description_en": "A figure holds a globe, gazing from a battlement.",
+    "keywords_en": [
+      "planning",
+      "vision",
+      "choice",
+      "prospect",
+      "strategy"
+    ]
   },
   {
     "id": "wands_03",
@@ -620,7 +1076,19 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": "wands03"
+    "imageUrl": "wands03",
+    "name_en": "Three of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Expansion and momentum; ships of effort begin to return.",
+    "reversedMeaning_en": "Delays or limited foresight; adjust plans and keep faith.",
+    "description_en": "Watching ships from the shore, three staffs planted nearby.",
+    "keywords_en": [
+      "expansion",
+      "progress",
+      "foresight",
+      "movement",
+      "opportunity"
+    ]
   },
   {
     "id": "wands_04",
@@ -637,7 +1105,19 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": "wands04"
+    "imageUrl": "wands04",
+    "name_en": "Four of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Celebration, milestone, and shared stability.",
+    "reversedMeaning_en": "Tension at home or postponed celebration; create safe space.",
+    "description_en": "A floral canopy marks a joyful homecoming.",
+    "keywords_en": [
+      "celebration",
+      "home",
+      "milestone",
+      "community",
+      "joy"
+    ]
   },
   {
     "id": "wands_05",
@@ -654,7 +1134,19 @@
       "도전",
       "변화"
     ],
-    "imageUrl": "wands05"
+    "imageUrl": "wands05",
+    "name_en": "Five of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Competition and playful conflict; test your skills.",
+    "reversedMeaning_en": "Escalated discord or avoidance; seek healthy resolution.",
+    "description_en": "Five figures brandish wands in lively struggle.",
+    "keywords_en": [
+      "competition",
+      "conflict",
+      "debate",
+      "challenge",
+      "sparring"
+    ]
   },
   {
     "id": "wands_06",
@@ -671,7 +1163,19 @@
       "조화",
       "지지"
     ],
-    "imageUrl": "wands06"
+    "imageUrl": "wands06",
+    "name_en": "Six of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Recognition and victory after effort; accept the applause.",
+    "reversedMeaning_en": "Self-doubt or hollow praise; root success in authenticity.",
+    "description_en": "A laurel-crowned rider greeted by a cheering crowd.",
+    "keywords_en": [
+      "victory",
+      "recognition",
+      "achievement",
+      "confidence",
+      "success"
+    ]
   },
   {
     "id": "wands_07",
@@ -688,7 +1192,19 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": "wands07"
+    "imageUrl": "wands07",
+    "name_en": "Seven of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Courageous defense of position; hold your ground.",
+    "reversedMeaning_en": "Exhaustion or giving up; choose battles wisely.",
+    "description_en": "A lone figure defends a hill with raised staff.",
+    "keywords_en": [
+      "defense",
+      "perseverance",
+      "standing ground",
+      "challenge",
+      "courage"
+    ]
   },
   {
     "id": "wands_08",
@@ -705,7 +1221,19 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": "wands08"
+    "imageUrl": "wands08",
+    "name_en": "Eight of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Swift movement and messages; momentum carries you forward.",
+    "reversedMeaning_en": "Delays or scattered focus; align aim before release.",
+    "description_en": "Eight wands fly together across the sky.",
+    "keywords_en": [
+      "speed",
+      "movement",
+      "communication",
+      "momentum",
+      "travel"
+    ]
   },
   {
     "id": "wands_09",
@@ -722,7 +1250,19 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": "wands09"
+    "imageUrl": "wands09",
+    "name_en": "Nine of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Resilience and vigilance after trials; you’re close to success.",
+    "reversedMeaning_en": "Defensiveness or burnout; rest and reset boundaries.",
+    "description_en": "A weary guard stands with bandaged head, holding fast.",
+    "keywords_en": [
+      "resilience",
+      "perseverance",
+      "guarded",
+      "stamina",
+      "last push"
+    ]
   },
   {
     "id": "wands_10",
@@ -739,7 +1279,19 @@
       "유산",
       "가족"
     ],
-    "imageUrl": "wands10"
+    "imageUrl": "wands10",
+    "name_en": "Ten of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Heavy burdens and responsibility; prioritize to lighten the load.",
+    "reversedMeaning_en": "Overcommitment or carrying too much alone; delegate.",
+    "description_en": "A figure labors under a bundle of ten staffs.",
+    "keywords_en": [
+      "burden",
+      "responsibility",
+      "overload",
+      "duty",
+      "strain"
+    ]
   },
   {
     "id": "wands_11",
@@ -756,7 +1308,19 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": "wands11"
+    "imageUrl": "wands11",
+    "name_en": "Page of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Fresh enthusiasm and adventurous news spark action.",
+    "reversedMeaning_en": "Restless start-stop energy; ground your ideas.",
+    "description_en": "A lively page studies a budding staff in the desert.",
+    "keywords_en": [
+      "enthusiasm",
+      "exploration",
+      "news",
+      "potential",
+      "adventure"
+    ]
   },
   {
     "id": "wands_12",
@@ -773,7 +1337,19 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": "wands12"
+    "imageUrl": "wands12",
+    "name_en": "Knight of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Bold movement, charisma, and daring pursuit.",
+    "reversedMeaning_en": "Impulsiveness or inconsistency; channel fire wisely.",
+    "description_en": "A fiery knight charges forward with a wand.",
+    "keywords_en": [
+      "action",
+      "passion",
+      "impulse",
+      "travel",
+      "courage"
+    ]
   },
   {
     "id": "wands_13",
@@ -790,7 +1366,19 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": "wands13"
+    "imageUrl": "wands13",
+    "name_en": "Queen of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Confident warmth, magnetism, and creative leadership.",
+    "reversedMeaning_en": "Jealousy or self-doubt; reclaim your inner fire.",
+    "description_en": "A queen with sunflower and wand, a black cat at her feet.",
+    "keywords_en": [
+      "confidence",
+      "independence",
+      "warmth",
+      "charisma",
+      "creativity"
+    ]
   },
   {
     "id": "wands_14",
@@ -807,7 +1395,19 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": "wands14"
+    "imageUrl": "wands14",
+    "name_en": "King of Wands",
+    "arcana_en": "Wands",
+    "uprightMeaning_en": "Visionary leadership and decisive action ignite progress.",
+    "reversedMeaning_en": "Dominance or impatience; lead with inspiration, not force.",
+    "description_en": "A king holds a blossoming staff, ready to act.",
+    "keywords_en": [
+      "leadership",
+      "vision",
+      "enterprise",
+      "drive",
+      "inspiration"
+    ]
   },
   {
     "id": "swords_01",
@@ -824,7 +1424,19 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": "swords01"
+    "imageUrl": "swords01",
+    "name_en": "Ace of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Clear thought, truth, and a breakthrough cut through fog.",
+    "reversedMeaning_en": "Confusion or harsh words; sharpen focus before acting.",
+    "description_en": "A hand raises a crowned sword above the clouds.",
+    "keywords_en": [
+      "clarity",
+      "truth",
+      "breakthrough",
+      "logic",
+      "new idea"
+    ]
   },
   {
     "id": "swords_02",
@@ -841,7 +1453,19 @@
       "균형",
       "결정"
     ],
-    "imageUrl": "swords02"
+    "imageUrl": "swords02",
+    "name_en": "Two of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Stalemate and difficult choice; remove the blindfold gently.",
+    "reversedMeaning_en": "Decision comes, or tension breaks; choose with heart and mind.",
+    "description_en": "A blindfolded figure balances two crossed swords.",
+    "keywords_en": [
+      "indecision",
+      "stalemate",
+      "balance",
+      "choices",
+      "blocked vision"
+    ]
   },
   {
     "id": "swords_03",
@@ -858,7 +1482,19 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": "swords03"
+    "imageUrl": "swords03",
+    "name_en": "Three of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Heartbreak or painful truth pierces; feel and heal.",
+    "reversedMeaning_en": "Mending begins; release sorrow and allow recovery.",
+    "description_en": "Three swords pierce a heart beneath stormy clouds.",
+    "keywords_en": [
+      "heartbreak",
+      "pain",
+      "truth",
+      "sorrow",
+      "release"
+    ]
   },
   {
     "id": "swords_04",
@@ -875,7 +1511,19 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": "swords04"
+    "imageUrl": "swords04",
+    "name_en": "Four of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Rest and recuperation; quiet mind before the next move.",
+    "reversedMeaning_en": "Restlessness or delay in healing; set firmer boundaries.",
+    "description_en": "A figure lies in repose beneath three hanging swords.",
+    "keywords_en": [
+      "rest",
+      "recovery",
+      "meditation",
+      "pause",
+      "healing"
+    ]
   },
   {
     "id": "swords_05",
@@ -892,7 +1540,19 @@
       "도전",
       "변화"
     ],
-    "imageUrl": "swords05"
+    "imageUrl": "swords05",
+    "name_en": "Five of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Pyrrhic victory or conflict won at a cost; check motives.",
+    "reversedMeaning_en": "Desire to make amends or end tension; choose peace.",
+    "description_en": "A figure gathers swords as others walk away.",
+    "keywords_en": [
+      "conflict",
+      "tension",
+      "defeat",
+      "ego",
+      "cost"
+    ]
   },
   {
     "id": "swords_06",
@@ -909,7 +1569,19 @@
       "조화",
       "지지"
     ],
-    "imageUrl": "swords06"
+    "imageUrl": "swords06",
+    "name_en": "Six of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Transition to calmer waters; healing journey begins.",
+    "reversedMeaning_en": "Difficulty moving on or unfinished business; face what lingers.",
+    "description_en": "A boat glides across water carrying cloaked passengers.",
+    "keywords_en": [
+      "transition",
+      "healing",
+      "travel",
+      "moving on",
+      "recovery"
+    ]
   },
   {
     "id": "swords_07",
@@ -926,7 +1598,19 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": "swords07"
+    "imageUrl": "swords07",
+    "name_en": "Seven of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Strategy, stealth, or deception; act with integrity.",
+    "reversedMeaning_en": "Truth surfaces; own your choices and make amends.",
+    "description_en": "A figure sneaks away with five swords, two left behind.",
+    "keywords_en": [
+      "strategy",
+      "deception",
+      "tactics",
+      "independence",
+      "cunning"
+    ]
   },
   {
     "id": "swords_08",
@@ -943,7 +1627,19 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": "swords08"
+    "imageUrl": "swords08",
+    "name_en": "Eight of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Feeling trapped by thoughts; liberation starts with perspective.",
+    "reversedMeaning_en": "Release from mental binds; confidence returns.",
+    "description_en": "A blindfolded figure stands bound among eight swords.",
+    "keywords_en": [
+      "restriction",
+      "fear",
+      "limitation",
+      "overthinking",
+      "trapped"
+    ]
   },
   {
     "id": "swords_09",
@@ -960,7 +1656,19 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": "swords09"
+    "imageUrl": "swords09",
+    "name_en": "Nine of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Anxiety and sleepless worry; name the fear to ease it.",
+    "reversedMeaning_en": "Relief after despair or lingering nightmares; seek support.",
+    "description_en": "A person sits up in bed, nine swords on the wall.",
+    "keywords_en": [
+      "anxiety",
+      "worry",
+      "nightmare",
+      "guilt",
+      "fear"
+    ]
   },
   {
     "id": "swords_10",
@@ -977,7 +1685,19 @@
       "유산",
       "가족"
     ],
-    "imageUrl": "swords10"
+    "imageUrl": "swords10",
+    "name_en": "Ten of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "A painful ending; dawn waits beyond the low point.",
+    "reversedMeaning_en": "Recovery and regeneration after rock bottom.",
+    "description_en": "A figure lies with ten swords, dawn breaking behind.",
+    "keywords_en": [
+      "ending",
+      "betrayal",
+      "collapse",
+      "finality",
+      "release"
+    ]
   },
   {
     "id": "swords_11",
@@ -994,7 +1714,19 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": "swords11"
+    "imageUrl": "swords11",
+    "name_en": "Page of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Curious intellect, vigilance, and new ideas take flight.",
+    "reversedMeaning_en": "Gossip or haste; think before speaking or acting.",
+    "description_en": "A page brandishes a sword, alert to shifting winds.",
+    "keywords_en": [
+      "curiosity",
+      "ideas",
+      "watchfulness",
+      "communication",
+      "alertness"
+    ]
   },
   {
     "id": "swords_12",
@@ -1011,7 +1743,19 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": "swords12"
+    "imageUrl": "swords12",
+    "name_en": "Knight of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Decisive, swift action propelled by conviction.",
+    "reversedMeaning_en": "Impulsive or reckless charge; slow down for context.",
+    "description_en": "A knight races forward, sword raised against the wind.",
+    "keywords_en": [
+      "speed",
+      "assertion",
+      "ambition",
+      "conflict",
+      "drive"
+    ]
   },
   {
     "id": "swords_13",
@@ -1028,7 +1772,19 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": "swords13"
+    "imageUrl": "swords13",
+    "name_en": "Queen of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Clear perception, honesty, and wise boundaries.",
+    "reversedMeaning_en": "Coldness or bitterness; balance truth with compassion.",
+    "description_en": "A discerning queen gestures with a raised sword.",
+    "keywords_en": [
+      "clarity",
+      "independence",
+      "truth",
+      "discernment",
+      "directness"
+    ]
   },
   {
     "id": "swords_14",
@@ -1045,7 +1801,19 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": "swords14"
+    "imageUrl": "swords14",
+    "name_en": "King of Swords",
+    "arcana_en": "Swords",
+    "uprightMeaning_en": "Strategic intellect and authority guided by truth.",
+    "reversedMeaning_en": "Manipulative or rigid thinking; lead with fairness.",
+    "description_en": "A king sits firmly with an upright sword of reason.",
+    "keywords_en": [
+      "logic",
+      "authority",
+      "strategy",
+      "truth",
+      "objectivity"
+    ]
   },
   {
     "id": "pents_01",
@@ -1062,7 +1830,19 @@
       "새 출발",
       "잠재력"
     ],
-    "imageUrl": "pents01"
+    "imageUrl": "pents01",
+    "name_en": "Ace of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "New material opportunity, grounded start, or seed of prosperity.",
+    "reversedMeaning_en": "Missed chance or instability; prepare practical foundations.",
+    "description_en": "A coin rests in a divine hand above a garden path.",
+    "keywords_en": [
+      "prosperity",
+      "new job",
+      "stability",
+      "seed",
+      "manifestation"
+    ]
   },
   {
     "id": "pents_02",
@@ -1079,7 +1859,19 @@
       "균형",
       "결정"
     ],
-    "imageUrl": "pents02"
+    "imageUrl": "pents02",
+    "name_en": "Two of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Juggling priorities with flexibility; keep rhythm flowing.",
+    "reversedMeaning_en": "Overwhelm or imbalance; simplify and set limits.",
+    "description_en": "A dancer balances two coins within an endless loop.",
+    "keywords_en": [
+      "balance",
+      "adaptability",
+      "priorities",
+      "time management",
+      "flow"
+    ]
   },
   {
     "id": "pents_03",
@@ -1096,7 +1888,19 @@
       "성장",
       "팀워크"
     ],
-    "imageUrl": "pents03"
+    "imageUrl": "pents03",
+    "name_en": "Three of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Collaboration and craftsmanship build something lasting.",
+    "reversedMeaning_en": "Team friction or poor planning; align goals and roles.",
+    "description_en": "An apprentice, monk, and architect confer in a cathedral.",
+    "keywords_en": [
+      "teamwork",
+      "skill",
+      "planning",
+      "craft",
+      "cooperation"
+    ]
   },
   {
     "id": "pents_04",
@@ -1113,7 +1917,19 @@
       "안정",
       "휴식"
     ],
-    "imageUrl": "pents04"
+    "imageUrl": "pents04",
+    "name_en": "Four of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Holding tight to resources and control; seek balanced security.",
+    "reversedMeaning_en": "Letting go or loosening grip; generosity opens flow.",
+    "description_en": "A figure clutches coins at crown, arms, and feet.",
+    "keywords_en": [
+      "security",
+      "control",
+      "conservation",
+      "possessiveness",
+      "stability"
+    ]
   },
   {
     "id": "pents_05",
@@ -1130,7 +1946,19 @@
       "도전",
       "변화"
     ],
-    "imageUrl": "pents05"
+    "imageUrl": "pents05",
+    "name_en": "Five of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Material hardship or feeling shut out; support is nearby.",
+    "reversedMeaning_en": "Recovery and assistance begin; faith returns.",
+    "description_en": "Two weary figures pass a lit stained-glass window.",
+    "keywords_en": [
+      "hardship",
+      "loss",
+      "isolation",
+      "poverty",
+      "support"
+    ]
   },
   {
     "id": "pents_06",
@@ -1147,7 +1975,19 @@
       "조화",
       "지지"
     ],
-    "imageUrl": "pents06"
+    "imageUrl": "pents06",
+    "name_en": "Six of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Generosity and balanced giving and receiving.",
+    "reversedMeaning_en": "Strings attached or imbalance; seek fairness in exchange.",
+    "description_en": "A giver shares coins with balanced scales in hand.",
+    "keywords_en": [
+      "generosity",
+      "charity",
+      "balance",
+      "support",
+      "fairness"
+    ]
   },
   {
     "id": "pents_07",
@@ -1164,7 +2004,19 @@
       "끈기",
       "평가"
     ],
-    "imageUrl": "pents07"
+    "imageUrl": "pents07",
+    "name_en": "Seven of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Patience and assessment; growth takes steady tending.",
+    "reversedMeaning_en": "Impatience or misdirected effort; adjust the plan.",
+    "description_en": "A gardener rests on a staff, watching pentacle vines.",
+    "keywords_en": [
+      "patience",
+      "investment",
+      "assessment",
+      "growth",
+      "long-term"
+    ]
   },
   {
     "id": "pents_08",
@@ -1181,7 +2033,19 @@
       "움직임",
       "기술"
     ],
-    "imageUrl": "pents08"
+    "imageUrl": "pents08",
+    "name_en": "Eight of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Skill-building and diligent work hone mastery.",
+    "reversedMeaning_en": "Perfectionism or monotony; reconnect to craft’s purpose.",
+    "description_en": "A craftsman carves coins in focused repetition.",
+    "keywords_en": [
+      "mastery",
+      "practice",
+      "focus",
+      "craft",
+      "apprenticeship"
+    ]
   },
   {
     "id": "pents_09",
@@ -1198,7 +2062,19 @@
       "결실",
       "자존감"
     ],
-    "imageUrl": "pents09"
+    "imageUrl": "pents09",
+    "name_en": "Nine of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Self-reliance, luxury, and earned comfort.",
+    "reversedMeaning_en": "Overinvestment in appearances or dependence; honor true worth.",
+    "description_en": "A robed figure enjoys a garden with a falcon.",
+    "keywords_en": [
+      "independence",
+      "abundance",
+      "grace",
+      "security",
+      "enjoyment"
+    ]
   },
   {
     "id": "pents_10",
@@ -1215,7 +2091,19 @@
       "유산",
       "가족"
     ],
-    "imageUrl": "pents10"
+    "imageUrl": "pents10",
+    "name_en": "Ten of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Legacy, long-term stability, and family prosperity.",
+    "reversedMeaning_en": "Instability or disputes over resources; align on values.",
+    "description_en": "Generations gather amid archways filled with coins.",
+    "keywords_en": [
+      "legacy",
+      "wealth",
+      "family",
+      "tradition",
+      "long-term"
+    ]
   },
   {
     "id": "pents_11",
@@ -1232,7 +2120,19 @@
       "메시지",
       "호기심"
     ],
-    "imageUrl": "pents11"
+    "imageUrl": "pents11",
+    "name_en": "Page of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Student energy and practical curiosity about new skills.",
+    "reversedMeaning_en": "Lack of follow-through or focus; ground your study.",
+    "description_en": "A page admires a coin in a green field.",
+    "keywords_en": [
+      "study",
+      "opportunity",
+      "focus",
+      "practicality",
+      "manifesting"
+    ]
   },
   {
     "id": "pents_12",
@@ -1249,7 +2149,19 @@
       "행동",
       "탐험"
     ],
-    "imageUrl": "pents12"
+    "imageUrl": "pents12",
+    "name_en": "Knight of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Patient, steady progress and reliability.",
+    "reversedMeaning_en": "Stagnation or stubbornness; adjust pace mindfully.",
+    "description_en": "A steadfast knight holds a coin atop a calm horse.",
+    "keywords_en": [
+      "reliability",
+      "routine",
+      "persistence",
+      "diligence",
+      "patience"
+    ]
   },
   {
     "id": "pents_13",
@@ -1266,7 +2178,19 @@
       "성숙",
       "영향력"
     ],
-    "imageUrl": "pents13"
+    "imageUrl": "pents13",
+    "name_en": "Queen of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Practical nurturing, resourcefulness, and grounded care.",
+    "reversedMeaning_en": "Overgiving or neglect of self; restore your own roots.",
+    "description_en": "A queen cradles a coin amidst lush nature.",
+    "keywords_en": [
+      "nurturing",
+      "practicality",
+      "comfort",
+      "security",
+      "care"
+    ]
   },
   {
     "id": "pents_14",
@@ -1283,6 +2207,18 @@
       "권위",
       "숙련"
     ],
-    "imageUrl": "pents14"
+    "imageUrl": "pents14",
+    "name_en": "King of Pentacles",
+    "arcana_en": "Pentacles",
+    "uprightMeaning_en": "Wealth, stability, and capable stewardship of resources.",
+    "reversedMeaning_en": "Greed or rigidity; lead with generosity and wisdom.",
+    "description_en": "A prosperous king sits amid symbols of plenty.",
+    "keywords_en": [
+      "stability",
+      "abundance",
+      "leadership",
+      "practical wisdom",
+      "security"
+    ]
   }
 ]

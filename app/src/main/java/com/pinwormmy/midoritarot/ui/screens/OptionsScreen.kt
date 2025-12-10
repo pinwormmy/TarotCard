@@ -48,7 +48,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -91,6 +90,7 @@ import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.label
+import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.R
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -155,9 +155,7 @@ fun OptionsScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
-                )
+                colors = TarotUiDefaults.topBarColors()
             )
         }
     ) { innerPadding ->
@@ -368,9 +366,11 @@ private fun CardFaceSkinSelector(
                         .aspectRatio(CARD_ASPECT_RATIO)
                         .border(
                             width = if (isSelected) 2.dp else 1.dp,
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
-                                alpha = 0.3f
-                            ),
+                            color = if (isSelected) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                TarotUiDefaults.outline(0.35f)
+                            },
                             shape = TarotCardShape
                         )
                         .onGloballyPositioned { itemBounds.value = it.boundsInRoot() }
@@ -413,9 +413,11 @@ private fun CardBackSkinSelector(
                         .aspectRatio(CARD_ASPECT_RATIO)
                         .border(
                             width = if (isSelected) 2.dp else 1.dp,
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(
-                                alpha = 0.3f
-                            ),
+                            color = if (isSelected) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                TarotUiDefaults.outline(0.35f)
+                            },
                             shape = TarotCardShape
                         )
                         .onGloballyPositioned { itemBounds.value = it.boundsInRoot() }
@@ -488,7 +490,7 @@ private fun CardFacePreviewModal(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = overlayAlpha))
+                .background(TarotUiDefaults.scrimColor(alpha = overlayAlpha))
                 .clickable(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
@@ -506,12 +508,8 @@ private fun CardFacePreviewModal(
                     translationY = offsetY
                     alpha = 0.6f + 0.4f * eased
                 }
-                .background(Color(0xFF1F1F2E), RoundedCornerShape(24.dp))
-                .border(
-                    width = 1.dp,
-                    color = Color.White.copy(alpha = 0.15f),
-                    shape = RoundedCornerShape(24.dp)
-                )
+                .background(TarotUiDefaults.panelColor(), TarotUiDefaults.sheetShape)
+                .border(TarotUiDefaults.panelBorder(), TarotUiDefaults.sheetShape)
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -607,7 +605,7 @@ private fun CardBackPreviewModal(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = overlayAlpha))
+                .background(TarotUiDefaults.scrimColor(alpha = overlayAlpha))
                 .clickable(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
@@ -625,12 +623,8 @@ private fun CardBackPreviewModal(
                     translationY = offsetY
                     alpha = 0.6f + 0.4f * eased
                 }
-                .background(Color(0xFF1F1F2E), RoundedCornerShape(24.dp))
-                .border(
-                    width = 1.dp,
-                    color = Color.White.copy(alpha = 0.15f),
-                    shape = RoundedCornerShape(24.dp)
-                )
+                .background(TarotUiDefaults.panelColor(), TarotUiDefaults.sheetShape)
+                .border(TarotUiDefaults.panelBorder(), TarotUiDefaults.sheetShape)
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -697,7 +691,11 @@ private fun SkinSelector(
                         .size(72.dp)
                         .border(
                             width = if (isSelected) 2.dp else 1.dp,
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White.copy(alpha = 0.3f),
+                            color = if (isSelected) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                TarotUiDefaults.outline(0.35f)
+                            },
                             shape = RoundedCornerShape(24.dp)
                         )
                         .clickable { onSelect(skin.id) },
