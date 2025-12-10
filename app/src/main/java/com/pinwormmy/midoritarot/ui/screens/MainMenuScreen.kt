@@ -104,7 +104,7 @@ fun MainMenuScreen(
 
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(columnSpacing),
+            verticalArrangement = if (isTablet) Arrangement.spacedBy(columnSpacing) else Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
@@ -127,6 +127,10 @@ fun MainMenuScreen(
                         .aspectRatio(700f / 674f),
                     contentScale = ContentScale.Fit
                 )
+            }
+
+            if (!isTablet) {
+                Spacer(modifier = Modifier.height(buttonSpacing * 1.25f))
             }
 
             Column(
@@ -181,7 +185,7 @@ private fun MainMenuButton(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = fixedHeight, max = fixedHeight)
+            .heightIn(min = fixedHeight)
             .clip(RoundedCornerShape(28.dp))
             .let {
                 if (enabled) {
