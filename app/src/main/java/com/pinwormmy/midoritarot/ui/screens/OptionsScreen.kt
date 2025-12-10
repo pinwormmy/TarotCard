@@ -227,11 +227,6 @@ fun OptionsScreen(
                     ) {
                         Column {
                             Text(text = stringResource(id = R.string.options_daily_card_toggle), fontWeight = FontWeight.SemiBold)
-                            Text(
-                                text = stringResource(id = R.string.options_daily_card_desc),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                            )
                         }
                         Switch(
                             checked = settings.dailyCardNotification,

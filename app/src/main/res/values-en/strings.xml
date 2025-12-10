@@ -2,7 +2,7 @@
     <string name="app_name">Midori Tarot</string>
 
     <!-- Main menu -->
-    <string name="menu_daily_card">Daily Card</string>
+    <string name="menu_daily_card">Draw Today Fortune Card</string>
     <string name="menu_start_reading">Start Reading</string>
     <string name="menu_browse_cards">Browse Cards</string>
     <string name="menu_options">Options</string>
@@ -24,7 +24,7 @@
     <string name="tap_to_close">Tap to close</string>
 
     <!-- Daily card -->
-    <string name="daily_card_title">Daily Card</string>
+    <string name="daily_card_title">Draw Today Fortune Card</string>
     <string name="daily_card_hint_immediate">Front is visible. Tap once to view the description.</string>
     <string name="daily_card_hint_double">Double-tap to view the description.</string>
     <string name="daily_card_cta_flip">Tap to flip the card first.</string>
@@ -43,10 +43,9 @@
     <string name="options_section_background">Choose background</string>
     <string name="options_section_card_back">Choose card back</string>
     <string name="options_section_card_skin">Choose card skin</string>
-    <string name="options_section_daily_card">Daily card notification</string>
+    <string name="options_section_daily_card">App notifications</string>
     <string name="options_section_language">Language</string>
-    <string name="options_daily_card_toggle">Receive notification</string>
-    <string name="options_daily_card_desc">We will remind you to draw your daily card.</string>
+    <string name="options_daily_card_toggle">Get reminder to draw card</string>
     <string name="options_section_haptics">Haptics</string>
     <string name="options_haptics_title">Use vibration for card interactions</string>
     <string name="options_haptics_desc">Adds tactile feedback when drawing or tapping.</string>

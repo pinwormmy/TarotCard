@@ -53,10 +53,10 @@ class DailyCardNotificationWorker(
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_name)
             .setContentTitle("미도리 타로")
-            .setContentText("오늘은 무슨 일이 생길까? 오늘의 타로카드를 뽑아보세요!")
+            .setContentText("오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!")
             .setStyle(
                 NotificationCompat.BigTextStyle().bigText(
-                    "오늘은 무슨 일이 생길까? 오늘의 타로카드를 뽑아보세요!"
+                    "오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!"
                 )
             )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -93,7 +93,7 @@ class DailyCardNotificationWorker(
                 applicationContext.getString(R.string.app_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "오늘의 카드 알림"
+                description = "오늘하루운세뽑기 알림"
             }
             val manager = applicationContext.getSystemService(NotificationManager::class.java)
             manager?.createNotificationChannel(channel)
