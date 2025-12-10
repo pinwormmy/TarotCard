@@ -22,6 +22,12 @@
     <string name="upright_title">정방향</string>
     <string name="reversed_title">역방향</string>
     <string name="tap_to_close">탭하면 닫힙니다</string>
+    <string name="card_detail_title">카드 상세</string>
+    <string name="card_not_found">카드를 찾을 수 없습니다.</string>
+    <string name="keywords_label">키워드</string>
+    <string name="upright_meaning">정방향 해석</string>
+    <string name="reversed_meaning">역방향 해석</string>
+    <string name="description_label">설명</string>
 
     <!-- Daily card -->
     <string name="daily_card_title">오늘 하루 운세 카드 뽑기</string>
@@ -80,4 +86,7 @@
     <string name="reading_result_reversed">역방향 해석</string>
     <string name="reading_result_close_hint">탭하면 닫습니다</string>
     <string name="reading_result_touch_hint">카드를 터치하면 해석을 볼 수 있습니다.</string>
+    <string name="daily_notification_title">미도리 타로</string>
+    <string name="daily_notification_body">오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!</string>
+    <string name="daily_notification_channel_desc">오늘하루운세뽑기 알림</string>
 </resources>

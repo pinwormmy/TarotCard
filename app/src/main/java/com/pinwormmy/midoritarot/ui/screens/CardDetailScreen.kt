@@ -21,9 +21,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
+import com.pinwormmy.midoritarot.R
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
@@ -45,12 +47,12 @@ fun CardDetailScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(text = card?.name ?: "Card Detail") },
+                title = { Text(text = card?.name ?: stringResource(id = R.string.card_detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(id = R.string.back)
                         )
                     }
                 },
@@ -68,7 +70,7 @@ fun CardDetailScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Card not found.",
+                    text = stringResource(id = R.string.card_not_found),
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
@@ -120,7 +122,7 @@ private fun CardDetailBody(
         if (card.keywords.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "Keywords",
+                    text = stringResource(id = R.string.keywords_label),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
@@ -131,15 +133,15 @@ private fun CardDetailBody(
             }
         }
         Section(
-            title = "Upright Meaning",
+            title = stringResource(id = R.string.upright_meaning),
             body = card.uprightMeaning
         )
         Section(
-            title = "Reversed Meaning",
+            title = stringResource(id = R.string.reversed_meaning),
             body = card.reversedMeaning
         )
         Section(
-            title = "Description",
+            title = stringResource(id = R.string.description_label),
             body = card.description
         )
         Spacer(modifier = Modifier.height(8.dp))

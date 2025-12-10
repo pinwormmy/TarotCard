@@ -22,6 +22,12 @@
     <string name="upright_title">Upright</string>
     <string name="reversed_title">Reversed</string>
     <string name="tap_to_close">Tap to close</string>
+    <string name="card_detail_title">Card Detail</string>
+    <string name="card_not_found">Card not found.</string>
+    <string name="keywords_label">Keywords</string>
+    <string name="upright_meaning">Upright Meaning</string>
+    <string name="reversed_meaning">Reversed Meaning</string>
+    <string name="description_label">Description</string>
 
     <!-- Daily card -->
     <string name="daily_card_title">Draw Today Fortune Card</string>
@@ -80,4 +86,7 @@
     <string name="reading_result_reversed">Reversed meaning</string>
     <string name="reading_result_close_hint">Tap to close</string>
     <string name="reading_result_touch_hint">Tap a card to see its meaning.</string>
+    <string name="daily_notification_title">Midori Tarot</string>
+    <string name="daily_notification_body">What might unfold today? Draw your daily card!</string>
+    <string name="daily_notification_channel_desc">Daily draw reminder</string>
 </resources>

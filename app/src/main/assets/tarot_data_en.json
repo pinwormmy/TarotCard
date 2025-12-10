@@ -1,0 +1,1250 @@
+[
+  {
+    "id": "major_00",
+    "name": "The Fool",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "A fresh start and innocent trust invite serendipity and bold adventures.",
+    "reversedMeaning": "Reckless leaps or fear of leaping lead to avoidable chaos; pause and ground yourself.",
+    "description": "A carefree youth at the cliff’s edge, white rose and knapsack in hand.",
+    "keywords": [
+      "beginnings",
+      "innocence",
+      "trust",
+      "potential",
+      "optimism"
+    ],
+    "imageUrl": "tarot00"
+  },
+  {
+    "id": "major_01",
+    "name": "The Magician",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Focused will channels resources into tangible results; skill aligns heaven and earth.",
+    "reversedMeaning": "Scattered intent or manipulation drains power; regain authenticity before acting.",
+    "description": "A conduit between realms, raising a wand and pointing to earth.",
+    "keywords": [
+      "manifestation",
+      "skill",
+      "initiative",
+      "resourcefulness",
+      "power"
+    ],
+    "imageUrl": "tarot01"
+  },
+  {
+    "id": "major_02",
+    "name": "The High Priestess",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Quiet intuition reveals subtle truths; trust the wisdom beyond logic.",
+    "reversedMeaning": "Secrets and silence breed confusion; share what you feel instead of hiding.",
+    "description": "Guardian of mystery seated between light and shadow.",
+    "keywords": [
+      "intuition",
+      "mystery",
+      "inner voice",
+      "stillness",
+      "esoteric"
+    ],
+    "imageUrl": "tarot02"
+  },
+  {
+    "id": "major_03",
+    "name": "The Empress",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Nurturing abundance, creativity, and sensual comfort bloom under her care.",
+    "reversedMeaning": "Overprotection or creative block; tend to yourself as you would another.",
+    "description": "A sovereign of fertile fields and gentle authority.",
+    "keywords": [
+      "abundance",
+      "care",
+      "creativity",
+      "fertility",
+      "comfort"
+    ],
+    "imageUrl": "tarot03"
+  },
+  {
+    "id": "major_04",
+    "name": "The Emperor",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Structure, strategy, and decisive leadership create stability.",
+    "reversedMeaning": "Rigidity or control issues undermine authority; lead with balance, not force.",
+    "description": "An armored ruler on a stone throne, symbol of order and will.",
+    "keywords": [
+      "authority",
+      "structure",
+      "discipline",
+      "stability",
+      "strategy"
+    ],
+    "imageUrl": "tarot04"
+  },
+  {
+    "id": "major_05",
+    "name": "The Hierophant",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Tradition, shared beliefs, and mentorship offer guidance and belonging.",
+    "reversedMeaning": "Dogma stifles; question rules and reclaim personal meaning.",
+    "description": "A spiritual teacher between pillars, blessing seekers.",
+    "keywords": [
+      "tradition",
+      "faith",
+      "mentorship",
+      "conformity",
+      "teaching"
+    ],
+    "imageUrl": "tarot05"
+  },
+  {
+    "id": "major_06",
+    "name": "The Lovers",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Alignment of values and heartfelt choice create harmonious union.",
+    "reversedMeaning": "Misalignment or indecision strains bonds; return to core truth.",
+    "description": "Two figures under an angel, choosing with open hearts.",
+    "keywords": [
+      "union",
+      "choice",
+      "values",
+      "partnership",
+      "attraction"
+    ],
+    "imageUrl": "tarot06"
+  },
+  {
+    "id": "major_07",
+    "name": "The Chariot",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Willpower and focus steer opposing forces toward victory.",
+    "reversedMeaning": "Lack of direction or forcefulness causes drift; regain control with clarity.",
+    "description": "A determined driver guiding two sphinxes forward.",
+    "keywords": [
+      "drive",
+      "determination",
+      "victory",
+      "control",
+      "momentum"
+    ],
+    "imageUrl": "tarot07"
+  },
+  {
+    "id": "major_08",
+    "name": "Strength",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Gentle courage and inner calm tame wild energy.",
+    "reversedMeaning": "Self-doubt or suppressed anger; meet fear with compassion.",
+    "description": "A woman closing a lion’s jaws with serene grace.",
+    "keywords": [
+      "courage",
+      "compassion",
+      "patience",
+      "inner power",
+      "taming"
+    ],
+    "imageUrl": "tarot08"
+  },
+  {
+    "id": "major_09",
+    "name": "The Hermit",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Solitude and reflection reveal inner guidance; seek your own lamp.",
+    "reversedMeaning": "Isolation or avoidance; step out to reconnect after insight.",
+    "description": "An old sage holds a lantern on a snowy peak.",
+    "keywords": [
+      "introspection",
+      "wisdom",
+      "retreat",
+      "guidance",
+      "solitude"
+    ],
+    "imageUrl": "tarot09"
+  },
+  {
+    "id": "major_10",
+    "name": "Wheel of Fortune",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Cycles turn; luck and change invite adaptability and faith.",
+    "reversedMeaning": "Resistance to change or feeling stuck; adjust and participate in the turn.",
+    "description": "A great wheel in motion, ringed by symbols of fate.",
+    "keywords": [
+      "cycles",
+      "destiny",
+      "chance",
+      "turning point",
+      "karma"
+    ],
+    "imageUrl": "tarot10"
+  },
+  {
+    "id": "major_11",
+    "name": "Justice",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Balance, truth, and fair consequences come to light.",
+    "reversedMeaning": "Bias, dishonesty, or avoidance of responsibility; restore equilibrium.",
+    "description": "A figure with scales and sword seated in clarity.",
+    "keywords": [
+      "fairness",
+      "truth",
+      "law",
+      "cause and effect",
+      "balance"
+    ],
+    "imageUrl": "tarot11"
+  },
+  {
+    "id": "major_12",
+    "name": "The Hanged Man",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Pause and see from a new angle; surrender opens insight.",
+    "reversedMeaning": "Stalling or martyrdom; choose movement once perspective is gained.",
+    "description": "A serene figure hangs upside down with a halo.",
+    "keywords": [
+      "surrender",
+      "perspective",
+      "pause",
+      "sacrifice",
+      "acceptance"
+    ],
+    "imageUrl": "tarot12"
+  },
+  {
+    "id": "major_13",
+    "name": "Death",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "An ending clears space for transformation and renewal.",
+    "reversedMeaning": "Fear of change or clinging delays growth; let go gently.",
+    "description": "A skeletal rider heralds unavoidable transition.",
+    "keywords": [
+      "ending",
+      "transition",
+      "release",
+      "rebirth",
+      "closure"
+    ],
+    "imageUrl": "tarot13"
+  },
+  {
+    "id": "major_14",
+    "name": "Temperance",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Balance and patience blend opposites into harmony.",
+    "reversedMeaning": "Excess or imbalance; re-center and moderate your pace.",
+    "description": "An angel pours water between two cups, grounding and flowing.",
+    "keywords": [
+      "balance",
+      "moderation",
+      "healing",
+      "patience",
+      "alchemy"
+    ],
+    "imageUrl": "tarot14"
+  },
+  {
+    "id": "major_15",
+    "name": "The Devil",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Attachments, temptation, or shadow desires seek conscious choice.",
+    "reversedMeaning": "Loosening chains and reclaiming power; release unhealthy bonds.",
+    "description": "A horned figure with chained lovers at his feet.",
+    "keywords": [
+      "shadow",
+      "temptation",
+      "bondage",
+      "materialism",
+      "desire"
+    ],
+    "imageUrl": "tarot15"
+  },
+  {
+    "id": "major_16",
+    "name": "The Tower",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Sudden upheaval shatters false structures, clearing truth.",
+    "reversedMeaning": "Avoiding necessary change prolongs instability; rebuild with honesty.",
+    "description": "Lightning strikes a tower, figures fall as crowns tumble.",
+    "keywords": [
+      "upheaval",
+      "revelation",
+      "collapse",
+      "awakening",
+      "liberation"
+    ],
+    "imageUrl": "tarot16"
+  },
+  {
+    "id": "major_17",
+    "name": "The Star",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Hope, healing, and gentle guidance return after storms.",
+    "reversedMeaning": "Doubt clouds the light; reconnect to faith and self-worth.",
+    "description": "A calm figure pours water beneath a starlit sky.",
+    "keywords": [
+      "hope",
+      "healing",
+      "guidance",
+      "renewal",
+      "inspiration"
+    ],
+    "imageUrl": "tarot17"
+  },
+  {
+    "id": "major_18",
+    "name": "The Moon",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Dreams, intuition, and uncertainty blur the path; move with feeling.",
+    "reversedMeaning": "Confusion lifts; name your fears and trust small steps.",
+    "description": "A moonlit path between towers, animals howling to the night.",
+    "keywords": [
+      "intuition",
+      "illusion",
+      "fears",
+      "unconscious",
+      "dreams"
+    ],
+    "imageUrl": "tarot18"
+  },
+  {
+    "id": "major_19",
+    "name": "The Sun",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Clarity, vitality, and joyful success shine brightly.",
+    "reversedMeaning": "Temporary clouds or over-optimism; reconnect to simple joy.",
+    "description": "A child rides beneath a radiant sun and banner.",
+    "keywords": [
+      "joy",
+      "success",
+      "vitality",
+      "clarity",
+      "warmth"
+    ],
+    "imageUrl": "tarot19"
+  },
+  {
+    "id": "major_20",
+    "name": "Judgement",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Awakening and honest review lead to renewal and purpose.",
+    "reversedMeaning": "Self-criticism or avoidance stalls rebirth; accept the call.",
+    "description": "An angel’s horn calls figures to rise from the past.",
+    "keywords": [
+      "awakening",
+      "assessment",
+      "rebirth",
+      "absolution",
+      "calling"
+    ],
+    "imageUrl": "tarot20"
+  },
+  {
+    "id": "major_21",
+    "name": "The World",
+    "arcana": "Major Arcana",
+    "uprightMeaning": "Completion and wholeness; a cycle ends and integration begins.",
+    "reversedMeaning": "Loose ends or delay in closure; finish and celebrate.",
+    "description": "A dancer in a wreath, embraced by four guardians.",
+    "keywords": [
+      "completion",
+      "wholeness",
+      "travel",
+      "integration",
+      "achievement"
+    ],
+    "imageUrl": "tarot21"
+  },
+  {
+    "id": "cups_01",
+    "name": "Ace of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "New feelings, compassion, and creative flow overflow.",
+    "reversedMeaning": "Emotional block or withheld affection; let the heart breathe.",
+    "description": "An overflowing chalice held by a divine hand.",
+    "keywords": [
+      "new feelings",
+      "love",
+      "compassion",
+      "creativity",
+      "openness"
+    ],
+    "imageUrl": "cups01"
+  },
+  {
+    "id": "cups_02",
+    "name": "Two of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Mutual attraction and balanced partnership form a bond.",
+    "reversedMeaning": "Disconnection or imbalance; restore equal exchange.",
+    "description": "Two figures toast, caduceus rising between them.",
+    "keywords": [
+      "partnership",
+      "attraction",
+      "harmony",
+      "union",
+      "mutuality"
+    ],
+    "imageUrl": "cups02"
+  },
+  {
+    "id": "cups_03",
+    "name": "Three of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Celebration, friendship, and shared joy lift spirits.",
+    "reversedMeaning": "Overindulgence or exclusion; reconnect sincerely.",
+    "description": "Three friends raise cups in a joyful circle.",
+    "keywords": [
+      "celebration",
+      "community",
+      "friendship",
+      "joy",
+      "support"
+    ],
+    "imageUrl": "cups03"
+  },
+  {
+    "id": "cups_04",
+    "name": "Four of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Apathy and contemplation; a new offer is unnoticed.",
+    "reversedMeaning": "Re-engagement and fresh curiosity after stagnation.",
+    "description": "A seated figure ignores a cup offered from a cloud.",
+    "keywords": [
+      "apathy",
+      "reevaluation",
+      "boredom",
+      "introspection",
+      "offer"
+    ],
+    "imageUrl": "cups04"
+  },
+  {
+    "id": "cups_05",
+    "name": "Five of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Grief and regret focus on what’s lost; two cups remain.",
+    "reversedMeaning": "Acceptance and moving forward; hope slowly returns.",
+    "description": "A cloaked figure mourns spilled cups, two behind still full.",
+    "keywords": [
+      "loss",
+      "regret",
+      "grief",
+      "disappointment",
+      "perspective"
+    ],
+    "imageUrl": "cups05"
+  },
+  {
+    "id": "cups_06",
+    "name": "Six of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Nostalgia, kindness, and simple joy from the past.",
+    "reversedMeaning": "Living in the past or clinging; make space for now.",
+    "description": "Children share flowers in a peaceful courtyard.",
+    "keywords": [
+      "nostalgia",
+      "innocence",
+      "kindness",
+      "memories",
+      "comfort"
+    ],
+    "imageUrl": "cups06"
+  },
+  {
+    "id": "cups_07",
+    "name": "Seven of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Many choices and fantasies; discern what is real.",
+    "reversedMeaning": "Clarity after confusion; commit to one path.",
+    "description": "Seven cups filled with tempting visions in a cloud.",
+    "keywords": [
+      "choices",
+      "fantasy",
+      "temptation",
+      "illusion",
+      "dreaming"
+    ],
+    "imageUrl": "cups07"
+  },
+  {
+    "id": "cups_08",
+    "name": "Eight of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "A voluntary departure in search of deeper meaning.",
+    "reversedMeaning": "Fear of leaving or drifting aimlessly; choose with heart.",
+    "description": "A traveler walks away from stacked cups under moonlight.",
+    "keywords": [
+      "departure",
+      "search",
+      "letting go",
+      "introspection",
+      "journey"
+    ],
+    "imageUrl": "cups08"
+  },
+  {
+    "id": "cups_09",
+    "name": "Nine of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Contentment and wish fulfillment; enjoy what you have.",
+    "reversedMeaning": "Smugness or hollow success; seek genuine satisfaction.",
+    "description": "A pleased figure sits before nine displayed cups.",
+    "keywords": [
+      "satisfaction",
+      "gratitude",
+      "wish come true",
+      "comfort",
+      "pleasure"
+    ],
+    "imageUrl": "cups09"
+  },
+  {
+    "id": "cups_10",
+    "name": "Ten of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Emotional harmony, family, and shared bliss.",
+    "reversedMeaning": "Strained harmony or unrealistic ideals; nurture real bonds.",
+    "description": "A family rejoices beneath a rainbow of cups.",
+    "keywords": [
+      "harmony",
+      "family",
+      "joy",
+      "blessing",
+      "alignment"
+    ],
+    "imageUrl": "cups10"
+  },
+  {
+    "id": "cups_11",
+    "name": "Page of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Gentle messenger of feelings, creativity, and curiosity.",
+    "reversedMeaning": "Emotional immaturity or blocked inspiration; play with ideas.",
+    "description": "A youthful page holds a cup with a surprising fish.",
+    "keywords": [
+      "curiosity",
+      "imagination",
+      "intuition",
+      "messages",
+      "sensitivity"
+    ],
+    "imageUrl": "cups11"
+  },
+  {
+    "id": "cups_12",
+    "name": "Knight of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Romantic pursuit and heartfelt offers move forward.",
+    "reversedMeaning": "Moodiness or unrealistic ideals; balance dream with action.",
+    "description": "A knight rides calmly with a cup extended.",
+    "keywords": [
+      "romance",
+      "idealism",
+      "invitation",
+      "charm",
+      "quest"
+    ],
+    "imageUrl": "cups12"
+  },
+  {
+    "id": "cups_13",
+    "name": "Queen of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Compassionate, intuitive nurturing with emotional depth.",
+    "reversedMeaning": "Overwhelm or emotional withdrawal; re-center boundaries.",
+    "description": "A serene queen contemplates an ornate chalice.",
+    "keywords": [
+      "compassion",
+      "intuition",
+      "empathy",
+      "calm",
+      "support"
+    ],
+    "imageUrl": "cups13"
+  },
+  {
+    "id": "cups_14",
+    "name": "King of Cups",
+    "arcana": "Cups",
+    "uprightMeaning": "Emotional balance, diplomacy, and wise counsel.",
+    "reversedMeaning": "Emotional manipulation or volatility; steady the waters.",
+    "description": "A king on a throne atop rolling seas, cup in hand.",
+    "keywords": [
+      "balance",
+      "diplomacy",
+      "wisdom",
+      "supportive",
+      "calm authority"
+    ],
+    "imageUrl": "cups14"
+  },
+  {
+    "id": "wands_01",
+    "name": "Ace of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "A spark of inspiration, initiative, and raw creative energy.",
+    "reversedMeaning": "Delayed start or blocked passion; clear the path to act.",
+    "description": "A hand extends a budding wand from the clouds.",
+    "keywords": [
+      "inspiration",
+      "initiative",
+      "potential",
+      "energy",
+      "creation"
+    ],
+    "imageUrl": "wands01"
+  },
+  {
+    "id": "wands_02",
+    "name": "Two of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Planning and looking ahead; hold the vision and map the route.",
+    "reversedMeaning": "Playing too small or fear of expansion; step outside the gate.",
+    "description": "A figure holds a globe, gazing from a battlement.",
+    "keywords": [
+      "planning",
+      "vision",
+      "choice",
+      "prospect",
+      "strategy"
+    ],
+    "imageUrl": "wands02"
+  },
+  {
+    "id": "wands_03",
+    "name": "Three of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Expansion and momentum; ships of effort begin to return.",
+    "reversedMeaning": "Delays or limited foresight; adjust plans and keep faith.",
+    "description": "Watching ships from the shore, three staffs planted nearby.",
+    "keywords": [
+      "expansion",
+      "progress",
+      "foresight",
+      "movement",
+      "opportunity"
+    ],
+    "imageUrl": "wands03"
+  },
+  {
+    "id": "wands_04",
+    "name": "Four of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Celebration, milestone, and shared stability.",
+    "reversedMeaning": "Tension at home or postponed celebration; create safe space.",
+    "description": "A floral canopy marks a joyful homecoming.",
+    "keywords": [
+      "celebration",
+      "home",
+      "milestone",
+      "community",
+      "joy"
+    ],
+    "imageUrl": "wands04"
+  },
+  {
+    "id": "wands_05",
+    "name": "Five of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Competition and playful conflict; test your skills.",
+    "reversedMeaning": "Escalated discord or avoidance; seek healthy resolution.",
+    "description": "Five figures brandish wands in lively struggle.",
+    "keywords": [
+      "competition",
+      "conflict",
+      "debate",
+      "challenge",
+      "sparring"
+    ],
+    "imageUrl": "wands05"
+  },
+  {
+    "id": "wands_06",
+    "name": "Six of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Recognition and victory after effort; accept the applause.",
+    "reversedMeaning": "Self-doubt or hollow praise; root success in authenticity.",
+    "description": "A laurel-crowned rider greeted by a cheering crowd.",
+    "keywords": [
+      "victory",
+      "recognition",
+      "achievement",
+      "confidence",
+      "success"
+    ],
+    "imageUrl": "wands06"
+  },
+  {
+    "id": "wands_07",
+    "name": "Seven of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Courageous defense of position; hold your ground.",
+    "reversedMeaning": "Exhaustion or giving up; choose battles wisely.",
+    "description": "A lone figure defends a hill with raised staff.",
+    "keywords": [
+      "defense",
+      "perseverance",
+      "standing ground",
+      "challenge",
+      "courage"
+    ],
+    "imageUrl": "wands07"
+  },
+  {
+    "id": "wands_08",
+    "name": "Eight of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Swift movement and messages; momentum carries you forward.",
+    "reversedMeaning": "Delays or scattered focus; align aim before release.",
+    "description": "Eight wands fly together across the sky.",
+    "keywords": [
+      "speed",
+      "movement",
+      "communication",
+      "momentum",
+      "travel"
+    ],
+    "imageUrl": "wands08"
+  },
+  {
+    "id": "wands_09",
+    "name": "Nine of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Resilience and vigilance after trials; you’re close to success.",
+    "reversedMeaning": "Defensiveness or burnout; rest and reset boundaries.",
+    "description": "A weary guard stands with bandaged head, holding fast.",
+    "keywords": [
+      "resilience",
+      "perseverance",
+      "guarded",
+      "stamina",
+      "last push"
+    ],
+    "imageUrl": "wands09"
+  },
+  {
+    "id": "wands_10",
+    "name": "Ten of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Heavy burdens and responsibility; prioritize to lighten the load.",
+    "reversedMeaning": "Overcommitment or carrying too much alone; delegate.",
+    "description": "A figure labors under a bundle of ten staffs.",
+    "keywords": [
+      "burden",
+      "responsibility",
+      "overload",
+      "duty",
+      "strain"
+    ],
+    "imageUrl": "wands10"
+  },
+  {
+    "id": "wands_11",
+    "name": "Page of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Fresh enthusiasm and adventurous news spark action.",
+    "reversedMeaning": "Restless start-stop energy; ground your ideas.",
+    "description": "A lively page studies a budding staff in the desert.",
+    "keywords": [
+      "enthusiasm",
+      "exploration",
+      "news",
+      "potential",
+      "adventure"
+    ],
+    "imageUrl": "wands11"
+  },
+  {
+    "id": "wands_12",
+    "name": "Knight of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Bold movement, charisma, and daring pursuit.",
+    "reversedMeaning": "Impulsiveness or inconsistency; channel fire wisely.",
+    "description": "A fiery knight charges forward with a wand.",
+    "keywords": [
+      "action",
+      "passion",
+      "impulse",
+      "travel",
+      "courage"
+    ],
+    "imageUrl": "wands12"
+  },
+  {
+    "id": "wands_13",
+    "name": "Queen of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Confident warmth, magnetism, and creative leadership.",
+    "reversedMeaning": "Jealousy or self-doubt; reclaim your inner fire.",
+    "description": "A queen with sunflower and wand, a black cat at her feet.",
+    "keywords": [
+      "confidence",
+      "independence",
+      "warmth",
+      "charisma",
+      "creativity"
+    ],
+    "imageUrl": "wands13"
+  },
+  {
+    "id": "wands_14",
+    "name": "King of Wands",
+    "arcana": "Wands",
+    "uprightMeaning": "Visionary leadership and decisive action ignite progress.",
+    "reversedMeaning": "Dominance or impatience; lead with inspiration, not force.",
+    "description": "A king holds a blossoming staff, ready to act.",
+    "keywords": [
+      "leadership",
+      "vision",
+      "enterprise",
+      "drive",
+      "inspiration"
+    ],
+    "imageUrl": "wands14"
+  },
+  {
+    "id": "swords_01",
+    "name": "Ace of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Clear thought, truth, and a breakthrough cut through fog.",
+    "reversedMeaning": "Confusion or harsh words; sharpen focus before acting.",
+    "description": "A hand raises a crowned sword above the clouds.",
+    "keywords": [
+      "clarity",
+      "truth",
+      "breakthrough",
+      "logic",
+      "new idea"
+    ],
+    "imageUrl": "swords01"
+  },
+  {
+    "id": "swords_02",
+    "name": "Two of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Stalemate and difficult choice; remove the blindfold gently.",
+    "reversedMeaning": "Decision comes, or tension breaks; choose with heart and mind.",
+    "description": "A blindfolded figure balances two crossed swords.",
+    "keywords": [
+      "indecision",
+      "stalemate",
+      "balance",
+      "choices",
+      "blocked vision"
+    ],
+    "imageUrl": "swords02"
+  },
+  {
+    "id": "swords_03",
+    "name": "Three of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Heartbreak or painful truth pierces; feel and heal.",
+    "reversedMeaning": "Mending begins; release sorrow and allow recovery.",
+    "description": "Three swords pierce a heart beneath stormy clouds.",
+    "keywords": [
+      "heartbreak",
+      "pain",
+      "truth",
+      "sorrow",
+      "release"
+    ],
+    "imageUrl": "swords03"
+  },
+  {
+    "id": "swords_04",
+    "name": "Four of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Rest and recuperation; quiet mind before the next move.",
+    "reversedMeaning": "Restlessness or delay in healing; set firmer boundaries.",
+    "description": "A figure lies in repose beneath three hanging swords.",
+    "keywords": [
+      "rest",
+      "recovery",
+      "meditation",
+      "pause",
+      "healing"
+    ],
+    "imageUrl": "swords04"
+  },
+  {
+    "id": "swords_05",
+    "name": "Five of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Pyrrhic victory or conflict won at a cost; check motives.",
+    "reversedMeaning": "Desire to make amends or end tension; choose peace.",
+    "description": "A figure gathers swords as others walk away.",
+    "keywords": [
+      "conflict",
+      "tension",
+      "defeat",
+      "ego",
+      "cost"
+    ],
+    "imageUrl": "swords05"
+  },
+  {
+    "id": "swords_06",
+    "name": "Six of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Transition to calmer waters; healing journey begins.",
+    "reversedMeaning": "Difficulty moving on or unfinished business; face what lingers.",
+    "description": "A boat glides across water carrying cloaked passengers.",
+    "keywords": [
+      "transition",
+      "healing",
+      "travel",
+      "moving on",
+      "recovery"
+    ],
+    "imageUrl": "swords06"
+  },
+  {
+    "id": "swords_07",
+    "name": "Seven of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Strategy, stealth, or deception; act with integrity.",
+    "reversedMeaning": "Truth surfaces; own your choices and make amends.",
+    "description": "A figure sneaks away with five swords, two left behind.",
+    "keywords": [
+      "strategy",
+      "deception",
+      "tactics",
+      "independence",
+      "cunning"
+    ],
+    "imageUrl": "swords07"
+  },
+  {
+    "id": "swords_08",
+    "name": "Eight of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Feeling trapped by thoughts; liberation starts with perspective.",
+    "reversedMeaning": "Release from mental binds; confidence returns.",
+    "description": "A blindfolded figure stands bound among eight swords.",
+    "keywords": [
+      "restriction",
+      "fear",
+      "limitation",
+      "overthinking",
+      "trapped"
+    ],
+    "imageUrl": "swords08"
+  },
+  {
+    "id": "swords_09",
+    "name": "Nine of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Anxiety and sleepless worry; name the fear to ease it.",
+    "reversedMeaning": "Relief after despair or lingering nightmares; seek support.",
+    "description": "A person sits up in bed, nine swords on the wall.",
+    "keywords": [
+      "anxiety",
+      "worry",
+      "nightmare",
+      "guilt",
+      "fear"
+    ],
+    "imageUrl": "swords09"
+  },
+  {
+    "id": "swords_10",
+    "name": "Ten of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "A painful ending; dawn waits beyond the low point.",
+    "reversedMeaning": "Recovery and regeneration after rock bottom.",
+    "description": "A figure lies with ten swords, dawn breaking behind.",
+    "keywords": [
+      "ending",
+      "betrayal",
+      "collapse",
+      "finality",
+      "release"
+    ],
+    "imageUrl": "swords10"
+  },
+  {
+    "id": "swords_11",
+    "name": "Page of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Curious intellect, vigilance, and new ideas take flight.",
+    "reversedMeaning": "Gossip or haste; think before speaking or acting.",
+    "description": "A page brandishes a sword, alert to shifting winds.",
+    "keywords": [
+      "curiosity",
+      "ideas",
+      "watchfulness",
+      "communication",
+      "alertness"
+    ],
+    "imageUrl": "swords11"
+  },
+  {
+    "id": "swords_12",
+    "name": "Knight of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Decisive, swift action propelled by conviction.",
+    "reversedMeaning": "Impulsive or reckless charge; slow down for context.",
+    "description": "A knight races forward, sword raised against the wind.",
+    "keywords": [
+      "speed",
+      "assertion",
+      "ambition",
+      "conflict",
+      "drive"
+    ],
+    "imageUrl": "swords12"
+  },
+  {
+    "id": "swords_13",
+    "name": "Queen of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Clear perception, honesty, and wise boundaries.",
+    "reversedMeaning": "Coldness or bitterness; balance truth with compassion.",
+    "description": "A discerning queen gestures with a raised sword.",
+    "keywords": [
+      "clarity",
+      "independence",
+      "truth",
+      "discernment",
+      "directness"
+    ],
+    "imageUrl": "swords13"
+  },
+  {
+    "id": "swords_14",
+    "name": "King of Swords",
+    "arcana": "Swords",
+    "uprightMeaning": "Strategic intellect and authority guided by truth.",
+    "reversedMeaning": "Manipulative or rigid thinking; lead with fairness.",
+    "description": "A king sits firmly with an upright sword of reason.",
+    "keywords": [
+      "logic",
+      "authority",
+      "strategy",
+      "truth",
+      "objectivity"
+    ],
+    "imageUrl": "swords14"
+  },
+  {
+    "id": "pents_01",
+    "name": "Ace of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "New material opportunity, grounded start, or seed of prosperity.",
+    "reversedMeaning": "Missed chance or instability; prepare practical foundations.",
+    "description": "A coin rests in a divine hand above a garden path.",
+    "keywords": [
+      "prosperity",
+      "new job",
+      "stability",
+      "seed",
+      "manifestation"
+    ],
+    "imageUrl": "pents01"
+  },
+  {
+    "id": "pents_02",
+    "name": "Two of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Juggling priorities with flexibility; keep rhythm flowing.",
+    "reversedMeaning": "Overwhelm or imbalance; simplify and set limits.",
+    "description": "A dancer balances two coins within an endless loop.",
+    "keywords": [
+      "balance",
+      "adaptability",
+      "priorities",
+      "time management",
+      "flow"
+    ],
+    "imageUrl": "pents02"
+  },
+  {
+    "id": "pents_03",
+    "name": "Three of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Collaboration and craftsmanship build something lasting.",
+    "reversedMeaning": "Team friction or poor planning; align goals and roles.",
+    "description": "An apprentice, monk, and architect confer in a cathedral.",
+    "keywords": [
+      "teamwork",
+      "skill",
+      "planning",
+      "craft",
+      "cooperation"
+    ],
+    "imageUrl": "pents03"
+  },
+  {
+    "id": "pents_04",
+    "name": "Four of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Holding tight to resources and control; seek balanced security.",
+    "reversedMeaning": "Letting go or loosening grip; generosity opens flow.",
+    "description": "A figure clutches coins at crown, arms, and feet.",
+    "keywords": [
+      "security",
+      "control",
+      "conservation",
+      "possessiveness",
+      "stability"
+    ],
+    "imageUrl": "pents04"
+  },
+  {
+    "id": "pents_05",
+    "name": "Five of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Material hardship or feeling shut out; support is nearby.",
+    "reversedMeaning": "Recovery and assistance begin; faith returns.",
+    "description": "Two weary figures pass a lit stained-glass window.",
+    "keywords": [
+      "hardship",
+      "loss",
+      "isolation",
+      "poverty",
+      "support"
+    ],
+    "imageUrl": "pents05"
+  },
+  {
+    "id": "pents_06",
+    "name": "Six of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Generosity and balanced giving and receiving.",
+    "reversedMeaning": "Strings attached or imbalance; seek fairness in exchange.",
+    "description": "A giver shares coins with balanced scales in hand.",
+    "keywords": [
+      "generosity",
+      "charity",
+      "balance",
+      "support",
+      "fairness"
+    ],
+    "imageUrl": "pents06"
+  },
+  {
+    "id": "pents_07",
+    "name": "Seven of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Patience and assessment; growth takes steady tending.",
+    "reversedMeaning": "Impatience or misdirected effort; adjust the plan.",
+    "description": "A gardener rests on a staff, watching pentacle vines.",
+    "keywords": [
+      "patience",
+      "investment",
+      "assessment",
+      "growth",
+      "long-term"
+    ],
+    "imageUrl": "pents07"
+  },
+  {
+    "id": "pents_08",
+    "name": "Eight of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Skill-building and diligent work hone mastery.",
+    "reversedMeaning": "Perfectionism or monotony; reconnect to craft’s purpose.",
+    "description": "A craftsman carves coins in focused repetition.",
+    "keywords": [
+      "mastery",
+      "practice",
+      "focus",
+      "craft",
+      "apprenticeship"
+    ],
+    "imageUrl": "pents08"
+  },
+  {
+    "id": "pents_09",
+    "name": "Nine of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Self-reliance, luxury, and earned comfort.",
+    "reversedMeaning": "Overinvestment in appearances or dependence; honor true worth.",
+    "description": "A robed figure enjoys a garden with a falcon.",
+    "keywords": [
+      "independence",
+      "abundance",
+      "grace",
+      "security",
+      "enjoyment"
+    ],
+    "imageUrl": "pents09"
+  },
+  {
+    "id": "pents_10",
+    "name": "Ten of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Legacy, long-term stability, and family prosperity.",
+    "reversedMeaning": "Instability or disputes over resources; align on values.",
+    "description": "Generations gather amid archways filled with coins.",
+    "keywords": [
+      "legacy",
+      "wealth",
+      "family",
+      "tradition",
+      "long-term"
+    ],
+    "imageUrl": "pents10"
+  },
+  {
+    "id": "pents_11",
+    "name": "Page of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Student energy and practical curiosity about new skills.",
+    "reversedMeaning": "Lack of follow-through or focus; ground your study.",
+    "description": "A page admires a coin in a green field.",
+    "keywords": [
+      "study",
+      "opportunity",
+      "focus",
+      "practicality",
+      "manifesting"
+    ],
+    "imageUrl": "pents11"
+  },
+  {
+    "id": "pents_12",
+    "name": "Knight of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Patient, steady progress and reliability.",
+    "reversedMeaning": "Stagnation or stubbornness; adjust pace mindfully.",
+    "description": "A steadfast knight holds a coin atop a calm horse.",
+    "keywords": [
+      "reliability",
+      "routine",
+      "persistence",
+      "diligence",
+      "patience"
+    ],
+    "imageUrl": "pents12"
+  },
+  {
+    "id": "pents_13",
+    "name": "Queen of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Practical nurturing, resourcefulness, and grounded care.",
+    "reversedMeaning": "Overgiving or neglect of self; restore your own roots.",
+    "description": "A queen cradles a coin amidst lush nature.",
+    "keywords": [
+      "nurturing",
+      "practicality",
+      "comfort",
+      "security",
+      "care"
+    ],
+    "imageUrl": "pents13"
+  },
+  {
+    "id": "pents_14",
+    "name": "King of Pentacles",
+    "arcana": "Pentacles",
+    "uprightMeaning": "Wealth, stability, and capable stewardship of resources.",
+    "reversedMeaning": "Greed or rigidity; lead with generosity and wisdom.",
+    "description": "A prosperous king sits amid symbols of plenty.",
+    "keywords": [
+      "stability",
+      "abundance",
+      "leadership",
+      "practical wisdom",
+      "security"
+    ],
+    "imageUrl": "pents14"
+  }
+]

@@ -5,11 +5,13 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import com.pinwormmy.midoritarot.R
+import com.pinwormmy.midoritarot.ui.state.LocalizedName
+import java.util.Locale
 
 @Immutable
 data class TarotSkin(
     val id: String,
-    val displayName: String,
+    val displayName: LocalizedName,
     val backgroundBrush: Brush,
     val backgroundOverlayColor: Color,
     val backgroundImageRes: Int? = null,
@@ -26,7 +28,7 @@ data class TarotSkin(
 object TarotSkins {
     val SpaceOne = TarotSkin(
         id = "space_1",
-        displayName = "우주1",
+        displayName = LocalizedName(ko = "우주1", en = "Space I"),
         backgroundBrush = Brush.verticalGradient(
             listOf(
                 Color(0xFF020203),
@@ -48,7 +50,7 @@ object TarotSkins {
 
     val SpaceTwo = TarotSkin(
         id = "space_2",
-        displayName = "우주2",
+        displayName = LocalizedName(ko = "우주2", en = "Space II"),
         backgroundBrush = Brush.verticalGradient(
             listOf(
                 Color(0xFF05060F),
@@ -75,3 +77,5 @@ object TarotSkins {
 }
 
 val LocalTarotSkin = staticCompositionLocalOf { TarotSkins.default }
+
+fun TarotSkin.label(locale: Locale = Locale.getDefault()): String = displayName.resolve(locale)

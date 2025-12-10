@@ -3,13 +3,25 @@ package com.pinwormmy.midoritarot.assets
 import android.content.Context
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import org.json.JSONArray
+import java.util.Locale
 
 object TarotJsonLoader {
     fun load(
         context: Context,
         fileName: String = "tarot_data.json"
     ): List<TarotCardModel> {
-        val json = context.assets.open(fileName).bufferedReader().use { it.readText() }
+        val locale = Locale.getDefault().language.lowercase()
+        val preferredFile = when (locale) {
+            "en" -> "tarot_data_en.json"
+            "ja" -> "tarot_data_ja.json"
+            "th" -> "tarot_data_th.json"
+            else -> fileName
+        }
+        val json = runCatching {
+            context.assets.open(preferredFile).bufferedReader().use { it.readText() }
+        }.getOrElse {
+            context.assets.open(fileName).bufferedReader().use { it.readText() }
+        }
         val array = JSONArray(json)
         val cards = mutableListOf<TarotCardModel>()
         for (index in 0 until array.length()) {

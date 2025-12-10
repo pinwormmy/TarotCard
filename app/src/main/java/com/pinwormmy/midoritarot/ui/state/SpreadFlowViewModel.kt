@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.random.Random
+import java.util.Locale
 
 enum class CardCategory(val displayName: String) {
     MajorArcana("Major Arcana"),
@@ -60,8 +61,14 @@ class SpreadFlowViewModel(
         spread.positions.sortedBy { it.order }.map { it.slot }
 
     private fun instructionFor(spread: SpreadDefinition, index: Int): String? {
-        val position = spread.positions.getOrNull(index)
-        return position?.let { "${it.title} 카드를 선택하세요." }
+        val position = spread.positions.getOrNull(index) ?: return null
+        val title = position.title.resolve()
+        val lang = Locale.getDefault().language.lowercase()
+        return if (lang == "en") {
+            "Select the $title card."
+        } else {
+            "$title 카드를 선택하세요."
+        }
     }
 
     fun selectSpread(type: SpreadType) {
@@ -176,6 +183,7 @@ class SpreadFlowViewModel(
         updateState { it.copy(cutMode = true, statusMessage = null) }
     }
 
+    @Suppress("unused")
     fun cancelCutMode() {
         updateState { it.copy(cutMode = false, statusMessage = null) }
     }
@@ -217,7 +225,15 @@ class SpreadFlowViewModel(
             val updatedDrawn = state.drawnCards + (nextSlot to placement)
             val updatedFinal = state.finalCards + (nextSlot to placement)
             val titleLookup = state.spread.positions.associateBy { it.slot }
-            val message = titleLookup[nextSlot]?.let { "${it.title} 카드를 선택했습니다." }
+            val message = titleLookup[nextSlot]?.let { position ->
+                val title = position.title.resolve()
+                val lang = Locale.getDefault().language.lowercase()
+                if (lang == "en") {
+                    "You picked the $title card."
+                } else {
+                    "$title 카드를 선택했습니다."
+                }
+            }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
             val nextInstruction = instructionFor(state.spread, nextIndex + 1)
             state.copy(

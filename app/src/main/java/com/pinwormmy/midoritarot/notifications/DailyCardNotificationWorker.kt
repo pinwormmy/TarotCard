@@ -39,6 +39,8 @@ class DailyCardNotificationWorker(
     private fun showNotification() {
         ensureChannel()
         if (!canPostNotifications()) return
+        val title = applicationContext.getString(R.string.daily_notification_title)
+        val body = applicationContext.getString(R.string.daily_notification_body)
 
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -52,13 +54,9 @@ class DailyCardNotificationWorker(
 
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_name)
-            .setContentTitle("미도리 타로")
-            .setContentText("오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!")
-            .setStyle(
-                NotificationCompat.BigTextStyle().bigText(
-                    "오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!"
-                )
-            )
+            .setContentTitle(title)
+            .setContentText(body)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
@@ -93,7 +91,7 @@ class DailyCardNotificationWorker(
                 applicationContext.getString(R.string.app_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "오늘하루운세뽑기 알림"
+                description = applicationContext.getString(R.string.daily_notification_channel_desc)
             }
             val manager = applicationContext.getSystemService(NotificationManager::class.java)
             manager?.createNotificationChannel(channel)

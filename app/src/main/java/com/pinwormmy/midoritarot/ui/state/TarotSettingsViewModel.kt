@@ -13,22 +13,58 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+data class LocalizedName(
+    val ko: String,
+    val en: String,
+    val ja: String? = null,
+    val th: String? = null
+) {
+    fun resolve(locale: Locale = Locale.getDefault()): String {
+        return when (locale.language.lowercase()) {
+            "en" -> en.ifBlank { ko }
+            "ja" -> ja?.takeIf { it.isNotBlank() } ?: ko
+            "th" -> th?.takeIf { it.isNotBlank() } ?: ko
+            else -> ko
+        }
+    }
+}
+
 enum class CardBackStyle(
-    val displayName: String,
+    val displayName: LocalizedName,
     val assetName: String
 ) {
-    Byzantine("비잔틴", "byzantine"),
-    LightBrown("라이트 브라운", "lightbrown"),
-    RoseMoon("로즈 문", "rosemoon"),
-    Persia("페르시아", "persia")
+    Byzantine(
+        displayName = LocalizedName(ko = "비잔틴", en = "Byzantine"),
+        assetName = "byzantine"
+    ),
+    LightBrown(
+        displayName = LocalizedName(ko = "라이트 브라운", en = "Light Brown"),
+        assetName = "lightbrown"
+    ),
+    RoseMoon(
+        displayName = LocalizedName(ko = "로즈 문", en = "Rose Moon"),
+        assetName = "rosemoon"
+    ),
+    Persia(
+        displayName = LocalizedName(ko = "페르시아", en = "Persia"),
+        assetName = "persia"
+    );
+
+    fun label(locale: Locale = Locale.getDefault()): String = displayName.resolve(locale)
 }
 
 enum class CardFaceSkin(
-    val displayName: String,
+    val displayName: LocalizedName,
     val folder: String,
     val previewImage: String
 ) {
-    Animation("일본 애니", "animation", "tarot00")
+    Animation(
+        displayName = LocalizedName(ko = "일본 애니", en = "Anime"),
+        folder = "animation",
+        previewImage = "tarot00"
+    );
+
+    fun label(locale: Locale = Locale.getDefault()): String = displayName.resolve(locale)
 }
 
 enum class AppLanguage(val code: String) {

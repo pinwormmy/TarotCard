@@ -194,7 +194,7 @@ fun ShuffleAndDrawScreen(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = uiState.spread.title,
+                    text = uiState.spread.title.resolve(),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )

@@ -155,7 +155,7 @@ fun ReadingResultScreen(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = spread.title,
+                    text = spread.title.resolve(),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
@@ -225,7 +225,7 @@ fun ReadingResultScreen(
                         } else {
                             ResultPlaceholderCard(
                                 modifier = cardModifier,
-                                label = position.title
+                                label = position.title.resolve()
                             )
                         }
                     }
@@ -261,8 +261,8 @@ fun ReadingResultScreen(
                 zoomProgress = zoomAnimation.value,
                 cardBounds = originBounds,
                 containerBounds = container,
-                slotTitle = position.title,
-                slotDescription = position.description,
+                slotTitle = position.title.resolve(),
+                slotDescription = position.description.resolve(),
                 slotOrder = position.order,
                 onCardTapped = {
                     if (phase == CardRevealPhase.Zoom) {

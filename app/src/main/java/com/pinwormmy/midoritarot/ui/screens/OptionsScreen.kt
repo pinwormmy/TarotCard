@@ -90,6 +90,7 @@ import com.pinwormmy.midoritarot.ui.state.AppLanguage
 import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.theme.label
 import com.pinwormmy.midoritarot.R
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -383,7 +384,7 @@ private fun CardFaceSkinSelector(
                     )
                 }
                 Text(
-                    text = skin.displayName,
+                    text = skin.label(),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal
                 )
@@ -429,7 +430,7 @@ private fun CardBackSkinSelector(
                     )
                 }
                 Text(
-                    text = back.displayName,
+                    text = back.label(),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal
                 )
@@ -516,7 +517,7 @@ private fun CardFacePreviewModal(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = skin.displayName,
+                text = skin.label(),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -635,7 +636,7 @@ private fun CardBackPreviewModal(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = back.displayName,
+                text = back.label(),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -723,7 +724,7 @@ private fun SkinSelector(
                         )
                     }
                 }
-                Text(text = skin.displayName, style = MaterialTheme.typography.bodySmall)
+                Text(text = skin.label(), style = MaterialTheme.typography.bodySmall)
             }
         }
     }

@@ -73,9 +73,9 @@ fun ReadingSetupScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(text = spread.title, fontWeight = FontWeight.Bold)
+                    Text(text = spread.title.resolve(), fontWeight = FontWeight.Bold)
                     Text(
-                        text = spread.description,
+                        text = spread.description.resolve(),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                     )
@@ -124,7 +124,7 @@ fun ReadingSetupScreen(
                 SpreadPreviewCard(
                     modifier = previewModifier,
                     order = position.order,
-                    title = position.title
+                    title = position.title.resolve()
                 )
             }
 
@@ -132,7 +132,7 @@ fun ReadingSetupScreen(
                 modifier = Modifier.fillMaxWidth(),
                 value = questionText,
                 onValueChange = onQuestionChange,
-                placeholder = { Text(text = spread.questionPlaceholder) }
+                placeholder = { Text(text = spread.questionPlaceholder.resolve()) }
             )
 
             Row(
