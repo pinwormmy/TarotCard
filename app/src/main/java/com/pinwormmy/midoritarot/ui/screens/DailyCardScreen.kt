@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -34,6 +33,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -44,13 +44,15 @@ import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.DAILY_CARD_MAX_WIDTH_DP
-import com.pinwormmy.midoritarot.ui.components.DAILY_CARD_MAX_HEIGHT_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.platform.LocalContext
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -113,29 +115,24 @@ fun DailyCardScreen(
 
                 Box(
                     modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 24.dp)
-                .clickable {
-                    if (isBack) {
-                        if (hapticsEnabled) {
-                            HapticsPlayer.cardFlip(context, hapticFeedback)
-                        }
-                        isBack = false
-                    } else {
-                        showDescription = true
-                    }
-                },
+                        .fillMaxWidth()
+                        .padding(vertical = 24.dp)
+                        .clickable {
+                            if (isBack) {
+                                if (hapticsEnabled) {
+                                    HapticsPlayer.cardFlip(context, hapticFeedback)
+                                }
+                                isBack = false
+                            } else {
+                                showDescription = true
+                            }
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     DailyCardDisplay(
                         card = card,
                         isBack = isBack,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .sizeIn(
-                                maxWidth = DAILY_CARD_MAX_WIDTH_DP.dp,
-                                maxHeight = DAILY_CARD_MAX_HEIGHT_DP.dp
-                            )
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
 
@@ -169,13 +166,23 @@ private fun DailyCardDisplay(
     modifier: Modifier = Modifier
 ) {
     val density = LocalDensity.current
+    val windowInfo = LocalWindowInfo.current
+    val containerHeightDp = windowHeightDp(windowInfo, density)
+    val heightScale = LocalUiHeightScale.current
+    val sizeLimit = computeCardSizeLimit(
+        screenHeightDp = containerHeightDp.toInt(),
+        scaleFactor = heightScale,
+        heightFraction = 0.7f
+    )
     val rotation by animateFloatAsState(
         targetValue = if (isBack) 180f else 0f,
         label = "dailyCardFlip"
     )
     val faceRotation = 0f
     Surface(
-        modifier = modifier.aspectRatio(CARD_ASPECT_RATIO),
+        modifier = modifier
+            .applyCardSizeLimit(sizeLimit)
+            .aspectRatio(CARD_ASPECT_RATIO),
         tonalElevation = 12.dp,
         shape = TarotCardShape,
         color = Color.Transparent
@@ -185,7 +192,7 @@ private fun DailyCardDisplay(
                 .fillMaxSize()
                 .graphicsLayer {
                     rotationY = rotation
-                    cameraDistance = 12 * density.density
+                    cameraDistance = with(density) { 12.dp.toPx() }
                     rotationZ = faceRotation
                 }
                 .clip(TarotCardShape)
@@ -199,15 +206,15 @@ private fun DailyCardDisplay(
                     shape = TarotCardShape
                 )
             } else {
-        CardBackArt(
-            modifier = Modifier.fillMaxSize(),
-            overlay = Brush.verticalGradient(
-                listOf(Color.Transparent, Color(0x66000000))
-            ),
-            shape = TarotCardShape
-        )
-    }
-}
+                CardBackArt(
+                    modifier = Modifier.fillMaxSize(),
+                    overlay = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color(0x66000000))
+                    ),
+                    shape = TarotCardShape
+                )
+            }
+        }
     }
 }
 

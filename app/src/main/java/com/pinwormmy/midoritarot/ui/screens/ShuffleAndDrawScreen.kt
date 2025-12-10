@@ -70,8 +70,6 @@ import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
-import com.pinwormmy.midoritarot.ui.components.CARD_MAX_HEIGHT_DP
 import com.pinwormmy.midoritarot.ui.components.CARD_LANDSCAPE_RATIO
 import com.pinwormmy.midoritarot.ui.components.ShufflePhase
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
@@ -79,6 +77,10 @@ import com.pinwormmy.midoritarot.ui.components.rememberCardBackPainter
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowUiState
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
+import androidx.compose.ui.platform.LocalWindowInfo
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -100,6 +102,14 @@ fun ShuffleAndDrawScreen(
     onBack: () -> Unit
 ) {
     BackHandler(onBack = onBack)
+    val windowInfo = LocalWindowInfo.current
+    val density = LocalDensity.current
+    val uiScale = LocalUiHeightScale.current
+    val cardSizeLimit = computeCardSizeLimit(
+        screenHeightDp = windowHeightDp(windowInfo, density).toInt(),
+        scaleFactor = uiScale,
+        heightFraction = 0.7f
+    )
 
     var shufflePhase by remember { mutableStateOf(ShufflePhase.Idle) }
     val drawnIds = remember(uiState.drawnCards) {
@@ -211,8 +221,8 @@ fun ShuffleAndDrawScreen(
                     val widthFactor = if (uiState.cutMode) 0.9f else 0.7f
                     val maxWidthByHeight = maxHeight * CARD_ASPECT_RATIO
                     val proposedWidth = (maxWidth * widthFactor).coerceAtMost(maxWidthByHeight)
-                    val cappedWidth = proposedWidth.coerceAtMost(CARD_MAX_WIDTH_DP.dp)
-                    val cardHeight = (cappedWidth / CARD_ASPECT_RATIO).coerceAtMost(CARD_MAX_HEIGHT_DP.dp)
+                    val cappedWidth = proposedWidth.coerceAtMost(cardSizeLimit.maxWidth)
+                    val cardHeight = (cappedWidth / CARD_ASPECT_RATIO).coerceAtMost(cardSizeLimit.maxHeight)
                     val cardWidth = cardHeight * CARD_ASPECT_RATIO
 
                     if (uiState.gridVisible) {

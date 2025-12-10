@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -33,9 +32,15 @@ import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardCategory
 import com.pinwormmy.midoritarot.ui.state.category
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
+import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.platform.LocalDensity
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -49,6 +54,15 @@ fun CardLibraryScreen(
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
 ) {
+    val windowInfo = LocalWindowInfo.current
+    val density = LocalDensity.current
+    val uiScale = LocalUiHeightScale.current
+    val containerHeightDp = windowHeightDp(windowInfo, density)
+    val cardSizeLimit = computeCardSizeLimit(
+        screenHeightDp = containerHeightDp.toInt(),
+        scaleFactor = uiScale,
+        heightFraction = 0.7f
+    )
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -83,7 +97,11 @@ fun CardLibraryScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(filtered, key = { it.id }) { card ->
-                CardLibraryItem(card = card, onCardSelected = onCardSelected)
+                CardLibraryItem(
+                    card = card,
+                    onCardSelected = onCardSelected,
+                    cardSizeLimit = cardSizeLimit
+                )
             }
         }
 
@@ -102,7 +120,8 @@ fun CardLibraryScreen(
 private fun CardLibraryItem(
     card: TarotCardModel,
     onCardSelected: (TarotCardModel) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    cardSizeLimit: CardSizeLimit
 ) {
     Card(
         modifier = modifier
@@ -124,7 +143,7 @@ private fun CardLibraryItem(
                 card = card,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .widthIn(max = CARD_MAX_WIDTH_DP.dp)
+                    .applyCardSizeLimit(cardSizeLimit)
                     .aspectRatio(CARD_ASPECT_RATIO),
                 shape = shape
             )

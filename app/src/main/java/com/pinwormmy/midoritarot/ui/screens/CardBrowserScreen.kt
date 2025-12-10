@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -43,7 +42,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -59,6 +57,13 @@ import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import kotlinx.coroutines.launch
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.ui.platform.LocalDensity
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
+import androidx.compose.ui.platform.LocalWindowInfo
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 
 private enum class BrowserOverlayPhase { Zoom, Description }
 
@@ -75,6 +80,17 @@ fun CardBrowserScreen(
     var overlayPhase by remember { mutableStateOf(BrowserOverlayPhase.Zoom) }
     val zoomProgress = remember { Animatable(0f) }
     val coroutineScope = rememberCoroutineScope()
+    val windowInfo = LocalWindowInfo.current
+    val uiScale = LocalUiHeightScale.current
+    val density = LocalDensity.current
+    val containerHeightDp = windowHeightDp(windowInfo, density)
+    val cardSizeLimit = remember(windowInfo.containerSize.height, uiScale, containerHeightDp) {
+        computeCardSizeLimit(
+            screenHeightDp = containerHeightDp.toInt(),
+            scaleFactor = uiScale,
+            heightFraction = 0.7f
+        )
+    }
     @Suppress("UNUSED_VALUE")
     var animateZoom by remember { mutableStateOf(false) }
     var isZoomAnimating by remember { mutableStateOf(false) }
@@ -147,6 +163,7 @@ fun CardBrowserScreen(
                 items(filteredCards, key = { it.id }) { card ->
                     CardBrowserItem(
                         card = card,
+                        cardSizeLimit = cardSizeLimit,
                         onClick = {
                             if (isZoomAnimating) return@CardBrowserItem
                             if (overlayPhase == BrowserOverlayPhase.Description) {
@@ -182,6 +199,7 @@ fun CardBrowserScreen(
             phase = overlayPhase,
             zoomProgress = zoomProgress.value,
             isZoomAnimating = isZoomAnimating,
+            cardSizeLimit = cardSizeLimit,
             onCardTap = {
                 if (isZoomAnimating) return@CardDetailOverlay
                 overlayPhase = when (overlayPhase) {
@@ -208,6 +226,7 @@ fun CardBrowserScreen(
 @Composable
 private fun CardBrowserItem(
     card: TarotCardModel,
+    cardSizeLimit: CardSizeLimit,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
@@ -221,7 +240,7 @@ private fun CardBrowserItem(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .widthIn(max = CARD_MAX_WIDTH_DP.dp)
+                .applyCardSizeLimit(cardSizeLimit)
                 .aspectRatio(CARD_ASPECT_RATIO),
             shape = TarotCardShape
         ) {
@@ -246,6 +265,7 @@ private fun CardDetailOverlay(
     phase: BrowserOverlayPhase,
     zoomProgress: Float,
     isZoomAnimating: Boolean,
+    cardSizeLimit: CardSizeLimit,
     modifier: Modifier = Modifier,
     onCardTap: () -> Unit,
     onDismiss: () -> Unit,
@@ -281,7 +301,7 @@ private fun CardDetailOverlay(
                     card = card,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .widthIn(max = CARD_MAX_WIDTH_DP.dp)
+                        .applyCardSizeLimit(cardSizeLimit)
                         .aspectRatio(CARD_ASPECT_RATIO),
                     shape = TarotCardShape
                 )

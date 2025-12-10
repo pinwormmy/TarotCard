@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
@@ -23,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +42,9 @@ fun MainMenuScreen(
     onBrowseCards: (() -> Unit)? = null,
     onOpenOptions: (() -> Unit)? = null
 ) {
+    val configuration = LocalConfiguration.current
+    val isTablet = configuration.smallestScreenWidthDp >= 600
+
     val menuItems = listOf(
         MainMenuEntry(
             label = "오늘의 카드",
@@ -61,45 +68,91 @@ fun MainMenuScreen(
         )
     )
 
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Transparent)
-            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .padding(horizontal = 24.dp, vertical = if (isTablet) 24.dp else 32.dp)
     ) {
+        val constraintsMaxHeight = maxHeight
+        val columnSpacing = if (isTablet) 16.dp else 24.dp
+        val buttonSpacing = if (isTablet) 12.dp else 16.dp
+        val availableHeight = if (isTablet) constraintsMaxHeight - columnSpacing else Dp.Unspecified
+        val menuHeight: Dp = if (isTablet && availableHeight != Dp.Unspecified) {
+            availableHeight * 0.4f
+        } else {
+            Dp.Unspecified
+        }
+        val logoHeight: Dp = if (isTablet && availableHeight != Dp.Unspecified) {
+            availableHeight - menuHeight
+        } else {
+            Dp.Unspecified
+        }
+        val menuArrangement = Arrangement.spacedBy(buttonSpacing)
+        val availableForButtons = if (isTablet && menuHeight != Dp.Unspecified) {
+            menuHeight - buttonSpacing * (menuItems.size - 1)
+        } else {
+            Dp.Unspecified
+        }
+        val desiredButtonHeight = 60.dp
+        val buttonFixedHeight = if (isTablet && availableForButtons != Dp.Unspecified) {
+            desiredButtonHeight.coerceAtMost(availableForButtons / menuItems.size)
+        } else {
+            desiredButtonHeight
+        }
+        val buttonPadding = PaddingValues(vertical = if (isTablet) 16.dp else 20.dp, horizontal = 24.dp)
+
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(24.dp),
+            verticalArrangement = Arrangement.spacedBy(columnSpacing),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f),
+                    .let { base ->
+                        if (logoHeight != Dp.Unspecified) {
+                            base.height(logoHeight)
+                        } else {
+                            base
+                        }
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.title_logo),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth(0.81f)
+                        .fillMaxWidth(if (isTablet) 0.73f else 0.81f)
                         .aspectRatio(700f / 674f),
                     contentScale = ContentScale.Fit
                 )
             }
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .let { base ->
+                        if (menuHeight != Dp.Unspecified) {
+                            base.height(menuHeight)
+                        } else {
+                            base
+                        }
+                    },
+                verticalArrangement = menuArrangement
             ) {
                 menuItems.forEach { entry ->
                     MainMenuButton(
                         label = entry.label,
                         enabled = entry.enabled,
-                        onClick = entry.onClick
+                        onClick = entry.onClick,
+                        fixedHeight = buttonFixedHeight,
+                        contentPadding = buttonPadding
                     )
                 }
-                Spacer(modifier = Modifier.height(12.dp))
+                if (!isTablet) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
             }
         }
     }
@@ -110,7 +163,9 @@ private fun MainMenuButton(
     label: String,
     enabled: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    fixedHeight: Dp = 0.dp,
+    contentPadding: PaddingValues = PaddingValues(vertical = 20.dp, horizontal = 24.dp)
 ) {
     val containerColor = if (enabled) {
         MaterialTheme.colorScheme.surface.copy(alpha = 0.72f)
@@ -126,6 +181,7 @@ private fun MainMenuButton(
     Surface(
         modifier = modifier
             .fillMaxWidth()
+            .heightIn(min = fixedHeight, max = fixedHeight)
             .clip(RoundedCornerShape(28.dp))
             .let {
                 if (enabled) {
@@ -137,15 +193,19 @@ private fun MainMenuButton(
         color = containerColor,
         tonalElevation = if (enabled) 6.dp else 0.dp
     ) {
-        Text(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(PaddingValues(vertical = 20.dp, horizontal = 24.dp)),
-            text = label,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.SemiBold,
-            color = contentColor
-        )
+                .padding(contentPadding),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = contentColor
+            )
+        }
     }
 }
 

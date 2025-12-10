@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,8 +25,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
-import com.pinwormmy.midoritarot.ui.components.CARD_MAX_WIDTH_DP
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
+import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,6 +85,15 @@ private fun CardDetailBody(
     card: TarotCardModel,
     modifier: Modifier = Modifier
 ) {
+    val windowInfo = LocalWindowInfo.current
+    val density = LocalDensity.current
+    val containerHeightDp = windowHeightDp(windowInfo, density)
+    val scale = LocalUiHeightScale.current
+    val sizeLimit = computeCardSizeLimit(
+        screenHeightDp = containerHeightDp.toInt(),
+        scaleFactor = scale,
+        heightFraction = 0.7f
+    )
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -92,7 +105,7 @@ private fun CardDetailBody(
             card = card,
             modifier = Modifier
                 .fillMaxWidth()
-                .widthIn(max = CARD_MAX_WIDTH_DP.dp)
+                .applyCardSizeLimit(sizeLimit)
                 .aspectRatio(CARD_ASPECT_RATIO)
         )
         Text(

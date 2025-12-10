@@ -13,6 +13,8 @@ import androidx.compose.ui.platform.LocalDensity
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadLayout
 import com.pinwormmy.midoritarot.domain.spread.SpreadPosition
+import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import androidx.compose.ui.platform.LocalWindowInfo
 import kotlin.math.max
 import kotlin.math.min
 
@@ -25,6 +27,14 @@ fun SpreadBoard(
     content: @Composable (index: Int, position: SpreadPosition, modifier: Modifier) -> Unit
 ) {
     val density = LocalDensity.current
+    val windowInfo = LocalWindowInfo.current
+    val uiScale = LocalUiHeightScale.current
+    val containerHeightDp = windowHeightDp(windowInfo, density)
+    val cardLimit = computeCardSizeLimit(
+        screenHeightDp = containerHeightDp.toInt(),
+        scaleFactor = uiScale,
+        heightFraction = 0.7f
+    )
     BoxWithConstraints(modifier = modifier) {
         val spacingPx = with(density) { spacing.toPx() }
         val maxWidthPx = with(density) { maxWidth.toPx() }
@@ -35,8 +45,8 @@ fun SpreadBoard(
         val usableHeight = (maxHeightPx - spacingPx * (rowCount - 1)).coerceAtLeast(0f)
         val widthBased = usableWidth / columnCount
         val widthFromHeight = (usableHeight / rowCount) * CARD_ASPECT_RATIO
-        val cardWidthLimitPx = with(density) { CARD_MAX_WIDTH_DP.dp.toPx() }
-        val cardHeightLimitPx = with(density) { CARD_MAX_HEIGHT_DP.dp.toPx() }
+        val cardWidthLimitPx = with(density) { cardLimit.maxWidth.toPx() }
+        val cardHeightLimitPx = with(density) { cardLimit.maxHeight.toPx() }
         val rawWidthPx = min(widthBased, widthFromHeight)
         val cappedWidthPx = min(rawWidthPx, cardWidthLimitPx)
         val cappedHeightPx = cappedWidthPx / CARD_ASPECT_RATIO
