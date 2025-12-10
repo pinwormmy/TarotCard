@@ -9,6 +9,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pinwormmy.midoritarot.data.DailyCardRepository
@@ -23,7 +25,6 @@ import com.pinwormmy.midoritarot.ui.theme.LocalCardFaceSkin
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.TarotBackground
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
-import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
         val repository = TarotRepository(applicationContext)
         val dailyCardRepository = DailyCardRepository(applicationContext, repository)
         setContent {
+            val lastAppliedLocaleTag = rememberSaveable { mutableStateOf("") }
             val settingsViewModel: TarotSettingsViewModel =
                 viewModel(factory = TarotSettingsViewModel.factory(settingsRepository))
             val settingsState by settingsViewModel.uiState.collectAsState()
@@ -47,9 +49,10 @@ class MainActivity : ComponentActivity() {
             }
             LaunchedEffect(settingsState.language) {
                 val localeList = settingsState.language.toLocaleListCompat()
-                val current = AppCompatDelegate.getApplicationLocales()
-                if (!current.localeTagsEqual(localeList)) {
+                val targetTag = localeList.toLanguageTags()
+                if (lastAppliedLocaleTag.value != targetTag) {
                     AppCompatDelegate.setApplicationLocales(localeList)
+                    lastAppliedLocaleTag.value = targetTag
                     this@MainActivity.recreate()
                 }
             }
@@ -80,12 +83,7 @@ class MainActivity : ComponentActivity() {
 private fun AppLanguage.toLocaleListCompat(): LocaleListCompat =
     toLocaleOrNull()?.let { LocaleListCompat.create(it) } ?: LocaleListCompat.getEmptyLocaleList()
 
-private fun LocaleListCompat.localeTagsEqual(other: LocaleListCompat): Boolean =
-    toLanguageTags().lowercase(Locale.ROOT) == other.toLanguageTags().lowercase(Locale.ROOT)
-
 private fun applySavedLocale(settingsRepository: SettingsRepository) {
     val localeList = settingsRepository.load().language.toLocaleListCompat()
-    if (localeList != AppCompatDelegate.getApplicationLocales()) {
-        AppCompatDelegate.setApplicationLocales(localeList)
-    }
+    AppCompatDelegate.setApplicationLocales(localeList)
 }

@@ -10,7 +10,6 @@ enum class SpreadType {
     PastPresentFuture,
     EnergyAdvice,
     PathForward,
-    RelationshipH,
     CelticCross
 }
 
@@ -68,29 +67,29 @@ object SpreadCatalog {
 
     private val pastPresentFuture = SpreadDefinition(
         type = SpreadType.PastPresentFuture,
-        title = "과거 · 현재 · 미래",
-        description = "시간의 흐름에 따라 사건을 조망하는 3장 스프레드입니다.",
-        questionPlaceholder = "궁금한 상황을 묘사해 주세요 (선택)",
+        title = "쓰리카드",
+        description = "3장의 카드를 순서대로 배열해 상황을 간단히 읽습니다.",
+        questionPlaceholder = "궁금한 상황을 짧게 적어주세요 (선택)",
         layout = SpreadLayout(columns = 3, rows = 1),
         positions = listOf(
             SpreadPosition(
                 slot = SpreadSlot("ppf_past"),
-                title = "과거",
-                description = "지금의 상황을 만든 배경",
+                title = "첫번째 카드",
+                description = "첫 흐름 또는 배경",
                 order = 1,
                 placement = SpreadPlacement(column = 0, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("ppf_present"),
-                title = "현재",
-                description = "현재 드러난 모습",
+                title = "두번째 카드",
+                description = "현재 핵심 메시지",
                 order = 2,
                 placement = SpreadPlacement(column = 1, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("ppf_future"),
-                title = "미래",
-                description = "이 흐름이 닿을 가능성",
+                title = "세번째 카드",
+                description = "다음으로 이어질 가능성",
                 order = 3,
                 placement = SpreadPlacement(column = 2, row = 0)
             )
@@ -99,22 +98,22 @@ object SpreadCatalog {
 
     private val energyAdvice = SpreadDefinition(
         type = SpreadType.EnergyAdvice,
-        title = "에너지와 조언",
-        description = "현재 흐름을 읽고 그에 맞는 한 장의 조언을 받습니다.",
-        questionPlaceholder = "집중하려는 주제를 입력하세요 (선택)",
+        title = "투카드",
+        description = "2장의 카드를 나란히 펼쳐 빠르게 핵심을 봅니다.",
+        questionPlaceholder = "집중하려는 주제를 적어주세요 (선택)",
         layout = SpreadLayout(columns = 2, rows = 1),
         positions = listOf(
             SpreadPosition(
                 slot = SpreadSlot("energy_now"),
-                title = "현재 에너지",
-                description = "몸과 마음에 깃든 기류",
+                title = "첫번째 카드",
+                description = "상황 또는 핵심 포인트",
                 order = 1,
                 placement = SpreadPlacement(column = 0, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("energy_advice"),
-                title = "조언",
-                description = "흐름을 바르게 쓰는 방법",
+                title = "두번째 카드",
+                description = "보완 또는 조언",
                 order = 2,
                 placement = SpreadPlacement(column = 1, row = 0)
             )
@@ -123,97 +122,38 @@ object SpreadCatalog {
 
     private val pathForward = SpreadDefinition(
         type = SpreadType.PathForward,
-        title = "앞으로 나아갈 길",
-        description = "4장의 카드로 여정의 현 위치와 다음 단계를 설계합니다.",
-        questionPlaceholder = "달성하고 싶은 목표를 적어보세요 (선택)",
+        title = "포카드",
+        description = "4장의 카드로 상황과 다음 단계를 단계별로 훑습니다.",
+        questionPlaceholder = "보고 싶은 상황을 적어주세요 (선택)",
         layout = SpreadLayout(columns = 4, rows = 1),
         positions = listOf(
             SpreadPosition(
                 slot = SpreadSlot("path_now"),
-                title = "현재 위치",
-                description = "지금 진행 상황",
+                title = "첫번째 카드",
+                description = "출발점 혹은 현재",
                 order = 1,
                 placement = SpreadPlacement(column = 0, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("path_challenge"),
-                title = "장애물",
-                description = "앞을 가로막는 요소",
+                title = "두번째 카드",
+                description = "지나야 할 요소",
                 order = 2,
                 placement = SpreadPlacement(column = 1, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("path_guidance"),
-                title = "가이드",
-                description = "다음 선택을 비추는 힌트",
+                title = "세번째 카드",
+                description = "도움이 되는 관점",
                 order = 3,
                 placement = SpreadPlacement(column = 2, row = 0)
             ),
             SpreadPosition(
                 slot = SpreadSlot("path_outcome"),
-                title = "결과",
-                description = "방향을 따랐을 때의 모습",
+                title = "네번째 카드",
+                description = "이어질 결과/다음 단계",
                 order = 4,
                 placement = SpreadPlacement(column = 3, row = 0)
-            )
-        )
-    )
-
-    private val relationshipH = SpreadDefinition(
-        type = SpreadType.RelationshipH,
-        title = "관계",
-        description = "H 모양 배치로 두 사람 사이의 흐름을 세밀하게 읽습니다.",
-        questionPlaceholder = "어떤 관계를 탐색하고 싶나요? (선택)",
-        layout = SpreadLayout(columns = 3, rows = 3),
-        positions = listOf(
-            SpreadPosition(
-                slot = SpreadSlot("rel_you_top"),
-                title = "나의 시선",
-                description = "지금 내가 보는 장면",
-                order = 1,
-                placement = SpreadPlacement(column = 0, row = 0)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_you_core"),
-                title = "나의 감정",
-                description = "감정의 중심",
-                order = 2,
-                placement = SpreadPlacement(column = 0, row = 1)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_you_bottom"),
-                title = "숨겨진 영향",
-                description = "겉으로 드러나지 않은 에너지",
-                order = 3,
-                placement = SpreadPlacement(column = 0, row = 2)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_bridge"),
-                title = "관계의 연결",
-                description = "두 사람을 잇는 고리",
-                order = 4,
-                placement = SpreadPlacement(column = 1, row = 1)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_other_top"),
-                title = "상대의 시선",
-                description = "상대가 바라보는 화면",
-                order = 5,
-                placement = SpreadPlacement(column = 2, row = 0)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_other_core"),
-                title = "상대의 감정",
-                description = "마음속의 진심",
-                order = 6,
-                placement = SpreadPlacement(column = 2, row = 1)
-            ),
-            SpreadPosition(
-                slot = SpreadSlot("rel_future"),
-                title = "함께 갈 미래",
-                description = "관계가 만들어 갈 방향",
-                order = 7,
-                placement = SpreadPlacement(column = 2, row = 2)
             )
         )
     )
@@ -299,12 +239,11 @@ object SpreadCatalog {
     )
 
     private val allDefinitions = listOf(
-        oneCard,
-        pastPresentFuture,
-        energyAdvice,
-        pathForward,
-        relationshipH,
-        celticCross
+        oneCard,           // 1장
+        energyAdvice,      // 2장
+        pastPresentFuture, // 3장
+        pathForward,       // 4장
+        celticCross        // 10장
     )
 
     val default: SpreadDefinition = pastPresentFuture
