@@ -66,6 +66,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
+import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
@@ -81,6 +82,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.R
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -352,13 +354,13 @@ fun ShuffleAndDrawScreen(
                 ) {
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
-                        text = "컷",
+                        text = stringResource(id = R.string.action_cut),
                         enabled = !animationLocked,
                         onClick = cutRequestWithHaptics
                     )
                     OutlineLargeButton(
                         modifier = Modifier.weight(1f),
-                        text = "드로우",
+                        text = stringResource(id = R.string.action_draw),
                         enabled = !animationLocked,
                         onClick = gridRevealWithHaptics
                     )

@@ -53,6 +53,8 @@ import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import androidx.compose.ui.res.stringResource
+import com.pinwormmy.midoritarot.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,10 +75,13 @@ fun DailyCardScreen(
         containerColor = Color.Transparent,
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "오늘의 카드") },
+                title = { Text(text = stringResource(id = R.string.daily_card_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "뒤로")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -104,9 +109,9 @@ fun DailyCardScreen(
                 ) {
                     Text(
                         text = if (showFrontImmediately) {
-                            "앞면이 바로 보입니다. 한 번 탭하면 설명을 볼 수 있어요"
+                            stringResource(id = R.string.daily_card_hint_immediate)
                         } else {
-                            "카드를 두 번 탭하면 설명을 볼 수 있어요"
+                            stringResource(id = R.string.daily_card_hint_double)
                         },
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
@@ -139,9 +144,9 @@ fun DailyCardScreen(
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = when {
-                        isBack -> "첫 탭으로 카드를 뒤집어 보세요"
-                        showFrontImmediately -> "탭하면 설명 팝업"
-                        else -> "한 번 더 탭하면 설명 팝업"
+                        isBack -> stringResource(id = R.string.daily_card_cta_flip)
+                        showFrontImmediately -> stringResource(id = R.string.daily_card_cta_popup_first)
+                        else -> stringResource(id = R.string.daily_card_cta_popup_again)
                     },
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium,
@@ -256,7 +261,12 @@ private fun DailyCardDescriptionSheet(
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = "탭해서 닫기",
+                text = card.reversedMeaning,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = stringResource(id = R.string.daily_card_sheet_close),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )

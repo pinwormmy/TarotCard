@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
+import com.pinwormmy.midoritarot.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,10 +50,13 @@ fun SpreadMenuScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(text = "스프레드 선택") },
+                title = { Text(text = stringResource(id = R.string.spread_menu_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "뒤로")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

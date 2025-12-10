@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
     implementation(libs.androidx.compose.foundation.layout)

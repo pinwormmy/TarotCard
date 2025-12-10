@@ -40,6 +40,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,6 +59,7 @@ import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
+import com.pinwormmy.midoritarot.R
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
@@ -176,7 +178,7 @@ fun ReadingResultScreen(
                 contentAlignment = Alignment.Center
             ) {
                 if (orderedPlacements.all { it == null }) {
-                    Text(text = "아직 선택된 카드가 없습니다.")
+                    Text(text = stringResource(id = R.string.reading_result_empty))
                 } else {
                     val boardSpacing = when (spread.type) {
                         SpreadType.CelticCross -> 2.dp
@@ -237,7 +239,7 @@ fun ReadingResultScreen(
                     .navigationBarsPadding(),
                 onClick = onNavigateHome
             ) {
-                Text(text = "메인으로")
+                Text(text = stringResource(id = R.string.reading_result_home))
             }
         }
     }
@@ -423,7 +425,7 @@ private fun ReadingResultOverlay(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                val meaningTitle = if (isReversed) "역방향 해석" else null
+                val meaningTitle = if (isReversed) stringResource(id = R.string.reading_result_reversed) else null
                 val meaningBody = if (isReversed) card.reversedMeaning else card.uprightMeaning
                 Text(
                     text = card.name,
@@ -443,7 +445,7 @@ private fun ReadingResultOverlay(
                 }
                 Text(text = meaningBody, textAlign = TextAlign.Center, color = Color(0xFFECEBFF))
                 Text(
-                    text = "탭하면 닫습니다",
+                    text = stringResource(id = R.string.reading_result_close_hint),
                     color = Color.White.copy(alpha = 0.7f),
                     textAlign = TextAlign.Center
                 )
@@ -491,7 +493,7 @@ private fun ReadingResultOverlay(
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 96.dp)
                         .padding(horizontal = 24.dp),
-                    text = "카드를 터치하면 해석을 볼 수 있습니다.",
+                    text = stringResource(id = R.string.reading_result_touch_hint),
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White.copy(alpha = 0.82f)
                 )

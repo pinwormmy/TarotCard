@@ -6,7 +6,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -21,6 +25,8 @@ import androidx.compose.ui.res.painterResource
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.theme.LocalCardFaceSkin
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Suppress("DiscouragedApi", "UseOfNonComposableResources")
 @Composable
@@ -29,26 +35,18 @@ fun rememberCardPainter(
     faceSkin: CardFaceSkin = LocalCardFaceSkin.current
 ): Painter? {
     val context = LocalContext.current
-    val key = "${faceSkin.folder}:${card.imageUrl ?: card.id}"
-    val assetPath = remember(key) {
-        val name = (card.imageUrl ?: card.id).lowercase()
-        "skins/${faceSkin.folder}/$name.jpg"
+    val normalized = remember(card.id, card.imageUrl) {
+        (card.imageUrl ?: card.id).lowercase()
     }
-    val assetPainter = remember(key, context) {
-        runCatching {
-            context.assets.open(assetPath).use { stream ->
-                BitmapFactory.decodeStream(stream)?.asImageBitmap()
-            }?.let { BitmapPainter(it) }
-        }.getOrNull()
-    }
-    if (assetPainter != null) return assetPainter
-
+    val key = "${faceSkin.folder}:$normalized"
     val resId = remember(key, context) {
-        val normalized = (card.imageUrl ?: card.id).lowercase()
         context.resources.getIdentifier(normalized, "drawable", context.packageName)
             .takeIf { it != 0 }
     }
-    return resId?.let { painterResource(id = it) }
+    if (resId != null) return painterResource(id = resId)
+
+    val assetPath = remember(key) { "skins/${faceSkin.folder}/$normalized.jpg" }
+    return rememberAssetBitmapPainter(key = key, assetPath = assetPath)
 }
 
 @Suppress("DiscouragedApi", "UseOfNonComposableResources")
@@ -58,21 +56,15 @@ fun rememberCardBackPainter(
 ): Painter? {
     val context = LocalContext.current
     val style = backStyle ?: com.pinwormmy.midoritarot.ui.theme.LocalCardBackStyle.current
-    val key = style.assetName
-    val assetPath = remember(key) { "skins/cardback/${style.assetName.lowercase()}.jpg" }
-    val assetPainter = remember(key, context) {
-        runCatching {
-            context.assets.open(assetPath).use { stream ->
-                BitmapFactory.decodeStream(stream)?.asImageBitmap()
-            }?.let { BitmapPainter(it) }
-        }.getOrNull()
-    }
-    if (assetPainter != null) return assetPainter
+    val key = style.assetName.lowercase()
     val resId = remember(key, context) {
-        context.resources.getIdentifier(style.assetName.lowercase(), "drawable", context.packageName)
+        context.resources.getIdentifier(key, "drawable", context.packageName)
             .takeIf { it != 0 }
     }
-    return resId?.let { painterResource(id = it) }
+    if (resId != null) return painterResource(id = resId)
+
+    val assetPath = remember(key) { "skins/cardback/$key.jpg" }
+    return rememberAssetBitmapPainter(key = key, assetPath = assetPath)
 }
 
 @Composable
@@ -117,12 +109,35 @@ fun CardBackArt(
 }
 
 @Composable
+private fun rememberAssetBitmapPainter(
+    key: String,
+    assetPath: String
+): Painter? {
+    val context = LocalContext.current
+    var painter by remember(key) { mutableStateOf<Painter?>(null) }
+
+    LaunchedEffect(key, assetPath, context) {
+        if (painter != null) return@LaunchedEffect
+        val bitmap = withContext(Dispatchers.IO) {
+            runCatching {
+                context.assets.open(assetPath).use { stream ->
+                    BitmapFactory.decodeStream(stream)?.asImageBitmap()
+                }
+            }.getOrNull()
+        }
+        painter = bitmap?.let { BitmapPainter(it) }
+    }
+
+    return painter
+}
+
+@Composable
 fun CardFaceArt(
     card: TarotCardModel,
     modifier: Modifier = Modifier,
     overlay: Brush? = null,
     shape: Shape = TarotCardShape
- ) {
+) {
     val painter = rememberCardPainter(card)
     if (painter != null) {
         Box(modifier = modifier) {

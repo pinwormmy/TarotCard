@@ -7,6 +7,7 @@ import com.pinwormmy.midoritarot.data.SettingsRepository
 import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.TarotSkins
 import java.time.LocalTime
+import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,6 +31,24 @@ enum class CardFaceSkin(
     Animation("일본 애니", "animation", "tarot00")
 }
 
+enum class AppLanguage(val code: String) {
+    System("system"),
+    Korean("ko"),
+    English("en"),
+    Japanese("ja"),
+    Thai("th");
+
+    fun toLocaleOrNull(): Locale? = when (this) {
+        System -> null
+        else -> Locale(code)
+    }
+
+    companion object {
+        fun fromCode(code: String?): AppLanguage =
+            entries.firstOrNull { it.code == code } ?: System
+    }
+}
+
 @SuppressLint("NewApi")
 data class SettingsUiState(
     val skinId: String = TarotSkins.default.id,
@@ -37,7 +56,8 @@ data class SettingsUiState(
     val cardFaceSkin: CardFaceSkin = CardFaceSkin.Animation,
     val dailyCardNotification: Boolean = false,
     val dailyCardTime: LocalTime = LocalTime.of(9, 0),
-    val hapticsEnabled: Boolean = true
+    val hapticsEnabled: Boolean = true,
+    val language: AppLanguage = AppLanguage.System
 ) {
     val skin: TarotSkin = TarotSkins.findById(skinId)
 }
@@ -59,6 +79,8 @@ class TarotSettingsViewModel(
     fun updateDailyCardTime(time: LocalTime) = persist { it.copy(dailyCardTime = time) }
 
     fun toggleHaptics(enabled: Boolean) = persist { it.copy(hapticsEnabled = enabled) }
+
+    fun selectLanguage(language: AppLanguage) = persist { it.copy(language = language) }
 
     private fun persist(reducer: (SettingsUiState) -> SettingsUiState) {
         _uiState.update { current ->

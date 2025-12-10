@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.R
 
@@ -47,22 +48,22 @@ fun MainMenuScreen(
 
     val menuItems = listOf(
         MainMenuEntry(
-            label = "오늘의 카드",
+            label = stringResource(id = R.string.menu_daily_card),
             enabled = onDailyCard != null,
             onClick = onDailyCard ?: {}
         ),
         MainMenuEntry(
-            label = "리딩 시작",
+            label = stringResource(id = R.string.menu_start_reading),
             enabled = true,
             onClick = onStartReading
         ),
         MainMenuEntry(
-            label = "카드 살펴보기",
+            label = stringResource(id = R.string.menu_browse_cards),
             enabled = onBrowseCards != null,
             onClick = onBrowseCards ?: {}
         ),
         MainMenuEntry(
-            label = "옵션",
+            label = stringResource(id = R.string.menu_options),
             enabled = onOpenOptions != null,
             onClick = onOpenOptions ?: {}
         )

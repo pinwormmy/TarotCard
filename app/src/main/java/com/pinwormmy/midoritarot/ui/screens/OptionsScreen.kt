@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +38,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -67,6 +69,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -83,9 +86,11 @@ import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.ui.state.CardBackStyle
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.state.SettingsUiState
+import com.pinwormmy.midoritarot.ui.state.AppLanguage
 import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
+import com.pinwormmy.midoritarot.R
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -95,9 +100,11 @@ import java.time.format.DateTimeFormatter
 fun OptionsScreen(
     settings: SettingsUiState,
     availableSkins: List<TarotSkin>,
+    availableLanguages: List<AppLanguage>,
     onSelectSkin: (String) -> Unit,
     onSelectCardBack: (CardBackStyle) -> Unit,
     onSelectCardFace: (CardFaceSkin) -> Unit,
+    onSelectLanguage: (AppLanguage) -> Unit,
     onToggleDailyCard: (Boolean) -> Unit,
     onDailyCardTimeChange: (LocalTime) -> Unit,
     onToggleHaptics: (Boolean) -> Unit,
@@ -138,10 +145,13 @@ fun OptionsScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(text = "옵션") },
+                title = { Text(text = stringResource(id = R.string.options_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "뒤로")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -163,7 +173,7 @@ fun OptionsScreen(
                     .verticalScroll(scrollState),
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                OptionSection(title = "배경 선택") {
+                OptionSection(title = stringResource(id = R.string.options_section_background)) {
                     SkinSelector(
                         skins = availableSkins,
                         selectedId = settings.skinId,
@@ -171,7 +181,29 @@ fun OptionsScreen(
                     )
                 }
 
-                OptionSection(title = "카드 뒷면 선택") {
+                OptionSection(title = stringResource(id = R.string.options_section_language)) {
+                    val comingSoon = stringResource(id = R.string.language_coming_soon)
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        items(availableLanguages) { language ->
+                            val selected = settings.language == language
+                            FilterChip(
+                                selected = selected,
+                                onClick = {
+                                    if (language == AppLanguage.Japanese || language == AppLanguage.Thai) {
+                                        Toast.makeText(context, comingSoon, Toast.LENGTH_SHORT).show()
+                                        return@FilterChip
+                                    }
+                                    onSelectLanguage(language)
+                                },
+                                label = { Text(text = language.label()) }
+                            )
+                        }
+                    }
+                }
+
+                OptionSection(title = stringResource(id = R.string.options_section_card_back)) {
                     CardBackSkinSelector(
                         backs = CardBackStyle.entries.toList(),
                         selected = settings.cardBackStyle,
@@ -179,7 +211,7 @@ fun OptionsScreen(
                     )
                 }
 
-                OptionSection(title = "카드 스킨 선택") {
+                OptionSection(title = stringResource(id = R.string.options_section_card_skin)) {
                     CardFaceSkinSelector(
                         skins = CardFaceSkin.entries.toList(),
                         selected = settings.cardFaceSkin,
@@ -187,16 +219,16 @@ fun OptionsScreen(
                     )
                 }
 
-                OptionSection(title = "오늘의 카드 알림") {
+                OptionSection(title = stringResource(id = R.string.options_section_daily_card)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(text = "알림 받기", fontWeight = FontWeight.SemiBold)
+                            Text(text = stringResource(id = R.string.options_daily_card_toggle), fontWeight = FontWeight.SemiBold)
                             Text(
-                                text = "원하는 시간에 오늘의 카드를 뽑도록 알려드려요.",
+                                text = stringResource(id = R.string.options_daily_card_desc),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                             )
@@ -244,16 +276,16 @@ fun OptionsScreen(
                     }
                 }
 
-                OptionSection(title = "미세 진동") {
+                OptionSection(title = stringResource(id = R.string.options_section_haptics)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(text = "카드 인터랙션에 진동 사용", fontWeight = FontWeight.SemiBold)
+                            Text(text = stringResource(id = R.string.options_haptics_title), fontWeight = FontWeight.SemiBold)
                             Text(
-                                text = "드로우/탭 시 촉감을 더해요.",
+                                text = stringResource(id = R.string.options_haptics_desc),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                             )
@@ -513,13 +545,19 @@ private fun CardFacePreviewModal(
                     modifier = Modifier.weight(1f),
                     onClick = onSelect
                 ) {
-                    Text(text = if (isSelected) "선택됨" else "스킨 선택")
+                    Text(
+                        text = if (isSelected) {
+                            stringResource(id = R.string.options_selected)
+                        } else {
+                            stringResource(id = R.string.options_pick_skin)
+                        }
+                    )
                 }
                 OutlinedButton(
                     modifier = Modifier.weight(1f),
                     onClick = onDismiss
                 ) {
-                    Text(text = "취소")
+                    Text(text = stringResource(id = R.string.options_cancel))
                 }
             }
         }
@@ -626,13 +664,19 @@ private fun CardBackPreviewModal(
                     modifier = Modifier.weight(1f),
                     onClick = onSelect
                 ) {
-                    Text(text = if (isSelected) "선택됨" else "뒷면 선택")
+                    Text(
+                        text = if (isSelected) {
+                            stringResource(id = R.string.options_selected)
+                        } else {
+                            stringResource(id = R.string.options_pick_back)
+                        }
+                    )
                 }
                 OutlinedButton(
                     modifier = Modifier.weight(1f),
                     onClick = onDismiss
                 ) {
-                    Text(text = "취소")
+                    Text(text = stringResource(id = R.string.options_cancel))
                 }
             }
         }
@@ -688,6 +732,15 @@ private fun SkinSelector(
             }
         }
     }
+}
+
+@Composable
+private fun AppLanguage.label(): String = when (this) {
+    AppLanguage.System -> stringResource(id = R.string.language_system)
+    AppLanguage.Korean -> stringResource(id = R.string.language_korean)
+    AppLanguage.English -> stringResource(id = R.string.language_english)
+    AppLanguage.Japanese -> stringResource(id = R.string.language_japanese)
+    AppLanguage.Thai -> stringResource(id = R.string.language_thai)
 }
 
 private fun previewCardForSkin(skin: CardFaceSkin): TarotCardModel {

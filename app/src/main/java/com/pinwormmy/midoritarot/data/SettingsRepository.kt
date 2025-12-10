@@ -7,6 +7,7 @@ import com.pinwormmy.midoritarot.notifications.DailyCardNotificationPreferences
 import com.pinwormmy.midoritarot.ui.state.CardBackStyle
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.state.SettingsUiState
+import com.pinwormmy.midoritarot.ui.state.AppLanguage
 import java.time.LocalTime
 
 private const val PREF_NAME = "tarot_settings"
@@ -16,6 +17,7 @@ private const val KEY_CARD_FACE = "card_face"
 private const val KEY_DAILY_ENABLED = "daily_enabled"
 private const val KEY_DAILY_TIME = "daily_time"
 private const val KEY_HAPTICS = "haptics"
+private const val KEY_LANGUAGE = "language"
 
 class SettingsRepository(
     private val context: Context
@@ -43,6 +45,8 @@ class SettingsRepository(
             ?: defaults.dailyCardTime
 
         val haptics = prefs.getBoolean(KEY_HAPTICS, defaults.hapticsEnabled)
+        val language = prefs.getString(KEY_LANGUAGE, defaults.language.code)?.let { AppLanguage.fromCode(it) }
+            ?: defaults.language
 
         return defaults.copy(
             skinId = skinId,
@@ -50,7 +54,8 @@ class SettingsRepository(
             cardFaceSkin = cardFace,
             dailyCardNotification = dailyEnabled,
             dailyCardTime = dailyTime,
-            hapticsEnabled = haptics
+            hapticsEnabled = haptics,
+            language = language
         )
     }
 
@@ -62,6 +67,7 @@ class SettingsRepository(
             putBoolean(KEY_DAILY_ENABLED, state.dailyCardNotification)
             putString(KEY_DAILY_TIME, state.dailyCardTime.toString())
             putBoolean(KEY_HAPTICS, state.hapticsEnabled)
+            putString(KEY_LANGUAGE, state.language.code)
         }
     }
 }

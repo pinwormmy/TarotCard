@@ -30,6 +30,7 @@ import com.pinwormmy.midoritarot.ui.state.SpreadFlowViewModel
 import com.pinwormmy.midoritarot.domain.spread.SpreadStep
 import com.pinwormmy.midoritarot.ui.state.TarotSettingsViewModel
 import com.pinwormmy.midoritarot.ui.theme.TarotSkins
+import com.pinwormmy.midoritarot.ui.state.AppLanguage
 
 @Composable
 fun TarotNavGraph(
@@ -163,9 +164,11 @@ fun TarotNavGraph(
             OptionsScreen(
                 settings = settingsUiState,
                 availableSkins = TarotSkins.all,
+                availableLanguages = AppLanguage.entries.toList(),
                 onSelectSkin = { settingsViewModel.selectSkin(it) },
                 onSelectCardBack = { settingsViewModel.selectCardBack(it) },
                 onSelectCardFace = { settingsViewModel.selectCardFace(it) },
+                onSelectLanguage = { settingsViewModel.selectLanguage(it) },
                 onToggleDailyCard = { settingsViewModel.toggleDailyCard(it) },
                 onDailyCardTimeChange = { settingsViewModel.updateDailyCardTime(it) },
                 onToggleHaptics = { settingsViewModel.toggleHaptics(it) },

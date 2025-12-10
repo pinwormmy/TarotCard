@@ -1,3 +1,84 @@
 <resources>
     <string name="app_name">Midori Tarot</string>
+
+    <!-- Main menu -->
+    <string name="menu_daily_card">Daily Card</string>
+    <string name="menu_start_reading">Start Reading</string>
+    <string name="menu_browse_cards">Browse Cards</string>
+    <string name="menu_options">Options</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+
+    <!-- Card browser -->
+    <string name="card_browse_title">Browse Cards</string>
+    <string name="category_all">All</string>
+    <string name="category_major">Major</string>
+    <string name="category_wands">Wands</string>
+    <string name="category_cups">Cups</string>
+    <string name="category_swords">Swords</string>
+    <string name="category_pentacles">Pentacles</string>
+    <string name="keywords_prefix">Keywords: %1$s</string>
+    <string name="upright_title">Upright</string>
+    <string name="reversed_title">Reversed</string>
+    <string name="tap_to_close">Tap to close</string>
+
+    <!-- Daily card -->
+    <string name="daily_card_title">Daily Card</string>
+    <string name="daily_card_hint_immediate">Front is visible. Tap once to view the description.</string>
+    <string name="daily_card_hint_double">Double-tap to view the description.</string>
+    <string name="daily_card_cta_flip">Tap to flip the card first.</string>
+    <string name="daily_card_cta_popup_first">Tap to open the description.</string>
+    <string name="daily_card_cta_popup_again">Tap again to open the description.</string>
+    <string name="daily_card_sheet_close">Tap to close</string>
+
+    <!-- Card library -->
+    <string name="card_library_title">Choose %1$s</string>
+    <string name="card_library_subtitle">Pick the card you want in advance.</string>
+    <string name="card_library_back">Go back</string>
+    <string name="card_library_select">Select</string>
+
+    <!-- Options -->
+    <string name="options_title">Options</string>
+    <string name="options_section_background">Choose background</string>
+    <string name="options_section_card_back">Choose card back</string>
+    <string name="options_section_card_skin">Choose card skin</string>
+    <string name="options_section_daily_card">Daily card notification</string>
+    <string name="options_section_language">Language</string>
+    <string name="options_daily_card_toggle">Receive notification</string>
+    <string name="options_daily_card_desc">We will remind you to draw your daily card.</string>
+    <string name="options_section_haptics">Haptics</string>
+    <string name="options_haptics_title">Use vibration for card interactions</string>
+    <string name="options_haptics_desc">Adds tactile feedback when drawing or tapping.</string>
+    <string name="options_selected">Selected</string>
+    <string name="options_pick_skin">Choose skin</string>
+    <string name="options_pick_back">Choose back</string>
+    <string name="options_cancel">Cancel</string>
+    <string name="language_system">System default</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_thai">ไทย</string>
+    <string name="language_coming_soon">Coming soon.</string>
+
+    <!-- Reading setup -->
+    <string name="reading_setup_back">Back</string>
+    <string name="reading_setup_reverse_title">Use reversed cards</string>
+    <string name="reading_setup_reverse_desc">Interpret both upright and reversed meanings.</string>
+    <string name="reading_setup_shuffle">Shuffle cards</string>
+    <string name="reading_setup_start_now">Start reading now</string>
+
+    <!-- Spread menu -->
+    <string name="spread_menu_title">Choose a spread</string>
+
+    <!-- Shuffle and draw -->
+    <string name="action_cut">Cut</string>
+    <string name="action_draw">Draw</string>
+
+    <!-- Reading result -->
+    <string name="reading_result_empty">No card has been selected yet.</string>
+    <string name="reading_result_home">Home</string>
+    <string name="reading_result_reversed">Reversed meaning</string>
+    <string name="reading_result_close_hint">Tap to close</string>
+    <string name="reading_result_touch_hint">Tap a card to see its meaning.</string>
 </resources>

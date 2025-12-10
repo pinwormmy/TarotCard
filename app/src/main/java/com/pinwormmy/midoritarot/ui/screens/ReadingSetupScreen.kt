@@ -33,12 +33,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.ui.components.SpreadBoard
 import com.pinwormmy.midoritarot.ui.components.estimatedBoardHeight
 import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
+import com.pinwormmy.midoritarot.R
 
 @Composable
 fun ReadingSetupScreen(
@@ -79,7 +81,7 @@ fun ReadingSetupScreen(
                     )
                 }
                 OutlinedButton(onClick = onBack) {
-                    Text(text = "뒤로")
+                    Text(text = stringResource(id = R.string.reading_setup_back))
                 }
             }
 
@@ -139,9 +141,12 @@ fun ReadingSetupScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(text = "리버스 카드 사용하기", fontWeight = FontWeight.SemiBold)
                     Text(
-                        text = "카드 의미를 정방향과 역방향 모두 해석합니다.",
+                        text = stringResource(id = R.string.reading_setup_reverse_title),
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = stringResource(id = R.string.reading_setup_reverse_desc),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                     )
@@ -161,13 +166,13 @@ fun ReadingSetupScreen(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = onShuffle
             ) {
-                Text(text = "카드 셔플")
+                Text(text = stringResource(id = R.string.reading_setup_shuffle))
             }
             OutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = onQuickReading
             ) {
-                Text(text = "곧바로 리딩하기")
+                Text(text = stringResource(id = R.string.reading_setup_start_now))
             }
         }
     }

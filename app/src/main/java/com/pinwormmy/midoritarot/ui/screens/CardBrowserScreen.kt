@@ -64,6 +64,8 @@ import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
 import androidx.compose.ui.platform.LocalWindowInfo
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import androidx.compose.ui.res.stringResource
+import com.pinwormmy.midoritarot.R
 
 private enum class BrowserOverlayPhase { Zoom, Description }
 
@@ -104,10 +106,13 @@ fun CardBrowserScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(text = "카드 살펴보기") },
+                title = { Text(text = stringResource(id = R.string.card_browse_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "뒤로")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -130,12 +135,12 @@ fun CardBrowserScreen(
             ) {
                 categories.forEachIndexed { index, category ->
                     val label = when (category) {
-                        null -> "전체"
-                        CardCategory.MajorArcana -> "메이저"
-                        CardCategory.Wands -> "완즈"
-                        CardCategory.Cups -> "컵"
-                        CardCategory.Swords -> "소드"
-                        CardCategory.Pentacles -> "펜타클"
+                        null -> stringResource(id = R.string.category_all)
+                        CardCategory.MajorArcana -> stringResource(id = R.string.category_major)
+                        CardCategory.Wands -> stringResource(id = R.string.category_wands)
+                        CardCategory.Cups -> stringResource(id = R.string.category_cups)
+                        CardCategory.Swords -> stringResource(id = R.string.category_swords)
+                        CardCategory.Pentacles -> stringResource(id = R.string.category_pentacles)
                     }
                     Tab(
                         selected = selectedTabIndex == index,
@@ -322,17 +327,24 @@ private fun CardDetailOverlay(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(text = card.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-                    Text(text = card.arcana, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    Text(
+                        text = card.arcana,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                     if (card.keywords.isNotEmpty()) {
                         Text(
-                            text = "키워드: " + card.keywords.joinToString(separator = " • "),
+                            text = stringResource(
+                                id = R.string.keywords_prefix,
+                                card.keywords.joinToString(separator = " • ")
+                            ),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    Text(text = "정방향", fontWeight = FontWeight.SemiBold)
+                    Text(text = stringResource(id = R.string.upright_title), fontWeight = FontWeight.SemiBold)
                     Text(text = card.uprightMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
-                    Text(text = "역방향", fontWeight = FontWeight.SemiBold)
+                    Text(text = stringResource(id = R.string.reversed_title), fontWeight = FontWeight.SemiBold)
                     Text(text = card.reversedMeaning, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f))
                     if (card.description.isNotBlank()) {
                         Text(
@@ -341,7 +353,7 @@ private fun CardDetailOverlay(
                         )
                     }
                     Text(
-                        text = "탭하면 닫힙니다",
+                        text = stringResource(id = R.string.tap_to_close),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                         textAlign = TextAlign.Center

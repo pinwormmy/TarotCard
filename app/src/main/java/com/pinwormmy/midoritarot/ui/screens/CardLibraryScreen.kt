@@ -41,6 +41,8 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalDensity
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import androidx.compose.ui.res.stringResource
+import com.pinwormmy.midoritarot.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -68,9 +70,12 @@ fun CardLibraryScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 24.dp)
     ) {
-        Text(text = "$targetSlotTitle 카드 선택", fontWeight = FontWeight.Bold)
         Text(
-            text = "미리 선택할 카드를 직접 고르세요.",
+            text = stringResource(id = R.string.card_library_title, targetSlotTitle),
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = stringResource(id = R.string.card_library_subtitle),
             modifier = Modifier.padding(bottom = 16.dp)
         )
         val categories = CardCategory.entries
@@ -111,7 +116,7 @@ fun CardLibraryScreen(
                 .padding(top = 16.dp),
             onClick = onBack
         ) {
-            Text(text = "뒤로가기")
+            Text(text = stringResource(id = R.string.card_library_back))
         }
     }
 }
@@ -154,7 +159,7 @@ private fun CardLibraryItem(
                 textAlign = TextAlign.Center
             )
             Text(
-                text = "선택",
+                text = stringResource(id = R.string.card_library_select),
                 modifier = Modifier
                     .background(
                         color = Color.White.copy(alpha = 0.12f),
