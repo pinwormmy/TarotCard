@@ -55,13 +55,14 @@ private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): 
     val localized = item.optString(localizedKey)
     val base = item.optString(baseKey)
     val english = item.optString("${baseKey}_en")
+    val isSupported = lang == "ko" || lang == "en" || lang == "ja" || lang == "th"
 
     return when {
         localized.isNotBlank() -> localized
         lang == "ko" && base.isNotBlank() -> base
         english.isNotBlank() -> english
-        base.isNotBlank() -> base
-        else -> ""
+        base.isNotBlank() && isSupported -> base
+        else -> base.ifBlank { english }
     }
 }
 
@@ -71,13 +72,14 @@ private fun localizedKeywords(item: JSONObject, locale: Locale): List<String> {
     val localized = item.optJSONArray(localizedKey)
     val base = item.optJSONArray("keywords")
     val english = item.optJSONArray("keywords_en")
+    val isSupported = lang == "ko" || lang == "en" || lang == "ja" || lang == "th"
 
     val keywordsArray = when {
         localized != null -> localized
         lang == "ko" && base != null -> base
         english != null -> english
-        base != null -> base
-        else -> null
+        base != null && isSupported -> base
+        else -> english ?: base
     }
     return buildList {
         if (keywordsArray != null) {

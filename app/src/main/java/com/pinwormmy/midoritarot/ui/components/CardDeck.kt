@@ -68,11 +68,13 @@ fun CardDeck(
     val centerLiftPx = with(density) { 14.dp.toPx() }
     val deckLayers = 5
     val cardsPerSide = 6
-    val splitDuration = 360
-    val riffleCardDuration = 240
-    val riffleStagger = 70L
-    val mergeDuration = 420
-    val settleDuration = 260
+    // 속도 2배: 모든 구간 지속 시간을 절반으로 단축
+    val splitDuration = 180
+    val riffleCardDuration = 120
+    val riffleStagger = 35L
+    // 리플 이후 정리 단계는 추가로 2배 빠르게
+    val mergeDuration = 105
+    val settleDuration = 65
 
     val cardShape = TarotCardShape
 

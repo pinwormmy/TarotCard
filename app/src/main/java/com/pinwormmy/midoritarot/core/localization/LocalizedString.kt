@@ -18,10 +18,10 @@ data class LocalizedString(
         val lang = locale.language.lowercase()
         return when (lang) {
             "en" -> en?.takeIf { it.isNotBlank() } ?: ko
-            "ja" -> ja?.takeIf { it.isNotBlank() } ?: ko
-            "th" -> th?.takeIf { it.isNotBlank() } ?: ko
+            "ja" -> ja?.takeIf { it.isNotBlank() } ?: en ?: ko
+            "th" -> th?.takeIf { it.isNotBlank() } ?: en ?: ko
             "ko" -> ko.ifBlank { en ?: ja ?: th ?: ko }
-            else -> ko.ifBlank { en ?: ja ?: th ?: ko }
+            else -> en ?: ja ?: th ?: ko
         }
     }
 }

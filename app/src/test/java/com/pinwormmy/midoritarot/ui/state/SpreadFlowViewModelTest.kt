@@ -165,4 +165,29 @@ class SpreadFlowViewModelTest {
             Locale.setDefault(originalDefault)
         }
     }
+
+    @Test
+    fun handleDrawSelection_defaultsToEnglishForUnsupportedLanguage() {
+        val originalLocales = AppCompatDelegate.getApplicationLocales()
+        val originalDefault = Locale.getDefault()
+        try {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("fr"))
+            Locale.setDefault(Locale.FRANCE)
+
+            val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+            val repo = TarotRepository(context)
+            val vm = SpreadFlowViewModel(repo, initialUseReversed = true)
+
+            vm.startReading()
+            val firstCard = repo.getCards().first()
+
+            vm.handleDrawSelection(firstCard)
+            val status = vm.uiState.value.statusMessage
+
+            assertTrue(status?.contains("You picked") == true)
+        } finally {
+            AppCompatDelegate.setApplicationLocales(originalLocales)
+            Locale.setDefault(originalDefault)
+        }
+    }
 }

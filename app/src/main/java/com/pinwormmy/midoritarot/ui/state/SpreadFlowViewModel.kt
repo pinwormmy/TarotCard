@@ -75,7 +75,8 @@ class SpreadFlowViewModel(
             "en" -> "Select the $title card."
             "ja" -> "$title のカードを選択してください。"
             "th" -> "เลือกไพ่ $title"
-            else -> "$title 카드를 선택하세요."
+            "ko" -> "$title 카드를 선택하세요."
+            else -> "Select the $title card."
         }
     }
 
@@ -253,7 +254,8 @@ class SpreadFlowViewModel(
                     "en" -> "You picked the $title card."
                     "ja" -> "$title のカードを選びました。"
                     "th" -> "คุณเลือกไพ่ $title แล้ว"
-                    else -> "$title 카드를 선택했습니다."
+                    "ko" -> "$title 카드를 선택했습니다."
+                    else -> "You picked the $title card."
                 }
             }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size

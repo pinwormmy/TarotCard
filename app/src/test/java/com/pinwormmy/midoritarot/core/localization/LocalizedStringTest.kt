@@ -42,4 +42,20 @@ class LocalizedStringTest {
 
         assertEquals("日本語", resolved)
     }
+
+    @Test
+    fun resolve_fallsBackToEnglishForUnsupportedLanguage() {
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("fr"))
+        Locale.setDefault(Locale.FRANCE)
+
+        val target = LocalizedString(
+            ko = "한국어",
+            en = "English",
+            ja = "日本語"
+        )
+
+        val resolved = target.resolve()
+
+        assertEquals("English", resolved)
+    }
 }
