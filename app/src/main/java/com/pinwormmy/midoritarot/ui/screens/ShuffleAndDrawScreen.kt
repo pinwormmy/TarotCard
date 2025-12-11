@@ -237,6 +237,8 @@ fun ShuffleAndDrawScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 cards = uiState.drawPile,
                                 disabledCardIds = drawnIds,
+                                drawnCount = uiState.drawnCards.size,
+                                totalSlots = uiState.pendingSlots.size,
                                 hapticsEnabled = hapticsEnabled,
                                 hapticFeedback = hapticFeedback,
                                 selectionLocked = animationLocked || selectionLocked,
@@ -458,6 +460,8 @@ private fun DrawPileGrid(
     modifier: Modifier = Modifier,
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
+    drawnCount: Int,
+    totalSlots: Int,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
     selectionLocked: Boolean = false,
@@ -472,6 +476,7 @@ private fun DrawPileGrid(
         val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
         val cardBackPainter = rememberCardBackPainter()
+        val localSelectedIdsState = remember(cards) { mutableStateOf(setOf<String>()) }
 
         val columnSpacing = GRID_COLUMN_SPACING
         val totalRows = (cards.size + 1) / 2
@@ -487,8 +492,9 @@ private fun DrawPileGrid(
         val columnCount = ceil(cards.size / 2f).toInt()
         val usableHeight = maxHeight - cardHeight
         val stepY = if (columnCount > 1) usableHeight / (columnCount - 1) else 0.dp
-        val dealStaggerMillis = 20L
-        val dealAnimationMillis = 220
+        // 드로우 시 카드 뿌리기 속도 2배 가속: 간격·재생 시간 절반
+        val dealStaggerMillis = 10L
+        val dealAnimationMillis = 110
 
         val totalWidth = cardWidth * 2 + columnSpacing
         val leftColumnX = (maxWidth - totalWidth) / 2f
@@ -520,10 +526,11 @@ private fun DrawPileGrid(
         }
 
         fun findCardIdAt(position: Offset): String? {
+            val combinedDisabled = disabledCardIds + localSelectedIdsState.value
             return placements.asReversed().firstOrNull { placement ->
                 val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
                 val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
-                withinX && withinY && !disabledCardIds.contains(placement.card.id)
+                withinX && withinY && !combinedDisabled.contains(placement.card.id)
             }?.card?.id
         }
 
@@ -549,9 +556,14 @@ private fun DrawPileGrid(
                 maxWidth,
                 maxHeight,
                 gesturesEnabledState.value,
-                selectionLocked
+                selectionLocked,
+                totalSlots,
+                drawnCount,
+                localSelectedIdsState.value
             ) {
-                if (!gesturesEnabledState.value || selectionLocked) {
+                val selectionLimitReached =
+                    selectionLocked || (drawnCount + localSelectedIdsState.value.size >= totalSlots)
+                if (!gesturesEnabledState.value || selectionLimitReached) {
                     awaitCancellation()
                 }
                 awaitEachGesture {
@@ -566,7 +578,8 @@ private fun DrawPileGrid(
                                 val selectedId = hoveredCardId
                                 hoveredCardId = null
                                 if (selectedId != null) {
-                                    gesturesEnabledState.value = false
+                                    localSelectedIdsState.value =
+                                        localSelectedIdsState.value + selectedId
 
                                     if (hapticsEnabled) {
                                         hapticFeedback.performHapticFeedback(
@@ -605,7 +618,8 @@ private fun DrawPileGrid(
                         exitProgress.animateTo(1f, tween(400))
                         delay(50)
                         onCardSelected(card)
-                        gesturesEnabledState.value = true
+                        localSelectedIdsState.value =
+                            localSelectedIdsState.value - card.id
                     }
                 }
 
