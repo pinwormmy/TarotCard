@@ -1,0 +1,23 @@
+[
+  {
+    "id": "test_01",
+    "name_en": "Card EN",
+    "name_ja": "カードJA",
+    "arcana_en": "Test",
+    "arcana_ja": "テスト",
+    "uprightMeaning_en": "Alpha upright",
+    "reversedMeaning_en": "Alpha reversed",
+    "description_en": "Alpha desc",
+    "keywords_en": ["alpha"],
+    "keywords_ja": ["アルファ"]
+  },
+  {
+    "id": "test_02",
+    "name_en": "Only EN",
+    "arcana_en": "Test",
+    "uprightMeaning_en": "Gamma upright",
+    "reversedMeaning_en": "Gamma reversed",
+    "description_en": "Gamma desc",
+    "keywords_en": ["gamma"]
+  }
+]

@@ -191,7 +191,7 @@ fun OptionsScreen(
                             FilterChip(
                                 selected = selected,
                                 onClick = {
-                                    if (language == AppLanguage.Japanese || language == AppLanguage.Thai) {
+                                    if (language == AppLanguage.Thai) {
                                         Toast.makeText(context, comingSoon, Toast.LENGTH_SHORT).show()
                                         return@FilterChip
                                     }

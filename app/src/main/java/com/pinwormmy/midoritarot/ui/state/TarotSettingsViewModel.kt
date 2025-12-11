@@ -19,19 +19,19 @@ enum class CardBackStyle(
     val assetName: String
 ) {
     Byzantine(
-        displayName = LocalizedString(ko = "비잔틴", en = "Byzantine"),
+        displayName = LocalizedString(ko = "비잔틴", en = "Byzantine", ja = "ビザンティン"),
         assetName = "byzantine"
     ),
     LightBrown(
-        displayName = LocalizedString(ko = "라이트 브라운", en = "Light Brown"),
+        displayName = LocalizedString(ko = "라이트 브라운", en = "Light Brown", ja = "ライトブラウン"),
         assetName = "lightbrown"
     ),
     RoseMoon(
-        displayName = LocalizedString(ko = "로즈 문", en = "Rose Moon"),
+        displayName = LocalizedString(ko = "로즈 문", en = "Rose Moon", ja = "ローズムーン"),
         assetName = "rosemoon"
     ),
     Persia(
-        displayName = LocalizedString(ko = "페르시아", en = "Persia"),
+        displayName = LocalizedString(ko = "페르시아", en = "Persia", ja = "ペルシア"),
         assetName = "persia"
     );
 
@@ -44,7 +44,7 @@ enum class CardFaceSkin(
     val previewImage: String
 ) {
     Animation(
-        displayName = LocalizedString(ko = "일본 애니", en = "Anime"),
+        displayName = LocalizedString(ko = "일본 애니", en = "Anime", ja = "アニメ"),
         folder = "animation",
         previewImage = "tarot00"
     );

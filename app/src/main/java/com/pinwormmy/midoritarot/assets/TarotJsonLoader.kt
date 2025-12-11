@@ -2,11 +2,10 @@ package com.pinwormmy.midoritarot.assets
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import java.util.Locale
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.Locale
 
 object TarotJsonLoader {
     fun load(
@@ -45,25 +44,41 @@ object TarotJsonLoader {
 }
 
 private fun currentLocale(context: Context): Locale {
-    val appLocales: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
-    val locale = appLocales.get(0)
-        ?: context.resources.configuration.locales.get(0)
-        ?: Locale.getDefault()
-    return locale
+    val resLocale = context.resources.configuration.locales.get(0)
+    val appLocale = AppCompatDelegate.getApplicationLocales().get(0)
+    return resLocale ?: appLocale ?: Locale.getDefault()
 }
 
 private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): String {
     val lang = locale.language.lowercase()
     val localizedKey = "${baseKey}_${lang}"
-    return item.optString(localizedKey)
-        .takeIf { it.isNotBlank() }
-        ?: item.optString(baseKey)
+    val localized = item.optString(localizedKey)
+    val base = item.optString(baseKey)
+    val english = item.optString("${baseKey}_en")
+
+    return when {
+        localized.isNotBlank() -> localized
+        lang == "ko" && base.isNotBlank() -> base
+        english.isNotBlank() -> english
+        base.isNotBlank() -> base
+        else -> ""
+    }
 }
 
 private fun localizedKeywords(item: JSONObject, locale: Locale): List<String> {
     val lang = locale.language.lowercase()
     val localizedKey = "keywords_${lang}"
-    val keywordsArray = item.optJSONArray(localizedKey) ?: item.optJSONArray("keywords")
+    val localized = item.optJSONArray(localizedKey)
+    val base = item.optJSONArray("keywords")
+    val english = item.optJSONArray("keywords_en")
+
+    val keywordsArray = when {
+        localized != null -> localized
+        lang == "ko" && base != null -> base
+        english != null -> english
+        base != null -> base
+        else -> null
+    }
     return buildList {
         if (keywordsArray != null) {
             for (i in 0 until keywordsArray.length()) {

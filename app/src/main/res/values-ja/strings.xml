@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">ミドリタロット</string>
+
+    <!-- Main menu -->
+    <string name="menu_daily_card">今日のカードを引く</string>
+    <string name="menu_start_reading">リーディング開始</string>
+    <string name="menu_browse_cards">カードを見る</string>
+    <string name="menu_options">オプション</string>
+
+    <!-- Common -->
+    <string name="back">戻る</string>
+
+    <!-- Card browser -->
+    <string name="card_browse_title">カードを見る</string>
+    <string name="category_all">すべて</string>
+    <string name="category_major">メジャー</string>
+    <string name="category_wands">ワンド</string>
+    <string name="category_cups">カップ</string>
+    <string name="category_swords">ソード</string>
+    <string name="category_pentacles">ペンタクル</string>
+    <string name="keywords_prefix">キーワード: %1$s</string>
+    <string name="upright_title">正位置</string>
+    <string name="reversed_title">逆位置</string>
+    <string name="tap_to_close">タップで閉じる</string>
+    <string name="card_detail_title">カード詳細</string>
+    <string name="card_not_found">カードが見つかりません。</string>
+    <string name="keywords_label">キーワード</string>
+    <string name="upright_meaning">正位置の意味</string>
+    <string name="reversed_meaning">逆位置の意味</string>
+    <string name="description_label">説明</string>
+
+    <!-- Daily card -->
+    <string name="daily_card_title">今日のカードを引く</string>
+    <string name="daily_card_hint_immediate">表面がすぐに見えます。タップで説明を表示します</string>
+    <string name="daily_card_hint_double">カードを2回タップすると説明を表示します</string>
+    <string name="daily_card_cta_flip">最初のタップでカードをめくってください</string>
+    <string name="daily_card_cta_popup_first">タップで説明ポップアップ</string>
+    <string name="daily_card_cta_popup_again">もう一度タップで説明ポップアップ</string>
+    <string name="daily_card_sheet_close">タップで閉じる</string>
+
+    <!-- Card library -->
+    <string name="card_library_title">%1$s カード選択</string>
+    <string name="card_library_subtitle">あらかじめ選ぶカードを直接選択してください。</string>
+    <string name="card_library_back">戻る</string>
+    <string name="card_library_select">選択</string>
+
+    <!-- Options -->
+    <string name="options_title">オプション</string>
+    <string name="options_section_background">背景選択</string>
+    <string name="options_section_card_back">カード裏面</string>
+    <string name="options_section_card_skin">カードスキン</string>
+    <string name="options_section_daily_card">アプリ通知</string>
+    <string name="options_section_language">言語</string>
+    <string name="options_section_reading">リーディング設定</string>
+    <string name="options_daily_card_toggle">カードを引く通知を受け取る</string>
+    <string name="options_reversed_title">リバースカードを使用</string>
+    <string name="options_reversed_desc">スプレッドリーディングに逆位置を含めます。</string>
+    <string name="options_section_haptics">振動</string>
+    <string name="options_haptics_title">カード操作で振動を使う</string>
+    <string name="options_haptics_desc">ドロー/タップ時に触感を追加します。</string>
+    <string name="options_selected">選択済み</string>
+    <string name="options_pick_skin">スキンを選択</string>
+    <string name="options_pick_back">裏面を選択</string>
+    <string name="options_cancel">キャンセル</string>
+    <string name="language_system">システム設定に従う</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_thai">ไทย</string>
+    <string name="language_coming_soon">近日対応予定です。</string>
+
+    <!-- Reading setup -->
+    <string name="reading_setup_back">戻る</string>
+    <string name="reading_setup_shuffle">カードをシャッフル</string>
+    <string name="reading_setup_start_now">すぐにリーディング</string>
+
+    <!-- Spread menu -->
+    <string name="spread_menu_title">スプレッドを選択</string>
+
+    <!-- Shuffle and draw -->
+    <string name="action_cut">カット</string>
+    <string name="action_draw">ドロー</string>
+
+    <!-- Reading result -->
+    <string name="reading_result_empty">まだ選ばれたカードがありません。</string>
+    <string name="reading_result_home">ホームへ</string>
+    <string name="reading_result_reversed">逆位置の解釈</string>
+    <string name="reading_result_close_hint">タップで閉じます</string>
+    <string name="reading_result_touch_hint">カードをタッチすると解釈を表示します。</string>
+    <string name="daily_notification_title">ミドリタロット</string>
+    <string name="daily_notification_body">今日はどんな一日？カードで占ってみましょう！</string>
+    <string name="daily_notification_channel_desc">今日のカード通知</string>
+</resources>

@@ -2,7 +2,6 @@ package com.pinwormmy.midoritarot.data
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import com.pinwormmy.midoritarot.assets.TarotJsonLoader
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import java.util.Locale
@@ -29,9 +28,8 @@ class TarotRepository(
         getCards().firstOrNull { it.id == cardId }
 
     private fun currentLocale(): Locale {
-        val appLocales: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
-        return appLocales.get(0)
-            ?: context.resources.configuration.locales.get(0)
-            ?: Locale.getDefault()
+        val resLocale = context.resources.configuration.locales.get(0)
+        val appLocale = AppCompatDelegate.getApplicationLocales().get(0)
+        return resLocale ?: appLocale ?: Locale.getDefault()
     }
 }

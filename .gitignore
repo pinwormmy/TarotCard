@@ -58,7 +58,6 @@ tmp/
 
 ### OS Files ###
 # macOS
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -84,3 +83,6 @@ gradle-app.setting
 
 # Android Studio Markdown Preview settings
 .idea/markdown.xml
+
+#임시 실행 파일들
+.venv/
