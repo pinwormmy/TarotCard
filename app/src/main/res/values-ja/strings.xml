@@ -73,6 +73,7 @@
     <string name="reading_setup_back">戻る</string>
     <string name="reading_setup_shuffle">カードをシャッフル</string>
     <string name="reading_setup_start_now">すぐにリーディング</string>
+    <string name="reading_question_prefix">質問: %1$s</string>
 
     <!-- Spread menu -->
     <string name="spread_menu_title">スプレッドを選択</string>

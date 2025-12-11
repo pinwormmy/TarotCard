@@ -73,6 +73,7 @@
     <string name="reading_setup_back">Back</string>
     <string name="reading_setup_shuffle">Shuffle cards</string>
     <string name="reading_setup_start_now">Start reading now</string>
+    <string name="reading_question_prefix">Q. %1$s</string>
 
     <!-- Spread menu -->
     <string name="spread_menu_title">Choose a spread</string>

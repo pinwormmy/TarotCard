@@ -73,6 +73,7 @@
     <string name="reading_setup_back">뒤로</string>
     <string name="reading_setup_shuffle">카드 셔플</string>
     <string name="reading_setup_start_now">곧바로 리딩하기</string>
+    <string name="reading_question_prefix">질문: %1$s</string>
 
     <!-- Spread menu -->
     <string name="spread_menu_title">스프레드 선택</string>

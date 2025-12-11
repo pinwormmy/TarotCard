@@ -2,6 +2,7 @@ package com.pinwormmy.midoritarot.ui.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatDelegate
 import com.pinwormmy.midoritarot.data.TarotRepository
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
@@ -62,14 +63,19 @@ class SpreadFlowViewModel(
     private fun slotsFor(spread: SpreadDefinition): List<SpreadSlot> =
         spread.positions.sortedBy { it.order }.map { it.slot }
 
-    private fun instructionFor(spread: SpreadDefinition, index: Int): String? {
+    private fun instructionFor(
+        spread: SpreadDefinition,
+        index: Int,
+        locale: Locale = currentLocale()
+    ): String? {
         val position = spread.positions.getOrNull(index) ?: return null
-        val title = position.title.resolve()
-        val lang = Locale.getDefault().language.lowercase()
-        return if (lang == "en") {
-            "Select the $title card."
-        } else {
-            "$title 카드를 선택하세요."
+        val title = position.title.resolve(locale)
+        val lang = locale.language.lowercase()
+        return when (lang) {
+            "en" -> "Select the $title card."
+            "ja" -> "$title のカードを選択してください。"
+            "th" -> "เลือกไพ่ $title"
+            else -> "$title 카드를 선택하세요."
         }
     }
 
@@ -180,10 +186,15 @@ class SpreadFlowViewModel(
     }
 
     fun revealDrawGrid() {
+        val locale = currentLocale()
         updateState { state ->
             state.copy(
                 gridVisible = true,
-                nextInstruction = instructionFor(state.spread, state.drawnCards.size)
+                nextInstruction = instructionFor(
+                    spread = state.spread,
+                    index = state.drawnCards.size,
+                    locale = locale
+                )
             )
         }
     }
@@ -220,6 +231,7 @@ class SpreadFlowViewModel(
 
     fun handleDrawSelection(card: TarotCardModel): Boolean {
         var shouldShowResult = false
+        val locale = currentLocale()
         updateState { state ->
             if (state.pendingSlots.isEmpty()) return@updateState state
             if (state.drawnCards.values.any { it.card.id == card.id }) return@updateState state
@@ -235,16 +247,21 @@ class SpreadFlowViewModel(
             val updatedFinal = state.finalCards + (nextSlot to placement)
             val titleLookup = state.spread.positions.associateBy { it.slot }
             val message = titleLookup[nextSlot]?.let { position ->
-                val title = position.title.resolve()
-                val lang = Locale.getDefault().language.lowercase()
-                if (lang == "en") {
-                    "You picked the $title card."
-                } else {
-                    "$title 카드를 선택했습니다."
+                val title = position.title.resolve(locale)
+                val lang = locale.language.lowercase()
+                when (lang) {
+                    "en" -> "You picked the $title card."
+                    "ja" -> "$title のカードを選びました。"
+                    "th" -> "คุณเลือกไพ่ $title แล้ว"
+                    else -> "$title 카드를 선택했습니다."
                 }
             }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
-            val nextInstruction = instructionFor(state.spread, nextIndex + 1)
+            val nextInstruction = instructionFor(
+                spread = state.spread,
+                index = nextIndex + 1,
+                locale = locale
+            )
             state.copy(
                 drawnCards = updatedDrawn,
                 finalCards = updatedFinal,
@@ -304,6 +321,9 @@ class SpreadFlowViewModel(
     private fun updateState(transform: (SpreadFlowUiState) -> SpreadFlowUiState) {
         _uiState.update(transform)
     }
+
+    private fun currentLocale(): Locale =
+        AppCompatDelegate.getApplicationLocales().get(0) ?: Locale.getDefault()
 
     companion object {
         fun Factory(

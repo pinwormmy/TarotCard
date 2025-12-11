@@ -4,7 +4,7 @@
     "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE",
     "ComposeApplierCallMismatch",
     "ComposeApplierParameterMismatch",
-    "ComposeApplierDeclarationMismatch"
+    "ComposeApplierDeclarationMismatch", "COMPOSE_APPLIER_CALL_MISMATCH"
 )
 
 package com.pinwormmy.midoritarot.ui.screens
@@ -201,7 +201,10 @@ fun ShuffleAndDrawScreen(
                 )
                 if (uiState.questionText.isNotBlank()) {
                     Text(
-                        text = "Q. ${uiState.questionText}",
+                        text = stringResource(
+                            id = R.string.reading_question_prefix,
+                            uiState.questionText
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.White.copy(alpha = 0.8f),
                         textAlign = TextAlign.Center
@@ -525,25 +528,30 @@ private fun DrawPileGrid(
         }
 
         val maxDealIndex = placements.maxOfOrNull { it.dealOrderIndex } ?: 0
-        @Suppress("UNUSED_VALUE")
-        var gesturesEnabled by remember(cards) { mutableStateOf(false) }
+        val gesturesEnabledState = remember(cards) { mutableStateOf(false) }
 
         LaunchedEffect(cards) {
-            gesturesEnabled = false
+            gesturesEnabledState.value = false
             if (cards.isEmpty()) return@LaunchedEffect
 
             val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
             if (totalDelay > 0) {
                 delay(totalDelay)
             }
-            gesturesEnabled = true
+            gesturesEnabledState.value = true
             onDealAnimationFinished()
         }
 
         val pointerModifier = Modifier
             .fillMaxSize()
-            .pointerInput(cards, maxWidth, maxHeight, gesturesEnabled, selectionLocked) {
-                if (!gesturesEnabled || selectionLocked) {
+            .pointerInput(
+                cards,
+                maxWidth,
+                maxHeight,
+                gesturesEnabledState.value,
+                selectionLocked
+            ) {
+                if (!gesturesEnabledState.value || selectionLocked) {
                     awaitCancellation()
                 }
                 awaitEachGesture {
@@ -558,7 +566,8 @@ private fun DrawPileGrid(
                                 val selectedId = hoveredCardId
                                 hoveredCardId = null
                                 if (selectedId != null) {
-                                    gesturesEnabled = false
+                                    gesturesEnabledState.value = false
+
                                     if (hapticsEnabled) {
                                         hapticFeedback.performHapticFeedback(
                                             HapticFeedbackType.LongPress
@@ -596,7 +605,7 @@ private fun DrawPileGrid(
                         exitProgress.animateTo(1f, tween(400))
                         delay(50)
                         onCardSelected(card)
-                        gesturesEnabled = true
+                        gesturesEnabledState.value = true
                     }
                 }
 

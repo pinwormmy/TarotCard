@@ -163,7 +163,10 @@ fun ReadingResultScreen(
                 )
                 if (questionText.isNotBlank()) {
                     Text(
-                        text = "Q. $questionText",
+                        text = stringResource(
+                            id = R.string.reading_question_prefix,
+                            questionText
+                        ),
                         style = MaterialTheme.typography.bodyMedium,
                         color = TarotUiDefaults.hint(0.8f),
                         textAlign = TextAlign.Center

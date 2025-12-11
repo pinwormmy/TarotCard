@@ -140,4 +140,29 @@ class SpreadFlowViewModelTest {
         assertTrue(state.gridVisible)
         assertTrue(state.nextInstruction?.isNotBlank() == true)
     }
+
+    @Test
+    fun handleDrawSelection_usesAppLocaleForMessages() {
+        val originalLocales = AppCompatDelegate.getApplicationLocales()
+        val originalDefault = Locale.getDefault()
+        try {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ja"))
+            Locale.setDefault(Locale.JAPAN)
+
+            val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+            val jaRepository = TarotRepository(context)
+            val jaViewModel = SpreadFlowViewModel(jaRepository, initialUseReversed = true)
+
+            jaViewModel.startReading()
+            val firstCard = jaRepository.getCards().first()
+
+            jaViewModel.handleDrawSelection(firstCard)
+            val status = jaViewModel.uiState.value.statusMessage
+
+            assertTrue(status?.contains("カードを選びました") == true)
+        } finally {
+            AppCompatDelegate.setApplicationLocales(originalLocales)
+            Locale.setDefault(originalDefault)
+        }
+    }
 }
