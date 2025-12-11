@@ -46,15 +46,17 @@ data class SpreadCardResult(
 )
 
 class SpreadFlowViewModel(
-    repository: TarotRepository
+    repository: TarotRepository,
+    initialUseReversed: Boolean
 ) : ViewModel() {
 
     val availableSpreads: List<SpreadDefinition> = SpreadCatalog.all
 
     private val allCards = repository.getCards()
     private val random = Random(System.currentTimeMillis())
+    private var useReversedPreference: Boolean = initialUseReversed
 
-    private val _uiState = MutableStateFlow(baseState(SpreadCatalog.default))
+    private val _uiState = MutableStateFlow(baseState(SpreadCatalog.default, useReversedPreference))
     val uiState: StateFlow<SpreadFlowUiState> = _uiState.asStateFlow()
 
     private fun slotsFor(spread: SpreadDefinition): List<SpreadSlot> =
@@ -73,15 +75,22 @@ class SpreadFlowViewModel(
 
     fun selectSpread(type: SpreadType) {
         val target = SpreadCatalog.find(type)
-        _uiState.value = baseState(target)
+        _uiState.value = baseState(target, useReversedPreference)
     }
 
     fun updateQuestion(text: String) {
         updateState { it.copy(questionText = text) }
     }
 
-    fun updateUseReversed(enabled: Boolean) {
-        updateState { it.copy(useReversedCards = enabled) }
+    fun applyUseReversedPreference(enabled: Boolean) {
+        useReversedPreference = enabled
+        updateState { state ->
+            if (state.useReversedCards == enabled) {
+                state
+            } else {
+                state.copy(useReversedCards = enabled)
+            }
+        }
     }
 
     fun startReading(): SpreadStep {
@@ -253,7 +262,7 @@ class SpreadFlowViewModel(
         val current = _uiState.value
         _uiState.value = baseState(
             spread = current.spread,
-            useReversed = current.useReversedCards
+            useReversed = useReversedPreference
         )
     }
 
@@ -268,7 +277,7 @@ class SpreadFlowViewModel(
 
     private fun baseState(
         spread: SpreadDefinition,
-        useReversed: Boolean = spread.defaultUseReversed
+        useReversed: Boolean = useReversedPreference
     ): SpreadFlowUiState =
         SpreadFlowUiState(
             step = SpreadStep.Preselection,
@@ -297,12 +306,15 @@ class SpreadFlowViewModel(
     }
 
     companion object {
-        fun Factory(repository: TarotRepository): ViewModelProvider.Factory =
+        fun Factory(
+            repository: TarotRepository,
+            initialUseReversed: Boolean
+        ): ViewModelProvider.Factory =
             object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     if (modelClass.isAssignableFrom(SpreadFlowViewModel::class.java)) {
-                        return SpreadFlowViewModel(repository) as T
+                        return SpreadFlowViewModel(repository, initialUseReversed) as T
                     }
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

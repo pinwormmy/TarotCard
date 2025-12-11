@@ -78,6 +78,7 @@ data class SettingsUiState(
     val dailyCardNotification: Boolean = false,
     val dailyCardTime: LocalTime = LocalTime.of(9, 0),
     val hapticsEnabled: Boolean = true,
+    val useReversedCards: Boolean = true,
     val language: AppLanguage = AppLanguage.System
 ) {
     val skin: TarotSkin = TarotSkins.findById(skinId)
@@ -100,6 +101,8 @@ class TarotSettingsViewModel(
     fun updateDailyCardTime(time: LocalTime) = persist { it.copy(dailyCardTime = time) }
 
     fun toggleHaptics(enabled: Boolean) = persist { it.copy(hapticsEnabled = enabled) }
+
+    fun toggleUseReversedCards(enabled: Boolean) = persist { it.copy(useReversedCards = enabled) }
 
     fun selectLanguage(language: AppLanguage) = persist { it.copy(language = language) }
 

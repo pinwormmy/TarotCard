@@ -17,6 +17,7 @@ private const val KEY_CARD_FACE = "card_face"
 private const val KEY_DAILY_ENABLED = "daily_enabled"
 private const val KEY_DAILY_TIME = "daily_time"
 private const val KEY_HAPTICS = "haptics"
+private const val KEY_USE_REVERSED = "use_reversed"
 private const val KEY_LANGUAGE = "language"
 
 class SettingsRepository(
@@ -45,6 +46,7 @@ class SettingsRepository(
             ?: defaults.dailyCardTime
 
         val haptics = prefs.getBoolean(KEY_HAPTICS, defaults.hapticsEnabled)
+        val useReversed = prefs.getBoolean(KEY_USE_REVERSED, defaults.useReversedCards)
         val language = prefs.getString(KEY_LANGUAGE, defaults.language.code)?.let { AppLanguage.fromCode(it) }
             ?: defaults.language
 
@@ -55,6 +57,7 @@ class SettingsRepository(
             dailyCardNotification = dailyEnabled,
             dailyCardTime = dailyTime,
             hapticsEnabled = haptics,
+            useReversedCards = useReversed,
             language = language
         )
     }
@@ -67,6 +70,7 @@ class SettingsRepository(
             putBoolean(KEY_DAILY_ENABLED, state.dailyCardNotification)
             putString(KEY_DAILY_TIME, state.dailyCardTime.toString())
             putBoolean(KEY_HAPTICS, state.hapticsEnabled)
+            putBoolean(KEY_USE_REVERSED, state.useReversedCards)
             putString(KEY_LANGUAGE, state.language.code)
         }
     }

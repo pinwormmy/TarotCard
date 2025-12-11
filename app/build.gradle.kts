@@ -6,12 +6,14 @@ plugins {
 
 android {
     namespace = "com.pinwormmy.midoritarot"
+    //noinspection GradleDependency
     compileSdk = 35
     buildToolsVersion = "36.1.0"
 
     defaultConfig {
         applicationId = "com.pinwormmy.midoritarot"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 34
 
         versionCode = 1
@@ -50,6 +52,10 @@ android {
         compose = true
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
+
     // 3) packaging DSL 정식 형태
     packaging {
         resources {
@@ -74,11 +80,15 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
     implementation(libs.androidx.compose.foundation.layout)
+    //noinspection UseTomlInstead,GradleDependency
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("androidx.compose.material:material-icons-extended")
 
     // 테스트
     testImplementation(libs.junit)
+    testImplementation("org.robolectric:robolectric:4.13")
+    testImplementation("androidx.test:core:1.6.1")
+    testImplementation("io.mockk:mockk:1.13.12")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 

@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -46,11 +45,9 @@ import com.pinwormmy.midoritarot.R
 fun ReadingSetupScreen(
     spread: SpreadDefinition,
     questionText: String,
-    useReversedCards: Boolean,
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
     onQuestionChange: (String) -> Unit,
-    onUseReversedChange: (Boolean) -> Unit,
     onShuffle: () -> Unit,
     onQuickReading: () -> Unit
 ) {
@@ -134,28 +131,6 @@ fun ReadingSetupScreen(
                 onValueChange = onQuestionChange,
                 placeholder = { Text(text = spread.questionPlaceholder.resolve()) }
             )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(id = R.string.reading_setup_reverse_title),
-                        fontWeight = FontWeight.SemiBold
-                    )
-                    Text(
-                        text = stringResource(id = R.string.reading_setup_reverse_desc),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
-                }
-                Switch(
-                    checked = useReversedCards,
-                    onCheckedChange = onUseReversedChange
-                )
-            }
         }
 
         Column(
@@ -226,10 +201,8 @@ private fun ReadingSetupPreview() {
         ReadingSetupScreen(
             spread = SpreadCatalog.default,
             questionText = "",
-            useReversedCards = true,
             onBack = {},
             onQuestionChange = {},
-            onUseReversedChange = {},
             onShuffle = {},
             onQuickReading = {}
         )

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -40,12 +41,16 @@ fun TarotNavGraph(
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
+    val settingsUiState by settingsViewModel.uiState.collectAsState()
     val spreadViewModel: SpreadFlowViewModel = viewModel(
-        factory = SpreadFlowViewModel.Factory(repository)
+        factory = SpreadFlowViewModel.Factory(repository, settingsUiState.useReversedCards)
     )
     val spreadUiState by spreadViewModel.uiState.collectAsState()
     val allCards = remember { repository.getCards() }
-    val settingsUiState by settingsViewModel.uiState.collectAsState()
+
+    LaunchedEffect(settingsUiState.useReversedCards) {
+        spreadViewModel.applyUseReversedPreference(settingsUiState.useReversedCards)
+    }
 
     NavHost(
         navController = navController,
@@ -82,10 +87,8 @@ fun TarotNavGraph(
             ReadingSetupScreen(
                 spread = spreadUiState.spread,
                 questionText = spreadUiState.questionText,
-                useReversedCards = spreadUiState.useReversedCards,
                 onBack = { navController.safePopBackStack() },
                 onQuestionChange = { spreadViewModel.updateQuestion(it) },
-                onUseReversedChange = { spreadViewModel.updateUseReversed(it) },
                 onShuffle = {
                     when (spreadViewModel.startReading()) {
                         SpreadStep.ShuffleAndDraw -> navController.navigate(Screen.ShuffleAndDraw.route)
@@ -169,6 +172,7 @@ fun TarotNavGraph(
                 onSelectCardBack = { settingsViewModel.selectCardBack(it) },
                 onSelectCardFace = { settingsViewModel.selectCardFace(it) },
                 onSelectLanguage = { settingsViewModel.selectLanguage(it) },
+                onToggleReversedCards = { settingsViewModel.toggleUseReversedCards(it) },
                 onToggleDailyCard = { settingsViewModel.toggleDailyCard(it) },
                 onDailyCardTimeChange = { settingsViewModel.updateDailyCardTime(it) },
                 onToggleHaptics = { settingsViewModel.toggleHaptics(it) },

@@ -106,6 +106,7 @@ fun OptionsScreen(
     onSelectCardBack: (CardBackStyle) -> Unit,
     onSelectCardFace: (CardFaceSkin) -> Unit,
     onSelectLanguage: (AppLanguage) -> Unit,
+    onToggleReversedCards: (Boolean) -> Unit,
     onToggleDailyCard: (Boolean) -> Unit,
     onDailyCardTimeChange: (LocalTime) -> Unit,
     onToggleHaptics: (Boolean) -> Unit,
@@ -216,6 +217,32 @@ fun OptionsScreen(
                         selected = settings.cardFaceSkin,
                         onPreview = { skin, bounds -> previewSkin = skin to bounds }
                     )
+                }
+
+                OptionSection(title = stringResource(id = R.string.options_section_reading)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.options_reversed_title),
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = stringResource(id = R.string.options_reversed_desc),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                            )
+                        }
+                        Switch(
+                            checked = settings.useReversedCards,
+                            onCheckedChange = onToggleReversedCards
+                        )
+                    }
                 }
 
                 OptionSection(title = stringResource(id = R.string.options_section_daily_card)) {

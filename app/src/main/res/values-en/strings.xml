@@ -51,7 +51,10 @@
     <string name="options_section_card_skin">Choose card skin</string>
     <string name="options_section_daily_card">App notifications</string>
     <string name="options_section_language">Language</string>
+    <string name="options_section_reading">Reading settings</string>
     <string name="options_daily_card_toggle">Get reminder to draw card</string>
+    <string name="options_reversed_title">Use reversed cards</string>
+    <string name="options_reversed_desc">Include reversed orientation when reading spreads.</string>
     <string name="options_section_haptics">Haptics</string>
     <string name="options_haptics_title">Use vibration for card interactions</string>
     <string name="options_haptics_desc">Adds tactile feedback when drawing or tapping.</string>
@@ -68,8 +71,6 @@
 
     <!-- Reading setup -->
     <string name="reading_setup_back">Back</string>
-    <string name="reading_setup_reverse_title">Use reversed cards</string>
-    <string name="reading_setup_reverse_desc">Interpret both upright and reversed meanings.</string>
     <string name="reading_setup_shuffle">Shuffle cards</string>
     <string name="reading_setup_start_now">Start reading now</string>
 
