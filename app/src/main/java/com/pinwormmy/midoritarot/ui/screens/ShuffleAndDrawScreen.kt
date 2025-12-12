@@ -43,6 +43,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -456,7 +457,7 @@ private fun OutlineLargeButton(
 }
 
 @Composable
-private fun DrawPileGrid(
+internal fun DrawPileGrid(
     modifier: Modifier = Modifier,
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
@@ -477,6 +478,9 @@ private fun DrawPileGrid(
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
         val cardBackPainter = rememberCardBackPainter()
         val localSelectedIdsState = remember(cards) { mutableStateOf(setOf<String>()) }
+        val disabledCardIdsState = rememberUpdatedState(disabledCardIds)
+        val drawnCountState = rememberUpdatedState(drawnCount)
+        val selectionLockedState = rememberUpdatedState(selectionLocked)
 
         val columnSpacing = GRID_COLUMN_SPACING
         val totalRows = (cards.size + 1) / 2
@@ -526,7 +530,7 @@ private fun DrawPileGrid(
         }
 
         fun findCardIdAt(position: Offset): String? {
-            val combinedDisabled = disabledCardIds + localSelectedIdsState.value
+            val combinedDisabled = disabledCardIdsState.value + localSelectedIdsState.value
             return placements.asReversed().firstOrNull { placement ->
                 val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
                 val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
@@ -556,25 +560,37 @@ private fun DrawPileGrid(
                 maxWidth,
                 maxHeight,
                 gesturesEnabledState.value,
-                selectionLocked,
-                totalSlots,
-                drawnCount,
-                localSelectedIdsState.value
+                totalSlots
             ) {
-                val selectionLimitReached =
-                    selectionLocked || (drawnCount + localSelectedIdsState.value.size >= totalSlots)
-                if (!gesturesEnabledState.value || selectionLimitReached) {
+                if (!gesturesEnabledState.value) {
                     awaitCancellation()
                 }
+
+                fun selectionLimitReached(): Boolean =
+                    selectionLockedState.value ||
+                        (drawnCountState.value + localSelectedIdsState.value.size >= totalSlots)
+
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
                     try {
+                        if (selectionLimitReached()) {
+                            return@awaitEachGesture
+                        }
+
                         hoveredCardId = findCardIdAt(down.position)
                         while (true) {
                             val event = awaitPointerEvent()
                             val change = event.changes.firstOrNull { it.id == down.id } ?: continue
+                            if (selectionLimitReached()) {
+                                hoveredCardId = null
+                                break
+                            }
                             hoveredCardId = findCardIdAt(change.position)
                             if (!change.pressed) {
+                                if (selectionLimitReached()) {
+                                    hoveredCardId = null
+                                    break
+                                }
                                 val selectedId = hoveredCardId
                                 hoveredCardId = null
                                 if (selectedId != null) {
