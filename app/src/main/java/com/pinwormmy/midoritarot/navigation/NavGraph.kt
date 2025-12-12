@@ -1,5 +1,6 @@
 package com.pinwormmy.midoritarot.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawing
@@ -48,6 +49,14 @@ fun TarotNavGraph(
     val spreadUiState by spreadViewModel.uiState.collectAsState()
     val allCards = remember(settingsUiState.language) { repository.getCards() }
 
+    val navigateHomeFromReading = {
+        spreadViewModel.resetFlow()
+        navController.navigate(Screen.MainMenu.route) {
+            popUpTo(Screen.MainMenu.route) { inclusive = true }
+            launchSingleTop = true
+        }
+    }
+
     LaunchedEffect(settingsUiState.useReversedCards) {
         spreadViewModel.applyUseReversedPreference(settingsUiState.useReversedCards)
     }
@@ -77,17 +86,19 @@ fun TarotNavGraph(
         }
 
         composable(Screen.SpreadMenu.route) {
+            BackHandler(onBack = navigateHomeFromReading)
             SpreadMenuScreen(
                 spreads = spreadViewModel.availableSpreads,
                 onSpreadSelected = { type ->
                     spreadViewModel.selectSpread(type)
                     navController.navigate(Screen.ReadingSetup.route)
                 },
-                onBack = { navController.safePopBackStack() }
+                onBack = navigateHomeFromReading
             )
         }
 
         composable(Screen.ReadingSetup.route) {
+            BackHandler(onBack = navigateHomeFromReading)
             ReadingSetupScreen(
                 spread = spreadUiState.spread,
                 questionText = spreadUiState.questionText,
@@ -120,21 +131,18 @@ fun TarotNavGraph(
                         navController.navigate(Screen.ReadingResult.route)
                     }
                 },
-                onBack = { navController.safePopBackStack() }
+                onBack = navigateHomeFromReading
             )
         }
 
         composable(Screen.ReadingResult.route) {
+            BackHandler(onBack = navigateHomeFromReading)
             ReadingResultScreen(
                 spread = spreadUiState.spread,
                 cardsBySlot = spreadUiState.finalCards,
                 questionText = spreadUiState.questionText,
                 onNavigateHome = {
-                    spreadViewModel.resetFlow()
-                    navController.navigate(Screen.MainMenu.route) {
-                        popUpTo(Screen.MainMenu.route) { inclusive = true }
-                        launchSingleTop = true
-                    }
+                    navigateHomeFromReading()
                 }
             )
         }
