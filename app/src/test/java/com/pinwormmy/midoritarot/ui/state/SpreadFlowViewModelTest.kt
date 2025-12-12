@@ -190,4 +190,20 @@ class SpreadFlowViewModelTest {
             Locale.setDefault(originalDefault)
         }
     }
+
+    @Test
+    fun refreshLocaleContent_updatesSelectedCardsAndStatusMessage() {
+        viewModel.startReading()
+        val englishFool = repository.getCard("major_00", locale = Locale.ENGLISH)!!
+
+        viewModel.handleDrawSelection(englishFool)
+        val before = viewModel.uiState.value
+        assertEquals("The Fool", before.finalCards.values.first().card.name)
+        assertTrue(before.statusMessage?.contains("You picked") == true)
+
+        viewModel.refreshLocaleContent(locale = Locale.JAPANESE)
+        val after = viewModel.uiState.value
+        assertEquals("愚者", after.finalCards.values.first().card.name)
+        assertTrue(after.statusMessage?.contains("カードを選びました") == true)
+    }
 }

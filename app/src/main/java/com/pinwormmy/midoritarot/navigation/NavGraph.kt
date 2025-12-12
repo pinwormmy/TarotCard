@@ -46,10 +46,14 @@ fun TarotNavGraph(
         factory = SpreadFlowViewModel.Factory(repository, settingsUiState.useReversedCards)
     )
     val spreadUiState by spreadViewModel.uiState.collectAsState()
-    val allCards = remember { repository.getCards() }
+    val allCards = remember(settingsUiState.language) { repository.getCards() }
 
     LaunchedEffect(settingsUiState.useReversedCards) {
         spreadViewModel.applyUseReversedPreference(settingsUiState.useReversedCards)
+    }
+
+    LaunchedEffect(settingsUiState.language) {
+        spreadViewModel.refreshLocaleContent()
     }
 
     NavHost(

@@ -10,22 +10,23 @@ import java.util.Locale
 object TarotJsonLoader {
     fun load(
         context: Context,
-        fileName: String = "tarot_data.json"
+        fileName: String = "tarot_data.json",
+        locale: Locale? = null
     ): List<TarotCardModel> {
-        val locale = currentLocale(context)
+        val resolvedLocale = locale ?: currentLocale(context)
         val json = context.assets.open(fileName).bufferedReader().use { it.readText() }
         val array = JSONArray(json)
         val cards = mutableListOf<TarotCardModel>()
         for (index in 0 until array.length()) {
             val item = array.getJSONObject(index)
-            val keywords = localizedKeywords(item, locale)
-            val name = localizedString(item, "name", locale)
-            val arcana = localizedString(item, "arcana", locale)
-            val uprightMeaning = localizedString(item, "uprightMeaning", locale)
+            val keywords = localizedKeywords(item, resolvedLocale)
+            val name = localizedString(item, "name", resolvedLocale)
+            val arcana = localizedString(item, "arcana", resolvedLocale)
+            val uprightMeaning = localizedString(item, "uprightMeaning", resolvedLocale)
                 .ifBlank { item.optString("meaning") }
-            val reversedMeaning = localizedString(item, "reversedMeaning", locale)
+            val reversedMeaning = localizedString(item, "reversedMeaning", resolvedLocale)
                 .ifBlank { "Blocked energy, delays, or the shadow of $name" }
-            val description = localizedString(item, "description", locale)
+            val description = localizedString(item, "description", resolvedLocale)
                 .ifBlank { uprightMeaning }
 
             cards += TarotCardModel(
@@ -44,9 +45,10 @@ object TarotJsonLoader {
 }
 
 private fun currentLocale(context: Context): Locale {
-    val resLocale = context.resources.configuration.locales.get(0)
     val appLocale = AppCompatDelegate.getApplicationLocales().get(0)
-    return resLocale ?: appLocale ?: Locale.getDefault()
+    if (appLocale != null) return appLocale
+
+    return context.resources.configuration.locales.get(0) ?: Locale.getDefault()
 }
 
 private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): String {

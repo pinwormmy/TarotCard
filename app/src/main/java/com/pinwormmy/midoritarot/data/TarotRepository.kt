@@ -12,24 +12,25 @@ class TarotRepository(
     private var cachedLocaleTag: String? = null
     private var cachedCards: List<TarotCardModel>? = null
 
-    fun getCards(): List<TarotCardModel> {
-        val locale = currentLocale()
-        val currentTag = locale.toLanguageTag()
+    fun getCards(locale: Locale? = null): List<TarotCardModel> {
+        val resolvedLocale = locale ?: currentLocale()
+        val currentTag = resolvedLocale.toLanguageTag()
         val cached = cachedCards
         if (cached != null && cachedLocaleTag == currentTag) return cached
 
-        val fresh = TarotJsonLoader.load(context)
+        val fresh = TarotJsonLoader.load(context, locale = resolvedLocale)
         cachedCards = fresh
         cachedLocaleTag = currentTag
         return fresh
     }
 
-    fun getCard(cardId: String?): TarotCardModel? =
-        getCards().firstOrNull { it.id == cardId }
+    fun getCard(cardId: String?, locale: Locale? = null): TarotCardModel? =
+        getCards(locale).firstOrNull { it.id == cardId }
 
     private fun currentLocale(): Locale {
-        val resLocale = context.resources.configuration.locales.get(0)
         val appLocale = AppCompatDelegate.getApplicationLocales().get(0)
-        return resLocale ?: appLocale ?: Locale.getDefault()
+        if (appLocale != null) return appLocale
+
+        return context.resources.configuration.locales.get(0) ?: Locale.getDefault()
     }
 }

@@ -47,13 +47,13 @@ data class SpreadCardResult(
 )
 
 class SpreadFlowViewModel(
-    repository: TarotRepository,
+    private val repository: TarotRepository,
     initialUseReversed: Boolean
 ) : ViewModel() {
 
     val availableSpreads: List<SpreadDefinition> = SpreadCatalog.all
 
-    private val allCards = repository.getCards()
+    private var allCards = repository.getCards()
     private val random = Random(System.currentTimeMillis())
     private var useReversedPreference: Boolean = initialUseReversed
 
@@ -283,6 +283,68 @@ class SpreadFlowViewModel(
             spread = current.spread,
             useReversed = useReversedPreference
         )
+    }
+
+    fun refreshLocaleContent(locale: Locale? = null) {
+        val resolvedLocale = locale ?: currentLocale()
+        val freshCards = repository.getCards(locale = resolvedLocale)
+        if (freshCards === allCards) return
+
+        val cardsById = freshCards.associateBy { it.id }
+        allCards = freshCards
+
+        updateState { state ->
+            val updatedDrawPile = state.drawPile.map { cardsById[it.id] ?: it }
+            val updatedDrawn = state.drawnCards.mapValues { (_, value) ->
+                val updatedCard = cardsById[value.card.id] ?: value.card
+                if (updatedCard === value.card) value else value.copy(card = updatedCard)
+            }
+            val updatedFinal = state.finalCards.mapValues { (_, value) ->
+                val updatedCard = cardsById[value.card.id] ?: value.card
+                if (updatedCard === value.card) value else value.copy(card = updatedCard)
+            }
+
+            val updatedStatusMessage = if (
+                state.statusMessage != null &&
+                state.pendingSlots.isNotEmpty() &&
+                state.drawnCards.isNotEmpty()
+            ) {
+                val lastSlot = state.pendingSlots.getOrNull(state.drawnCards.size - 1)
+                val position = lastSlot?.let { slot ->
+                    state.spread.positions.firstOrNull { it.slot == slot }
+                }
+                position?.let { pos ->
+                    val title = pos.title.resolve(resolvedLocale)
+                    when (resolvedLocale.language.lowercase()) {
+                        "en" -> "You picked the $title card."
+                        "ja" -> "$title のカードを選びました。"
+                        "th" -> "คุณเลือกไพ่ $title แล้ว"
+                        "ko" -> "$title 카드를 선택했습니다."
+                        else -> "You picked the $title card."
+                    }
+                } ?: state.statusMessage
+            } else {
+                state.statusMessage
+            }
+
+            val updatedNextInstruction = if (state.nextInstruction != null) {
+                instructionFor(
+                    spread = state.spread,
+                    index = state.drawnCards.size,
+                    locale = resolvedLocale
+                ) ?: state.nextInstruction
+            } else {
+                null
+            }
+
+            state.copy(
+                drawPile = updatedDrawPile,
+                drawnCards = updatedDrawn,
+                finalCards = updatedFinal,
+                statusMessage = updatedStatusMessage,
+                nextInstruction = updatedNextInstruction
+            )
+        }
     }
 
     private fun splitDrawPile(pile: List<TarotCardModel>): List<List<TarotCardModel>> {
