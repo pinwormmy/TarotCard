@@ -11,6 +11,7 @@ package com.pinwormmy.midoritarot.ui.screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
@@ -87,7 +88,6 @@ import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.R
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.math.ceil
 
 private const val LANDSCAPE_CARD_RATIO = CARD_LANDSCAPE_RATIO
@@ -474,7 +474,6 @@ internal fun DrawPileGrid(
         contentAlignment = Alignment.TopCenter
     ) {
         val density = LocalDensity.current
-        val selectionEvents = remember { MutableSharedFlow<String>(extraBufferCapacity = 16) }
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
         val cardBackPainter = rememberCardBackPainter()
         val localSelectedIdsState = remember(cards) { mutableStateOf(setOf<String>()) }
@@ -540,11 +539,14 @@ internal fun DrawPileGrid(
 
         val maxDealIndex = placements.maxOfOrNull { it.dealOrderIndex } ?: 0
         val gesturesEnabledState = remember(cards) { mutableStateOf(false) }
+        var dealStarted by remember(cards) { mutableStateOf(false) }
 
         LaunchedEffect(cards) {
             gesturesEnabledState.value = false
+            dealStarted = false
             if (cards.isEmpty()) return@LaunchedEffect
 
+            dealStarted = true
             val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
             if (totalDelay > 0) {
                 delay(totalDelay)
@@ -602,7 +604,6 @@ internal fun DrawPileGrid(
                                             HapticFeedbackType.LongPress
                                         )
                                     }
-                                    selectionEvents.tryEmit(selectedId)
                                 }
                                 break
                             }
@@ -620,17 +621,18 @@ internal fun DrawPileGrid(
         Box(modifier = pointerModifier) {
             placements.forEach { placement ->
                 val card = placement.card
-                val appear = remember(card.id) { Animatable(0f) }
                 val exitProgress = remember(card.id) { Animatable(0f) }
-                val isExiting = remember(card.id) { mutableStateOf(false) }
+                val isExiting = localSelectedIdsState.value.contains(card.id)
+                val appear by animateFloatAsState(
+                    targetValue = if (dealStarted) 1f else 0f,
+                    animationSpec = tween(
+                        durationMillis = dealAnimationMillis,
+                        delayMillis = (dealStaggerMillis * placement.dealOrderIndex).toInt(),
+                    )
+                )
 
-                LaunchedEffect(card.id) {
-                    delay(dealStaggerMillis * placement.dealOrderIndex)
-                    appear.animateTo(1f, tween(dealAnimationMillis))
-                }
-
-                LaunchedEffect(isExiting.value) {
-                    if (isExiting.value) {
+                if (isExiting) {
+                    LaunchedEffect(card.id) {
                         exitProgress.animateTo(1f, tween(400))
                         delay(50)
                         onCardSelected(card)
@@ -639,28 +641,20 @@ internal fun DrawPileGrid(
                     }
                 }
 
-                LaunchedEffect(card.id) {
-                    selectionEvents.collect { targetId ->
-                        if (targetId == card.id && !isExiting.value) {
-                            isExiting.value = true
-                        }
-                    }
-                }
-
                 val isDisabled = disabledCardIds.contains(card.id)
-                val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear.value)
-                val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear.value)
+                val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear)
+                val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear)
                 val exitShiftY = exitProgress.value * (maxHeightPx + cardHeightPx)
-                val baseScale = 0.9f + 0.1f * appear.value
+                val baseScale = 0.9f + 0.1f * appear
                 val hoverScale = if (!isDisabled && hoveredCardId == card.id) 1.05f else 1f
                 val targetAlpha = if (isDisabled) 0f else 1f
                 val layerAlpha =
-                    (appear.value * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
+                    (appear * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
 
                 // 🔥 여기 Box가 "가로 카드" 컨테이너 + 움직임 담당
                 Box(
                     modifier = Modifier
-                        .zIndex(if (isExiting.value || exitProgress.value > 0f) 1f else 0f)
+                        .zIndex(if (isExiting || exitProgress.value > 0f) 1f else 0f)
                         .width(cardWidth)
                         .height(cardHeight)
                         .graphicsLayer {
