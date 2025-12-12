@@ -16,9 +16,9 @@
     "imageUrl": "tarot00",
     "name_en": "The Fool",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "A fresh start and innocent trust invite serendipity and bold adventures.",
-    "reversedMeaning_en": "Reckless leaps or fear of leaping lead to avoidable chaos; pause and ground yourself.",
-    "description_en": "A carefree youth at the cliff’s edge, white rose and knapsack in hand.",
+    "uprightMeaning_en": "A new beginning awakens trust in the unknown and playful curiosity. An open attitude draws in happy coincidences and bold adventures.",
+    "reversedMeaning_en": "A careless leap brings avoidable confusion and scattered focus. Pause, steady yourself, and ground before committing to the next path.",
+    "description_en": "A youth at the cliff’s edge, about to begin the soul’s journey.",
     "keywords_en": [
       "beginnings",
       "innocence",
@@ -28,14 +28,14 @@
     ],
     "name_ja": "愚者",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "新たなスタートと無邪気な信頼が、偶然の出会いと大胆な冒険を誘います。",
-    "reversedMeaning_ja": "無謀な跳躍や跳躍への恐怖は、回避可能な混乱につながります。立ち止まって自分自身をグラウンディングしてください。",
-    "description_ja": "白いバラとナップザックを手に、崖の端にいる屈託のない若者。",
+    "uprightMeaning_ja": "新しい始まりは、未知への信頼と遊び心ある好奇心を呼び起こします。開かれた姿勢が、偶然の幸運と大胆な冒険を導きます。",
+    "reversedMeaning_ja": "軽率な跳躍は、避けられたはずの混乱と散漫さを招きます。次の道に身を投じる前に立ち止まり、地に足をつけて整えましょう。",
+    "description_ja": "魂の旅を始めようと、崖の端に立つ若者。",
     "keywords_ja": [
       "始まり",
       "純真",
       "信頼",
-      "可能性",
+      "潜在力",
       "楽観"
     ]
   },
@@ -56,25 +56,25 @@
     "imageUrl": "tarot01",
     "name_en": "The Magician",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Focused will channels resources into tangible results; skill aligns heaven and earth.",
-    "reversedMeaning_en": "Scattered intent or manipulation drains power; regain authenticity before acting.",
-    "description_en": "A conduit between realms, raising a wand and pointing to earth.",
+    "uprightMeaning_en": "Focused will gathers your resources and turns them into tangible results. Skillful communication aligns heaven and earth, helping your wish take form.",
+    "reversedMeaning_en": "Scattered intentions weaken your power, and manipulative tactics boomerang in the end. Recenter on sincerity before you act.",
+    "description_en": "A herald who bridges two worlds and knows how to handle energy.",
     "keywords_en": [
       "manifestation",
       "skill",
       "initiative",
       "resourcefulness",
-      "power"
+      "strength"
     ],
     "name_ja": "魔術師",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "集中することで、リソースを具体的な結果に導きます。スキルは天と地を一致させます。",
-    "reversedMeaning_ja": "分散した意図や操作は力を消耗します。行動する前に誠実さを取り戻しましょう。",
-    "description_ja": "杖を上げて地球を指す、領域間の導管。",
+    "uprightMeaning_ja": "集中した意志が資源を集め、手に取れる結果へと変えていきます。巧みな伝達が天と地を整え、望みの具現化を助けます。",
+    "reversedMeaning_ja": "散った意図は力を弱め、操作的な戦術はやがて自分に返ってきます。行動の前に、誠実さの中心へ戻りましょう。",
+    "description_ja": "二つの世界をつなぎ、エネルギーの扱い方を知る使者。",
     "keywords_ja": [
       "具現化",
       "技能",
-      "主導権",
+      "主導性",
       "機転",
       "力"
     ]
@@ -95,27 +95,25 @@
     "imageUrl": "tarot02",
     "name_en": "The High Priestess",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Quiet intuition reveals subtle truths; trust the wisdom beyond logic.",
-    "reversedMeaning_en": "Secrets and silence breed confusion; share what you feel instead of hiding.",
-    "description_en": "Guardian of mystery seated between light and shadow.",
+    "uprightMeaning_en": "Stillness reveals subtle truths and messages from intuition. She invites you to trust inner wisdom that goes beyond logic.",
+    "reversedMeaning_en": "Hidden secrets breed confusion and emotional disconnection. Don’t hide behind silence—share what you truly feel.",
+    "description_en": "A mysterious guardian seated between light and shadow.",
     "keywords_en": [
       "intuition",
       "mystery",
-      "inner voice",
-      "stillness",
-      "esoteric"
+      "subconscious",
+      "dreams"
     ],
     "name_ja": "女教皇",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "静かな直感は微妙な真実を明らかにします。論理を超えた知恵を信頼してください。",
-    "reversedMeaning_ja": "秘密と沈黙は混乱を生みます。隠すのではなく、感じていることを共有しましょう。",
-    "description_ja": "光と影の間に座る謎の守護者。",
+    "uprightMeaning_ja": "静けさは、かすかな真実と直感のメッセージを映し出します。彼女は論理を超えた内なる知恵を信じるよう招きます。",
+    "reversedMeaning_ja": "隠された秘密は混乱と感情的な断絶を育てます。沈黙の陰に隠れず、あなたが感じていることを分かち合いましょう。",
+    "description_ja": "光と影のあいだに座る、神秘の守り手。",
     "keywords_ja": [
       "直感",
       "神秘",
-      "内なる声",
-      "静けさ",
-      "秘教"
+      "潜在意識",
+      "夢"
     ]
   },
   {
@@ -135,26 +133,26 @@
     "imageUrl": "tarot03",
     "name_en": "The Empress",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Nurturing abundance, creativity, and sensual comfort bloom under her care.",
-    "reversedMeaning_en": "Overprotection or creative block; tend to yourself as you would another.",
-    "description_en": "A sovereign of fertile fields and gentle authority.",
+    "uprightMeaning_en": "Sensual abundance, creativity, and nurturing bloom under her influence. She encourages you to receive—and to create.",
+    "reversedMeaning_en": "If you neglect your own needs, burnout and overprotectiveness arrive. Reclaim pleasure and healthy boundaries.",
+    "description_en": "An archetype of the Earth Mother, surrounded by fertile fields.",
     "keywords_en": [
-      "abundance",
-      "care",
-      "creativity",
       "fertility",
+      "creativity",
+      "nurturing",
+      "beauty",
       "comfort"
     ],
     "name_ja": "女帝",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "彼女のケアの下で、豊かさ、創造性、そして官能的な安らぎを育みます。",
-    "reversedMeaning_ja": "過保護または創造的なブロック。他人と同じように自分自身にも気を配りましょう。",
-    "description_ja": "肥沃な田畑と穏やかな権威の君主。",
+    "uprightMeaning_ja": "感覚的な豊かさと創造性、そして慈しみが彼女のもとで花開きます。受け取り、そして生み出すことを促します。",
+    "reversedMeaning_ja": "自分の必要を満たさないと、燃え尽きや過保護が訪れます。喜びと境界線を取り戻しましょう。",
+    "description_ja": "肥沃な野に囲まれた、大地の母性の原型。",
     "keywords_ja": [
-      "豊かさ",
-      "思いやり",
-      "創造性",
       "豊穣",
+      "創造性",
+      "養育",
+      "美",
       "安らぎ"
     ]
   },
@@ -174,27 +172,25 @@
     "imageUrl": "tarot04",
     "name_en": "The Emperor",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Structure, strategy, and decisive leadership create stability.",
-    "reversedMeaning_en": "Rigidity or control issues undermine authority; lead with balance, not force.",
-    "description_en": "An armored ruler on a stone throne, symbol of order and will.",
+    "uprightMeaning_en": "Structure, discipline, and leadership stabilize long-term ambitions. Stand clearly and claim your authority.",
+    "reversedMeaning_en": "Rigidity and a need for control block collaboration. Adjust your strategy with flexibility so you don’t become isolated.",
+    "description_en": "A sovereign seated on a stone throne.",
     "keywords_en": [
       "authority",
-      "structure",
-      "discipline",
       "stability",
-      "strategy"
+      "order",
+      "protection"
     ],
     "name_ja": "皇帝",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "構造、戦略、そして決断力のあるリーダーシップが安定を生み出します。",
-    "reversedMeaning_ja": "硬直性や統制の問題は権威を損なう。力ではなくバランスを持ってリードしてください。",
-    "description_ja": "石の玉座の上にある鎧を着た支配者、秩序と意志の象徴。",
+    "uprightMeaning_ja": "構造と規律、リーダーシップが長期的な野心を安定させます。明確な態度で、自分の権威を宣言しましょう。",
+    "reversedMeaning_ja": "硬直と支配欲は協働を妨げます。孤立しないよう、戦略を柔軟に調整しましょう。",
+    "description_ja": "石の玉座に座す主権者。",
     "keywords_ja": [
       "権威",
-      "構造",
-      "規律",
       "安定",
-      "戦略"
+      "秩序",
+      "保護"
     ]
   },
   {
@@ -213,27 +209,25 @@
     "imageUrl": "tarot05",
     "name_en": "The Hierophant",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Tradition, shared beliefs, and mentorship offer guidance and belonging.",
-    "reversedMeaning_en": "Dogma stifles; question rules and reclaim personal meaning.",
-    "description_en": "A spiritual teacher between pillars, blessing seekers.",
+    "uprightMeaning_en": "Tradition, mentors, and shared belief systems provide direction. Learning from a teacher helps you walk a steady path.",
+    "reversedMeaning_en": "When questions are forbidden, dogma suffocates growth. Go beyond hollow rules and build a philosophy of your own.",
+    "description_en": "A spiritual teacher who conveys ancestral wisdom.",
     "keywords_en": [
       "tradition",
-      "faith",
-      "mentorship",
-      "conformity",
-      "teaching"
+      "trust",
+      "learning",
+      "ritual"
     ],
     "name_ja": "教皇",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "伝統、共通の信念、指導は、導きと帰属をもたらします。",
-    "reversedMeaning_ja": "教義は息苦しい。ルールに疑問を持ち、個人的な意味を取り戻しましょう。",
-    "description_ja": "柱の間の精神的な教師、祝福を求める者。",
+    "uprightMeaning_ja": "伝統や師、共有された信念体系が方向を示します。師に学ぶことで、揺るぎない道を歩めます。",
+    "reversedMeaning_ja": "問いを禁じれば、教条主義が成長を窒息させます。空っぽの規則を超え、自分だけの哲学を築きましょう。",
+    "description_ja": "祖先の知恵を伝える霊的な師。",
     "keywords_ja": [
       "伝統",
-      "信仰",
-      "メンターシップ",
-      "順応",
-      "教導"
+      "信頼",
+      "学び",
+      "儀式"
     ]
   },
   {
@@ -253,27 +247,27 @@
     "imageUrl": "tarot06",
     "name_en": "The Lovers",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Alignment of values and heartfelt choice create harmonious union.",
-    "reversedMeaning_en": "Misalignment or indecision strains bonds; return to core truth.",
-    "description_en": "Two figures under an angel, choosing with open hearts.",
+    "uprightMeaning_en": "A heart-led choice aligns values, relationships, and purpose into one line. A truthful connection calls forth growth in both of you.",
+    "reversedMeaning_en": "Indecision and divided priorities wear down intimacy. Reconcile your inner conflict before you commit.",
+    "description_en": "Two people blessed by a radiant angel.",
     "keywords_en": [
       "union",
       "choice",
-      "values",
-      "partnership",
-      "attraction"
+      "alignment",
+      "love",
+      "values"
     ],
     "name_ja": "恋人",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "価値観の一致と心からの選択が調和のとれた結合を生み出します。",
-    "reversedMeaning_ja": "調整のずれや優柔不断は絆を歪めます。核心的な真実に立ち返る。",
-    "description_ja": "天使の下に二人の人物が心を開いて選択している。",
+    "uprightMeaning_ja": "心に導かれた選択が、価値観・関係・目的を一本に整えます。真実のつながりが互いの成長を呼びます。",
+    "reversedMeaning_ja": "優柔不断と分裂した優先順位は親密さをすり減らします。約束する前に、内なる葛藤と和解しましょう。",
+    "description_ja": "輝く天使に祝福される二人。",
     "keywords_ja": [
-      "結び付き",
+      "結びつき",
       "選択",
-      "価値観",
-      "パートナーシップ",
-      "魅力"
+      "整合",
+      "愛",
+      "価値観"
     ]
   },
   {
@@ -292,27 +286,25 @@
     "imageUrl": "tarot07",
     "name_en": "The Chariot",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Willpower and focus steer opposing forces toward victory.",
-    "reversedMeaning_en": "Lack of direction or forcefulness causes drift; regain control with clarity.",
-    "description_en": "A determined driver guiding two sphinxes forward.",
+    "uprightMeaning_en": "Decisive focus binds opposing forces and drives you toward victory. Confidence helps you break through obstacles.",
+    "reversedMeaning_en": "Charging without a clear aim leaves burnout and hollow wins. Rein in your arrogance before you rush forward.",
+    "description_en": "A warrior steering a chariot pulled by sphinxes.",
     "keywords_en": [
-      "drive",
-      "determination",
-      "victory",
+      "willpower",
+      "momentum",
       "control",
-      "momentum"
+      "success"
     ],
     "name_ja": "戦車",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "意志の力と集中力が敵対勢力を勝利に導きます。",
-    "reversedMeaning_ja": "方向性の欠如や力強さは漂流を引き起こします。明確にコントロールを取り戻します。",
-    "description_ja": "2 つのスフィンクスを前に導く決意の強いドライバー。",
+    "uprightMeaning_ja": "断固とした集中が相反する力を束ね、勝利へと進ませます。自信が障害を突破させます。",
+    "reversedMeaning_ja": "目的のない突進は燃え尽きと空虚な成果を残します。飛び込む前に、驕りの手綱を締めましょう。",
+    "description_ja": "スフィンクスが引く戦車を操る戦士。",
     "keywords_ja": [
+      "意志力",
       "推進力",
-      "決意",
-      "勝利",
-      "制御",
-      "勢い"
+      "統制",
+      "成功"
     ]
   },
   {
@@ -331,27 +323,25 @@
     "imageUrl": "tarot08",
     "name_en": "Strength",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Gentle courage and inner calm tame wild energy.",
-    "reversedMeaning_en": "Self-doubt or suppressed anger; meet fear with compassion.",
-    "description_en": "A woman closing a lion’s jaws with serene grace.",
+    "uprightMeaning_en": "Compassionate courage tames the inner beast and builds resilience. Gentle strength lasts longer than brute force.",
+    "reversedMeaning_en": "Self-doubt and suppressed anger drain your vitality. Don’t repress it—befriend your instincts.",
+    "description_en": "A girl tenderly soothing a lion.",
     "keywords_en": [
       "courage",
-      "compassion",
       "patience",
-      "inner power",
-      "taming"
+      "inner strength",
+      "compassion"
     ],
     "name_ja": "力",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "穏やかな勇気と内なる静けさが、野生のエネルギーを飼いならします。",
-    "reversedMeaning_ja": "自己不信または抑圧された怒り。思いやりをもって恐怖に立ち向かう。",
-    "description_ja": "穏やかな優雅さでライオンの顎を閉じる女性。",
+    "uprightMeaning_ja": "慈しみある勇気が内なる獣をなだめ、回復力を育てます。柔らかな力は荒々しい力より長く続きます。",
+    "reversedMeaning_ja": "自己不信と抑え込まれた怒りが活力を奪います。押し殺さず、本能と友だちになりましょう。",
+    "description_ja": "獅子を優しく落ち着かせる少女。",
     "keywords_ja": [
       "勇気",
-      "慈愛",
       "忍耐",
       "内なる力",
-      "手なずけ"
+      "慈しみ"
     ]
   },
   {
@@ -370,27 +360,25 @@
     "imageUrl": "tarot09",
     "name_en": "The Hermit",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Solitude and reflection reveal inner guidance; seek your own lamp.",
-    "reversedMeaning_en": "Isolation or avoidance; step out to reconnect after insight.",
-    "description_en": "An old sage holds a lantern on a snowy peak.",
+    "uprightMeaning_en": "Solitude lights up deeper wisdom and the guidance of those who came before. Step back, rest, and absorb what you’ve learned.",
+    "reversedMeaning_en": "If you refuse to reconnect, isolation becomes escapism. Share the lantern you have found.",
+    "description_en": "A sage holding a lantern on a mountaintop.",
     "keywords_en": [
-      "introspection",
+      "inner reflection",
       "wisdom",
-      "retreat",
-      "guidance",
-      "solitude"
+      "solitude",
+      "guidance"
     ],
     "name_ja": "隠者",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "孤独と内省は内なる導きを明らかにします。自分だけのランプを探してください。",
-    "reversedMeaning_ja": "孤立または回避。洞察を得た後、再接続するために外に出てください。",
-    "description_ja": "雪の頂上で老賢人が提灯を持っています。",
+    "uprightMeaning_ja": "孤独は、より深い知恵と先人の導きを照らします。退いて休み、学びを吸収しましょう。",
+    "reversedMeaning_ja": "世と再びつながることを拒むと、孤立は逃避になります。見つけた灯りを分かち合いましょう。",
+    "description_ja": "山頂で灯りを掲げる賢者。",
     "keywords_ja": [
       "内省",
       "知恵",
-      "退避",
-      "導き",
-      "孤独"
+      "孤独",
+      "導き"
     ]
   },
   {
@@ -409,27 +397,25 @@
     "imageUrl": "tarot10",
     "name_en": "Wheel of Fortune",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Cycles turn; luck and change invite adaptability and faith.",
-    "reversedMeaning_en": "Resistance to change or feeling stuck; adjust and participate in the turn.",
-    "description_en": "A great wheel in motion, ringed by symbols of fate.",
+    "uprightMeaning_en": "Life turns within cycles of expansion and contraction. Move with change and catch the luck that’s rising.",
+    "reversedMeaning_en": "Clinging to control as the tide shifts only grows frustration. Let go of resistance and ride the wheel’s turn.",
+    "description_en": "A sacred wheel that reminds you of fate’s movement.",
     "keywords_en": [
-      "cycles",
-      "destiny",
-      "chance",
-      "turning point",
-      "karma"
+      "cycle",
+      "fate",
+      "opportunity",
+      "turning point"
     ],
     "name_ja": "運命の輪",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "サイクルは回転します。幸運と変化は適応力と信念を呼び起こします。",
-    "reversedMeaning_ja": "変化への抵抗や行き詰まり感。調整してターンに参加します。",
-    "description_ja": "運命の象徴が鳴り響く、動く大車輪。",
+    "uprightMeaning_ja": "人生は拡大と収縮の循環のなかで回っています。変化に歩調を合わせ、上昇する幸運をつかみましょう。",
+    "reversedMeaning_ja": "潮目が変わっているのに支配を握りしめると、苛立ちは増します。抵抗を手放し、回転の流れに乗りましょう。",
+    "description_ja": "運命の動きを思い出させる聖なる車輪。",
     "keywords_ja": [
       "周期",
       "運命",
-      "偶然",
-      "転機",
-      "カルマ"
+      "機会",
+      "転機"
     ]
   },
   {
@@ -448,27 +434,25 @@
     "imageUrl": "tarot11",
     "name_en": "Justice",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Balance, truth, and fair consequences come to light.",
-    "reversedMeaning_en": "Bias, dishonesty, or avoidance of responsibility; restore equilibrium.",
-    "description_en": "A figure with scales and sword seated in clarity.",
+    "uprightMeaning_en": "Balanced choices rooted in truth restore harmony. When you take responsibility, fair outcomes follow.",
+    "reversedMeaning_en": "Bias and avoidance tip the scales. Face the consequences honestly and bring balance back.",
+    "description_en": "A figure holding a sword and scales between two pillars.",
     "keywords_en": [
       "fairness",
       "truth",
       "law",
-      "cause and effect",
-      "balance"
+      "cause and effect"
     ],
     "name_ja": "正義",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "バランス、真実、そして公平な結果が明らかになります。",
-    "reversedMeaning_ja": "偏見、不正、または責任の回避。平衡を回復します。",
-    "description_ja": "鱗と剣がはっきりと座っている人物。",
+    "uprightMeaning_ja": "真実に根ざしたバランスの取れた選択が調和を回復します。責任を引き受ければ、公正な結果が伴います。",
+    "reversedMeaning_ja": "偏りと回避が天秤を傾けます。結果を正直に見つめ、再び釣り合いを取り戻しましょう。",
+    "description_ja": "二本の柱のあいだで剣と天秤を持つ人物。",
     "keywords_ja": [
-      "公正",
+      "公平",
       "真実",
       "法",
-      "因果",
-      "バランス"
+      "因果"
     ]
   },
   {
@@ -487,27 +471,25 @@
     "imageUrl": "tarot12",
     "name_en": "The Hanged Man",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Pause and see from a new angle; surrender opens insight.",
-    "reversedMeaning_en": "Stalling or martyrdom; choose movement once perspective is gained.",
-    "description_en": "A serene figure hangs upside down with a halo.",
+    "uprightMeaning_en": "Voluntary surrender rearranges your view and invites awakening. Pause for a moment to see from another angle.",
+    "reversedMeaning_en": "Stagnation without meaning saps morale. If the insight has landed, choose movement.",
+    "description_en": "A seeker hanging upside down, glowing with inner light.",
     "keywords_en": [
-      "surrender",
-      "perspective",
-      "pause",
       "sacrifice",
-      "acceptance"
+      "patience",
+      "perspective",
+      "pause"
     ],
     "name_ja": "吊られた男",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "立ち止まって、新しい角度から見てみましょう。降伏は洞察力を開きます。",
-    "reversedMeaning_ja": "失速または殉教。視点を獲得したら動きを選択します。",
-    "description_ja": "穏やかな人物が後光を帯びて逆さまにぶら下がっています。",
+    "uprightMeaning_ja": "自発的な手放しが視点を組み替え、気づきを招きます。別の角度から見るために、いったん立ち止まりましょう。",
+    "reversedMeaning_ja": "意味のない停滞は士気を下げます。洞察が得られたなら、動くことを選びましょう。",
+    "description_ja": "内なる光を宿し、逆さに吊るされた求道者。",
     "keywords_ja": [
-      "降伏",
-      "視点",
-      "一時停止",
       "犠牲",
-      "受容"
+      "忍耐",
+      "視点",
+      "停止"
     ]
   },
   {
@@ -526,24 +508,22 @@
     "imageUrl": "tarot13",
     "name_en": "Death",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "An ending clears space for transformation and renewal.",
-    "reversedMeaning_en": "Fear of change or clinging delays growth; let go gently.",
-    "description_en": "A skeletal rider heralds unavoidable transition.",
+    "uprightMeaning_en": "A graceful ending opens space for deep renewal. Transformation is inevitable—and it brings liberation.",
+    "reversedMeaning_en": "The longer you cling to what has run its course, the longer sorrow lasts. Accept the transition and regain your elasticity.",
+    "description_en": "An armored figure crossing a fading landscape.",
     "keywords_en": [
-      "ending",
-      "transition",
-      "release",
+      "transformation",
+      "liberation",
       "rebirth",
       "closure"
     ],
     "name_ja": "死神",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "エンディングは、変革と再生のためのスペースを空けます。",
-    "reversedMeaning_ja": "変化への恐怖や執着は成長を遅らせます。そっと手放してください。",
-    "description_ja": "スケルトンライダーは避けられない移行を告げます。",
+    "uprightMeaning_ja": "優雅な終わりは、深い刷新のための空間を開きます。変容は必然であり、解放感をもたらします。",
+    "reversedMeaning_ja": "寿命を終えた形にしがみつくほど、悲しみは長引きます。転換を受け入れ、再びしなやかさを取り戻しましょう。",
+    "description_ja": "消えゆく風景を横切る、甲冑の人物。",
     "keywords_ja": [
-      "終わり",
-      "移行",
+      "変容",
       "解放",
       "再生",
       "終結"
@@ -565,27 +545,25 @@
     "imageUrl": "tarot14",
     "name_en": "Temperance",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Balance and patience blend opposites into harmony.",
-    "reversedMeaning_en": "Excess or imbalance; re-center and moderate your pace.",
-    "description_en": "An angel pours water between two cups, grounding and flowing.",
+    "uprightMeaning_en": "Integration and moderation blend opposites into harmony. Flow patiently between the extremes.",
+    "reversedMeaning_en": "Rushing or overcommitting brings imbalance back. Recalibrate your daily rituals.",
+    "description_en": "An angel mixing water between two cups.",
     "keywords_en": [
       "balance",
-      "moderation",
+      "alchemy",
       "healing",
-      "patience",
-      "alchemy"
+      "patience"
     ],
     "name_ja": "節制",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "バランスと忍耐は相反するものを調和させます。",
-    "reversedMeaning_ja": "過剰または不均衡。中心を取り戻し、ペースを緩めます。",
-    "description_ja": "天使は2つのカップの間に水を注ぎ、接地して流れます。",
+    "uprightMeaning_ja": "統合と節制が両極を調和的に混ぜ合わせます。極端のあいだを、忍耐強く流れていきましょう。",
+    "reversedMeaning_ja": "急ぎすぎたり、のめり込みすぎたりすると、不均衡がまた頭をもたげます。日々の習慣を整え直しましょう。",
+    "description_ja": "二つの杯のあいだで水を混ぜる天使。",
     "keywords_ja": [
       "バランス",
-      "節度",
-      "癒やし",
-      "忍耐",
-      "錬金術"
+      "錬金術",
+      "癒し",
+      "忍耐"
     ]
   },
   {
@@ -604,27 +582,25 @@
     "imageUrl": "tarot15",
     "name_en": "The Devil",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Attachments, temptation, or shadow desires seek conscious choice.",
-    "reversedMeaning_en": "Loosening chains and reclaiming power; release unhealthy bonds.",
-    "description_en": "A horned figure with chained lovers at his feet.",
+    "uprightMeaning_en": "Shadowy desires, contracts, and obsessions rise for honest inspection. Owning them helps you reclaim your power to choose.",
+    "reversedMeaning_en": "Addiction and fear tighten their chains when left in the unconscious. Cut the vows that drain your life-force.",
+    "description_en": "A horned being binding lovers with loose chains.",
     "keywords_en": [
       "shadow",
       "temptation",
-      "bondage",
       "materialism",
-      "desire"
+      "bondage"
     ],
     "name_ja": "悪魔",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "執着、誘惑、または影の欲望は意識的な選択を求めます。",
-    "reversedMeaning_ja": "鎖を緩め、力を取り戻す。不健全な絆を解放します。",
-    "description_ja": "足元には鎖につながれた恋人たちを抱えた角のある人物。",
+    "uprightMeaning_ja": "影の欲望や契約、執着が正直な点検のために浮かび上がります。認めることで、選ぶ力を取り戻せます。",
+    "reversedMeaning_ja": "中毒や恐れは、無意識に放置するほど鎖を締めます。生命力を消耗する約束を断ち切りましょう。",
+    "description_ja": "ゆるい鎖で恋人たちを縛る、角のある存在。",
     "keywords_ja": [
       "影",
       "誘惑",
-      "束縛",
       "物質主義",
-      "欲望"
+      "束縛"
     ]
   },
   {
@@ -643,27 +619,25 @@
     "imageUrl": "tarot16",
     "name_en": "The Tower",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Sudden upheaval shatters false structures, clearing truth.",
-    "reversedMeaning_en": "Avoiding necessary change prolongs instability; rebuild with honesty.",
-    "description_en": "Lightning strikes a tower, figures fall as crowns tumble.",
+    "uprightMeaning_en": "Sudden upheaval topples false structures so truth can stand. Liberation strikes like lightning.",
+    "reversedMeaning_en": "The more you resist change, the larger the chaos grows. When the dust settles, rebuild on authenticity.",
+    "description_en": "A tower struck by lightning, with people falling.",
     "keywords_en": [
       "upheaval",
       "revelation",
       "collapse",
-      "awakening",
-      "liberation"
+      "awakening"
     ],
     "name_ja": "塔",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "突然の激動が偽りの構造を粉砕し、真実を明らかにします。",
-    "reversedMeaning_ja": "必要な変化を避けると不安定が長引きます。誠実に再建します。",
-    "description_ja": "稲妻が塔に落ち、王冠が倒れながら人物が倒れます。",
+    "uprightMeaning_ja": "突然の激変が偽りの構造を崩し、真実が立つようにします。解放は稲妻のように訪れます。",
+    "reversedMeaning_ja": "変化を拒むほど混乱は大きくなります。埃が落ち着いたら、誠実さの上に建て直しましょう。",
+    "description_ja": "稲妻に打たれて崩れる塔と、落下する人々。",
     "keywords_ja": [
       "激変",
       "啓示",
       "崩壊",
-      "覚醒",
-      "解放"
+      "覚醒"
     ]
   },
   {
@@ -682,27 +656,25 @@
     "imageUrl": "tarot17",
     "name_en": "The Star",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Hope, healing, and gentle guidance return after storms.",
-    "reversedMeaning_en": "Doubt clouds the light; reconnect to faith and self-worth.",
-    "description_en": "A calm figure pours water beneath a starlit sky.",
+    "uprightMeaning_en": "Hope and spiritual nourishment flow in through a quiet presence. Vulnerability invites the universe’s blessing.",
+    "reversedMeaning_en": "Doubt clouds your ability to receive healing waters. Tend your faith with gentleness.",
+    "description_en": "A woman pouring water beneath a radiant star.",
     "keywords_en": [
       "hope",
       "healing",
-      "guidance",
-      "renewal",
-      "inspiration"
+      "inspiration",
+      "serenity"
     ],
     "name_ja": "星",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "嵐の後には、希望、癒し、そして優しい導きが戻ってきます。",
-    "reversedMeaning_ja": "疑いは光を曇らせます。信仰と自尊心に再びつながります。",
-    "description_ja": "星空の下、水を注ぐ穏やかな姿。",
+    "uprightMeaning_ja": "希望と霊的な滋養が、静かな存在感を通して流れ込みます。弱さを見せることが宇宙の祝福を招きます。",
+    "reversedMeaning_ja": "疑いは癒しの水を受け取る力を曇らせます。信頼をやさしく育てましょう。",
+    "description_ja": "輝く星の下で水を注ぐ女性。",
     "keywords_ja": [
       "希望",
-      "癒やし",
-      "導き",
-      "刷新",
-      "インスピレーション"
+      "癒し",
+      "ひらめき",
+      "平穏"
     ]
   },
   {
@@ -721,27 +693,25 @@
     "imageUrl": "tarot18",
     "name_en": "The Moon",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Dreams, intuition, and uncertainty blur the path; move with feeling.",
-    "reversedMeaning_en": "Confusion lifts; name your fears and trust small steps.",
-    "description_en": "A moonlit path between towers, animals howling to the night.",
+    "uprightMeaning_en": "Dreams and intuition whisper along a foggy path. Navigate uncertainty by instinct.",
+    "reversedMeaning_en": "When fear rules, illusion and anxiety distort reality. Shine light on hidden motives.",
+    "description_en": "A dog barking under moonlight, as a crayfish emerges.",
     "keywords_en": [
       "intuition",
-      "illusion",
-      "fears",
-      "unconscious",
-      "dreams"
+      "mystery",
+      "subconscious",
+      "fear"
     ],
     "name_ja": "月",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "夢、直感、不確実性が道を曖昧にします。感覚で動く。",
-    "reversedMeaning_ja": "混乱は解消されます。自分の恐怖に名前を付けて、小さな一歩を信じてください。",
-    "description_ja": "塔の間の月明かりに照らされた小道、夜に吠える動物たち。",
+    "uprightMeaning_ja": "夢と直感が霧の道に沿ってささやきます。本能で不確かさを航海しましょう。",
+    "reversedMeaning_ja": "恐れが支配すると、幻想と不安が現実を歪めます。隠れた動機に光を当てましょう。",
+    "description_ja": "月明かりの下で吠える犬と、這い出るザリガニ。",
     "keywords_ja": [
       "直感",
-      "幻想",
-      "恐怖",
-      "無意識",
-      "夢"
+      "神秘",
+      "潜在意識",
+      "恐れ"
     ]
   },
   {
@@ -760,27 +730,25 @@
     "imageUrl": "tarot19",
     "name_en": "The Sun",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Clarity, vitality, and joyful success shine brightly.",
-    "reversedMeaning_en": "Temporary clouds or over-optimism; reconnect to simple joy.",
-    "description_en": "A child rides beneath a radiant sun and banner.",
+    "uprightMeaning_en": "Vitality, joy, and clear sight brightly illuminate your efforts. Celebrate your growth without holding back.",
+    "reversedMeaning_en": "Burnout or an inflated ego can dim your light. Rest and gratitude steady your radiance.",
+    "description_en": "A child riding a white horse beneath the sun.",
     "keywords_en": [
-      "joy",
       "success",
-      "vitality",
-      "clarity",
-      "warmth"
+      "joy",
+      "warmth",
+      "clarity"
     ],
     "name_ja": "太陽",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "明晰さ、活力、そして喜びに満ちた成功が明るく輝きます。",
-    "reversedMeaning_ja": "一時的な雲行きが怪しかったり、楽観的すぎる。シンプルな喜びに再びつながります。",
-    "description_ja": "輝く太陽と旗の下に乗る子供。",
+    "uprightMeaning_ja": "活力と喜び、澄んだ視界があなたの試みを明るく照らします。成長を喜んで祝福しましょう。",
+    "reversedMeaning_ja": "燃え尽きや膨らんだ自我が光を曇らせることがあります。休息と感謝が輝きを安定させます。",
+    "description_ja": "太陽の下、白い馬に乗る子ども。",
     "keywords_ja": [
-      "喜び",
       "成功",
-      "活力",
-      "明晰さ",
-      "温もり"
+      "喜び",
+      "温かさ",
+      "明晰さ"
     ]
   },
   {
@@ -799,27 +767,25 @@
     "imageUrl": "tarot20",
     "name_en": "Judgement",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Awakening and honest review lead to renewal and purpose.",
-    "reversedMeaning_en": "Self-criticism or avoidance stalls rebirth; accept the call.",
-    "description_en": "An angel’s horn calls figures to rise from the past.",
+    "uprightMeaning_en": "Awakening calls you to respond with courage and forgiveness. Integrate your learning and rise anew.",
+    "reversedMeaning_en": "Avoiding the truth delays your evolution. Answer the trumpet with honest reflection.",
+    "description_en": "People rising from coffins at the sound of a trumpet.",
     "keywords_en": [
-      "awakening",
-      "assessment",
       "rebirth",
-      "absolution",
-      "calling"
+      "calling",
+      "forgiveness",
+      "self-awareness"
     ],
     "name_ja": "審判",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "目覚めと正直な見直しが更新と目的につながります。",
-    "reversedMeaning_ja": "自己批判や回避は再生を遅らせます。電話を受けます。",
-    "description_ja": "天使の角は人々に過去から立ち上がるよう呼びかけます。",
+    "uprightMeaning_ja": "覚醒が、勇気と赦しをもって応えよと呼びかけます。学びを統合し、新たに立ち上がりましょう。",
+    "reversedMeaning_ja": "真実を避ければ進化は遅れます。ラッパの響きに、正直な内省で応えましょう。",
+    "description_ja": "ラッパの音に、棺から起き上がる人々。",
     "keywords_ja": [
-      "覚醒",
-      "評価",
       "再生",
+      "天命",
       "赦し",
-      "呼びかけ"
+      "自覚"
     ]
   },
   {
@@ -838,26 +804,24 @@
     "imageUrl": "tarot21",
     "name_en": "The World",
     "arcana_en": "Major Arcana",
-    "uprightMeaning_en": "Completion and wholeness; a cycle ends and integration begins.",
-    "reversedMeaning_en": "Loose ends or delay in closure; finish and celebrate.",
-    "description_en": "A dancer in a wreath, embraced by four guardians.",
+    "uprightMeaning_en": "Wholeness, completion, and a threshold-crossing journey reward your dedication. Rejoice fully in your mastery.",
+    "reversedMeaning_en": "Lingering attachment keeps the cycle from closing. Consciously end the chapter before you move on.",
+    "description_en": "A dancer within a laurel wreath, surrounded by guardians.",
     "keywords_en": [
       "completion",
-      "wholeness",
-      "travel",
       "integration",
+      "journey",
       "achievement"
     ],
     "name_ja": "世界",
     "arcana_ja": "大アルカナ",
-    "uprightMeaning_ja": "完成と完全性。サイクルが終了し、統合が始まります。",
-    "reversedMeaning_ja": "行き詰まりまたは閉鎖の遅れ。終わって祝う。",
-    "description_ja": "花輪をかぶり、4 人の守護者に抱きしめられたダンサー。",
+    "uprightMeaning_ja": "完全さと達成、そして境界を越える旅が献身に報います。熟達を思いきり喜びましょう。",
+    "reversedMeaning_ja": "未練が残ると循環は完結しません。次へ進む前に、意識して章を閉じましょう。",
+    "description_ja": "守護者に囲まれた月桂樹の輪の中で踊る人物。",
     "keywords_ja": [
-      "完了",
-      "統合感",
-      "旅",
+      "完成",
       "統合",
+      "旅",
       "達成"
     ]
   },
@@ -879,27 +843,29 @@
     "imageUrl": "cups01",
     "name_en": "Ace of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests new feelings, compassion, and creative flow overflow. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate emotional block or withheld affection; let the heart breathe. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Ace of Cups emphasizes new feelings and love, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "New emotions and invitations overflow like grace. Vulnerability becomes fuel for sacred creation.",
+    "reversedMeaning_en": "Emotional blockage or hidden affection keeps the sprout from growing. Slowly reopen the heart’s passageways.",
+    "description_en": "The Ace of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "new feelings",
-      "love",
-      "compassion",
-      "creativity",
-      "openness"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "new beginnings",
+      "potential"
     ],
     "name_ja": "カップのエース",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップのエースは「新たな感情」と「愛」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップのエースは「新たな感情」の停滞や「愛」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップのエースは「新たな感情」と「愛」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "新しい感情と招きが、恩寵のようにあふれます。弱さを見せることが、聖なる創造の燃料になります。",
+    "reversedMeaning_ja": "感情の詰まりや隠した愛情が芽吹きを妨げます。心の通り道をゆっくり開き直しましょう。",
+    "description_ja": "カップのエースは「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "新たな感情",
-      "愛",
-      "慈愛",
-      "創造性",
-      "開放性"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "新たな出発",
+      "潜在力"
     ]
   },
   {
@@ -920,27 +886,29 @@
     "imageUrl": "cups02",
     "name_en": "Two of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests mutual attraction and balanced partnership form a bond. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate disconnection or imbalance; restore equal exchange. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Two of Cups emphasizes partnership and attraction, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Partnership and heartfelt mirroring create a safe bond. Mirror-like empathy deepens trust.",
+    "reversedMeaning_en": "Codependence or imbalance puts strain on the relationship. Restore self-love and bring things back into balance.",
+    "description_en": "The Two of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "partnership",
-      "attraction",
-      "harmony",
-      "union",
-      "mutuality"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "balance",
+      "decision"
     ],
     "name_ja": "カップの2",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの2は「パートナーシップ」と「魅力」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの2は「パートナーシップ」の停滞や「魅力」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの2は「パートナーシップ」と「魅力」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "パートナーシップと誠実な映し合いが、安全な絆をつくります。鏡のような共感が信頼を深めます。",
+    "reversedMeaning_ja": "共依存や不均衡が関係を緊張させます。自己愛を回復し、バランスを整えましょう。",
+    "description_ja": "カップの2は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "パートナーシップ",
-      "魅力",
-      "調和",
-      "結び付き",
-      "相互性"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "バランス",
+      "決断"
     ]
   },
   {
@@ -961,27 +929,29 @@
     "imageUrl": "cups03",
     "name_en": "Three of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests celebration, friendship, and shared joy lift spirits. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate overindulgence or exclusion; reconnect sincerely. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Three of Cups emphasizes celebration and community, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Celebration and friendship nourish the soul. Joy shared together multiplies blessings.",
+    "reversedMeaning_en": "Excess socializing or gossip drains your energy. Reconnect with your real companions.",
+    "description_en": "The Three of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "celebration",
-      "community",
-      "friendship",
-      "joy",
-      "support"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "growth",
+      "teamwork"
     ],
     "name_ja": "カップの3",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの3は「祝宴」と「共同体」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの3は「祝宴」の停滞や「共同体」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの3は「祝宴」と「共同体」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "共同体の祝福と友情が魂を養います。分かち合う喜びが祝福を増幅させます。",
+    "reversedMeaning_ja": "過度な社交や陰口は気力を消耗します。本当の仲間ともう一度つながり直しましょう。",
+    "description_ja": "カップの3は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "祝宴",
-      "共同体",
-      "友情",
-      "喜び",
-      "支援"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "成長",
+      "チームワーク"
     ]
   },
   {
@@ -1002,27 +972,29 @@
     "imageUrl": "cups04",
     "name_en": "Four of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests apathy and contemplation; a new offer is unnoticed. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate re-engagement and fresh curiosity after stagnation. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Four of Cups emphasizes apathy and reevaluation, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Inner reflection helps you reassess your desires. Quiet time renews gratitude.",
+    "reversedMeaning_en": "Apathy and refusing the gift block growth. Reengage with gratitude and participate again.",
+    "description_en": "The Four of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "apathy",
-      "reevaluation",
-      "boredom",
-      "introspection",
-      "offer"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "stability",
+      "rest"
     ],
     "name_ja": "カップの4",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの4は「無気力」と「再評価」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの4は「無気力」の停滞や「再評価」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの4は「無気力」と「再評価」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "内省が欲望を見直させます。静かな時間が感謝を新しくします。",
+    "reversedMeaning_ja": "無関心や贈り物を拒む態度は成長を妨げます。感謝の心で、再び関わり直しましょう。",
+    "description_ja": "カップの4は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "無気力",
-      "再評価",
-      "退屈",
-      "内省",
-      "提案"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "安定",
+      "休息"
     ]
   },
   {
@@ -1043,27 +1015,29 @@
     "imageUrl": "cups05",
     "name_en": "Five of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests grief and regret focus on what’s lost; two cups remain. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate acceptance and moving forward; hope slowly returns. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Five of Cups emphasizes loss and regret, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Honoring grief allows new possibilities to emerge. Healing begins when you feel it fully.",
+    "reversedMeaning_en": "Living in regret keeps you from seeing the cups that remain. Gently turn your gaze forward.",
+    "description_en": "The Five of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "loss",
-      "regret",
-      "grief",
-      "disappointment",
-      "perspective"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "challenge",
+      "change"
     ],
     "name_ja": "カップの5",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの5は「喪失」と「後悔」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの5は「喪失」の停滞や「後悔」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの5は「喪失」と「後悔」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "悲しみを尊重すると、新しい可能性が浮かび上がります。十分に感じてこそ癒されます。",
+    "reversedMeaning_ja": "後悔の中で生きると、残っている杯が見えません。視線をやさしく前へ向けましょう。",
+    "description_ja": "カップの5は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "喪失",
-      "後悔",
-      "悲嘆",
-      "失望",
-      "視点"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "挑戦",
+      "変化"
     ]
   },
   {
@@ -1084,27 +1058,29 @@
     "imageUrl": "cups06",
     "name_en": "Six of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests nostalgia, kindness, and simple joy from the past. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate living in the past or clinging; make space for now. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Six of Cups emphasizes nostalgia and innocence, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Sweet nostalgia and kindness revive innocence. Acts of giving soothe the soul.",
+    "reversedMeaning_en": "Idealizing the past makes you miss the joy of the present. Let memories inspire you, not imprison you.",
+    "description_en": "The Six of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "nostalgia",
-      "innocence",
-      "kindness",
-      "memories",
-      "comfort"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "harmony",
+      "support"
     ],
     "name_ja": "カップの6",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの6は「郷愁」と「純真」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの6は「郷愁」の停滞や「純真」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの6は「郷愁」と「純真」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "甘い郷愁と親切が純真さをよみがえらせます。与える行為が魂をなだめます。",
+    "reversedMeaning_ja": "過去を美化すると、今の喜びを取りこぼします。記憶を牢獄ではなく、ひらめきにしましょう。",
+    "description_ja": "カップの6は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "郷愁",
-      "純真",
-      "親切",
-      "思い出",
-      "安らぎ"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "調和",
+      "支え"
     ]
   },
   {
@@ -1125,27 +1101,29 @@
     "imageUrl": "cups07",
     "name_en": "Seven of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests many choices and fantasies; discern what is real. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate clarity after confusion; commit to one path. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Seven of Cups emphasizes choices and fantasy, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Imagination presents several alluring paths. Discern fantasy from dreams you can actually realize.",
+    "reversedMeaning_en": "Overwhelm and unrealistic expectations scatter your energy. Root your choice in reality.",
+    "description_en": "The Seven of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "choices",
-      "fantasy",
-      "temptation",
-      "illusion",
-      "dreaming"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "perseverance",
+      "evaluation"
     ],
     "name_ja": "カップの7",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの7は「選択肢」と「幻想」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの7は「選択肢」の停滞や「幻想」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの7は「選択肢」と「幻想」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "想像力が魅力的な道をいくつも示します。幻想と、実現可能な夢を見分けましょう。",
+    "reversedMeaning_ja": "圧倒感や根拠のない期待がエネルギーを散らします。選択を現実に根づかせましょう。",
+    "description_ja": "カップの7は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "選択肢",
-      "幻想",
-      "誘惑",
-      "幻想",
-      "夢想"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "忍耐",
+      "評価"
     ]
   },
   {
@@ -1166,27 +1144,29 @@
     "imageUrl": "cups08",
     "name_en": "Eight of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests A voluntary departure in search of deeper meaning. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate fear of leaving or drifting aimlessly; choose with heart. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Eight of Cups emphasizes departure and search, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Leaving familiar emotional ground lets you meet deeper meaning. Courage walks you toward authenticity.",
+    "reversedMeaning_en": "Postponing a necessary ending prolongs dissatisfaction. Respect the call to leave.",
+    "description_en": "The Eight of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "departure",
-      "search",
-      "letting go",
-      "introspection",
-      "journey"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "movement",
+      "skill"
     ],
     "name_ja": "カップの8",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの8は「旅立ち」と「探求」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの8は「旅立ち」の停滞や「探求」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの8は「旅立ち」と「探求」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "慣れ親しんだ感情の土地を離れてこそ、より深い意味に出会えます。勇気が真実へと歩ませます。",
+    "reversedMeaning_ja": "必要な終わりを先延ばしにすると、不満は長引きます。去るよう促す声を尊重しましょう。",
+    "description_ja": "カップの8は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "旅立ち",
-      "探求",
-      "手放し",
-      "内省",
-      "旅"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "動き",
+      "技能"
     ]
   },
   {
@@ -1207,27 +1187,29 @@
     "imageUrl": "cups09",
     "name_en": "Nine of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests contentment and wish fulfillment; enjoy what you have. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate smugness or hollow success; seek genuine satisfaction. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Nine of Cups emphasizes satisfaction and gratitude, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Contentment and heartfelt wishes become real through harmonious effort. Praise yourself and enjoy what you’ve earned.",
+    "reversedMeaning_en": "Excess indulgence or complacency slows growth. Share the blessings that are expanding.",
+    "description_en": "The Nine of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "satisfaction",
-      "gratitude",
-      "wish come true",
-      "comfort",
-      "pleasure"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "reward",
+      "self-worth"
     ],
     "name_ja": "カップの9",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの9は「満足」と「感謝」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの9は「満足」の停滞や「感謝」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの9は「満足」と「感謝」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "満足感と心からの願いが、調和した努力によって現実化します。自分を褒め、味わいましょう。",
+    "reversedMeaning_ja": "過度な享楽や安住が成長を鈍らせます。広がる祝福を分かち合いましょう。",
+    "description_ja": "カップの9は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "満足",
-      "感謝",
-      "願望成就",
-      "安らぎ",
-      "愉しみ"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "成果",
+      "自尊心"
     ]
   },
   {
@@ -1248,27 +1230,29 @@
     "imageUrl": "cups10",
     "name_en": "Ten of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests emotional harmony, family, and shared bliss. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate strained harmony or unrealistic ideals; nurture real bonds. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Ten of Cups emphasizes harmony and family, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Emotional fulfillment and family harmony bless this chapter. Gratitude holds up the rainbow.",
+    "reversedMeaning_en": "Overly high ideals can weigh on the people you love. Nurture joy instead of chasing perfection.",
+    "description_en": "The Ten of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "harmony",
-      "family",
-      "joy",
-      "blessing",
-      "alignment"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "legacy",
+      "family"
     ],
     "name_ja": "カップの10",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップの10は「調和」と「家族」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップの10は「調和」の停滞や「家族」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップの10は「調和」と「家族」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "感情的な満ち足りと家族の調和が、この章を祝福します。感謝が虹を支えます。",
+    "reversedMeaning_ja": "過度な理想は、愛する人を苦しめることがあります。完璧を追うより、喜びを育てましょう。",
+    "description_ja": "カップの10は「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "調和",
-      "家族",
-      "喜び",
-      "祝福",
-      "整合"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "遺産",
+      "家族"
     ]
   },
   {
@@ -1289,27 +1273,29 @@
     "imageUrl": "cups11",
     "name_en": "Page of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests gentle messenger of feelings, creativity, and curiosity. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate emotional immaturity or blocked inspiration; play with ideas. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Page of Cups emphasizes curiosity and imagination, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "A compassionate message and creative curiosity approach. Listen to the poet within.",
+    "reversedMeaning_en": "Immaturity or emotional rumors breed confusion. Choose kind words that come from truth.",
+    "description_en": "The Page of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "curiosity",
-      "imagination",
+      "emotion",
       "intuition",
-      "messages",
-      "sensitivity"
+      "relationship",
+      "healing",
+      "message",
+      "curiosity"
     ],
     "name_ja": "カップのペイジ",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップのペイジは「好奇心」と「想像力」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップのペイジは「好奇心」の停滞や「想像力」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップのペイジは「好奇心」と「想像力」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "思いやりのあるメッセージと創造的な好奇心が近づきます。内なる詩人の声に耳を傾けましょう。",
+    "reversedMeaning_ja": "未熟さや感情的な噂が混乱を生みます。真実から生まれた、やさしい言葉を選びましょう。",
+    "description_ja": "カップのペイジは「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "好奇心",
-      "想像力",
+      "感情",
       "直感",
+      "関係",
+      "癒し",
       "メッセージ",
-      "感受性"
+      "好奇心"
     ]
   },
   {
@@ -1330,26 +1316,28 @@
     "imageUrl": "cups12",
     "name_en": "Knight of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests romantic pursuit and heartfelt offers move forward. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate moodiness or unrealistic ideals; balance dream with action. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Knight of Cups emphasizes romance and idealism, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Romantic exploration and a sincere offer move forward with charm. Follow your honest feelings.",
+    "reversedMeaning_en": "Moodiness or escapism throws promises off course. Balance passion with responsibility.",
+    "description_en": "The Knight of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "romance",
-      "idealism",
-      "invitation",
-      "charm",
-      "quest"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "action",
+      "exploration"
     ],
     "name_ja": "カップのナイト",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップのナイトは「ロマンス」と「理想主義」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップのナイトは「ロマンス」の停滞や「理想主義」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップのナイトは「ロマンス」と「理想主義」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "ロマンチックな探求と誠実な申し出が、魅力的に前進します。正直な感情に従いましょう。",
+    "reversedMeaning_ja": "気分屋さや逃避が約束を逸らします。情熱を責任とバランスさせましょう。",
+    "description_ja": "カップのナイトは「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "ロマンス",
-      "理想主義",
-      "招待",
-      "魅力",
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "行動",
       "探求"
     ]
   },
@@ -1371,27 +1359,29 @@
     "imageUrl": "cups13",
     "name_en": "Queen of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests compassionate, intuitive nurturing with emotional depth. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate overwhelm or emotional withdrawal; re-center boundaries. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The Queen of Cups emphasizes compassion and intuition, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Empathy, intuition, and gentle receptivity guide your decisions. Make room for grace.",
+    "reversedMeaning_en": "Emotional overload or a martyr mindset depletes compassion. Strengthen your personal boundaries.",
+    "description_en": "The Queen of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "compassion",
+      "emotion",
       "intuition",
-      "empathy",
-      "calm",
-      "support"
+      "relationship",
+      "healing",
+      "maturity",
+      "influence"
     ],
     "name_ja": "カップのクイーン",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップのクイーンは「慈愛」と「直感」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップのクイーンは「慈愛」の停滞や「直感」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップのクイーンは「慈愛」と「直感」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "共感と直感、繊細な受容性が決断を導きます。優雅さのための余白をつくりましょう。",
+    "reversedMeaning_ja": "感情の過負荷や殉教的な心理は、慈しみを枯らします。個人の境界線を補強しましょう。",
+    "description_ja": "カップのクイーンは「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "慈愛",
+      "感情",
       "直感",
-      "共感",
-      "穏やかさ",
-      "支援"
+      "関係",
+      "癒し",
+      "成熟",
+      "影響力"
     ]
   },
   {
@@ -1412,27 +1402,29 @@
     "imageUrl": "cups14",
     "name_en": "King of Cups",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests emotional balance, diplomacy, and wise counsel. Listen to your feelings and connect with sincerity.",
-    "reversedMeaning_en": "Reversed, it can indicate emotional manipulation or volatility; steady the waters. Avoid emotional avoidance or overindulgence; return to honesty.",
-    "description_en": "The King of Cups emphasizes balance and diplomacy, encouraging a more heart-led approach in everyday life.",
+    "uprightMeaning_en": "Mastery of emotion creates wise counsel and creative leadership. Lead with a mature heart.",
+    "reversedMeaning_en": "Manipulative or cold behavior freezes connection. Practice honest vulnerability.",
+    "description_en": "The King of Cups centers on emotion and intuition, emphasizing feelings and relationships.",
     "keywords_en": [
-      "balance",
-      "diplomacy",
-      "wisdom",
-      "supportive",
-      "calm authority"
+      "emotion",
+      "intuition",
+      "relationship",
+      "healing",
+      "authority",
+      "mastery"
     ],
     "name_ja": "カップのキング",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "カップのキングは「バランス」と「外交」を示します。感情に耳を傾け、誠実に向き合いましょう。",
-    "reversedMeaning_ja": "逆位置のカップのキングは「バランス」の停滞や「外交」の乱れを示します。感情の回避や過度な依存を避け、正直さを取り戻しましょう。",
-    "description_ja": "カップのキングは「バランス」と「外交」を示し、感情とつながりの視点で進むことを促します。",
+    "uprightMeaning_ja": "感情の熟達が、賢明な助言と創造的なリーダーシップを生みます。成熟した心で導きましょう。",
+    "reversedMeaning_ja": "操作的、あるいは冷たい態度はつながりを凍らせます。正直な弱さを練習しましょう。",
+    "description_ja": "カップのキングは「感情」と「直感」を軸に、気持ちと関係性を強調します。",
     "keywords_ja": [
-      "バランス",
-      "外交",
-      "知恵",
-      "支え",
-      "穏やかな権威"
+      "感情",
+      "直感",
+      "関係",
+      "癒し",
+      "権威",
+      "熟達"
     ]
   },
   {
@@ -1453,27 +1445,29 @@
     "imageUrl": "wands01",
     "name_en": "Ace of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests A spark of inspiration, initiative, and raw creative energy. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate delayed start or blocked passion; clear the path to act. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Ace of Wands emphasizes inspiration and initiative, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "A spark of inspiration ignites a bold attempt. Claim the flame of desire as your own.",
+    "reversedMeaning_en": "Without action to carry your passion, the start just spins its wheels. Gather scattered energy into one point.",
+    "description_en": "The Ace of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "inspiration",
+      "passion",
       "initiative",
-      "potential",
-      "energy",
-      "creation"
+      "vision",
+      "expansion",
+      "new beginnings",
+      "potential"
     ],
     "name_ja": "ワンドのエース",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドのエースは「インスピレーション」と「主導権」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドのエースは「インスピレーション」の停滞や「主導権」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドのエースは「インスピレーション」と「主導権」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "ひらめきの火種が大胆な挑戦に火をつけます。欲望の炎を、自分のものとして宣言しましょう。",
+    "reversedMeaning_ja": "情熱に従う実行がなければ、始まりは空回りします。散ったエネルギーを一点に集めましょう。",
+    "description_ja": "ワンドのエースは「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "インスピレーション",
-      "主導権",
-      "可能性",
-      "エネルギー",
-      "創造"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "新たな出発",
+      "潜在力"
     ]
   },
   {
@@ -1494,27 +1488,29 @@
     "imageUrl": "wands02",
     "name_en": "Two of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests planning and looking ahead; hold the vision and map the route. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate playing too small or fear of expansion; step outside the gate. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Two of Wands emphasizes planning and vision, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Strategic planning and a bold view widen your horizon. Reach out and meet the possibilities ahead.",
+    "reversedMeaning_en": "Fear of leaving comfort blocks your potential. Move even if you feel uncertain.",
+    "description_en": "The Two of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "planning",
+      "passion",
+      "initiative",
       "vision",
-      "choice",
-      "prospect",
-      "strategy"
+      "expansion",
+      "balance",
+      "decision"
     ],
     "name_ja": "ワンドの2",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの2は「計画」と「ビジョン」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの2は「計画」の停滞や「ビジョン」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの2は「計画」と「ビジョン」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "戦略的な計画と大胆な視野が地平を広げます。近づく可能性と手を取り合いましょう。",
+    "reversedMeaning_ja": "安住の地を出る恐れが潜在力を塞ぎます。不確かでも動きましょう。",
+    "description_ja": "ワンドの2は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "計画",
+      "情熱",
+      "主導性",
       "ビジョン",
-      "選択",
-      "見通し",
-      "戦略"
+      "拡大",
+      "バランス",
+      "決断"
     ]
   },
   {
@@ -1535,27 +1531,29 @@
     "imageUrl": "wands03",
     "name_en": "Three of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests expansion and momentum; ships of effort begin to return. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate delays or limited foresight; adjust plans and keep faith. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Three of Wands emphasizes expansion and progress, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Momentum builds, like ships returning with promises. Keep expanding what you can reach.",
+    "reversedMeaning_en": "Delays test your patience but help refine your strategy. Hold the vision while adjusting how you act.",
+    "description_en": "The Three of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
+      "passion",
+      "initiative",
+      "vision",
       "expansion",
-      "progress",
-      "foresight",
-      "movement",
-      "opportunity"
+      "growth",
+      "teamwork"
     ],
     "name_ja": "ワンドの3",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの3は「拡大」と「進歩」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの3は「拡大」の停滞や「進歩」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの3は「拡大」と「進歩」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "船が約束を積んで戻るように、推進力が積み上がります。届く範囲をさらに広げ続けましょう。",
+    "reversedMeaning_ja": "遅れは忍耐を試しますが、戦略を磨かせます。ビジョンを守りつつ、実行の仕方を調整しましょう。",
+    "description_ja": "ワンドの3は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
+      "情熱",
+      "主導性",
+      "ビジョン",
       "拡大",
-      "進歩",
-      "先見",
-      "動き",
-      "好機"
+      "成長",
+      "チームワーク"
     ]
   },
   {
@@ -1576,27 +1574,29 @@
     "imageUrl": "wands04",
     "name_en": "Four of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests celebration, milestone, and shared stability. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate tension at home or postponed celebration; create safe space. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Four of Wands emphasizes celebration and home, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Celebration and milestones strengthen the community. A solid foundation allows room for play.",
+    "reversedMeaning_en": "Unfinished business disrupts the feast. Tie up loose ends before you rest.",
+    "description_en": "The Four of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "celebration",
-      "home",
-      "milestone",
-      "community",
-      "joy"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "stability",
+      "rest"
     ],
     "name_ja": "ワンドの4",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの4は「祝宴」と「家庭」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの4は「祝宴」の停滞や「家庭」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの4は「祝宴」と「家庭」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "祝福と節目が共同体を堅くします。しっかりした土台は、遊びを許します。",
+    "reversedMeaning_ja": "未完の用事が祝宴を邪魔します。休む前に、ゆるんだ結び目を整えましょう。",
+    "description_ja": "ワンドの4は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "祝宴",
-      "家庭",
-      "節目",
-      "共同体",
-      "喜び"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "安定",
+      "休息"
     ]
   },
   {
@@ -1617,27 +1617,29 @@
     "imageUrl": "wands05",
     "name_en": "Five of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests competition and playful conflict; test your skills. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate escalated discord or avoidance; seek healthy resolution. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Five of Wands emphasizes competition and conflict, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Healthy competition sharpens your skill and reveals your passion. Enjoy the debate like a game.",
+    "reversedMeaning_en": "Petty fights waste energy. Collaborate instead of proving superiority.",
+    "description_en": "The Five of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "competition",
-      "conflict",
-      "debate",
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
       "challenge",
-      "sparring"
+      "change"
     ],
     "name_ja": "ワンドの5",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの5は「競争」と「葛藤」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの5は「競争」の停滞や「葛藤」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの5は「競争」と「葛藤」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "健全な競争が実力を研ぎ、情熱をあらわにします。議論も遊びのように楽しみましょう。",
+    "reversedMeaning_ja": "些細な争いはエネルギーを浪費します。優位を証明するより、協力しましょう。",
+    "description_ja": "ワンドの5は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "競争",
-      "葛藤",
-      "議論",
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
       "挑戦",
-      "小競り合い"
+      "変化"
     ]
   },
   {
@@ -1658,27 +1660,29 @@
     "imageUrl": "wands06",
     "name_en": "Six of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests recognition and victory after effort; accept the applause. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate self-doubt or hollow praise; root success in authenticity. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Six of Wands emphasizes victory and recognition, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Recognition and victory crown your determination. Share your achievements generously.",
+    "reversedMeaning_en": "Arrogance and an obsession with outside approval inflate the ego. Remember those who supported you.",
+    "description_en": "The Six of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "victory",
-      "recognition",
-      "achievement",
-      "confidence",
-      "success"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "harmony",
+      "support"
     ],
     "name_ja": "ワンドの6",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの6は「勝利」と「承認」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの6は「勝利」の停滞や「承認」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの6は「勝利」と「承認」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "称賛と勝利が、あなたの決断力に冠を授けます。成果を惜しみなく分かち合いましょう。",
+    "reversedMeaning_ja": "驕りや外部の承認への執着が自我を膨らませます。支えてくれた人を思い出しましょう。",
+    "description_ja": "ワンドの6は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "勝利",
-      "承認",
-      "達成",
-      "自信",
-      "成功"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "調和",
+      "支え"
     ]
   },
   {
@@ -1699,27 +1703,29 @@
     "imageUrl": "wands07",
     "name_en": "Seven of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests courageous defense of position; hold your ground. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate exhaustion or giving up; choose battles wisely. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Seven of Wands emphasizes defense and perseverance, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Hold your ground with conviction. Courage defends your progress under pressure.",
+    "reversedMeaning_en": "Stubbornness that won’t listen will exhaust you. Choose your battles wisely.",
+    "description_en": "The Seven of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "defense",
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
       "perseverance",
-      "standing ground",
-      "challenge",
-      "courage"
+      "evaluation"
     ],
     "name_ja": "ワンドの7",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの7は「防衛」と「粘り強さ」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの7は「防衛」の停滞や「粘り強さ」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの7は「防衛」と「粘り強さ」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "確信をもって立場を守りましょう。勇気が、圧力の中でも前進を守ります。",
+    "reversedMeaning_ja": "聞く耳を持たない頑固さはあなたを疲れさせます。戦う場所を賢く選びましょう。",
+    "description_ja": "ワンドの7は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "防衛",
-      "粘り強さ",
-      "踏みとどまる",
-      "挑戦",
-      "勇気"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "忍耐",
+      "評価"
     ]
   },
   {
@@ -1740,27 +1746,29 @@
     "imageUrl": "wands08",
     "name_en": "Eight of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests swift movement and messages; momentum carries you forward. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate delays or scattered focus; align aim before release. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Eight of Wands emphasizes speed and movement, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Fast movement and clear signals push your plans forward. Welcome the pace.",
+    "reversedMeaning_en": "Rash action leads to misfires. Make time to confirm direction.",
+    "description_en": "The Eight of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "speed",
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
       "movement",
-      "communication",
-      "momentum",
-      "travel"
+      "skill"
     ],
     "name_ja": "ワンドの8",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの8は「速度」と「動き」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの8は「速度」の停滞や「動き」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの8は「速度」と「動き」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "素早い動きと明確なサインが計画を前へ押し出します。スピードを喜んで受け入れましょう。",
+    "reversedMeaning_ja": "性急な行動は誤射を生みます。方向を確認する時間を確保しましょう。",
+    "description_ja": "ワンドの8は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "速度",
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
       "動き",
-      "コミュニケーション",
-      "勢い",
-      "旅"
+      "技能"
     ]
   },
   {
@@ -1781,27 +1789,29 @@
     "imageUrl": "wands09",
     "name_en": "Nine of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests resilience and vigilance after trials; you’re close to success. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate defensiveness or burnout; rest and reset boundaries. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Nine of Wands emphasizes resilience and perseverance, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Resilience and strategic boundaries help you finish the journey. Protect what matters.",
+    "reversedMeaning_en": "Over-guarding traps you in survival mode. Lean on your allies.",
+    "description_en": "The Nine of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "resilience",
-      "perseverance",
-      "guarded",
-      "stamina",
-      "last push"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "reward",
+      "self-worth"
     ],
     "name_ja": "ワンドの9",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの9は「回復力」と「粘り強さ」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの9は「回復力」の停滞や「粘り強さ」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの9は「回復力」と「粘り強さ」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "回復力と戦略的な境界線が旅を完走させます。大切なものを守りましょう。",
+    "reversedMeaning_ja": "過度な警戒は生存モードに閉じ込めます。仲間に頼りましょう。",
+    "description_ja": "ワンドの9は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "回復力",
-      "粘り強さ",
-      "警戒",
-      "持久力",
-      "最後のひと踏ん張り"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "成果",
+      "自尊心"
     ]
   },
   {
@@ -1822,27 +1832,29 @@
     "imageUrl": "wands10",
     "name_en": "Ten of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests heavy burdens and responsibility; prioritize to lighten the load. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate overcommitment or carrying too much alone; delegate. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Ten of Wands emphasizes burden and responsibility, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "After reaching a dream, heavy responsibilities follow. Share the load if you want to keep the fire burning.",
+    "reversedMeaning_en": "Too much weight invites burnout. Put down burdens that aren’t yours.",
+    "description_en": "The Ten of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "burden",
-      "responsibility",
-      "overload",
-      "duty",
-      "strain"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "legacy",
+      "family"
     ],
     "name_ja": "ワンドの10",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドの10は「重荷」と「責任」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドの10は「重荷」の停滞や「責任」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドの10は「重荷」と「責任」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "夢を叶えた後には、重い責任が伴います。火を守るために、荷を分け合いましょう。",
+    "reversedMeaning_ja": "荷が多すぎると燃え尽きます。あなたのものではない負担を下ろしましょう。",
+    "description_ja": "ワンドの10は「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "重荷",
-      "責任",
-      "過負荷",
-      "義務",
-      "緊張"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "遺産",
+      "家族"
     ]
   },
   {
@@ -1863,27 +1875,29 @@
     "imageUrl": "wands11",
     "name_en": "Page of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests fresh enthusiasm and adventurous news spark action. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate restless start-stop energy; ground your ideas. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Page of Wands emphasizes enthusiasm and exploration, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Exciting news and a spark of creation arrive. Explore with bold curiosity.",
+    "reversedMeaning_en": "Impulsiveness or distraction wastes inspiration. Hold the idea firmly before you announce it.",
+    "description_en": "The Page of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "enthusiasm",
-      "exploration",
-      "news",
-      "potential",
-      "adventure"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "message",
+      "curiosity"
     ],
     "name_ja": "ワンドのペイジ",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドのペイジは「熱意」と「探究」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドのペイジは「熱意」の停滞や「探究」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドのペイジは「熱意」と「探究」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "胸が躍る知らせと創作の火花が届きます。大胆な好奇心で探検しましょう。",
+    "reversedMeaning_ja": "衝動的だったり散漫だったりすると、ひらめきを浪費します。告げる前に、アイデアをしっかり掴みましょう。",
+    "description_ja": "ワンドのペイジは「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "熱意",
-      "探究",
-      "知らせ",
-      "可能性",
-      "冒険"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "メッセージ",
+      "好奇心"
     ]
   },
   {
@@ -1904,27 +1918,29 @@
     "imageUrl": "wands12",
     "name_en": "Knight of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests bold movement, charisma, and daring pursuit. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate impulsiveness or inconsistency; channel fire wisely. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Knight of Wands emphasizes action and passion, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Adventure and charm drive bold pursuits. Lead the charge with courage and humor.",
+    "reversedMeaning_en": "A restless ego abandons plans midway. Clarify your commitment before you charge.",
+    "description_en": "The Knight of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "action",
       "passion",
-      "impulse",
-      "travel",
-      "courage"
+      "initiative",
+      "vision",
+      "expansion",
+      "action",
+      "exploration"
     ],
     "name_ja": "ワンドのナイト",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドのナイトは「行動」と「情熱」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドのナイトは「行動」の停滞や「情熱」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドのナイトは「行動」と「情熱」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "冒険心と魅力が大胆な追求を駆り立てます。勇気とユーモアで先頭に立ちましょう。",
+    "reversedMeaning_ja": "焦る自我は、計画を途中で投げ出します。突進する前に、献身をはっきりさせましょう。",
+    "description_ja": "ワンドのナイトは「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "行動",
       "情熱",
-      "衝動",
-      "旅",
-      "勇気"
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "行動",
+      "探求"
     ]
   },
   {
@@ -1945,27 +1961,29 @@
     "imageUrl": "wands13",
     "name_en": "Queen of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests confident warmth, magnetism, and creative leadership. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate jealousy or self-doubt; reclaim your inner fire. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The Queen of Wands emphasizes confidence and independence, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Confident charm lets your light shine on others. Embody warmth and leadership.",
+    "reversedMeaning_en": "Jealousy or burnout dulls your influence. Tend your own flame first.",
+    "description_en": "The Queen of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "confidence",
-      "independence",
-      "warmth",
-      "charisma",
-      "creativity"
+      "passion",
+      "initiative",
+      "vision",
+      "expansion",
+      "maturity",
+      "influence"
     ],
     "name_ja": "ワンドのクイーン",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドのクイーンは「自信」と「自立」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドのクイーンは「自信」の停滞や「自立」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドのクイーンは「自信」と「自立」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "自信ある魅力が他者に光を照らします。温かさとリーダーシップを体現しましょう。",
+    "reversedMeaning_ja": "嫉妬や燃え尽きは影響力を曇らせます。まずは自分の炎を守りましょう。",
+    "description_ja": "ワンドのクイーンは「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "自信",
-      "自立",
-      "温もり",
-      "カリスマ",
-      "創造性"
+      "情熱",
+      "主導性",
+      "ビジョン",
+      "拡大",
+      "成熟",
+      "影響力"
     ]
   },
   {
@@ -1986,27 +2004,29 @@
     "imageUrl": "wands14",
     "name_en": "King of Wands",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests visionary leadership and decisive action ignite progress. Take initiative with passion, but pace yourself.",
-    "reversedMeaning_en": "Reversed, it can indicate dominance or impatience; lead with inspiration, not force. Watch for impatience or burnout; slow down and refocus.",
-    "description_en": "The King of Wands emphasizes leadership and vision, encouraging a more bold approach in everyday life.",
+    "uprightMeaning_en": "Visionary mastery gathers teams and innovation together. Lead with authenticity.",
+    "reversedMeaning_en": "Tyrannical or hasty behavior pushes allies away. Balance drive with empathy.",
+    "description_en": "The King of Wands centers on passion and initiative, emphasizing drive and momentum.",
     "keywords_en": [
-      "leadership",
+      "passion",
+      "initiative",
       "vision",
-      "enterprise",
-      "drive",
-      "inspiration"
+      "expansion",
+      "authority",
+      "mastery"
     ],
     "name_ja": "ワンドのキング",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ワンドのキングは「リーダーシップ」と「ビジョン」を示します。情熱を行動に移しつつ、ペース配分を意識しましょう。",
-    "reversedMeaning_ja": "逆位置のワンドのキングは「リーダーシップ」の停滞や「ビジョン」の乱れを示します。焦りや燃え尽きを避け、いったん立ち止まって立て直しましょう。",
-    "description_ja": "ワンドのキングは「リーダーシップ」と「ビジョン」を示し、情熱と行動力の視点で進むことを促します。",
+    "uprightMeaning_ja": "ビジョンある熟達が、チームと革新を結集させます。真摯さをもって指揮しましょう。",
+    "reversedMeaning_ja": "暴君のようだったり性急だったりすると、同盟は離れていきます。推進力と共感をバランスよく扱いましょう。",
+    "description_ja": "ワンドのキングは「情熱」と「主導性」を軸に、推進力と勢いを強調します。",
     "keywords_ja": [
-      "リーダーシップ",
+      "情熱",
+      "主導性",
       "ビジョン",
-      "事業心",
-      "推進力",
-      "インスピレーション"
+      "拡大",
+      "権威",
+      "熟達"
     ]
   },
   {
@@ -2027,27 +2047,29 @@
     "imageUrl": "swords01",
     "name_en": "Ace of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests clear thought, truth, and a breakthrough cut through fog. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate confusion or harsh words; sharpen focus before acting. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Ace of Swords emphasizes clarity and truth, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "A breakthrough insight cuts through confusion. Speak the truth with decisive clarity.",
+    "reversedMeaning_en": "Words used as weapons—or excessive thinking—sever connection. Don’t lose your discernment.",
+    "description_en": "The Ace of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "clarity",
-      "truth",
-      "breakthrough",
       "logic",
-      "new idea"
+      "truth",
+      "clarity",
+      "communication",
+      "new beginnings",
+      "potential"
     ],
     "name_ja": "ソードのエース",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードのエースは「明晰さ」と「真実」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードのエースは「明晰さ」の停滞や「真実」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードのエースは「明晰さ」と「真実」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "突破口のような洞察が混乱を切り裂きます。決断力のある真実を語りましょう。",
+    "reversedMeaning_ja": "武器としての言葉や考えすぎは、つながりを断ちます。見極めを失わないでください。",
+    "description_ja": "ソードのエースは「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "明晰さ",
-      "真実",
-      "突破",
       "論理",
-      "新しいアイデア"
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "新たな出発",
+      "潜在力"
     ]
   },
   {
@@ -2068,27 +2090,29 @@
     "imageUrl": "swords02",
     "name_en": "Two of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests stalemate and difficult choice; remove the blindfold gently. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate decision comes, or tension breaks; choose with heart and mind. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Two of Swords emphasizes indecision and stalemate, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Balanced contemplation and stillness weigh the options fairly. Trust calm logic.",
+    "reversedMeaning_en": "If you refuse to feel, the stalemate continues. Integrate analysis and intuition.",
+    "description_en": "The Two of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "indecision",
-      "stalemate",
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
       "balance",
-      "choices",
-      "blocked vision"
+      "decision"
     ],
     "name_ja": "ソードの2",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの2は「優柔不断」と「行き詰まり」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの2は「優柔不断」の停滞や「行き詰まり」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの2は「優柔不断」と「行き詰まり」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "バランスの取れた熟考と静けさが、選択肢を公平に量ります。落ち着いた論理を信じましょう。",
+    "reversedMeaning_ja": "感じようとしなければ膠着は続きます。分析と直感を統合しましょう。",
+    "description_ja": "ソードの2は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "優柔不断",
-      "行き詰まり",
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
       "バランス",
-      "選択肢",
-      "視界遮断"
+      "決断"
     ]
   },
   {
@@ -2109,27 +2133,29 @@
     "imageUrl": "swords03",
     "name_en": "Three of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests heartbreak or painful truth pierces; feel and heal. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate mending begins; release sorrow and allow recovery. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Three of Swords emphasizes heartbreak and pain, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Heartache and cathartic honesty clear the air. Healing begins when you acknowledge sorrow.",
+    "reversedMeaning_en": "Lingering resentment blocks recovery. Release the story that keeps you holding the wound.",
+    "description_en": "The Three of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "heartbreak",
-      "pain",
+      "logic",
       "truth",
-      "sorrow",
-      "release"
+      "clarity",
+      "communication",
+      "growth",
+      "teamwork"
     ],
     "name_ja": "ソードの3",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの3は「失恋」と「痛み」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの3は「失恋」の停滞や「痛み」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの3は「失恋」と「痛み」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "心の痛みとカタルシスのような正直さが空気を澄ませます。悲しみを認めてこそ癒されます。",
+    "reversedMeaning_ja": "残った怨みは回復を妨げます。傷を握りしめさせる物語を手放しましょう。",
+    "description_ja": "ソードの3は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "失恋",
-      "痛み",
+      "論理",
       "真実",
-      "悲しみ",
-      "解放"
+      "明晰さ",
+      "コミュニケーション",
+      "成長",
+      "チームワーク"
     ]
   },
   {
@@ -2150,27 +2176,29 @@
     "imageUrl": "swords04",
     "name_en": "Four of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests rest and recuperation; quiet mind before the next move. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate restlessness or delay in healing; set firmer boundaries. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Four of Swords emphasizes rest and recovery, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Rest, meditation, and retreat clear the mind again. Honor the sacred pause.",
+    "reversedMeaning_en": "Too much isolation feeds anxiety. Return to life when your strength comes back.",
+    "description_en": "The Four of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "rest",
-      "recovery",
-      "meditation",
-      "pause",
-      "healing"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "stability",
+      "rest"
     ],
     "name_ja": "ソードの4",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの4は「休息」と「回復」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの4は「休息」の停滞や「回復」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの4は「休息」と「回復」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "休息と瞑想、後退が心を再び澄ませます。神聖な停止を尊重しましょう。",
+    "reversedMeaning_ja": "過度な孤立は不安を育てます。力が戻ったら、生活へ戻りましょう。",
+    "description_ja": "ソードの4は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "休息",
-      "回復",
-      "瞑想",
-      "一時停止",
-      "癒やし"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "安定",
+      "休息"
     ]
   },
   {
@@ -2191,27 +2219,29 @@
     "imageUrl": "swords05",
     "name_en": "Five of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests pyrrhic victory or conflict won at a cost; check motives. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate desire to make amends or end tension; choose peace. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Five of Swords emphasizes conflict and tension, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Conflict reveals a winner with no companions. Question whether this battle is worth it.",
+    "reversedMeaning_en": "Avoidance or a hollow victory can weigh on your conscience. Look for ways to repair the relationship.",
+    "description_en": "The Five of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "conflict",
-      "tension",
-      "defeat",
-      "ego",
-      "cost"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "challenge",
+      "change"
     ],
     "name_ja": "ソードの5",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの5は「葛藤」と「緊張」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの5は「葛藤」の停滞や「緊張」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの5は「葛藤」と「緊張」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "争いは、仲間のいない勝者を浮かび上がらせます。この戦いに価値があるか、疑ってみましょう。",
+    "reversedMeaning_ja": "回避や空虚な勝利が良心を苦しめます。関係を回復する道を探りましょう。",
+    "description_ja": "ソードの5は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "葛藤",
-      "緊張",
-      "敗北",
-      "エゴ",
-      "代償"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "挑戦",
+      "変化"
     ]
   },
   {
@@ -2232,27 +2262,29 @@
     "imageUrl": "swords06",
     "name_en": "Six of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests transition to calmer waters; healing journey begins. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate difficulty moving on or unfinished business; face what lingers. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Six of Swords emphasizes transition and healing, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "A guided transition carries you from turmoil to calm. Accept the journey of moving on.",
+    "reversedMeaning_en": "Refusing a necessary move prolongs stress. Prepare yourself and go forward.",
+    "description_en": "The Six of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "transition",
-      "healing",
-      "travel",
-      "moving on",
-      "recovery"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "harmony",
+      "support"
     ],
     "name_ja": "ソードの6",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの6は「移行」と「癒やし」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの6は「移行」の停滞や「癒やし」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの6は「移行」と「癒やし」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "導かれる転換が、混乱から静けさへ連れていきます。舟で渡る旅路を受け入れましょう。",
+    "reversedMeaning_ja": "必要な移動を拒むと、ストレスは長引きます。準備して進みましょう。",
+    "description_ja": "ソードの6は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "移行",
-      "癒やし",
-      "旅",
-      "前進",
-      "回復"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "調和",
+      "支え"
     ]
   },
   {
@@ -2273,27 +2305,29 @@
     "imageUrl": "swords07",
     "name_en": "Seven of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests strategy, stealth, or deception; act with integrity. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate truth surfaces; own your choices and make amends. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Seven of Swords emphasizes strategy and deception, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Strategic thinking and caution help you navigate a complex agenda. Trust your ingenuity.",
+    "reversedMeaning_en": "Deception and half-truths destroy trust. If you want lasting success, act transparently.",
+    "description_en": "The Seven of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "strategy",
-      "deception",
-      "tactics",
-      "independence",
-      "cunning"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "perseverance",
+      "evaluation"
     ],
     "name_ja": "ソードの7",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの7は「戦略」と「欺き」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの7は「戦略」の停滞や「欺き」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの7は「戦略」と「欺き」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "戦略的思考と慎重さが、複雑な課題を切り抜けさせます。機転を信じましょう。",
+    "reversedMeaning_ja": "欺きや半端な真実は信頼を崩します。長い成功を望むなら、透明に行動しましょう。",
+    "description_ja": "ソードの7は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "戦略",
-      "欺き",
-      "戦術",
-      "自立",
-      "狡猾さ"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "忍耐",
+      "評価"
     ]
   },
   {
@@ -2314,27 +2348,29 @@
     "imageUrl": "swords08",
     "name_en": "Eight of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests feeling trapped by thoughts; liberation starts with perspective. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate release from mental binds; confidence returns. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Eight of Swords emphasizes restriction and fear, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "When you acknowledge your agency, the mental prison begins to melt. Reality is wider than fear claims.",
+    "reversedMeaning_en": "A victim narrative keeps paralysis in place. Lift the blindfold one step at a time.",
+    "description_en": "The Eight of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "restriction",
-      "fear",
-      "limitation",
-      "overthinking",
-      "trapped"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "movement",
+      "skill"
     ],
     "name_ja": "ソードの8",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの8は「制限」と「恐れ」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの8は「制限」の停滞や「恐れ」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの8は「制限」と「恐れ」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "主体性を認めると、心の牢獄はほどけ始めます。現実は恐れが語るより広いのです。",
+    "reversedMeaning_ja": "被害者の物語は麻痺を長引かせます。目隠しを一歩ずつ外していきましょう。",
+    "description_ja": "ソードの8は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "制限",
-      "恐れ",
-      "制限",
-      "考えすぎ",
-      "閉塞"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "動き",
+      "技能"
     ]
   },
   {
@@ -2355,27 +2391,29 @@
     "imageUrl": "swords09",
     "name_en": "Nine of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests anxiety and sleepless worry; name the fear to ease it. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate relief after despair or lingering nightmares; seek support. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Nine of Swords emphasizes anxiety and worry, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Anxiety peaks just before dawn, and it calls for compassionate self-talk. Look into the nightmare.",
+    "reversedMeaning_en": "Endless rumination keeps the pain alive. Share your worries and gain perspective.",
+    "description_en": "The Nine of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "anxiety",
-      "worry",
-      "nightmare",
-      "guilt",
-      "fear"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "reward",
+      "self-worth"
     ],
     "name_ja": "ソードの9",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの9は「不安」と「心配」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの9は「不安」の停滞や「心配」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの9は「不安」と「心配」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "不安は夜明け前に頂点に達しますが、思いやりある自己対話を促します。悪夢を見つめましょう。",
+    "reversedMeaning_ja": "繰り返しの思考は苦しみを生かし続けます。心配を分かち合い、視点を得ましょう。",
+    "description_ja": "ソードの9は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "不安",
-      "心配",
-      "悪夢",
-      "罪悪感",
-      "恐れ"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "成果",
+      "自尊心"
     ]
   },
   {
@@ -2396,27 +2434,29 @@
     "imageUrl": "swords10",
     "name_en": "Ten of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests A painful ending; dawn waits beyond the low point. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate recovery and regeneration after rock bottom. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Ten of Swords emphasizes ending and betrayal, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "A painful cycle ends, making space for a new birth. Honor the lesson and let it go.",
+    "reversedMeaning_en": "Refusing closure keeps you stuck where you fell. Rise and begin again.",
+    "description_en": "The Ten of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "ending",
-      "betrayal",
-      "collapse",
-      "finality",
-      "release"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "legacy",
+      "family"
     ],
     "name_ja": "ソードの10",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードの10は「終わり」と「裏切り」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードの10は「終わり」の停滞や「裏切り」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードの10は「終わり」と「裏切り」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "痛ましい循環が終わり、新しい誕生の余地が生まれます。学びをたたえ、送り出しましょう。",
+    "reversedMeaning_ja": "終わりを拒むと、地に刺さったまま留まります。起き上がり、やり直しましょう。",
+    "description_ja": "ソードの10は「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "終わり",
-      "裏切り",
-      "崩壊",
-      "終局",
-      "解放"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "遺産",
+      "家族"
     ]
   },
   {
@@ -2437,27 +2477,29 @@
     "imageUrl": "swords11",
     "name_en": "Page of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests curious intellect, vigilance, and new ideas take flight. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate gossip or haste; think before speaking or acting. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Page of Swords emphasizes curiosity and ideas, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Curious study and a sharp message arrive unexpectedly. Observe and learn.",
+    "reversedMeaning_en": "Gossip or restlessness causes problems. Anchor your mind before you speak.",
+    "description_en": "The Page of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "curiosity",
-      "ideas",
-      "watchfulness",
+      "logic",
+      "truth",
+      "clarity",
       "communication",
-      "alertness"
+      "message",
+      "curiosity"
     ],
     "name_ja": "ソードのペイジ",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードのペイジは「好奇心」と「発想」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードのペイジは「好奇心」の停滞や「発想」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードのペイジは「好奇心」と「発想」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "好奇心ある学びと鋭いメッセージが、思いがけず届きます。観察し、学びましょう。",
+    "reversedMeaning_ja": "噂話や落ち着きのなさが問題を起こします。話す前に心をしっかり定めましょう。",
+    "description_ja": "ソードのペイジは「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "好奇心",
-      "発想",
-      "注意深さ",
+      "論理",
+      "真実",
+      "明晰さ",
       "コミュニケーション",
-      "警戒"
+      "メッセージ",
+      "好奇心"
     ]
   },
   {
@@ -2478,27 +2520,29 @@
     "imageUrl": "swords12",
     "name_en": "Knight of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests decisive, swift action propelled by conviction. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate impulsive or reckless charge; slow down for context. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Knight of Swords emphasizes speed and assertion, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "A nimble intellect champions truth and decisive action. Cut away needless barriers.",
+    "reversedMeaning_en": "Hasty words cause wounds. Tune your speed with empathy.",
+    "description_en": "The Knight of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "speed",
-      "assertion",
-      "ambition",
-      "conflict",
-      "drive"
+      "logic",
+      "truth",
+      "clarity",
+      "communication",
+      "action",
+      "exploration"
     ],
     "name_ja": "ソードのナイト",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードのナイトは「速度」と「自己主張」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードのナイトは「速度」の停滞や「自己主張」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードのナイトは「速度」と「自己主張」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "俊敏な知性が真実と断固たる行動を擁護します。不要な障壁を切り払いましょう。",
+    "reversedMeaning_ja": "性急な言葉は傷を残します。速度を共感で調整しましょう。",
+    "description_ja": "ソードのナイトは「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "速度",
-      "自己主張",
-      "野心",
-      "葛藤",
-      "推進力"
+      "論理",
+      "真実",
+      "明晰さ",
+      "コミュニケーション",
+      "行動",
+      "探求"
     ]
   },
   {
@@ -2519,27 +2563,29 @@
     "imageUrl": "swords13",
     "name_en": "Queen of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests clear perception, honesty, and wise boundaries. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate coldness or bitterness; balance truth with compassion. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The Queen of Swords emphasizes clarity and independence, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Insightful independence and honest counsel protect integrity. Speak your boundaries clearly.",
+    "reversedMeaning_en": "Cold detachment pushes people away. Invite softness into the conversation.",
+    "description_en": "The Queen of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
-      "clarity",
-      "independence",
+      "logic",
       "truth",
-      "discernment",
-      "directness"
+      "clarity",
+      "communication",
+      "maturity",
+      "influence"
     ],
     "name_ja": "ソードのクイーン",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードのクイーンは「明晰さ」と「自立」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードのクイーンは「明晰さ」の停滞や「自立」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードのクイーンは「明晰さ」と「自立」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "洞察ある独立性と正直な助言が、真実性を守ります。境界線を明確に伝えましょう。",
+    "reversedMeaning_ja": "冷たい断絶は仲間を遠ざけます。対話にやわらかさを招き入れましょう。",
+    "description_ja": "ソードのクイーンは「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
-      "明晰さ",
-      "自立",
+      "論理",
       "真実",
-      "洞察",
-      "率直さ"
+      "明晰さ",
+      "コミュニケーション",
+      "成熟",
+      "影響力"
     ]
   },
   {
@@ -2560,27 +2606,29 @@
     "imageUrl": "swords14",
     "name_en": "King of Swords",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests strategic intellect and authority guided by truth. Seek clarity, speak directly, and think critically.",
-    "reversedMeaning_en": "Reversed, it can indicate manipulative or rigid thinking; lead with fairness. Beware mental overload or harsh words; pause and regain perspective.",
-    "description_en": "The King of Swords emphasizes logic and authority, encouraging a more clear-minded approach in everyday life.",
+    "uprightMeaning_en": "Strategic leadership and ethical judgment shine. Rule with reason.",
+    "reversedMeaning_en": "Rigid thinking or an authoritarian tone provokes resistance. Listen before you decide.",
+    "description_en": "The King of Swords centers on logic and truth, emphasizing thought and communication.",
     "keywords_en": [
       "logic",
-      "authority",
-      "strategy",
       "truth",
-      "objectivity"
+      "clarity",
+      "communication",
+      "authority",
+      "mastery"
     ],
     "name_ja": "ソードのキング",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ソードのキングは「論理」と「権威」を示します。状況を整理し、率直に伝え、冷静に考えましょう。",
-    "reversedMeaning_ja": "逆位置のソードのキングは「論理」の停滞や「権威」の乱れを示します。思考過多や言葉の鋭さに注意し、落ち着いて視野を広げましょう。",
-    "description_ja": "ソードのキングは「論理」と「権威」を示し、思考と判断の視点で進むことを促します。",
+    "uprightMeaning_ja": "戦略的なリーダーシップと倫理的判断が光ります。理性をもって治めましょう。",
+    "reversedMeaning_ja": "硬直した思考や権威的な口調は反発を招きます。結論の前に耳を傾けましょう。",
+    "description_ja": "ソードのキングは「論理」と「真実」を軸に、思考とコミュニケーションを強調します。",
     "keywords_ja": [
       "論理",
-      "権威",
-      "戦略",
       "真実",
-      "客観性"
+      "明晰さ",
+      "コミュニケーション",
+      "権威",
+      "熟達"
     ]
   },
   {
@@ -2601,27 +2649,29 @@
     "imageUrl": "pents01",
     "name_en": "Ace of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests new material opportunity, grounded start, or seed of prosperity. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate missed chance or instability; prepare practical foundations. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Ace of Pentacles emphasizes prosperity and new job, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Steady effort opens a tangible opportunity in your hands. Root a new venture in the ground now.",
+    "reversedMeaning_en": "Hesitation makes you miss the chance. Plant the seed before the soil dries.",
+    "description_en": "The Ace of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "prosperity",
-      "new job",
       "stability",
-      "seed",
-      "manifestation"
+      "work",
+      "abundance",
+      "health",
+      "new beginnings",
+      "potential"
     ],
     "name_ja": "ペンタクルのエース",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルのエースは「繁栄」と「新しい仕事」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルのエースは「繁栄」の停滞や「新しい仕事」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルのエースは「繁栄」と「新しい仕事」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "着実な努力が、手に取れる機会を芽吹かせます。今こそ新しい事業を根づかせましょう。",
+    "reversedMeaning_ja": "ためらいは機会を逃します。土が乾く前に、種をまきましょう。",
+    "description_ja": "ペンタクルのエースは「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "繁栄",
-      "新しい仕事",
       "安定",
-      "種",
-      "具現化"
+      "仕事",
+      "豊かさ",
+      "健康",
+      "新たな出発",
+      "潜在力"
     ]
   },
   {
@@ -2642,27 +2692,29 @@
     "imageUrl": "pents02",
     "name_en": "Two of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests juggling priorities with flexibility; keep rhythm flowing. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate overwhelm or imbalance; simplify and set limits. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Two of Pentacles emphasizes balance and adaptability, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Juggling priorities with a playful attitude brings financial balance. Ride the flow of change.",
+    "reversedMeaning_en": "Overpromising creates imbalance. Simplify and recover your rhythm.",
+    "description_en": "The Two of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
       "balance",
-      "adaptability",
-      "priorities",
-      "time management",
-      "flow"
+      "decision"
     ],
     "name_ja": "ペンタクルの2",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの2は「バランス」と「柔軟性」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの2は「バランス」の停滞や「柔軟性」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの2は「バランス」と「柔軟性」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "遊び心をもって優先順位をジャグリングすると、財政はバランスを取り戻します。変化の波に乗りましょう。",
+    "reversedMeaning_ja": "約束を抱えすぎると不均衡になります。単純化してリズムを取り戻しましょう。",
+    "description_ja": "ペンタクルの2は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
       "バランス",
-      "柔軟性",
-      "優先順位",
-      "時間管理",
-      "流れ"
+      "決断"
     ]
   },
   {
@@ -2683,27 +2735,29 @@
     "imageUrl": "pents03",
     "name_en": "Three of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests collaboration and craftsmanship build something lasting. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate team friction or poor planning; align goals and roles. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Three of Pentacles emphasizes teamwork and skill, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Collaboration and craftsmanship earn respect. Share your expertise within the community.",
+    "reversedMeaning_en": "Lack of cooperation can stall a project. Invite feedback and compromise.",
+    "description_en": "The Three of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "teamwork",
-      "skill",
-      "planning",
-      "craft",
-      "cooperation"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "growth",
+      "teamwork"
     ],
     "name_ja": "ペンタクルの3",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの3は「チームワーク」と「技能」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの3は「チームワーク」の停滞や「技能」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの3は「チームワーク」と「技能」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "協働と職人技が尊敬を呼びます。共同体の中で専門性を分かち合いましょう。",
+    "reversedMeaning_ja": "協力が不足するとプロジェクトは止まります。フィードバックと妥協を招き入れましょう。",
+    "description_ja": "ペンタクルの3は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "チームワーク",
-      "技能",
-      "計画",
-      "技",
-      "協力"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "成長",
+      "チームワーク"
     ]
   },
   {
@@ -2724,27 +2778,29 @@
     "imageUrl": "pents04",
     "name_en": "Four of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests holding tight to resources and control; seek balanced security. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate letting go or loosening grip; generosity opens flow. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Four of Pentacles emphasizes security and control, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Saving and boundaries protect the wealth you worked hard to gain. Cherish what truly matters.",
+    "reversedMeaning_en": "Clinging from scarcity blocks growth. Loosen your grip so abundance can circulate.",
+    "description_en": "The Four of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "security",
-      "control",
-      "conservation",
-      "possessiveness",
-      "stability"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "stability",
+      "rest"
     ],
     "name_ja": "ペンタクルの4",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの4は「安全」と「制御」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの4は「安全」の停滞や「制御」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの4は「安全」と「制御」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "貯蓄と境界線が、苦労して得た富を守ります。本当に大切なものを大事にしましょう。",
+    "reversedMeaning_ja": "欠乏を握りしめると成長が止まります。豊かさが循環するよう、手の力をゆるめましょう。",
+    "description_ja": "ペンタクルの4は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "安全",
-      "制御",
-      "保存",
-      "独占欲",
-      "安定"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "安定",
+      "休息"
     ]
   },
   {
@@ -2765,27 +2821,29 @@
     "imageUrl": "pents05",
     "name_en": "Five of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests material hardship or feeling shut out; support is nearby. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate recovery and assistance begin; faith returns. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Five of Pentacles emphasizes hardship and loss, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Hardship and material difficulty teach resilience and compassion. Seek a support system.",
+    "reversedMeaning_en": "Isolation worsens the struggle. Accept help and turn your heart toward recovery.",
+    "description_en": "The Five of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "hardship",
-      "loss",
-      "isolation",
-      "poverty",
-      "support"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "challenge",
+      "change"
     ],
     "name_ja": "ペンタクルの5",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの5は「困難」と「喪失」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの5は「困難」の停滞や「喪失」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの5は「困難」と「喪失」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "苦難と物質的な困難が、回復力と慈しみを教えます。支援のつながりを探しましょう。",
+    "reversedMeaning_ja": "孤立は困難を悪化させます。助けを受け取り、回復へ心を向けましょう。",
+    "description_ja": "ペンタクルの5は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "困難",
-      "喪失",
-      "孤立",
-      "貧困",
-      "支援"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "挑戦",
+      "変化"
     ]
   },
   {
@@ -2806,27 +2864,29 @@
     "imageUrl": "pents06",
     "name_en": "Six of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests generosity and balanced giving and receiving. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate strings attached or imbalance; seek fairness in exchange. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Six of Pentacles emphasizes generosity and charity, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Generosity and fair exchange restore balance. Give and receive with open palms.",
+    "reversedMeaning_en": "Power imbalance or conditional help leaves guilt behind. Even when helping, allow autonomy.",
+    "description_en": "The Six of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "generosity",
-      "charity",
-      "balance",
-      "support",
-      "fairness"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "harmony",
+      "support"
     ],
     "name_ja": "ペンタクルの6",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの6は「寛大さ」と「慈善」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの6は「寛大さ」の停滞や「慈善」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの6は「寛大さ」と「慈善」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "寛大さと公正な交換がバランスを取り戻します。開いた手のひらで与え、受け取りましょう。",
+    "reversedMeaning_ja": "力の不均衡や条件付きの支援は罪悪感を残します。助けるとしても、自律を許しましょう。",
+    "description_ja": "ペンタクルの6は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "寛大さ",
-      "慈善",
-      "バランス",
-      "支援",
-      "公正"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "調和",
+      "支え"
     ]
   },
   {
@@ -2847,27 +2907,29 @@
     "imageUrl": "pents07",
     "name_en": "Seven of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests patience and assessment; growth takes steady tending. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate impatience or misdirected effort; adjust the plan. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Seven of Pentacles emphasizes patience and investment, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Review and patience show what to prune and what to nurture. Trust slow growth.",
+    "reversedMeaning_en": "Impatience makes you abandon something promising. Hold on a little longer.",
+    "description_en": "The Seven of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "patience",
-      "investment",
-      "assessment",
-      "growth",
-      "long-term"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "perseverance",
+      "evaluation"
     ],
     "name_ja": "ペンタクルの7",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの7は「忍耐」と「投資」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの7は「忍耐」の停滞や「投資」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの7は「忍耐」と「投資」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "点検と忍耐が、何を減らし何を育てるべきかを示します。ゆっくりした成長を信じましょう。",
+    "reversedMeaning_ja": "焦りは有望なことを手放させます。もう少しだけ耐えてみましょう。",
+    "description_ja": "ペンタクルの7は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
       "忍耐",
-      "投資",
-      "評価",
-      "成長",
-      "長期"
+      "評価"
     ]
   },
   {
@@ -2888,27 +2950,29 @@
     "imageUrl": "pents08",
     "name_en": "Eight of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests skill-building and diligent work hone mastery. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate perfectionism or monotony; reconnect to craft’s purpose. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Eight of Pentacles emphasizes mastery and practice, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Diligent practice builds skill. Focus on craftsmanship.",
+    "reversedMeaning_en": "Aimless perfectionism drains joy. Remember why you started.",
+    "description_en": "The Eight of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "mastery",
-      "practice",
-      "focus",
-      "craft",
-      "apprenticeship"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "movement",
+      "skill"
     ],
     "name_ja": "ペンタクルの8",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの8は「熟練」と「練習」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの8は「熟練」の停滞や「練習」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの8は「熟練」と「練習」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "勤勉な練習が実力を育てます。職人魂に集中しましょう。",
+    "reversedMeaning_ja": "目的のない完璧主義は喜びを枯らします。なぜ始めたのか思い出しましょう。",
+    "description_ja": "ペンタクルの8は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "熟練",
-      "練習",
-      "集中",
-      "技",
-      "見習い"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "動き",
+      "技能"
     ]
   },
   {
@@ -2929,27 +2993,29 @@
     "imageUrl": "pents09",
     "name_en": "Nine of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests self-reliance, luxury, and earned comfort. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate overinvestment in appearances or dependence; honor true worth. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Nine of Pentacles emphasizes independence and abundance, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Self-reliance and refinement grant elegant independence. Celebrate your harvest freely.",
+    "reversedMeaning_en": "Over-identifying with status leads to isolation. Share your comfort with those you love.",
+    "description_en": "The Nine of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "independence",
+      "stability",
+      "work",
       "abundance",
-      "grace",
-      "security",
-      "enjoyment"
+      "health",
+      "reward",
+      "self-worth"
     ],
     "name_ja": "ペンタクルの9",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの9は「自立」と「豊かさ」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの9は「自立」の停滞や「豊かさ」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの9は「自立」と「豊かさ」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "自立と洗練が、優雅な独立をもたらします。収穫を存分に祝福しましょう。",
+    "reversedMeaning_ja": "地位への同一化が強すぎると孤立します。心地よさを愛する人と分かち合いましょう。",
+    "description_ja": "ペンタクルの9は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "自立",
+      "安定",
+      "仕事",
       "豊かさ",
-      "優雅さ",
-      "安全",
-      "楽しみ"
+      "健康",
+      "成果",
+      "自尊心"
     ]
   },
   {
@@ -2970,27 +3036,29 @@
     "imageUrl": "pents10",
     "name_en": "Ten of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests legacy, long-term stability, and family prosperity. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate instability or disputes over resources; align on values. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Ten of Pentacles emphasizes legacy and wealth, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Legacy, ancestors, and long-term security take center stage. Invest in your roots.",
+    "reversedMeaning_en": "Family expectations or outdated systems need revision. Modernize tradition with care.",
+    "description_en": "The Ten of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
+      "stability",
+      "work",
+      "abundance",
+      "health",
       "legacy",
-      "wealth",
-      "family",
-      "tradition",
-      "long-term"
+      "family"
     ],
     "name_ja": "ペンタクルの10",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルの10は「遺産」と「富」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルの10は「遺産」の停滞や「富」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルの10は「遺産」と「富」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "遺産、祖先、長期的な安全が中心になります。根に投資しましょう。",
+    "reversedMeaning_ja": "家族の期待や古い仕組みは改編が必要です。伝統を現代的に手入れしましょう。",
+    "description_ja": "ペンタクルの10は「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
       "遺産",
-      "富",
-      "家族",
-      "伝統",
-      "長期"
+      "家族"
     ]
   },
   {
@@ -3011,27 +3079,29 @@
     "imageUrl": "pents11",
     "name_en": "Page of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests student energy and practical curiosity about new skills. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate lack of follow-through or focus; ground your study. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Page of Pentacles emphasizes study and opportunity, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Study and practical curiosity bring new income ideas. Draw the blueprint.",
+    "reversedMeaning_en": "Procrastination or laziness wastes your potential. Take the first concrete step.",
+    "description_en": "The Page of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "study",
-      "opportunity",
-      "focus",
-      "practicality",
-      "manifesting"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "message",
+      "curiosity"
     ],
     "name_ja": "ペンタクルのペイジ",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルのペイジは「学び」と「好機」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルのペイジは「学び」の停滞や「好機」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルのペイジは「学び」と「好機」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "学びと実用的な好奇心が、新しい収入のアイデアを運んできます。設計図を描きましょう。",
+    "reversedMeaning_ja": "先延ばしや怠けは潜在力を浪費します。最初の具体的な行動を取りましょう。",
+    "description_ja": "ペンタクルのペイジは「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "学び",
-      "好機",
-      "集中",
-      "実用性",
-      "実現"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "メッセージ",
+      "好奇心"
     ]
   },
   {
@@ -3052,27 +3122,29 @@
     "imageUrl": "pents12",
     "name_en": "Knight of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests patient, steady progress and reliability. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate stagnation or stubbornness; adjust pace mindfully. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Knight of Pentacles emphasizes reliability and routine, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Steady progress and loyalty complete long-lasting goals. Respect your routine.",
+    "reversedMeaning_en": "Stubbornness or boredom stops momentum. Inject something new into your habits.",
+    "description_en": "The Knight of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "reliability",
-      "routine",
-      "persistence",
-      "diligence",
-      "patience"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "action",
+      "exploration"
     ],
     "name_ja": "ペンタクルのナイト",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルのナイトは「信頼性」と「ルーティン」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルのナイトは「信頼性」の停滞や「ルーティン」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルのナイトは「信頼性」と「ルーティン」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "着実な前進と忠誠心が、長期の目標を完成へ導きます。ルーティンを尊重しましょう。",
+    "reversedMeaning_ja": "頑固さや退屈さが推進力を止めます。習慣に新しさを注ぎ込みましょう。",
+    "description_ja": "ペンタクルのナイトは「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "信頼性",
-      "ルーティン",
-      "持続",
-      "勤勉",
-      "忍耐"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "行動",
+      "探求"
     ]
   },
   {
@@ -3093,27 +3165,29 @@
     "imageUrl": "pents13",
     "name_en": "Queen of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests practical nurturing, resourcefulness, and grounded care. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate overgiving or neglect of self; restore your own roots. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The Queen of Pentacles emphasizes nurturing and practicality, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Earthy care and practical wit keep everyone steady. Create cozy abundance.",
+    "reversedMeaning_en": "Over-sacrifice or neglecting self-care drains your resources. Let yourself receive care, too.",
+    "description_en": "The Queen of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
-      "nurturing",
-      "practicality",
-      "comfort",
-      "security",
-      "care"
+      "stability",
+      "work",
+      "abundance",
+      "health",
+      "maturity",
+      "influence"
     ],
     "name_ja": "ペンタクルのクイーン",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルのクイーンは「養育」と「実用性」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルのクイーンは「養育」の停滞や「実用性」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルのクイーンは「養育」と「実用性」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "大地のようなケアと機転が、皆をしっかり支えます。あたたかな豊かさをつくりましょう。",
+    "reversedMeaning_ja": "過度な自己犠牲やセルフケア不足は資源を枯らします。あなたもケアを受け取りましょう。",
+    "description_ja": "ペンタクルのクイーンは「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
-      "養育",
-      "実用性",
-      "安らぎ",
-      "安全",
-      "思いやり"
+      "安定",
+      "仕事",
+      "豊かさ",
+      "健康",
+      "成熟",
+      "影響力"
     ]
   },
   {
@@ -3134,27 +3208,29 @@
     "imageUrl": "pents14",
     "name_en": "King of Pentacles",
     "arcana_en": "Minor Arcana",
-    "uprightMeaning_en": "This card suggests wealth, stability, and capable stewardship of resources. Stay practical, plan ahead, and build step by step.",
-    "reversedMeaning_en": "Reversed, it can indicate greed or rigidity; lead with generosity and wisdom. Avoid procrastination or short-sighted choices; recommit to the basics.",
-    "description_en": "The King of Pentacles emphasizes stability and abundance, encouraging a more practical approach in everyday life.",
+    "uprightMeaning_en": "Reliable leadership builds an empire with patience and ethics. Manage your resources wisely.",
+    "reversedMeaning_en": "Material obsession or rigidity hardens authority. Share power and adapt.",
+    "description_en": "The King of Pentacles centers on stability and work, emphasizing practical reality and diligent accumulation.",
     "keywords_en": [
       "stability",
+      "work",
       "abundance",
-      "leadership",
-      "practical wisdom",
-      "security"
+      "health",
+      "authority",
+      "mastery"
     ],
     "name_ja": "ペンタクルのキング",
     "arcana_ja": "小アルカナ",
-    "uprightMeaning_ja": "ペンタクルのキングは「安定」と「豊かさ」を示します。現実的に計画し、一歩ずつ積み上げましょう。",
-    "reversedMeaning_ja": "逆位置のペンタクルのキングは「安定」の停滞や「豊かさ」の乱れを示します。先延ばしや目先の判断に注意し、基本に立ち返りましょう。",
-    "description_ja": "ペンタクルのキングは「安定」と「豊かさ」を示し、現実と積み重ねの視点で進むことを促します。",
+    "uprightMeaning_ja": "信頼できるリーダーシップが、忍耐と倫理で王国を築きます。資源を賢く管理しましょう。",
+    "reversedMeaning_ja": "物質への執着や硬直は権威を硬くします。権力を分かち、適応しましょう。",
+    "description_ja": "ペンタクルのキングは「安定」と「仕事」を軸に、現実と誠実な積み重ねを強調します。",
     "keywords_ja": [
       "安定",
+      "仕事",
       "豊かさ",
-      "リーダーシップ",
-      "実践的知恵",
-      "安全"
+      "健康",
+      "権威",
+      "熟達"
     ]
   }
 ]
