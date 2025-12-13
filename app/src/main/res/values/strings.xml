@@ -1,94 +1,94 @@
 <resources>
-    <string name="app_name">미도리 타로</string>
+    <string name="app_name">Midori Tarot</string>
 
     <!-- Main menu -->
-    <string name="menu_daily_card">오늘 하루 운세 카드 뽑기</string>
-    <string name="menu_start_reading">리딩 시작</string>
-    <string name="menu_browse_cards">카드 살펴보기</string>
-    <string name="menu_options">옵션</string>
+    <string name="menu_daily_card">Draw Today Fortune Card</string>
+    <string name="menu_start_reading">Start Reading</string>
+    <string name="menu_browse_cards">Browse Cards</string>
+    <string name="menu_options">Options</string>
 
     <!-- Common -->
-    <string name="back">뒤로</string>
+    <string name="back">Back</string>
 
     <!-- Card browser -->
-    <string name="card_browse_title">카드 살펴보기</string>
-    <string name="category_all">전체</string>
-    <string name="category_major">메이저</string>
-    <string name="category_wands">완즈</string>
-    <string name="category_cups">컵</string>
-    <string name="category_swords">소드</string>
-    <string name="category_pentacles">펜타클</string>
-    <string name="keywords_prefix">키워드: %1$s</string>
-    <string name="upright_title">정방향</string>
-    <string name="reversed_title">역방향</string>
-    <string name="tap_to_close">탭하면 닫힙니다</string>
-    <string name="card_detail_title">카드 상세</string>
-    <string name="card_not_found">카드를 찾을 수 없습니다.</string>
-    <string name="keywords_label">키워드</string>
-    <string name="upright_meaning">정방향 해석</string>
-    <string name="reversed_meaning">역방향 해석</string>
-    <string name="description_label">설명</string>
+    <string name="card_browse_title">Browse Cards</string>
+    <string name="category_all">All</string>
+    <string name="category_major">Major</string>
+    <string name="category_wands">Wands</string>
+    <string name="category_cups">Cups</string>
+    <string name="category_swords">Swords</string>
+    <string name="category_pentacles">Pentacles</string>
+    <string name="keywords_prefix">Keywords: %1$s</string>
+    <string name="upright_title">Upright</string>
+    <string name="reversed_title">Reversed</string>
+    <string name="tap_to_close">Tap to close</string>
+    <string name="card_detail_title">Card Detail</string>
+    <string name="card_not_found">Card not found.</string>
+    <string name="keywords_label">Keywords</string>
+    <string name="upright_meaning">Upright Meaning</string>
+    <string name="reversed_meaning">Reversed Meaning</string>
+    <string name="description_label">Description</string>
 
     <!-- Daily card -->
-    <string name="daily_card_title">오늘 하루 운세 카드 뽑기</string>
-    <string name="daily_card_hint_immediate">앞면이 바로 보입니다. 한 번 탭하면 설명을 볼 수 있어요</string>
-    <string name="daily_card_hint_double">카드를 두 번 탭하면 설명을 볼 수 있어요</string>
-    <string name="daily_card_cta_flip">첫 탭으로 카드를 뒤집어 보세요</string>
-    <string name="daily_card_cta_popup_first">탭하면 설명 팝업</string>
-    <string name="daily_card_cta_popup_again">한 번 더 탭하면 설명 팝업</string>
-    <string name="daily_card_sheet_close">탭해서 닫기</string>
+    <string name="daily_card_title">Draw Today Fortune Card</string>
+    <string name="daily_card_hint_immediate">Front is visible. Tap once to view the description.</string>
+    <string name="daily_card_hint_double">Double-tap to view the description.</string>
+    <string name="daily_card_cta_flip">Tap to flip the card first.</string>
+    <string name="daily_card_cta_popup_first">Tap to open the description.</string>
+    <string name="daily_card_cta_popup_again">Tap again to open the description.</string>
+    <string name="daily_card_sheet_close">Tap to close</string>
 
     <!-- Card library -->
-    <string name="card_library_title">%1$s 카드 선택</string>
-    <string name="card_library_subtitle">미리 선택할 카드를 직접 고르세요.</string>
-    <string name="card_library_back">뒤로가기</string>
-    <string name="card_library_select">선택</string>
+    <string name="card_library_title">Choose %1$s</string>
+    <string name="card_library_subtitle">Pick the card you want in advance.</string>
+    <string name="card_library_back">Go back</string>
+    <string name="card_library_select">Select</string>
 
     <!-- Options -->
-    <string name="options_title">옵션</string>
-    <string name="options_section_background">배경 선택</string>
-    <string name="options_section_card_back">카드 뒷면 선택</string>
-    <string name="options_section_card_skin">카드 스킨 선택</string>
-    <string name="options_section_daily_card">앱 알림</string>
-    <string name="options_section_language">언어</string>
-    <string name="options_section_reading">리딩 설정</string>
-    <string name="options_daily_card_toggle">카드 뽑도록 알림 받기</string>
-    <string name="options_reversed_title">리버스 카드 사용하기</string>
-    <string name="options_reversed_desc">스프레드 리딩에서 역방향을 포함합니다.</string>
-    <string name="options_section_haptics">미세 진동</string>
-    <string name="options_haptics_title">카드 인터랙션에 진동 사용</string>
-    <string name="options_haptics_desc">드로우/탭 시 촉감을 더해요.</string>
-    <string name="options_selected">선택됨</string>
-    <string name="options_pick_skin">스킨 선택</string>
-    <string name="options_pick_back">뒷면 선택</string>
-    <string name="options_cancel">취소</string>
-    <string name="language_system">시스템 기본값</string>
+    <string name="options_title">Options</string>
+    <string name="options_section_background">Choose background</string>
+    <string name="options_section_card_back">Choose card back</string>
+    <string name="options_section_card_skin">Choose card skin</string>
+    <string name="options_section_daily_card">App notifications</string>
+    <string name="options_section_language">Language</string>
+    <string name="options_section_reading">Reading settings</string>
+    <string name="options_daily_card_toggle">Get reminder to draw card</string>
+    <string name="options_reversed_title">Use reversed cards</string>
+    <string name="options_reversed_desc">Include reversed orientation when reading spreads.</string>
+    <string name="options_section_haptics">Haptics</string>
+    <string name="options_haptics_title">Use vibration for card interactions</string>
+    <string name="options_haptics_desc">Adds tactile feedback when drawing or tapping.</string>
+    <string name="options_selected">Selected</string>
+    <string name="options_pick_skin">Choose skin</string>
+    <string name="options_pick_back">Choose back</string>
+    <string name="options_cancel">Cancel</string>
+    <string name="language_system">System default</string>
     <string name="language_korean">한국어</string>
     <string name="language_english">English</string>
     <string name="language_japanese">日本語</string>
     <string name="language_thai">ไทย</string>
-    <string name="language_coming_soon">업데이트 예정입니다.</string>
+    <string name="language_coming_soon">Coming soon.</string>
 
     <!-- Reading setup -->
-    <string name="reading_setup_back">뒤로</string>
-    <string name="reading_setup_shuffle">카드 셔플</string>
-    <string name="reading_setup_start_now">곧바로 리딩하기</string>
-    <string name="reading_question_prefix">질문: %1$s</string>
+    <string name="reading_setup_back">Back</string>
+    <string name="reading_setup_shuffle">Shuffle cards</string>
+    <string name="reading_setup_start_now">Start reading now</string>
+    <string name="reading_question_prefix">Q. %1$s</string>
 
     <!-- Spread menu -->
-    <string name="spread_menu_title">스프레드 선택</string>
+    <string name="spread_menu_title">Choose a spread</string>
 
     <!-- Shuffle and draw -->
-    <string name="action_cut">컷</string>
-    <string name="action_draw">드로우</string>
+    <string name="action_cut">Cut</string>
+    <string name="action_draw">Draw</string>
 
     <!-- Reading result -->
-    <string name="reading_result_empty">아직 선택된 카드가 없습니다.</string>
-    <string name="reading_result_home">메인으로</string>
-    <string name="reading_result_reversed">역방향 해석</string>
-    <string name="reading_result_close_hint">탭하면 닫습니다</string>
-    <string name="reading_result_touch_hint">카드를 터치하면 해석을 볼 수 있습니다.</string>
-    <string name="daily_notification_title">미도리 타로</string>
-    <string name="daily_notification_body">오늘은 무슨 일이 생길까? 오늘 하루 운세를 점쳐보세요!</string>
-    <string name="daily_notification_channel_desc">오늘하루운세뽑기 알림</string>
+    <string name="reading_result_empty">No card has been selected yet.</string>
+    <string name="reading_result_home">Home</string>
+    <string name="reading_result_reversed">Reversed meaning</string>
+    <string name="reading_result_close_hint">Tap to close</string>
+    <string name="reading_result_touch_hint">Tap a card to see its meaning.</string>
+    <string name="daily_notification_title">Midori Tarot</string>
+    <string name="daily_notification_body">What might unfold today? Draw your daily card!</string>
+    <string name="daily_notification_channel_desc">Daily draw reminder</string>
 </resources>
