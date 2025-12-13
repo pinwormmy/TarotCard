@@ -15,7 +15,7 @@ class SpreadCatalogTest {
         val spread = SpreadCatalog.find(SpreadType.OneCard)
 
         assertEquals("ワンカード", spread.title.resolve(locale))
-        assertEquals("簡単な質問を書いてください（任意）", spread.questionPlaceholder.resolve(locale))
+        assertEquals("（任意）質問を入力してください", spread.questionPlaceholder.resolve(locale))
         val position = spread.positions.first()
         assertEquals("核心メッセージ", position.title.resolve(locale))
     }

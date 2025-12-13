@@ -1,6 +1,8 @@
 package com.pinwormmy.midoritarot
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.content.pm.ActivityInfo
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
@@ -26,8 +28,10 @@ import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.TarotBackground
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 
+@SuppressLint("SourceLockedOrientationActivity")
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         val settingsRepository = SettingsRepository(applicationContext)
         applySavedLocale(settingsRepository)
         super.onCreate(savedInstanceState)

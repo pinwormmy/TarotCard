@@ -62,9 +62,10 @@ object SpreadCatalog {
             ja = "今日必要な核心メッセージを1枚で素早く受け取ります。"
         ),
         questionPlaceholder = LocalizedString(
-            ko = "간단한 질문을 남겨보세요 (선택)",
-            en = "Add a quick question (optional)",
-            ja = "簡単な質問を書いてください（任意）"
+            ko = "(선택)질문을 입력하세요",
+            en = "(Optional) Enter a question",
+            ja = "（任意）質問を入力してください",
+            th = "(ไม่บังคับ) พิมพ์คำถาม",
         ),
         layout = SpreadLayout(columns = 1, rows = 1),
         positions = listOf(
@@ -91,9 +92,10 @@ object SpreadCatalog {
             ja = "3枚のカードを順に並べて状況をシンプルに読みます。"
         ),
         questionPlaceholder = LocalizedString(
-            ko = "궁금한 상황을 짧게 적어주세요 (선택)",
-            en = "Write your question briefly (optional)",
-            ja = "気になる状況を短く書いてください（任意）"
+            ko = "(선택)질문을 입력하세요",
+            en = "(Optional) Enter a question",
+            ja = "（任意）質問を入力してください",
+            th = "(ไม่บังคับ) พิมพ์คำถาม",
         ),
         layout = SpreadLayout(columns = 3, rows = 1),
         positions = listOf(
@@ -142,9 +144,10 @@ object SpreadCatalog {
             ja = "2枚を並べて素早く核心を見るスプレッド。"
         ),
         questionPlaceholder = LocalizedString(
-            ko = "집중하려는 주제를 적어주세요 (선택)",
-            en = "Write the topic you’re focusing on (optional)",
-            ja = "焦点にしたいテーマを書いてください（任意）"
+            ko = "(선택)질문을 입력하세요",
+            en = "(Optional) Enter a question",
+            ja = "（任意）質問を入力してください",
+            th = "(ไม่บังคับ) พิมพ์คำถาม",
         ),
         layout = SpreadLayout(columns = 2, rows = 1),
         positions = listOf(
@@ -182,9 +185,10 @@ object SpreadCatalog {
             ja = "4枚のカードで状況と次のステップを段階的に見ます。"
         ),
         questionPlaceholder = LocalizedString(
-            ko = "보고 싶은 상황을 적어주세요 (선택)",
-            en = "Describe the situation you want to explore (optional)",
-            ja = "知りたい状況を書いてください（任意）"
+            ko = "(선택)질문을 입력하세요",
+            en = "(Optional) Enter a question",
+            ja = "（任意）質問を入力してください",
+            th = "(ไม่บังคับ) พิมพ์คำถาม",
         ),
         layout = SpreadLayout(columns = 4, rows = 1),
         positions = listOf(
@@ -244,9 +248,10 @@ object SpreadCatalog {
             ja = "10枚の伝統的なスプレッドで状況を多角的に見ます。"
         ),
         questionPlaceholder = LocalizedString(
-            ko = "깊이 들여다보고 싶은 질문을 적어보세요 (선택)",
-            en = "Write the deep question you want to explore (optional)",
-            ja = "深く掘り下げたい質問を書いてください（任意）"
+            ko = "(선택)질문을 입력하세요",
+            en = "(Optional) Enter a question",
+            ja = "（任意）質問を入力してください",
+            th = "(ไม่บังคับ) พิมพ์คำถาม",
         ),
         layout = SpreadLayout(columns = 4, rows = 4),
         positions = listOf(

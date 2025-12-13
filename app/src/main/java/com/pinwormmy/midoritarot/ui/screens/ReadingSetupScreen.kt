@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -93,7 +94,13 @@ fun ReadingSetupScreen(
                 modifier = Modifier.fillMaxWidth(),
                 value = questionText,
                 onValueChange = { onQuestionChange(it.replace('\n', ' ').replace('\r', ' ')) },
-                placeholder = { Text(text = spread.questionPlaceholder.resolve()) },
+                placeholder = {
+                    Text(
+                        text = spread.questionPlaceholder.resolve(),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
                 singleLine = true,
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions.Default.copy(
