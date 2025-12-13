@@ -47,7 +47,9 @@ fun TarotNavGraph(
         factory = SpreadFlowViewModel.Factory(repository, settingsUiState.useReversedCards)
     )
     val spreadUiState by spreadViewModel.uiState.collectAsState()
-    val allCards = remember(settingsUiState.language) { repository.getCards() }
+    val allCards = remember(settingsUiState.language) {
+        repository.getCards(locale = settingsUiState.language.toLocaleOrNull())
+    }
 
     val navigateHomeFromReading = {
         spreadViewModel.resetFlow()
@@ -62,7 +64,7 @@ fun TarotNavGraph(
     }
 
     LaunchedEffect(settingsUiState.language) {
-        spreadViewModel.refreshLocaleContent()
+        spreadViewModel.refreshLocaleContent(locale = settingsUiState.language.toLocaleOrNull())
     }
 
     NavHost(
@@ -160,7 +162,7 @@ fun TarotNavGraph(
         }
 
         composable(Screen.DailyCard.route) {
-            val dailyCardResult = remember { dailyCardRepository.getCardForToday() }
+            val dailyCardResult = remember(settingsUiState.language) { dailyCardRepository.getCardForToday() }
             DailyCardScreen(
                 card = dailyCardResult.card,
                 onBack = { navController.safePopBackStack() },

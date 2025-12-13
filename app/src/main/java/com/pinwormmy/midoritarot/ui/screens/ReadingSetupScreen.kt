@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -27,7 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,6 +87,26 @@ fun ReadingSetupScreen(
                 }
             }
 
+            val focusManager = LocalFocusManager.current
+            val keyboardController = LocalSoftwareKeyboardController.current
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = questionText,
+                onValueChange = { onQuestionChange(it.replace('\n', ' ').replace('\r', ' ')) },
+                placeholder = { Text(text = spread.questionPlaceholder.resolve()) },
+                singleLine = true,
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focusManager.clearFocus()
+                        keyboardController?.hide()
+                    },
+                ),
+            )
+
             SpreadBoard(
                 layout = spread.layout,
                 positions = spread.positions,
@@ -124,13 +149,6 @@ fun ReadingSetupScreen(
                     title = position.title.resolve()
                 )
             }
-
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = questionText,
-                onValueChange = onQuestionChange,
-                placeholder = { Text(text = spread.questionPlaceholder.resolve()) }
-            )
         }
 
         Column(

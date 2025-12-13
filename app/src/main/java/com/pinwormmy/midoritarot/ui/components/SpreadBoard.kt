@@ -6,15 +6,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.compose.ui.platform.LocalDensity
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadLayout
 import com.pinwormmy.midoritarot.domain.spread.SpreadPosition
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
-import androidx.compose.ui.platform.LocalWindowInfo
 import kotlin.math.max
 import kotlin.math.min
 

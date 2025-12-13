@@ -2,7 +2,6 @@ package com.pinwormmy.midoritarot.ui.screens
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -29,7 +28,7 @@ class DrawPileGridGestureTest {
     val composeRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
-    fun dragGesture_isNotCancelledWhenDrawnCountUpdatesMidGesture() {
+    fun dragGesture_isNotCancelledWhenDisabledIdsUpdateMidGesture() {
         composeRule.mainClock.autoAdvance = false
 
         val selectedIds = mutableListOf<String>()
@@ -54,8 +53,6 @@ class DrawPileGridGestureTest {
                 }
             }
 
-            // [수정 1] var ... by 대신 val ... = remember { ... } 사용
-            val drawnCountState = remember { mutableIntStateOf(0) }
             val disabledIdsState = remember { mutableStateOf(emptySet<String>()) }
 
             val cards = remember {
@@ -87,16 +84,13 @@ class DrawPileGridGestureTest {
                     .testTag("grid"),
                 cards = cards,
                 disabledCardIds = disabledIdsState.value, // .value로 읽기
-                drawnCount = drawnCountState.intValue,    // .intValue로 읽기
-                totalSlots = 3,
+                totalSlots = 2,
                 hapticsEnabled = false,
                 hapticFeedback = hapticFeedback,
                 selectionLocked = false,
                 onDealAnimationFinished = {},
                 onCardSelected = { card -> // 불필요한 Suppress 제거 가능
                     selectedIds.add(card.id)
-                    // [수정 2] 값 할당 방식 변경 (Setter 호출이므로 경고 없음)
-                    drawnCountState.intValue = selectedIds.size
                     disabledIdsState.value += card.id
                 }
             )
@@ -152,8 +146,6 @@ class DrawPileGridGestureTest {
                 }
             }
 
-            // [수정 1] 동일하게 val State 객체로 변경
-            val drawnCountState = remember { mutableIntStateOf(0) }
             val disabledIdsState = remember { mutableStateOf(emptySet<String>()) }
 
             val cards = remember {
@@ -185,7 +177,6 @@ class DrawPileGridGestureTest {
                     .testTag("grid"),
                 cards = cards,
                 disabledCardIds = disabledIdsState.value,
-                drawnCount = drawnCountState.intValue,
                 totalSlots = 1,
                 hapticsEnabled = false,
                 hapticFeedback = hapticFeedback,
@@ -193,8 +184,6 @@ class DrawPileGridGestureTest {
                 onDealAnimationFinished = {},
                 onCardSelected = { card ->
                     selectedIds.add(card.id)
-                    // [수정 2] 값 업데이트
-                    drawnCountState.intValue = selectedIds.size
                     disabledIdsState.value = disabledIdsState.value + card.id
                 }
             )

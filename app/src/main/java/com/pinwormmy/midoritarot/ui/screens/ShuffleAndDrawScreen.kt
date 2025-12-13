@@ -9,9 +9,10 @@
 
 package com.pinwormmy.midoritarot.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
@@ -26,7 +27,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,14 +40,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.UiComposable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -58,34 +59,33 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.UiComposable
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
-import androidx.compose.ui.res.stringResource
+import com.pinwormmy.midoritarot.R
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import com.pinwormmy.midoritarot.ui.components.CardBackArt
-import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CARD_LANDSCAPE_RATIO
+import com.pinwormmy.midoritarot.ui.components.CardBackArt
+import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.ShufflePhase
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
+import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.rememberCardBackPainter
+import com.pinwormmy.midoritarot.ui.components.windowHeightDp
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowUiState
-import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
-import androidx.compose.ui.platform.LocalWindowInfo
+import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
-import com.pinwormmy.midoritarot.R
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlin.math.ceil
@@ -238,7 +238,6 @@ fun ShuffleAndDrawScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 cards = uiState.drawPile,
                                 disabledCardIds = drawnIds,
-                                drawnCount = uiState.drawnCards.size,
                                 totalSlots = uiState.pendingSlots.size,
                                 hapticsEnabled = hapticsEnabled,
                                 hapticFeedback = hapticFeedback,
@@ -461,7 +460,6 @@ internal fun DrawPileGrid(
     modifier: Modifier = Modifier,
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
-    drawnCount: Int,
     totalSlots: Int,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
@@ -478,7 +476,6 @@ internal fun DrawPileGrid(
         val cardBackPainter = rememberCardBackPainter()
         val localSelectedIdsState = remember(cards) { mutableStateOf(setOf<String>()) }
         val disabledCardIdsState = rememberUpdatedState(disabledCardIds)
-        val drawnCountState = rememberUpdatedState(drawnCount)
         val selectionLockedState = rememberUpdatedState(selectionLocked)
 
         val columnSpacing = GRID_COLUMN_SPACING
@@ -514,42 +511,54 @@ internal fun DrawPileGrid(
             val dealOrderIndex: Int
         )
 
-        val placements = cards.mapIndexed { index, card ->
-            val columnIndex = index % 2
-            val rowIndex = index / 2
-            val dealOrderIndex = if (columnIndex == 1) rowIndex else totalRows + rowIndex
-            val targetXDp = if (columnIndex == 0) leftColumnX else rightColumnX
-            val targetYDp = stepY * rowIndex
-            CardPlacement(
-                card = card,
-                targetXPx = with(density) { targetXDp.toPx() },
-                targetYPx = with(density) { targetYDp.toPx() },
-                dealOrderIndex = dealOrderIndex
-            )
+        val placements = remember(cards, maxWidth, maxHeight, density) {
+            cards.mapIndexed { index, card ->
+                val columnIndex = index % 2
+                val rowIndex = index / 2
+                val dealOrderIndex = if (columnIndex == 1) rowIndex else totalRows + rowIndex
+                val targetXDp = if (columnIndex == 0) leftColumnX else rightColumnX
+                val targetYDp = stepY * rowIndex
+                CardPlacement(
+                    card = card,
+                    targetXPx = with(density) { targetXDp.toPx() },
+                    targetYPx = with(density) { targetYDp.toPx() },
+                    dealOrderIndex = dealOrderIndex,
+                )
+            }
         }
+        val placementsState = rememberUpdatedState(placements)
+        val cardWidthPxState = rememberUpdatedState(cardWidthPx)
+        val cardHeightPxState = rememberUpdatedState(cardHeightPx)
 
         fun findCardIdAt(position: Offset): String? {
             val combinedDisabled = disabledCardIdsState.value + localSelectedIdsState.value
-            return placements.asReversed().firstOrNull { placement ->
-                val withinX = position.x in placement.targetXPx..(placement.targetXPx + cardWidthPx)
-                val withinY = position.y in placement.targetYPx..(placement.targetYPx + cardHeightPx)
+            val widthPx = cardWidthPxState.value
+            val heightPx = cardHeightPxState.value
+            return placementsState.value.asReversed().firstOrNull { placement ->
+                val withinX = position.x in placement.targetXPx..(placement.targetXPx + widthPx)
+                val withinY = position.y in placement.targetYPx..(placement.targetYPx + heightPx)
                 withinX && withinY && !combinedDisabled.contains(placement.card.id)
             }?.card?.id
         }
 
-        val maxDealIndex = placements.maxOfOrNull { it.dealOrderIndex } ?: 0
+        val maxDealIndex = remember(placements) { placements.maxOfOrNull { it.dealOrderIndex } ?: 0 }
         val gesturesEnabledState = remember(cards) { mutableStateOf(false) }
-        var dealStarted by remember(cards) { mutableStateOf(false) }
+        val dealTimeMillis = remember(cards) { Animatable(0f) }
 
         LaunchedEffect(cards) {
             gesturesEnabledState.value = false
-            dealStarted = false
             if (cards.isEmpty()) return@LaunchedEffect
 
-            dealStarted = true
-            val totalDelay = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
-            if (totalDelay > 0) {
-                delay(totalDelay)
+            dealTimeMillis.snapTo(0f)
+            val totalDurationMillis = dealStaggerMillis * maxDealIndex + dealAnimationMillis.toLong()
+            if (totalDurationMillis > 0) {
+                dealTimeMillis.animateTo(
+                    targetValue = totalDurationMillis.toFloat(),
+                    animationSpec = tween(
+                        durationMillis = totalDurationMillis.toInt(),
+                        easing = LinearEasing,
+                    ),
+                )
             }
             gesturesEnabledState.value = true
             onDealAnimationFinished()
@@ -559,8 +568,6 @@ internal fun DrawPileGrid(
             .fillMaxSize()
             .pointerInput(
                 cards,
-                maxWidth,
-                maxHeight,
                 gesturesEnabledState.value,
                 totalSlots
             ) {
@@ -570,7 +577,7 @@ internal fun DrawPileGrid(
 
                 fun selectionLimitReached(): Boolean =
                     selectionLockedState.value ||
-                        (drawnCountState.value + localSelectedIdsState.value.size >= totalSlots)
+                        ((disabledCardIdsState.value + localSelectedIdsState.value).size >= totalSlots)
 
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
@@ -623,13 +630,9 @@ internal fun DrawPileGrid(
                 val card = placement.card
                 val exitProgress = remember(card.id) { Animatable(0f) }
                 val isExiting = localSelectedIdsState.value.contains(card.id)
-                val appear by animateFloatAsState(
-                    targetValue = if (dealStarted) 1f else 0f,
-                    animationSpec = tween(
-                        durationMillis = dealAnimationMillis,
-                        delayMillis = (dealStaggerMillis * placement.dealOrderIndex).toInt(),
-                    )
-                )
+                val delayMillis = dealStaggerMillis * placement.dealOrderIndex
+                val appear = ((dealTimeMillis.value - delayMillis.toFloat()) / dealAnimationMillis)
+                    .coerceIn(0f, 1f)
 
                 if (isExiting) {
                     LaunchedEffect(card.id) {
