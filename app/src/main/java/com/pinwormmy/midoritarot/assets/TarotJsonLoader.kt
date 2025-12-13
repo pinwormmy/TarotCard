@@ -1,7 +1,7 @@
 package com.pinwormmy.midoritarot.assets
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatDelegate
+import com.pinwormmy.midoritarot.core.localization.currentAppLocale
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import org.json.JSONArray
 import org.json.JSONObject
@@ -13,7 +13,7 @@ object TarotJsonLoader {
         fileName: String = "tarot_data.json",
         locale: Locale? = null
     ): List<TarotCardModel> {
-        val resolvedLocale = locale ?: currentLocale(context)
+        val resolvedLocale = locale ?: currentAppLocale(context)
         val json = context.assets.open(fileName).bufferedReader().use { it.readText() }
         val array = JSONArray(json)
         val cards = mutableListOf<TarotCardModel>()
@@ -44,12 +44,7 @@ object TarotJsonLoader {
     }
 }
 
-private fun currentLocale(context: Context): Locale {
-    val appLocale = AppCompatDelegate.getApplicationLocales().get(0)
-    if (appLocale != null) return appLocale
-
-    return context.resources.configuration.locales.get(0) ?: Locale.getDefault()
-}
+private val SUPPORTED_LANGUAGE_CODES = setOf("ko", "en", "ja", "th")
 
 private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): String {
     val lang = locale.language.lowercase()
@@ -57,7 +52,7 @@ private fun localizedString(item: JSONObject, baseKey: String, locale: Locale): 
     val localized = item.optString(localizedKey)
     val base = item.optString(baseKey)
     val english = item.optString("${baseKey}_en")
-    val isSupported = lang == "ko" || lang == "en" || lang == "ja" || lang == "th"
+    val isSupported = lang in SUPPORTED_LANGUAGE_CODES
 
     return when {
         localized.isNotBlank() -> localized
@@ -74,7 +69,7 @@ private fun localizedKeywords(item: JSONObject, locale: Locale): List<String> {
     val localized = item.optJSONArray(localizedKey)
     val base = item.optJSONArray("keywords")
     val english = item.optJSONArray("keywords_en")
-    val isSupported = lang == "ko" || lang == "en" || lang == "ja" || lang == "th"
+    val isSupported = lang in SUPPORTED_LANGUAGE_CODES
 
     val keywordsArray = when {
         localized != null -> localized

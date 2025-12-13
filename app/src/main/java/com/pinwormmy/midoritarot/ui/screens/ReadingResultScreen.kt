@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -54,11 +53,9 @@ import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.SpreadBoard
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
 import com.pinwormmy.midoritarot.R
 import kotlinx.coroutines.launch
@@ -317,13 +314,7 @@ private fun ReadingResultCard(
     enabled: Boolean = true,
     onTapped: () -> Unit
 ) {
-    val windowInfo = LocalWindowInfo.current
-    val uiScale = LocalUiHeightScale.current
-    val sizeLimit = computeCardSizeLimit(
-        screenHeightDp = windowHeightDp(windowInfo, LocalDensity.current).toInt(),
-        scaleFactor = uiScale,
-        heightFraction = 0.7f
-    )
+    val sizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     val isBack = phase == CardRevealPhase.Back
     val rotation by animateFloatAsState(
         targetValue = if (isBack) 180f else 0f,

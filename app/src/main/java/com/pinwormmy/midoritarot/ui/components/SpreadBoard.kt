@@ -7,14 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.pinwormmy.midoritarot.domain.spread.SpreadDefinition
 import com.pinwormmy.midoritarot.domain.spread.SpreadLayout
 import com.pinwormmy.midoritarot.domain.spread.SpreadPosition
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import kotlin.math.max
 import kotlin.math.min
 
@@ -27,14 +25,7 @@ fun SpreadBoard(
     content: @Composable (index: Int, position: SpreadPosition, modifier: Modifier) -> Unit
 ) {
     val density = LocalDensity.current
-    val windowInfo = LocalWindowInfo.current
-    val uiScale = LocalUiHeightScale.current
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val cardLimit = computeCardSizeLimit(
-        screenHeightDp = containerHeightDp.toInt(),
-        scaleFactor = uiScale,
-        heightFraction = 0.7f
-    )
+    val cardLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     BoxWithConstraints(modifier = modifier) {
         val spacingPx = with(density) { spacing.toPx() }
         val maxWidthPx = with(density) { maxWidth.toPx() }

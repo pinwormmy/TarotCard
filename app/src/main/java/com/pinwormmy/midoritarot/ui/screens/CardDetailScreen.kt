@@ -28,11 +28,7 @@ import com.pinwormmy.midoritarot.R
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,15 +81,7 @@ private fun CardDetailBody(
     card: TarotCardModel,
     modifier: Modifier = Modifier
 ) {
-    val windowInfo = LocalWindowInfo.current
-    val density = LocalDensity.current
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val scale = LocalUiHeightScale.current
-    val sizeLimit = computeCardSizeLimit(
-        screenHeightDp = containerHeightDp.toInt(),
-        scaleFactor = scale,
-        heightFraction = 0.7f
-    )
+    val sizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     Column(
         modifier = modifier
             .fillMaxSize()

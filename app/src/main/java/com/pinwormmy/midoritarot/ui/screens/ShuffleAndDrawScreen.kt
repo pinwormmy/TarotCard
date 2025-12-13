@@ -63,7 +63,6 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -78,13 +77,11 @@ import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardDeck
 import com.pinwormmy.midoritarot.ui.components.ShufflePhase
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.rememberCardBackPainter
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowUiState
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
 import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
@@ -106,14 +103,7 @@ fun ShuffleAndDrawScreen(
     onBack: () -> Unit
 ) {
     BackHandler(onBack = onBack)
-    val windowInfo = LocalWindowInfo.current
-    val density = LocalDensity.current
-    val uiScale = LocalUiHeightScale.current
-    val cardSizeLimit = computeCardSizeLimit(
-        screenHeightDp = windowHeightDp(windowInfo, density).toInt(),
-        scaleFactor = uiScale,
-        heightFraction = 0.7f
-    )
+    val cardSizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
 
     var shufflePhase by remember { mutableStateOf(ShufflePhase.Idle) }
     val drawnIds = remember(uiState.drawnCards) {

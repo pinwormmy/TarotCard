@@ -1,6 +1,5 @@
 package com.pinwormmy.midoritarot.core.localization
 
-import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
 
 /**
@@ -13,7 +12,7 @@ data class LocalizedString(
     val th: String? = null
 ) {
     fun resolve(
-        locale: Locale = AppCompatDelegate.getApplicationLocales().get(0) ?: Locale.getDefault()
+        locale: Locale = currentAppLocale()
     ): String {
         val lang = locale.language.lowercase()
         return when (lang) {

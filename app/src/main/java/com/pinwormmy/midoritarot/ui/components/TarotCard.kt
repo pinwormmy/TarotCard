@@ -18,9 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalDensity
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 
 @Composable
 fun TarotCard(
@@ -30,16 +28,9 @@ fun TarotCard(
     onClick: (() -> Unit)? = null,
     flipDurationMillis: Int = 450
 ) {
-    val windowInfo = LocalWindowInfo.current
     val density = LocalDensity.current
     val cameraDistancePx = with(density) { 12.dp.toPx() }
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val heightScale = LocalUiHeightScale.current
-    val sizeLimit = computeCardSizeLimit(
-        screenHeightDp = containerHeightDp.toInt(),
-        scaleFactor = heightScale,
-        heightFraction = 0.7f
-    )
+    val sizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
 
     val rotation by animateFloatAsState(
         targetValue = if (isFaceUp) 180f else 0f,

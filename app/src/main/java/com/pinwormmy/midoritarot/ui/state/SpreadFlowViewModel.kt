@@ -2,7 +2,8 @@ package com.pinwormmy.midoritarot.ui.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.appcompat.app.AppCompatDelegate
+import com.pinwormmy.midoritarot.core.localization.currentAppLocale
+import com.pinwormmy.midoritarot.core.localization.LocalizedString
 import com.pinwormmy.midoritarot.data.TarotRepository
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
@@ -16,14 +17,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.random.Random
 import java.util.Locale
-
-enum class CardCategory(val displayName: String) {
-    MajorArcana("Major Arcana"),
-    Wands("Wands"),
-    Cups("Cups"),
-    Swords("Swords"),
-    Pentacles("Pentacles")
-}
 
 data class SpreadFlowUiState(
     val step: SpreadStep = SpreadStep.Preselection,
@@ -70,15 +63,24 @@ class SpreadFlowViewModel(
     ): String? {
         val position = spread.positions.getOrNull(index) ?: return null
         val title = position.title.resolve(locale)
-        val lang = locale.language.lowercase()
-        return when (lang) {
-            "en" -> "Select the $title card."
-            "ja" -> "$title のカードを選択してください。"
-            "th" -> "เลือกไพ่ $title"
-            "ko" -> "$title 카드를 선택하세요."
-            else -> "Select the $title card."
-        }
+        return selectionInstruction(title).resolve(locale)
     }
+
+    private fun selectionInstruction(title: String): LocalizedString =
+        LocalizedString(
+            ko = "$title 카드를 선택하세요.",
+            en = "Select the $title card.",
+            ja = "$title のカードを選択してください。",
+            th = "เลือกไพ่ $title"
+        )
+
+    private fun selectionConfirmation(title: String): LocalizedString =
+        LocalizedString(
+            ko = "$title 카드를 선택했습니다.",
+            en = "You picked the $title card.",
+            ja = "$title のカードを選びました。",
+            th = "คุณเลือกไพ่ $title แล้ว"
+        )
 
     fun selectSpread(type: SpreadType) {
         val target = SpreadCatalog.find(type)
@@ -247,17 +249,8 @@ class SpreadFlowViewModel(
             val updatedDrawn = state.drawnCards + (nextSlot to placement)
             val updatedFinal = state.finalCards + (nextSlot to placement)
             val titleLookup = state.spread.positions.associateBy { it.slot }
-            val message = titleLookup[nextSlot]?.let { position ->
-                val title = position.title.resolve(locale)
-                val lang = locale.language.lowercase()
-                when (lang) {
-                    "en" -> "You picked the $title card."
-                    "ja" -> "$title のカードを選びました。"
-                    "th" -> "คุณเลือกไพ่ $title แล้ว"
-                    "ko" -> "$title 카드를 선택했습니다."
-                    else -> "You picked the $title card."
-                }
-            }
+            val message = titleLookup[nextSlot]
+                ?.let { position -> selectionConfirmation(position.title.resolve(locale)).resolve(locale) }
             shouldShowResult = updatedDrawn.size == state.pendingSlots.size
             val nextInstruction = instructionFor(
                 spread = state.spread,
@@ -313,16 +306,9 @@ class SpreadFlowViewModel(
                 val position = lastSlot?.let { slot ->
                     state.spread.positions.firstOrNull { it.slot == slot }
                 }
-                position?.let { pos ->
-                    val title = pos.title.resolve(resolvedLocale)
-                    when (resolvedLocale.language.lowercase()) {
-                        "en" -> "You picked the $title card."
-                        "ja" -> "$title のカードを選びました。"
-                        "th" -> "คุณเลือกไพ่ $title แล้ว"
-                        "ko" -> "$title 카드를 선택했습니다."
-                        else -> "You picked the $title card."
-                    }
-                } ?: state.statusMessage
+                position
+                    ?.let { pos -> selectionConfirmation(pos.title.resolve(resolvedLocale)).resolve(resolvedLocale) }
+                    ?: state.statusMessage
             } else {
                 state.statusMessage
             }
@@ -387,7 +373,7 @@ class SpreadFlowViewModel(
     }
 
     private fun currentLocale(): Locale =
-        AppCompatDelegate.getApplicationLocales().get(0) ?: Locale.getDefault()
+        currentAppLocale()
 
     companion object {
         fun Factory(
@@ -403,26 +389,5 @@ class SpreadFlowViewModel(
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
             }
-    }
-}
-
-fun TarotCardModel.category(): CardCategory {
-    val normalizedId = id.lowercase()
-    return when {
-        normalizedId.startsWith("major_") -> CardCategory.MajorArcana
-        normalizedId.startsWith("wands_") -> CardCategory.Wands
-        normalizedId.startsWith("cups_") -> CardCategory.Cups
-        normalizedId.startsWith("swords_") -> CardCategory.Swords
-        normalizedId.startsWith("pentacles_") || normalizedId.startsWith("pents_") -> CardCategory.Pentacles
-        else -> {
-            val value = arcana.lowercase()
-            when {
-                value.contains("wand") -> CardCategory.Wands
-                value.contains("cup") -> CardCategory.Cups
-                value.contains("sword") -> CardCategory.Swords
-                value.contains("pentacle") || value.contains("coin") -> CardCategory.Pentacles
-                else -> CardCategory.MajorArcana
-            }
-        }
     }
 }

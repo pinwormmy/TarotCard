@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -44,11 +44,11 @@ fun TarotNavGraph(
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
-    val settingsUiState by settingsViewModel.uiState.collectAsState()
+    val settingsUiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
     val spreadViewModel: SpreadFlowViewModel = viewModel(
         factory = SpreadFlowViewModel.Factory(repository, settingsUiState.useReversedCards)
     )
-    val spreadUiState by spreadViewModel.uiState.collectAsState()
+    val spreadUiState by spreadViewModel.uiState.collectAsStateWithLifecycle()
     val allCards = remember(settingsUiState.language) {
         repository.getCards(locale = settingsUiState.language.toLocaleOrNull())
     }

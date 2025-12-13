@@ -8,6 +8,7 @@
         tools:targetApi="33" />
 
     <application
+        android:name=".TarotApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

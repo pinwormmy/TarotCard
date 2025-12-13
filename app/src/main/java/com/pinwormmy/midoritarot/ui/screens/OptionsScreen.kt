@@ -66,7 +66,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -79,16 +78,14 @@ import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import com.pinwormmy.midoritarot.ui.state.CardBackStyle
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 import com.pinwormmy.midoritarot.ui.state.SettingsUiState
 import com.pinwormmy.midoritarot.ui.state.AppLanguage
 import com.pinwormmy.midoritarot.ui.theme.TarotSkin
 import com.pinwormmy.midoritarot.ui.theme.HapticsPlayer
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.label
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.R
@@ -115,14 +112,7 @@ fun OptionsScreen(
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val hapticFeedback = LocalHapticFeedback.current
-    val windowInfo = LocalWindowInfo.current
-    val density = LocalDensity.current
-    val uiScale = LocalUiHeightScale.current
-    val cardSizeLimit = computeCardSizeLimit(
-        screenHeightDp = windowHeightDp(windowInfo, density).toInt(),
-        scaleFactor = uiScale,
-        heightFraction = 0.7f
-    )
+    val cardSizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     val timeFormatter = remember { DateTimeFormatter.ofPattern("a hh:mm") }
     val containerBounds = remember { mutableStateOf<Rect?>(null) }
     val notificationPermissionLauncher = rememberLauncherForActivityResult(

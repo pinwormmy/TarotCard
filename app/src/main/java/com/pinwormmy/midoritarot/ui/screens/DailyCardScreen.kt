@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -48,10 +47,8 @@ import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.CardBackArt
 import androidx.compose.ui.platform.LocalContext
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.R
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
@@ -169,14 +166,7 @@ private fun DailyCardDisplay(
     modifier: Modifier = Modifier
 ) {
     val density = LocalDensity.current
-    val windowInfo = LocalWindowInfo.current
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val heightScale = LocalUiHeightScale.current
-    val sizeLimit = computeCardSizeLimit(
-        screenHeightDp = containerHeightDp.toInt(),
-        scaleFactor = heightScale,
-        heightFraction = 0.7f
-    )
+    val sizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     val rotation by animateFloatAsState(
         targetValue = if (isBack) 180f else 0f,
         label = "dailyCardFlip"

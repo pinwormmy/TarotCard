@@ -29,18 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import com.pinwormmy.midoritarot.ui.state.CardCategory
-import com.pinwormmy.midoritarot.ui.state.category
+import com.pinwormmy.midoritarot.domain.model.CardCategory
+import com.pinwormmy.midoritarot.domain.model.category
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
-import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.platform.LocalDensity
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.R
 
@@ -56,15 +52,7 @@ fun CardLibraryScreen(
     onCardSelected: (TarotCardModel) -> Unit,
     onBack: () -> Unit
 ) {
-    val windowInfo = LocalWindowInfo.current
-    val density = LocalDensity.current
-    val uiScale = LocalUiHeightScale.current
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val cardSizeLimit = computeCardSizeLimit(
-        screenHeightDp = containerHeightDp.toInt(),
-        scaleFactor = uiScale,
-        heightFraction = 0.7f
-    )
+    val cardSizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -81,10 +69,17 @@ fun CardLibraryScreen(
         val categories = CardCategory.entries
         TabRow(selectedTabIndex = categories.indexOf(selectedCategory)) {
             categories.forEach { category ->
+                val label = when (category) {
+                    CardCategory.MajorArcana -> stringResource(id = R.string.category_major)
+                    CardCategory.Wands -> stringResource(id = R.string.category_wands)
+                    CardCategory.Cups -> stringResource(id = R.string.category_cups)
+                    CardCategory.Swords -> stringResource(id = R.string.category_swords)
+                    CardCategory.Pentacles -> stringResource(id = R.string.category_pentacles)
+                }
                 Tab(
                     selected = selectedCategory == category,
                     onClick = { onCategoryChange(category) },
-                    text = { Text(text = category.displayName) }
+                    text = { Text(text = label) }
                 )
             }
         }

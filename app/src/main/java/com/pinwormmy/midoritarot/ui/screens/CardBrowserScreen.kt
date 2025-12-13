@@ -48,22 +48,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
-import com.pinwormmy.midoritarot.ui.state.CardCategory
-import com.pinwormmy.midoritarot.ui.state.category
+import com.pinwormmy.midoritarot.domain.model.CardCategory
+import com.pinwormmy.midoritarot.domain.model.category
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.ui.components.CardFaceArt
 import com.pinwormmy.midoritarot.ui.components.TarotCardShape
 import kotlinx.coroutines.launch
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.ui.platform.LocalDensity
-import com.pinwormmy.midoritarot.ui.theme.LocalUiHeightScale
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import com.pinwormmy.midoritarot.ui.components.applyCardSizeLimit
-import com.pinwormmy.midoritarot.ui.components.computeCardSizeLimit
 import com.pinwormmy.midoritarot.ui.components.CardSizeLimit
-import androidx.compose.ui.platform.LocalWindowInfo
-import com.pinwormmy.midoritarot.ui.components.windowHeightDp
+import com.pinwormmy.midoritarot.ui.components.rememberCardSizeLimit
 import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.R
 
@@ -82,17 +78,7 @@ fun CardBrowserScreen(
     var overlayPhase by remember { mutableStateOf(BrowserOverlayPhase.Zoom) }
     val zoomProgress = remember { Animatable(0f) }
     val coroutineScope = rememberCoroutineScope()
-    val windowInfo = LocalWindowInfo.current
-    val uiScale = LocalUiHeightScale.current
-    val density = LocalDensity.current
-    val containerHeightDp = windowHeightDp(windowInfo, density)
-    val cardSizeLimit = remember(windowInfo.containerSize.height, uiScale, containerHeightDp) {
-        computeCardSizeLimit(
-            screenHeightDp = containerHeightDp.toInt(),
-            scaleFactor = uiScale,
-            heightFraction = 0.7f
-        )
-    }
+    val cardSizeLimit = rememberCardSizeLimit(heightFraction = 0.7f)
     @Suppress("UNUSED_VALUE")
     var animateZoom by remember { mutableStateOf(false) }
     var isZoomAnimating by remember { mutableStateOf(false) }

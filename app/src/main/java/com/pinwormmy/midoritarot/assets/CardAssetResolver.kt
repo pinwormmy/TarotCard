@@ -5,8 +5,13 @@ import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.state.CardBackStyle
 import com.pinwormmy.midoritarot.ui.state.CardFaceSkin
 
-fun normalizedFaceName(card: TarotCardModel): String =
-    (card.imageUrl ?: card.id).lowercase()
+fun normalizedFaceName(card: TarotCardModel): String {
+    val raw = card.imageUrl ?: card.id
+    val lastSegment = raw.substringAfterLast('/').substringAfterLast('\\')
+    val withoutQuery = lastSegment.substringBefore('?').substringBefore('#')
+    val withoutExtension = withoutQuery.substringBeforeLast('.', missingDelimiterValue = withoutQuery)
+    return withoutExtension.lowercase()
+}
 
 fun faceDrawableResId(context: Context, name: String): Int? {
     val resId = context.resources.getIdentifier(name.lowercase(), "drawable", context.packageName)
