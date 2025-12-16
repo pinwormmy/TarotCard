@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         val repository = container.tarotRepository
         val dailyCardRepository = container.dailyCardRepository
+        val drawHistoryRepository = container.drawHistoryRepository
         setContent {
             val lastAppliedLocaleTag = rememberSaveable {
                 mutableStateOf(AppCompatDelegate.getApplicationLocales().toLanguageTags())
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                         TarotNavGraph(
                             repository = repository,
                             dailyCardRepository = dailyCardRepository,
+                            drawHistoryRepository = drawHistoryRepository,
                             settingsViewModel = settingsViewModel
                         )
                     }

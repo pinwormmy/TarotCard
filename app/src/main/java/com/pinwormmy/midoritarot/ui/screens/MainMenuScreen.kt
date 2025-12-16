@@ -1,3 +1,8 @@
+@file:Suppress(
+    "ComposeApplierCallMismatch",
+    "COMPOSE_APPLIER_CALL_MISMATCH"
+)
+
 package com.pinwormmy.midoritarot.ui.screens
 
 import androidx.compose.foundation.background
@@ -40,6 +45,7 @@ fun MainMenuScreen(
     onStartReading: () -> Unit,
     modifier: Modifier = Modifier,
     onDailyCard: (() -> Unit)? = null,
+    onOpenHistory: (() -> Unit)? = null,
     onBrowseCards: (() -> Unit)? = null,
     onOpenOptions: (() -> Unit)? = null
 ) {
@@ -56,6 +62,11 @@ fun MainMenuScreen(
             label = stringResource(id = R.string.menu_start_reading),
             enabled = true,
             onClick = onStartReading
+        ),
+        MainMenuEntry(
+            label = stringResource(id = R.string.menu_history),
+            enabled = onOpenHistory != null,
+            onClick = onOpenHistory ?: {}
         ),
         MainMenuEntry(
             label = stringResource(id = R.string.menu_browse_cards),

@@ -4,11 +4,18 @@
     <!-- Main menu -->
     <string name="menu_daily_card">今日のカードを引く</string>
     <string name="menu_start_reading">リーディング開始</string>
+    <string name="menu_history">リーディング履歴</string>
     <string name="menu_browse_cards">カードを見る</string>
     <string name="menu_options">オプション</string>
 
     <!-- Common -->
     <string name="back">戻る</string>
+
+    <!-- History -->
+    <string name="history_title">リーディング履歴</string>
+    <string name="history_empty">まだリーディング履歴がありません。</string>
+    <string name="history_unknown_card">不明なカード</string>
+    <string name="history_entry_not_found">リーディング履歴が見つかりません。</string>
 
     <!-- Card browser -->
     <string name="card_browse_title">カードを見る</string>

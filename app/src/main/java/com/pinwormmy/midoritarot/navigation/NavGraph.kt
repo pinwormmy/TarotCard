@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -20,10 +21,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.pinwormmy.midoritarot.data.DailyCardRepository
+import com.pinwormmy.midoritarot.data.DrawHistoryCard
+import com.pinwormmy.midoritarot.data.DrawHistoryRepository
 import com.pinwormmy.midoritarot.data.TarotRepository
+import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
+import com.pinwormmy.midoritarot.domain.spread.SpreadSlot
 import com.pinwormmy.midoritarot.ui.screens.CardBrowserScreen
 import com.pinwormmy.midoritarot.ui.screens.CardDetailScreen
 import com.pinwormmy.midoritarot.ui.screens.DailyCardScreen
+import com.pinwormmy.midoritarot.ui.screens.DrawHistoryScreen
 import com.pinwormmy.midoritarot.ui.screens.MainMenuScreen
 import com.pinwormmy.midoritarot.ui.screens.OptionsScreen
 import com.pinwormmy.midoritarot.ui.screens.ReadingResultScreen
@@ -31,15 +37,18 @@ import com.pinwormmy.midoritarot.ui.screens.ReadingSetupScreen
 import com.pinwormmy.midoritarot.ui.screens.SpreadMenuScreen
 import com.pinwormmy.midoritarot.ui.screens.ShuffleAndDrawScreen
 import com.pinwormmy.midoritarot.ui.state.SpreadFlowViewModel
+import com.pinwormmy.midoritarot.ui.state.SpreadCardResult
 import com.pinwormmy.midoritarot.domain.spread.SpreadStep
 import com.pinwormmy.midoritarot.ui.state.TarotSettingsViewModel
 import com.pinwormmy.midoritarot.ui.theme.TarotSkins
 import com.pinwormmy.midoritarot.ui.state.AppLanguage
+import com.pinwormmy.midoritarot.R
 
 @Composable
 fun TarotNavGraph(
     repository: TarotRepository,
     dailyCardRepository: DailyCardRepository,
+    drawHistoryRepository: DrawHistoryRepository,
     settingsViewModel: TarotSettingsViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -69,6 +78,29 @@ fun TarotNavGraph(
         spreadViewModel.refreshLocaleContent(locale = settingsUiState.language.toLocaleOrNull())
     }
 
+    fun recordHistoryFromState() {
+        val state = spreadViewModel.uiState.value
+        val finalBySlotId = state.finalCards.entries.associate { it.key.id to it.value }
+        val orderedSlotIds = state.spread.positions
+            .sortedBy { it.order }
+            .map { it.slot.id }
+        val cards = orderedSlotIds.mapNotNull { slotId ->
+            finalBySlotId[slotId]?.let {
+                DrawHistoryCard(
+                    slotId = slotId,
+                    cardId = it.card.id,
+                    isReversed = it.isReversed,
+                )
+            }
+        }
+        if (cards.isEmpty()) return
+        drawHistoryRepository.recordReading(
+            spreadType = state.spread.type,
+            questionText = state.questionText.trim(),
+            cards = cards,
+        )
+    }
+
     NavHost(
         navController = navController,
         startDestination = Screen.MainMenu.route,
@@ -84,6 +116,7 @@ fun TarotNavGraph(
                 onDailyCard = {
                     navController.navigate(Screen.DailyCard.route)
                 },
+                onOpenHistory = { navController.navigate(Screen.DrawHistory.route) },
                 onBrowseCards = { navController.navigate(Screen.CardBrowser.route) },
                 onOpenOptions = { navController.navigate(Screen.Options.route) }
             )
@@ -117,6 +150,7 @@ fun TarotNavGraph(
                 },
                 onQuickReading = {
                     spreadViewModel.startQuickReading()
+                    recordHistoryFromState()
                     navController.navigate(Screen.ReadingResult.route)
                 }
             )
@@ -132,6 +166,7 @@ fun TarotNavGraph(
                 onCardSelected = { card ->
                     val finished = spreadViewModel.handleDrawSelection(card)
                     if (finished) {
+                        recordHistoryFromState()
                         navController.navigate(Screen.ReadingResult.route)
                     }
                 },
@@ -195,6 +230,55 @@ fun TarotNavGraph(
                 onBack = { navController.safePopBackStack() }
             )
         }
+
+        composable(Screen.DrawHistory.route) {
+            val historyEntries by drawHistoryRepository.entries.collectAsStateWithLifecycle()
+            val cardsById = remember(allCards) { allCards.associateBy { it.id } }
+            DrawHistoryScreen(
+                entries = historyEntries,
+                cardsById = cardsById,
+                onBack = { navController.safePopBackStack() },
+                onEntrySelected = { entryId ->
+                    navController.navigate(Screen.HistoryReading.createRoute(entryId))
+                }
+            )
+        }
+
+        composable(
+            route = Screen.HistoryReading.route,
+            arguments = listOf(navArgument("entryId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val entryId = backStackEntry.arguments?.getString("entryId")
+            val historyEntries by drawHistoryRepository.entries.collectAsStateWithLifecycle()
+            val entry = remember(historyEntries, entryId) {
+                entryId?.let { id -> historyEntries.firstOrNull { it.id == id } }
+            }
+            val cardsById = remember(allCards) { allCards.associateBy { it.id } }
+            if (entry == null) {
+                androidx.compose.material3.Text(text = stringResource(id = R.string.history_entry_not_found))
+                return@composable
+            }
+
+            val spread = remember(entry.spreadType) { SpreadCatalog.find(entry.spreadType) }
+            val cardsBySlot = remember(entry, cardsById) {
+                entry.cards.mapNotNull { card ->
+                    val model = cardsById[card.cardId] ?: return@mapNotNull null
+                    SpreadSlot(card.slotId) to SpreadCardResult(
+                        card = model,
+                        isReversed = card.isReversed,
+                    )
+                }.toMap()
+            }
+
+            ReadingResultScreen(
+                spread = spread,
+                cardsBySlot = cardsBySlot,
+                questionText = entry.questionText,
+                startRevealed = true,
+                actionLabelResId = R.string.back,
+                onNavigateHome = { navController.safePopBackStack() }
+            )
+        }
     }
 }
 
@@ -212,6 +296,10 @@ private sealed class Screen(val route: String) {
     data object DailyCard : Screen("daily_card")
     data object CardBrowser : Screen("card_browser")
     data object Options : Screen("options")
+    data object DrawHistory : Screen("draw_history")
+    data object HistoryReading : Screen("history_reading/{entryId}") {
+        fun createRoute(entryId: String) = "history_reading/$entryId"
+    }
     data object CardDetail : Screen("card_detail/{cardId}") {
         @Suppress("unused")
         fun createRoute(cardId: String) = "card_detail/$cardId"

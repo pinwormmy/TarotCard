@@ -74,6 +74,8 @@ fun ReadingResultScreen(
     cardsBySlot: Map<SpreadSlot, SpreadCardResult>,
     questionText: String,
     modifier: Modifier = Modifier,
+    startRevealed: Boolean = false,
+    actionLabelResId: Int = R.string.reading_result_home,
     onNavigateHome: () -> Unit
 ) {
     val rememberedCards = remember { mutableStateOf(cardsBySlot) }
@@ -85,8 +87,9 @@ fun ReadingResultScreen(
     val positions = spread.positions
     val orderedSlots = remember(spread) { positions.map { it.slot } }
     val orderedPlacements = orderedSlots.map { displayCards[it] }
-    val revealStates = remember(spread) {
-        positions.map { mutableStateOf(CardRevealPhase.Back) }
+    val revealStates = remember(spread, startRevealed) {
+        val initialPhase = if (startRevealed) CardRevealPhase.Front else CardRevealPhase.Back
+        positions.map { mutableStateOf(initialPhase) }
     }
     val cardBounds = remember(spread) {
         List(positions.size) { mutableStateOf<Rect?>(null) }
@@ -240,7 +243,7 @@ fun ReadingResultScreen(
                     .navigationBarsPadding(),
                 onClick = onNavigateHome
             ) {
-                Text(text = stringResource(id = R.string.reading_result_home))
+                Text(text = stringResource(id = actionLabelResId))
             }
         }
     }
