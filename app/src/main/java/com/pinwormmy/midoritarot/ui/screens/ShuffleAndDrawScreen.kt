@@ -48,18 +48,17 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.UiComposable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -68,7 +67,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import androidx.compose.ui.zIndex
 import com.pinwormmy.midoritarot.R
 import com.pinwormmy.midoritarot.domain.model.TarotCardModel
 import com.pinwormmy.midoritarot.ui.components.CARD_ASPECT_RATIO
@@ -85,6 +83,7 @@ import com.pinwormmy.midoritarot.ui.theme.LocalHapticsEnabled
 import com.pinwormmy.midoritarot.ui.theme.TarotUiDefaults
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.ceil
 
 private const val LANDSCAPE_CARD_RATIO = CARD_LANDSCAPE_RATIO
@@ -229,6 +228,7 @@ fun ShuffleAndDrawScreen(
                                 cards = uiState.drawPile,
                                 disabledCardIds = drawnIds,
                                 totalSlots = uiState.pendingSlots.size,
+                                cardBackPainter = cardBackPainter,
                                 hapticsEnabled = hapticsEnabled,
                                 hapticFeedback = hapticFeedback,
                                 selectionLocked = animationLocked || selectionLocked,
@@ -451,6 +451,7 @@ internal fun DrawPileGrid(
     cards: List<TarotCardModel>,
     disabledCardIds: Set<String>,
     totalSlots: Int,
+    cardBackPainter: Painter? = null,
     hapticsEnabled: Boolean,
     hapticFeedback: HapticFeedback,
     selectionLocked: Boolean = false,
@@ -463,7 +464,7 @@ internal fun DrawPileGrid(
     ) {
         val density = LocalDensity.current
         var hoveredCardId by remember { mutableStateOf<String?>(null) }
-        val cardBackPainter = rememberCardBackPainter()
+        val resolvedCardBackPainter = cardBackPainter ?: rememberCardBackPainter()
         val localSelectedIdsState = remember(cards) { mutableStateOf(setOf<String>()) }
         val disabledCardIdsState = rememberUpdatedState(disabledCardIds)
         val selectionLockedState = rememberUpdatedState(selectionLocked)
@@ -521,13 +522,17 @@ internal fun DrawPileGrid(
         val cardHeightPxState = rememberUpdatedState(cardHeightPx)
 
         fun findCardIdAt(position: Offset): String? {
-            val combinedDisabled = disabledCardIdsState.value + localSelectedIdsState.value
+            val disabledIds = disabledCardIdsState.value
+            val localSelectedIds = localSelectedIdsState.value
             val widthPx = cardWidthPxState.value
             val heightPx = cardHeightPxState.value
             return placementsState.value.asReversed().firstOrNull { placement ->
                 val withinX = position.x in placement.targetXPx..(placement.targetXPx + widthPx)
                 val withinY = position.y in placement.targetYPx..(placement.targetYPx + heightPx)
-                withinX && withinY && !combinedDisabled.contains(placement.card.id)
+                withinX &&
+                    withinY &&
+                    !disabledIds.contains(placement.card.id) &&
+                    !localSelectedIds.contains(placement.card.id)
             }?.card?.id
         }
 
@@ -554,6 +559,13 @@ internal fun DrawPileGrid(
             onDealAnimationFinished()
         }
 
+        val onCardSelectedState = rememberUpdatedState(onCardSelected)
+        val exitScope = androidx.compose.runtime.rememberCoroutineScope()
+        val cardsById = remember(cards) { cards.associateBy { it.id } }
+        val exitProgressById = remember(cards) {
+            androidx.compose.runtime.mutableStateMapOf<String, Animatable<Float, androidx.compose.animation.core.AnimationVector1D>>()
+        }
+
         val pointerModifier = Modifier
             .fillMaxSize()
             .pointerInput(
@@ -567,7 +579,7 @@ internal fun DrawPileGrid(
 
                 fun selectionLimitReached(): Boolean =
                     selectionLockedState.value ||
-                        ((disabledCardIdsState.value + localSelectedIdsState.value).size >= totalSlots)
+                        (disabledCardIdsState.value.size + localSelectedIdsState.value.size >= totalSlots)
 
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
@@ -593,13 +605,28 @@ internal fun DrawPileGrid(
                                 val selectedId = hoveredCardId
                                 hoveredCardId = null
                                 if (selectedId != null) {
-                                    localSelectedIdsState.value =
-                                        localSelectedIdsState.value + selectedId
+                                    val selectedCard = cardsById[selectedId] ?: return@awaitEachGesture
+                                    if (exitProgressById.containsKey(selectedId)) {
+                                        return@awaitEachGesture
+                                    }
+
+                                    localSelectedIdsState.value = localSelectedIdsState.value + selectedId
 
                                     if (hapticsEnabled) {
                                         hapticFeedback.performHapticFeedback(
                                             HapticFeedbackType.LongPress
                                         )
+                                    }
+
+                                    val exitProgress = Animatable(0f)
+                                    exitProgressById[selectedId] = exitProgress
+                                    exitScope.launch {
+                                        exitProgress.animateTo(1f, tween(400))
+                                        delay(50)
+                                        onCardSelectedState.value(selectedCard)
+                                        localSelectedIdsState.value =
+                                            localSelectedIdsState.value - selectedId
+                                        exitProgressById.remove(selectedId)
                                     }
                                 }
                                 break
@@ -615,107 +642,111 @@ internal fun DrawPileGrid(
                 }
             }
 
-        Box(modifier = pointerModifier) {
-            placements.forEach { placement ->
-                val card = placement.card
-                val exitProgress = remember(card.id) { Animatable(0f) }
-                val isExiting = localSelectedIdsState.value.contains(card.id)
-                val delayMillis = dealStaggerMillis * placement.dealOrderIndex
-                val appear = ((dealTimeMillis.value - delayMillis.toFloat()) / dealAnimationMillis)
-                    .coerceIn(0f, 1f)
-
-                if (isExiting) {
-                    LaunchedEffect(card.id) {
-                        exitProgress.animateTo(1f, tween(400))
-                        delay(50)
-                        onCardSelected(card)
-                        localSelectedIdsState.value =
-                            localSelectedIdsState.value - card.id
-                    }
-                }
-
-                val isDisabled = disabledCardIds.contains(card.id)
-                val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear)
-                val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear)
-                val exitShiftY = exitProgress.value * (maxHeightPx + cardHeightPx)
-                val baseScale = 0.9f + 0.1f * appear
-                val hoverScale = if (!isDisabled && hoveredCardId == card.id) 1.05f else 1f
-                val targetAlpha = if (isDisabled) 0f else 1f
-                val layerAlpha =
-                    (appear * (1f - exitProgress.value)).coerceIn(0f, targetAlpha)
-
-                // 🔥 여기 Box가 "가로 카드" 컨테이너 + 움직임 담당
-                Box(
-                    modifier = Modifier
-                        .zIndex(if (isExiting || exitProgress.value > 0f) 1f else 0f)
-                        .width(cardWidth)
-                        .height(cardHeight)
-                        .graphicsLayer {
-                            translationX = animatedTranslationX
-                            translationY = animatedTranslationY + exitShiftY
-                            this.alpha = layerAlpha
-                            val scale = baseScale * hoverScale
-                            scaleX = scale
-                            scaleY = scale
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    RotatedCardBack(
-                        modifier = Modifier.fillMaxSize(),
-                        painter = cardBackPainter
-                    )
-                }
-            }
+        val layoutDirection = androidx.compose.ui.platform.LocalLayoutDirection.current
+        val cardSize = remember(cardWidthPx, cardHeightPx) {
+            androidx.compose.ui.geometry.Size(cardWidthPx, cardHeightPx)
         }
-    }
-}
-
-@UiComposable
-@Composable
-private fun RotatedCardBack(
-    modifier: Modifier = Modifier,
-    painter: Painter?
-) {
-    // 드로우 그리드용 가로 카드: 자식은 세로 비율로 측정, 부모는 가로 비율을 노출한 뒤
-    // 배치 단계에서 90도 회전과 모서리 클립을 적용하여 카드와 이미지 방향을 일치시킨다.
-    Layout(
-        modifier = modifier,
-        content = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .graphicsLayer {
-                        rotationZ = 90f
-                        transformOrigin = TransformOrigin.Center
-                        shape = TarotCardShape
-                        clip = true
-                    }
-            ) {
-                CardBackArt(
-                    modifier = Modifier.fillMaxSize(),
-                    overlay = Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0x66000000))
-                    ),
-                    shape = TarotCardShape,
-                    painterOverride = painter
-                )
-            }
-        }
-    ) { measurables, constraints ->
-        val placeable = measurables.first().measure(
-            constraints.copy(
-                minWidth = constraints.minHeight,
-                maxWidth = constraints.maxHeight,
-                minHeight = constraints.minWidth,
-                maxHeight = constraints.maxWidth
+        val cardClipPath = remember(cardSize, layoutDirection, density) {
+            val outline = TarotCardShape.createOutline(
+                size = cardSize,
+                layoutDirection = layoutDirection,
+                density = density
             )
-        )
+            androidx.compose.ui.graphics.Path().apply {
+                when (outline) {
+                    is androidx.compose.ui.graphics.Outline.Rectangle -> addRect(outline.rect)
+                    is androidx.compose.ui.graphics.Outline.Rounded -> addRoundRect(outline.roundRect)
+                    is androidx.compose.ui.graphics.Outline.Generic -> addPath(outline.path)
+                }
+            }
+        }
+        val cardCenter = remember(cardWidthPx, cardHeightPx) {
+            Offset(cardWidthPx / 2f, cardHeightPx / 2f)
+        }
+        val portraitSize = remember(cardWidthPx, cardHeightPx) {
+            androidx.compose.ui.geometry.Size(cardHeightPx, cardWidthPx)
+        }
+        val portraitTopLeft = remember(cardCenter, cardWidthPx, cardHeightPx) {
+            Offset(
+                x = cardCenter.x - (cardHeightPx / 2f),
+                y = cardCenter.y - (cardWidthPx / 2f),
+            )
+        }
+        val overlayBrush = remember(cardWidthPx) {
+            Brush.verticalGradient(
+                colors = listOf(Color.Transparent, Color(0x66000000)),
+                startY = 0f,
+                endY = cardWidthPx,
+            )
+        }
+        val fallbackBrush = remember(cardWidthPx) {
+            Brush.verticalGradient(
+                colors = listOf(Color(0xFF1C1D36), Color(0xFF0E0F1E)),
+                startY = 0f,
+                endY = cardWidthPx,
+            )
+        }
 
-        // 부모(가로 셀) 기준 크기를 노출
-        layout(placeable.height, placeable.width) {
-            val offsetX = (placeable.height - placeable.width) / 2
-            val offsetY = (placeable.width - placeable.height) / 2
-            placeable.placeRelative(offsetX, offsetY)
+        Box(modifier = pointerModifier) {
+            androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
+                val currentDealTime = dealTimeMillis.value
+                val disabledIds = disabledCardIdsState.value
+                val hoveredId = hoveredCardId
+                val painter = resolvedCardBackPainter
+
+                fun drawPlacement(placement: CardPlacement) {
+                    val cardId = placement.card.id
+                    val exitProgress = exitProgressById[cardId]?.value ?: 0f
+
+                    val delayMillis = dealStaggerMillis * placement.dealOrderIndex
+                    val appear =
+                        ((currentDealTime - delayMillis.toFloat()) / dealAnimationMillis).coerceIn(0f, 1f)
+
+                    val isDisabled = disabledIds.contains(cardId)
+                    val targetAlpha = if (isDisabled) 0f else 1f
+                    val alpha = (appear * (1f - exitProgress)).coerceIn(0f, targetAlpha)
+                    if (alpha <= 0.001f) return
+
+                    val animatedTranslationX = lerp(startXPx, placement.targetXPx, appear)
+                    val animatedTranslationY = lerp(startYPx, placement.targetYPx, appear)
+                    val exitShiftY = exitProgress * (maxHeightPx + cardHeightPx)
+                    val baseScale = 0.9f + 0.1f * appear
+                    val hoverScale = if (!isDisabled && hoveredId == cardId) 1.05f else 1f
+                    val scaleFactor = baseScale * hoverScale
+
+                    withTransform({
+                        translate(animatedTranslationX, animatedTranslationY + exitShiftY)
+                        scale(scaleFactor, scaleFactor, pivot = cardCenter)
+                    }) {
+                        clipPath(cardClipPath) {
+                            withTransform({
+                                rotate(90f, pivot = cardCenter)
+                                translate(portraitTopLeft.x, portraitTopLeft.y)
+                            }) {
+                                if (painter != null) {
+                                    with(painter) {
+                                        draw(size = portraitSize, alpha = alpha)
+                                    }
+                                } else {
+                                    drawRect(brush = fallbackBrush, size = portraitSize, alpha = alpha)
+                                }
+                                drawRect(brush = overlayBrush, size = portraitSize, alpha = alpha)
+                            }
+                        }
+                    }
+                }
+
+                placements.forEach { placement ->
+                    if (!exitProgressById.containsKey(placement.card.id)) {
+                        drawPlacement(placement)
+                    }
+                }
+                placements.forEach { placement ->
+                    if (exitProgressById.containsKey(placement.card.id)) {
+                        drawPlacement(placement)
+                    }
+                }
+            }
         }
     }
 }
