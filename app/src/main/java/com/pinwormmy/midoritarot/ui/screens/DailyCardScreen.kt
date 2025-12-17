@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -117,6 +118,7 @@ fun DailyCardScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
+                        .testTag("daily_card_card")
                         .clickable {
                             if (isBack) {
                                 if (hapticsEnabled) {
@@ -246,11 +248,6 @@ private fun DailyCardDescriptionSheet(
             }
             Text(
                 text = card.uprightMeaning,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Text(
-                text = card.reversedMeaning,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
