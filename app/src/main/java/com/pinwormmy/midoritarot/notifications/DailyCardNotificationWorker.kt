@@ -49,7 +49,7 @@ class DailyCardNotificationWorker(
             applicationContext,
             0,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            pendingIntentFlags()
         )
 
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -95,6 +95,15 @@ class DailyCardNotificationWorker(
             }
             val manager = applicationContext.getSystemService(NotificationManager::class.java)
             manager?.createNotificationChannel(channel)
+        }
+    }
+
+    private fun pendingIntentFlags(): Int {
+        val baseFlags = PendingIntent.FLAG_UPDATE_CURRENT
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            baseFlags or PendingIntent.FLAG_IMMUTABLE
+        } else {
+            baseFlags
         }
     }
 
