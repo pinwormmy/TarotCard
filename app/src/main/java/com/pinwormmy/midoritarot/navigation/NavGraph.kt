@@ -26,6 +26,7 @@ import com.pinwormmy.midoritarot.data.DrawHistoryRepository
 import com.pinwormmy.midoritarot.data.TarotRepository
 import com.pinwormmy.midoritarot.domain.spread.SpreadCatalog
 import com.pinwormmy.midoritarot.domain.spread.SpreadSlot
+import com.pinwormmy.midoritarot.domain.spread.SpreadType
 import com.pinwormmy.midoritarot.ui.screens.CardBrowserScreen
 import com.pinwormmy.midoritarot.ui.screens.CardDetailScreen
 import com.pinwormmy.midoritarot.ui.screens.DailyCardScreen
@@ -200,6 +201,21 @@ fun TarotNavGraph(
 
         composable(Screen.DailyCard.route) {
             val dailyCardResult = remember(settingsUiState.language) { dailyCardRepository.getCardForToday() }
+            LaunchedEffect(dailyCardResult.card.id, dailyCardResult.isExisting) {
+                if (!dailyCardResult.isExisting) {
+                    drawHistoryRepository.recordReading(
+                        spreadType = SpreadType.DailyCard,
+                        questionText = "",
+                        cards = listOf(
+                            DrawHistoryCard(
+                                slotId = SpreadCatalog.dailyCardSlot.id,
+                                cardId = dailyCardResult.card.id,
+                                isReversed = false,
+                            )
+                        ),
+                    )
+                }
+            }
             DailyCardScreen(
                 card = dailyCardResult.card,
                 onBack = { navController.safePopBackStack() },

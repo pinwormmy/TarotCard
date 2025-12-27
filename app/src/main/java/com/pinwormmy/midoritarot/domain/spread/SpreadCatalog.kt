@@ -8,6 +8,7 @@ value class SpreadSlot(val id: String)
 
 enum class SpreadType {
     OneCard,
+    DailyCard,
     PastPresentFuture,
     EnergyAdvice,
     PathForward,
@@ -49,6 +50,8 @@ data class SpreadDefinition(
 )
 
 object SpreadCatalog {
+    val dailyCardSlot = SpreadSlot("daily_card")
+
     private val oneCard = SpreadDefinition(
         type = SpreadType.OneCard,
         title = LocalizedString(
@@ -81,6 +84,49 @@ object SpreadCatalog {
                 placement = SpreadPlacement(column = 0, row = 0)
             )
         )
+    )
+
+    private val dailyCard = SpreadDefinition(
+        type = SpreadType.DailyCard,
+        title = LocalizedString(
+            ko = "오늘 하루 운세 카드",
+            en = "Today Fortune Card",
+            ja = "今日の運勢カード",
+            th = "ไพ่ทำนายประจำวัน",
+        ),
+        description = LocalizedString(
+            ko = "오늘 하루의 메시지를 한 장으로 확인합니다.",
+            en = "A single card to check today's message.",
+            ja = "今日のメッセージを1枚で確認します。",
+            th = "การ์ดหนึ่งใบสำหรับข้อความประจำวันนี้",
+        ),
+        questionPlaceholder = LocalizedString(
+            ko = "",
+            en = "",
+            ja = "",
+            th = "",
+        ),
+        layout = SpreadLayout(columns = 1, rows = 1),
+        positions = listOf(
+            SpreadPosition(
+                slot = dailyCardSlot,
+                title = LocalizedString(
+                    ko = "오늘의 메시지",
+                    en = "Today's Message",
+                    ja = "今日のメッセージ",
+                    th = "ข้อความวันนี้",
+                ),
+                description = LocalizedString(
+                    ko = "오늘의 흐름을 알려주는 카드",
+                    en = "The card that reflects today's flow.",
+                    ja = "今日の流れを示すカード。",
+                    th = "การ์ดที่สะท้อนถึงกระแสของวันนี้",
+                ),
+                order = 1,
+                placement = SpreadPlacement(column = 0, row = 0),
+            )
+        ),
+        defaultUseReversed = false,
     )
 
     private val pastPresentFuture = SpreadDefinition(
@@ -381,5 +427,8 @@ object SpreadCatalog {
     val all: List<SpreadDefinition> = allDefinitions
 
     fun find(type: SpreadType): SpreadDefinition =
-        allDefinitions.firstOrNull { it.type == type } ?: default
+        when (type) {
+            SpreadType.DailyCard -> dailyCard
+            else -> allDefinitions.firstOrNull { it.type == type } ?: default
+        }
 }
