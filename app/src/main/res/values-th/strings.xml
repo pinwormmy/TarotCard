@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">Midori Tarot</string>
+
+    <!-- Main menu -->
+    <string name="menu_daily_card">สุ่มไพ่ทำนายประจำวัน</string>
+    <string name="menu_start_reading">เริ่มการทำนาย</string>
+    <string name="menu_history">ประวัติการทำนาย</string>
+    <string name="menu_browse_cards">เรียกดูไพ่</string>
+    <string name="menu_options">การตั้งค่า</string>
+
+    <!-- Common -->
+    <string name="back">ย้อนกลับ</string>
+
+    <!-- History -->
+    <string name="history_title">ประวัติการทำนาย</string>
+    <string name="history_empty">ยังไม่มีประวัติการทำนาย</string>
+    <string name="history_unknown_card">ไพ่ไม่ทราบชื่อ</string>
+    <string name="history_entry_not_found">ไม่พบรายการประวัติ</string>
+
+    <!-- Card browser -->
+    <string name="card_browse_title">เรียกดูไพ่</string>
+    <string name="category_all">ทั้งหมด</string>
+    <string name="category_major">เมเจอร์อาร์คานา</string>
+    <string name="category_wands">ไม้เท้า</string>
+    <string name="category_cups">ถ้วย</string>
+    <string name="category_swords">ดาบ</string>
+    <string name="category_pentacles">เหรียญ</string>
+    <string name="keywords_prefix">คำสำคัญ: %1$s</string>
+    <string name="upright_title">ตั้งตรง</string>
+    <string name="reversed_title">กลับหัว</string>
+    <string name="tap_to_close">แตะเพื่อปิด</string>
+    <string name="card_detail_title">รายละเอียดไพ่</string>
+    <string name="card_not_found">ไม่พบไพ่</string>
+    <string name="keywords_label">คำสำคัญ</string>
+    <string name="upright_meaning">ความหมายไพ่ตั้งตรง</string>
+    <string name="reversed_meaning">ความหมายไพ่กลับหัว</string>
+    <string name="description_label">คำอธิบาย</string>
+
+    <!-- Daily card -->
+    <string name="daily_card_title">สุ่มไพ่ทำนายประจำวัน</string>
+    <string name="daily_card_hint_immediate">ด้านหน้ามองเห็นแล้ว แตะหนึ่งครั้งเพื่อดูคำอธิบาย</string>
+    <string name="daily_card_hint_double">แตะสองครั้งเพื่อดูคำอธิบาย</string>
+    <string name="daily_card_cta_flip">แตะเพื่อพลิกไพ่ก่อน</string>
+    <string name="daily_card_cta_popup_first">แตะเพื่อเปิดคำอธิบาย</string>
+    <string name="daily_card_cta_popup_again">แตะอีกครั้งเพื่อเปิดคำอธิบาย</string>
+    <string name="daily_card_sheet_close">แตะเพื่อปิด</string>
+
+    <!-- Card library -->
+    <string name="card_library_title">เลือก %1$s</string>
+    <string name="card_library_subtitle">เลือกไพ่ที่ต้องการล่วงหน้า</string>
+    <string name="card_library_back">ย้อนกลับ</string>
+    <string name="card_library_select">เลือก</string>
+
+    <!-- Options -->
+    <string name="options_title">การตั้งค่า</string>
+    <string name="options_section_background">เลือกพื้นหลัง</string>
+    <string name="options_section_card_back">เลือกด้านหลังไพ่</string>
+    <string name="options_section_card_skin">เลือกสกินไพ่</string>
+    <string name="options_section_daily_card">การแจ้งเตือนแอป</string>
+    <string name="options_section_language">ภาษา</string>
+    <string name="options_section_reading">การตั้งค่าการทำนาย</string>
+    <string name="options_daily_card_toggle">รับการเตือนให้สุ่มไพ่ประจำวัน</string>
+    <string name="options_reversed_title">ใช้ไพ่กลับหัว</string>
+    <string name="options_reversed_desc">รวมการกลับหัวเมื่ออ่านสเปรด</string>
+    <string name="options_section_haptics">การสั่น</string>
+    <string name="options_haptics_title">ใช้การสั่นเมื่อโต้ตอบกับไพ่</string>
+    <string name="options_haptics_desc">เพิ่มการตอบสนองสัมผัสเมื่อสุ่มหรือแตะ</string>
+    <string name="options_selected">เลือกแล้ว</string>
+    <string name="options_pick_skin">เลือกสกิน</string>
+    <string name="options_pick_back">เลือกด้านหลัง</string>
+    <string name="options_cancel">ยกเลิก</string>
+    <string name="language_system">ค่าเริ่มต้นของระบบ</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_thai">ไทย</string>
+    <string name="language_coming_soon">เร็ว ๆ นี้</string>
+
+    <!-- Reading setup -->
+    <string name="reading_setup_back">ย้อนกลับ</string>
+    <string name="reading_setup_shuffle">สับไพ่</string>
+    <string name="reading_setup_start_now">เริ่มการทำนายตอนนี้</string>
+    <string name="reading_question_prefix">คำถาม: %1$s</string>
+
+    <!-- Spread menu -->
+    <string name="spread_menu_title">เลือกสเปรด</string>
+
+    <!-- Shuffle and draw -->
+    <string name="action_cut">ตัดไพ่</string>
+    <string name="action_draw">จั่วไพ่</string>
+
+    <!-- Reading result -->
+    <string name="reading_result_empty">ยังไม่ได้เลือกไพ่</string>
+    <string name="reading_result_home">หน้าแรก</string>
+    <string name="reading_result_reversed">ความหมายไพ่กลับหัว</string>
+    <string name="reading_result_close_hint">แตะเพื่อปิด</string>
+    <string name="reading_result_touch_hint">แตะไพ่เพื่อดูความหมาย</string>
+    <string name="daily_notification_title">Midori Tarot</string>
+    <string name="daily_notification_body">วันนี้จะเกิดอะไรขึ้นบ้าง? จั่วไพ่ประจำวันของคุณ!</string>
+    <string name="daily_notification_channel_desc">การเตือนจั่วไพ่ประจำวัน</string>
+</resources>

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.os.Build
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -172,7 +171,6 @@ fun OptionsScreen(
                 }
 
                 OptionSection(title = stringResource(id = R.string.options_section_language)) {
-                    val comingSoon = stringResource(id = R.string.language_coming_soon)
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
@@ -181,10 +179,6 @@ fun OptionsScreen(
                             FilterChip(
                                 selected = selected,
                                 onClick = {
-                                    if (language == AppLanguage.Thai) {
-                                        Toast.makeText(context, comingSoon, Toast.LENGTH_SHORT).show()
-                                        return@FilterChip
-                                    }
                                     onSelectLanguage(language)
                                 },
                                 label = { Text(text = language.label()) }
