@@ -14,10 +14,13 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
@@ -25,12 +28,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +46,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pinwormmy.midoritarot.ui.theme.TarotcardTheme
 import com.pinwormmy.midoritarot.R
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @Composable
 fun MainMenuScreen(
@@ -113,62 +122,99 @@ fun MainMenuScreen(
             desiredButtonHeight
         }
         val buttonPadding = PaddingValues(vertical = if (isTablet) 16.dp else 20.dp, horizontal = 24.dp)
+        val navBarBottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+        val maxSlideDp = if (!isTablet && navBarBottomPadding > 0.dp) {
+            navBarBottomPadding + 8.dp
+        } else {
+            0.dp
+        }
+        val maxSlidePx = with(LocalDensity.current) { maxSlideDp.toPx() }
+        val viewportHeightPx = with(LocalDensity.current) { constraintsMaxHeight.toPx() }
+        val contentHeightPx = remember { mutableStateOf(0) }
+        val extraSlidePx = if (!isTablet && maxSlidePx > 0f && contentHeightPx.value > 0) {
+            (maxSlidePx - (contentHeightPx.value - viewportHeightPx)).coerceAtLeast(0f)
+        } else {
+            0f
+        }
+        val extraSlideDp = with(LocalDensity.current) { extraSlidePx.toDp() }
+        val scrollState = rememberScrollState()
 
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = if (isTablet) Arrangement.spacedBy(columnSpacing) else Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .let { base ->
-                        if (logoHeight != Dp.Unspecified) {
-                            base.height(logoHeight)
-                        } else {
-                            base
-                        }
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.title_logo),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth(if (isTablet) 0.73f else 0.81f)
-                        .aspectRatio(700f / 674f),
-                    contentScale = ContentScale.Fit
-                )
-            }
-
-            if (!isTablet) {
-                Spacer(modifier = Modifier.height(buttonSpacing * 1.25f))
-            }
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .let { base ->
-                        if (menuHeight != Dp.Unspecified) {
-                            base.height(menuHeight)
+                        if (!isTablet) {
+                            base.heightIn(min = constraintsMaxHeight)
                         } else {
                             base
                         }
+                    }
+                    .onGloballyPositioned { coordinates ->
+                        contentHeightPx.value = coordinates.size.height
                     },
-                verticalArrangement = menuArrangement
+                verticalArrangement = if (isTablet) Arrangement.spacedBy(columnSpacing) else Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                menuItems.forEach { entry ->
-                    MainMenuButton(
-                        label = entry.label,
-                        enabled = entry.enabled,
-                        onClick = entry.onClick,
-                        fixedHeight = buttonFixedHeight,
-                        contentPadding = buttonPadding
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .let { base ->
+                            if (logoHeight != Dp.Unspecified) {
+                                base.height(logoHeight)
+                            } else {
+                                base
+                            }
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.title_logo),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth(if (isTablet) 0.73f else 0.81f)
+                            .aspectRatio(700f / 674f),
+                        contentScale = ContentScale.Fit
                     )
                 }
+
                 if (!isTablet) {
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(buttonSpacing * 1.25f))
                 }
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .let { base ->
+                            if (menuHeight != Dp.Unspecified) {
+                                base.height(menuHeight)
+                            } else {
+                                base
+                            }
+                        },
+                    verticalArrangement = menuArrangement
+                ) {
+                    menuItems.forEach { entry ->
+                        MainMenuButton(
+                            label = entry.label,
+                            enabled = entry.enabled,
+                            onClick = entry.onClick,
+                            fixedHeight = buttonFixedHeight,
+                            contentPadding = buttonPadding
+                        )
+                    }
+                    if (!isTablet) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+                }
+            }
+
+            if (!isTablet && extraSlideDp > 0.dp) {
+                Spacer(modifier = Modifier.height(extraSlideDp))
             }
         }
     }

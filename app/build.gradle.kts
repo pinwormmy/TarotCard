@@ -16,8 +16,8 @@ android {
         //noinspection OldTargetApi
         targetSdk = 35
 
-        versionCode = 3
-        versionName = "1.0.2"
+        versionCode = 4
+        versionName = "1.0.21"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -26,7 +26,7 @@ android {
     buildTypes {
         release {
             // 개발 중: false, 배포 시 true 로 전환
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
